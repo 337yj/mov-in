@@ -4,11 +4,12 @@ import {
   Route,
 } from 'react-router-dom';
 
-import { HomePage } from '../pages';
+import { ComponentPage, HomePage } from '../pages';
 
 const route = (
   <Route path="/">
     <Route index element={<HomePage />} />
+    <Route path="components" element={<ComponentPage />} />
   </Route>
 );
 

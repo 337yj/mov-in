@@ -1,0 +1,34 @@
+@use "../../../styles/constants/colors" as c;
+
+.label {
+  display: block;
+  width: 100%;
+  margin-bottom: 30px;
+
+  // 화면에는 안보이지만 스크린리더에선 읽히도록
+  .labelText {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+  }
+
+  // 부모 요소의 width만큼 늘어나도록
+  .input {
+    width: 100%;
+    padding: 16px 20px;
+    margin: 4px 0px;
+    border: none;
+    border-radius: 10px;
+    background-color: c.$C_WHITE_40;
+    font-size: 24px;
+    color: c.$C_WHITE;
+
+    &::placeholder {
+      font-size: 24px;
+      color: c.$C_WHITE;
+    }
+  }
+}

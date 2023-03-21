@@ -1,0 +1,8 @@
+@use "../../../styles/constants" as c;
+
+.button {
+  background-color: c.$C_PURPLE;
+  color: c.$C_WHITE;
+  border-radius: 5px;
+  padding: 24px 12px;
+}

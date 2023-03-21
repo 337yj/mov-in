@@ -5,7 +5,7 @@ import styles from './input.module.scss';
 const Input = ({ className, label, id, placeholder, ...props }) => {
   return (
     <label htmlFor={id} className={cx(styles.label, className)}>
-      {/* 추후 사용시 value속성 추가해야됨*/}
+      {/* 추후 사용시 value속성 추가*/}
       <input
         type="text"
         id={id}

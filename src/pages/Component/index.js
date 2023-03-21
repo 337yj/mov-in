@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, CheckBox, Input } from "../../components";
+import { Button, CheckBox, Input, Toggle } from "../../components";
 import styles from "./components.module.scss";
 
 const Component = () => {
@@ -12,16 +12,20 @@ const Component = () => {
 
                 <article>
                     <div>
-                    <h2>버튼</h2>
-                    <Button />
+                        <h2>버튼</h2>
+                        <Button />
                     </div>
                     <div>
-                    <h2>체크박스</h2>
-                    <CheckBox />
+                        <h2>체크박스</h2>
+                        <CheckBox />
                     </div>
                     <div>
-                    <h2>입력창</h2>
-                    <Input />
+                        <h2>입력창</h2>
+                        <Input />
+                    </div>
+                    <div>
+                        <h2>토글</h2>
+                        <Toggle />
                     </div>
                 </article>
             </section>

@@ -2,9 +2,9 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { HomePage } from "../pages";
+import { HomePage } from '../pages';
 
 const route = (
   <Route path="/">

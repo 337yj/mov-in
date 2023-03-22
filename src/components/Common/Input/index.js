@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import cx from 'classnames';
-import styles from './input.module.scss';
+import React, { memo } from "react";
+import cx from "classnames";
+import styles from "./input.module.scss";
 
 // 로그인, 회원가입 input
 // form태그로 감싸주고 Input 사용하기

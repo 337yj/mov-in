@@ -1,7 +1,8 @@
-import React from "react";
-import cx from "classnames";
-import { IconCheck } from "../../../assets/icon/index";
-import styles from "./checkBox.module.scss";
+import React from 'react';
+import cx from 'classnames';
+// import { IconCheck } from '../../../assets/icon/index';
+import { IconCheck, IconSearch } from '../../../assets';
+import styles from './checkBox.module.scss';
 
 const CheckBox = ({ className, ...props }) => {
   return (

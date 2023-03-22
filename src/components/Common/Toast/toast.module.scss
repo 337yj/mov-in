@@ -1,0 +1,46 @@
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
+
+.toast {
+  @include m.flex(center, center);
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  bottom: 140px;
+  height: 50px;
+  padding: 12px 20px 10px 12px;
+  border-radius: 50px;
+  z-index: 2;
+  background-color: c.$C_PURPLE;
+  color: c.$C_WHITE;
+  transition: all linear 0.3s;
+
+  &.warningToast {
+    background-color: c.$C_PINK;
+  }
+
+  &.copyToast {
+    background-color: c.$C_DARKINDIGO;
+  }
+
+  &.ignoreToast {
+    background-color: c.$C_WHITE_40;
+  }
+
+  > button {
+    margin-left: 80px;
+    background-color: #ffffff00;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.circle {
+  @include m.flex();
+  width: 25px;
+  height: 25px;
+  padding: 6px;
+  margin: 0px 16px 0px 6px;
+  background-color: white;
+  border-radius: 100%;
+}

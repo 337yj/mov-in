@@ -1,11 +1,8 @@
-import React from "react";
+import React from 'react';
+import styles from './home.module.scss';
 
 const Home = () => {
-    return (
-        <section>
-            <p>home</p>
-        </section>
-    );
+  return <main className={styles.wrapper}>메인 페이지</main>;
 };
 
 export default Home;

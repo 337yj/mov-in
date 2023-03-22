@@ -1,0 +1,6 @@
+@use "../../styles/constants/colors" as c;
+
+.wrapper {
+  height: 100vh;
+  background-color: c.$C_INDIGO;
+}

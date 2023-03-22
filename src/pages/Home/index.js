@@ -1,5 +1,4 @@
 import React from 'react';
-import { CheckBox } from '../../components';
 import styles from './home.module.scss';
 
 const Home = () => {

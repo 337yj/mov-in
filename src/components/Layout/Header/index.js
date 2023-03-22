@@ -9,7 +9,9 @@ const Header = () => {
   const navigate = useNavigate();
 
   const onNavigateHome = () => {
-    navigate('/');
+    return () => {
+      navigate(`/`);
+    };
   };
 
   return (

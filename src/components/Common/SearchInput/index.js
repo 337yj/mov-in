@@ -12,7 +12,6 @@ const SearchInput = ({ className, placeholder, ...props }) => {
     e.preventDefault();
     // 검색 결과페이지로 이동
     navigate(`/searchResult`);
-    // `/searchResult/${searchText}`
   };
 
   // 검색값
@@ -33,7 +32,7 @@ const SearchInput = ({ className, placeholder, ...props }) => {
         onChange={getValue}
         {...props}
       />
-      <button type="submit" className={styles.searchBtn}>
+      <button type="button" className={styles.searchBtn}>
         <IconSearch className={styles.iconSearch} />
       </button>
     </form>

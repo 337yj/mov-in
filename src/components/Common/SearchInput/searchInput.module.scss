@@ -18,19 +18,22 @@
 
     &::placeholder {
       font-size: 18px;
-      color: c.$C_WHITE_40;
+      color: c.$C_WHITE;
     }
   }
 
   .searchBtn {
     @include m.flex();
-    position: absolute;
-    right: 0;
+    display: block;
+    z-index: 1000;
     width: 50px;
     height: 50px;
+    position: absolute;
+    right: 0;
     border: 0;
     background-color: transparent;
     cursor: pointer;
+    pointer-events: none;
 
     .iconSearch {
       width: 30px;

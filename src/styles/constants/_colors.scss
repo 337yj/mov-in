@@ -1,25 +1,28 @@
 $C_BLACK: #000000;
-
-$C_PURPLE: #7e2cc7;
-
-$C_YELLOW: #f3c623;
-
-$C_PINK: #e91e63;
-
-$C_DARKGRAY: #737373;
-
-$C_GREEN: #02bc7d;
-
-$C_INDIGO: #010226;
+$C_BLACK_20: rgba(0, 0, 0, 0.2);
+$C_BLACK_40: rgba(0, 0, 0, 0.4);
+$C_BLACK_80: rgba(0, 0, 0, 0.8);
 
 $C_WHITE: #ffffff;
-
-$C_BLACK_40: rgba(0, 0, 0, 0.4);
-
-$C_BLACK_20: rgba(0, 0, 0, 0.2);
-
-$C_WHITE_50: rgba(255, 255, 255, 0.5);
-
-$C_WHITE_40: rgba(255, 255, 255, 0.4);
-
 $C_WHITE_10: rgba(255, 255, 255, 0.1);
+$C_WHITE_40: rgba(255, 255, 255, 0.4);
+$C_WHITE_50: rgba(255, 255, 255, 0.5);
+$C_WHITE_80: rgba(255, 255, 255, 0.8);
+
+$C_PURPLE: #7e2cc7;
+$C_PURPLE_80: rgba(128, 44, 201, 0.8);
+
+$C_YELLOW: #f3c623;
+$C_YELLOW_80: rgba(243, 198, 35, 0.8);
+
+$C_PINK: #e91e63;
+$C_PINK_80: rgba(233, 30, 99, 0.8);
+
+$C_DARKGRAY: #737373;
+$C_DARKGRAY_80: rgba(115, 115, 115, 0.8);
+
+$C_GREEN: #02bc7d;
+$C_GREEN_80: rgba(2, 188, 125, 0.8);
+
+$C_INDIGO: #010226;
+$C_INDIGO_80: rgba(1, 2, 38, 0.8);

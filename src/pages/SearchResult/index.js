@@ -1,7 +1,9 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 const SearchResult = () => {
-  return <div>검색결과</div>;
+  const { searchText } = useParams();
+  return <div>검색결과 : {searchText}</div>;
 };
 
 export default SearchResult;

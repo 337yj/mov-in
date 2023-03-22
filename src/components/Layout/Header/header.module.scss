@@ -11,6 +11,7 @@
   background-color: c.$C_BLACK_20;
 
   .logo {
+    width: 180px;
     margin-right: 16px;
     cursor: pointer;
   }
@@ -31,7 +32,7 @@
       border: 0;
       background-color: transparent;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 500;
       color: c.$C_WHITE;
       cursor: pointer;
     }

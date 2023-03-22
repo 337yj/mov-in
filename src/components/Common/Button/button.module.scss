@@ -1,21 +1,11 @@
-@use "../../../styles/constants/" as c;
-
-// main {
-//     width: 100%;
-//     height: 100vh;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     background-color: c.$C_INDIGO;
-// }
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
 
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include m.flex();
     padding: 6px 34px;
     border: none;
-    color: white;
+    color: c.$C_WHITE;
     background: c.$C_PURPLE;
     border-radius: 10px;
     cursor: pointer;
@@ -27,15 +17,15 @@
 
     &.secondary {
         color: c.$C_BLACK;
-        background: white;
-
+        background: c.$C_WHITE;
+        
         &:hover {
             background-color: rgba(255, 255, 255, 0.8);
         }
     }
 
     &.pink {
-        color: white;
+        color: c.$C_WHITE;
         background: c.$C_PINK;
 
         &:hover {

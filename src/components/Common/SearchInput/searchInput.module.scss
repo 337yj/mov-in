@@ -1,0 +1,43 @@
+@use "../../../styles/constants/colors" as c;
+@use "../../../styles/mixins" as m;
+
+.searchForm {
+  @include m.flex();
+  position: relative;
+  height: 50px;
+
+  .searchInput {
+    width: 100%;
+    height: 100%;
+    padding: 0 50px 0 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: c.$C_WHITE_40;
+    font-size: 18px;
+    color: c.$C_WHITE;
+
+    &::placeholder {
+      font-size: 18px;
+      color: c.$C_WHITE;
+    }
+  }
+
+  .searchBtn {
+    @include m.flex();
+    display: block;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    pointer-events: none;
+
+    .iconSearch {
+      width: 30px;
+      cursor: pointer;
+    }
+  }
+}

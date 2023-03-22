@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import cx from 'classnames';
 import styles from './input.module.scss';
 
+// 로그인, 회원가입 input
 const Input = ({ className, label, id, placeholder, ...props }) => {
   return (
     <label htmlFor={id} className={cx(styles.label, className)}>
@@ -18,4 +19,4 @@ const Input = ({ className, label, id, placeholder, ...props }) => {
   );
 };
 
-export default Input;
+export default memo(Input);

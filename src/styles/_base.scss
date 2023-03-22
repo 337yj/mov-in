@@ -72,3 +72,17 @@ textarea {
   font-family: "Pretendard", sans-serif, Spoqa Han Sans JP, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+// input 클리어 버튼 초기화
+// /* IE의 경우 */
+// input::-ms-clear,
+// input::-ms-reveal {
+//   display: none;
+// }
+// /* 크롬의 경우 */
+// input::-webkit-search-decoration,
+// input::-webkit-search-cancel-button,
+// input::-webkit-search-results-button,
+// input::-webkit-search-results-decoration {
+//   display: none;
+// }

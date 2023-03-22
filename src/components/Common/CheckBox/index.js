@@ -1,6 +1,6 @@
 import React from "react";
 import cx from "classnames";
-import { IconCheck } from "../../../assets/icon/index";
+import { IconCheck } from "../../../assets/icon";
 import styles from "./checkBox.module.scss";
 
 const CheckBox = ({ className, ...props }) => {

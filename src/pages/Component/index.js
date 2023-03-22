@@ -13,7 +13,18 @@ const Component = () => {
                 <article>
                     <div>
                         <h2>버튼</h2>
-                        <Button />
+                        <div className={styles.buttons}>
+                            <Button>저장</Button>
+                            <Button color="secondary">취소</Button>
+                            <Button color="pink">탈퇴</Button>
+                            <Button color="yellow">보기</Button>
+                        </div>
+                            <Button color="indigo">♡ 2,200</Button>
+                        <div className={styles.buttons}>
+                            <Button color="selectTag">태그</Button>
+                            <Button color="miniTag">태그</Button>
+                        </div>
+                            <Button color="login">로그인</Button>
                     </div>
                     <div>
                         <h2>체크박스</h2>

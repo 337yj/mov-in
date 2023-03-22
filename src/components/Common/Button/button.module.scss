@@ -1,80 +1,81 @@
-@use "../../../styles/constants/" as c;
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
 
 .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include m.flex();
   padding: 6px 34px;
   border: none;
-  color: white;
+  color: c.$C_WHITE;
   background: c.$C_PURPLE;
   border-radius: 10px;
   cursor: pointer;
   margin: 8px;
 
   &:hover {
-    background-color: rgb(126, 44, 199, 0.8);
+    background-color: c.$C_PURPLE_80;
   }
+}
 
-  &.secondary {
-    color: c.$C_BLACK;
-    background: white;
+&.secondary {
+  color: c.$C_BLACK;
+  background: c.$C_WHITE;
 
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.8);
-    }
+  &:hover {
+    background-color: c.$C_WHITE_80;
   }
+}
 
-  &.pink {
-    color: white;
-    background: c.$C_PINK;
+&.danger {
+  color: c.$C_WHITE;
+  background: c.$C_PINK;
 
-    &:hover {
-      background-color: rgba(233, 30, 99, 0.8);
-    }
+  &:hover {
+    background-color: c.$C_PINK_80;
   }
+}
 
-  &.yellow {
-    color: c.$C_BLACK;
-    background: c.$C_YELLOW;
+&.view {
+  color: c.$C_BLACK;
+  background: c.$C_YELLOW;
 
-    &:hover {
-      background-color: rgba(243, 198, 35, 0.8);
-    }
+  &:hover {
+    background-color: c.$C_YELLOW_80;
   }
+}
 
-  &.indigo {
-    padding: 18px 62px;
-    background-color: c.$C_INDIGO;
+&.grade {
+  padding: 18px 62px;
+  background-color: c.$C_INDIGO;
 
-    &:hover {
-      background-color: rgb(1, 2, 38, 0.8);
-    }
+  &:hover {
+    background-color: c.$C_INDIGO_80;
   }
+}
 
-  &.login {
-    padding: 16px 128px;
+&.login {
+  padding: 16px 128px;
+}
+// 로그인 버튼 없애기
+
+&.selectTag {
+  padding: 8px 14px;
+  background-color: c.$C_DARKGRAY;
+
+  &:hover {
+    background-color: c.$C_DARKGRAY_80;
   }
-
-  &.selectTag {
-    padding: 8px 14px;
-    background-color: c.$C_DARKGRAY;
-
-    &:hover {
-      background-color: rgb(115, 115, 115, 0.8);
-    }
-    &:focus-within {
-      background-color: c.$C_PURPLE;
-    }
+  &:focus-within {
+    background-color: c.$C_PURPLE;
   }
+}
+// 태그 컨포넌트따로 만들기
 
-  &.miniTag {
-    padding: 8px 14px;
-    border-radius: 12px;
-    cursor: default;
+&.miniTag {
+  padding: 8px 14px;
+  border-radius: 12px;
+  cursor: default;
 
-    &:hover {
-      background-color: c.$C_PURPLE;
-    }
+  &:hover {
+    background-color: c.$C_PURPLE;
   }
 }

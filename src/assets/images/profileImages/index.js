@@ -1,1 +1,12 @@
-export {};
+export { default as ImageProfile1 } from "./Upstream-1.svg";
+export { default as ImageProfile2 } from "./Upstream-2.svg";
+export { default as ImageProfile3 } from "./Upstream-3.svg";
+export { default as ImageProfile4 } from "./Upstream-4.svg";
+export { default as ImageProfile5 } from "./Upstream-5.svg";
+export { default as ImageProfile6 } from "./Upstream-6.svg";
+export { default as ImageProfile7 } from "./Upstream-7.svg";
+export { default as ImageProfile8 } from "./Upstream-8.svg";
+export { default as ImageProfile9 } from "./Upstream-9.svg";
+export { default as ImageProfile10 } from "./Upstream-10.svg";
+export { default as ImageProfile11 } from "./Upstream-11.svg";
+export { default as ImageProfile12 } from "./Upstream.svg";

@@ -1,92 +1,81 @@
-
-@use '../../../styles/constants/' as c;
-
-main {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: c.$C_INDIGO;
-}
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
 
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 6px 34px;
-    border: none;
-    color: white;
-    background: c.$C_PURPLE;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 8px;
+  @include m.flex();
+  padding: 6px 34px;
+  border: none;
+  color: c.$C_WHITE;
+  background: c.$C_PURPLE;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 8px;
+
+  &:hover {
+    background-color: c.$C_PURPLE_80;
+  }
+
+  &.secondary {
+    color: c.$C_BLACK;
+    background: c.$C_WHITE;
 
     &:hover {
-        background-color: rgb(126, 44, 199, 0.8);
+      background-color: c.$C_WHITE_80;
     }
+  }
 
-    &.secondary {
-        color: c.$C_BLACK;
-        background: white;
-            
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-    }
+  &.danger {
+    color: c.$C_WHITE;
+    background: c.$C_PINK;
 
-    &.pink {
-        color: white;
-        background: c.$C_PINK;
-        
-        &:hover {
-            background-color: rgba(233, 30, 99, 0.8);
-            }
+    &:hover {
+      background-color: c.$C_PINK_80;
     }
+  }
 
-    &.yellow {
-        color: c.$C_BLACK;
-        background: c.$C_YELLOW;
-            
-        &:hover {
-            background-color: rgba(243, 198, 35, 0.8);
-            }
-    }
+  &.view {
+    color: c.$C_BLACK;
+    background: c.$C_YELLOW;
 
-    &.indigo {
-        padding: 18px 62px;
-        background-color: c.$C_INDIGO;
-        
-        &:hover {
-            background-color: rgb(1, 2, 38, 0.8);
-            }
+    &:hover {
+      background-color: c.$C_YELLOW_80;
     }
+  }
 
-    &.login {
-        padding: 16px 128px; 
-    }
+  &.grade {
+    padding: 18px 62px;
+    background-color: c.$C_INDIGO;
 
-    &.selectTag {
-        padding: 8px 14px;
-        background-color: c.$C_DARKGRAY;
-            
-        &:hover {
-            background-color: rgb(115, 115, 115, 0.8);
-            }
-        &:focus-within {
-            background-color: c.$C_PURPLE;
-        }
+    &:hover {
+      background-color: c.$C_INDIGO_80;
     }
+  }
 
-    &.miniTag {
-        padding: 8px 14px;
-        border-radius: 12px;
-        cursor: default;
-        
-        &:hover {
-            background-color: c.$C_PURPLE;
-        }
+  &.login {
+    padding: 16px 128px;
+  }
+  // 로그인 버튼 없애기
+
+  &.selectTag {
+    padding: 8px 14px;
+    background-color: c.$C_DARKGRAY;
+
+    &:hover {
+      background-color: c.$C_DARKGRAY_80;
     }
+    &:focus-within {
+      background-color: c.$C_PURPLE;
+    }
+  }
+  // 태그 컨포넌트따로 만들기
+
+  &.miniTag {
+    padding: 8px 14px;
+    border-radius: 12px;
+    cursor: default;
+
+    &:hover {
+      background-color: c.$C_PURPLE;
+    }
+  }
 }
-
-

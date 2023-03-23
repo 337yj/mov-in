@@ -8,15 +8,15 @@ const Stars = () => {
 
   // 초기값은 빈 별5개
   // 숫자별로 보여지는 아이콘이 다르게
-  // 1일때
+  // 1일때 꽉찬별 1개 빈별4개
   //
 
-  const [grade, setGrade] = useState([false, false, false, false, false]);
+  const [grade, setGrade] = useState(0);
 
-  const starsGrade = (num) => {
+  const starsGrade = (index) => {
     let star = [...grade];
     for (let i = 0; i < 5; i++) {
-      star[i] = i <= num ? true : false;
+      star[i] = i <= index ? true : false;
     }
     setGrade(star);
   };

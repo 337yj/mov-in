@@ -2,16 +2,17 @@
 @use "../../../styles/mixins" as m;
 
 .searchForm {
-  @include m.flex();
-  position: relative;
+  @include m.flex(flex-start);
+  width: 600px;
   height: 50px;
+  border: none;
 
   .searchInput {
-    width: 100%;
+    width: calc(100% - 50px);
     height: 100%;
-    padding: 0 50px 0 20px;
+    padding-left: 20px;
     border: none;
-    border-radius: 10px;
+    border-radius: 10px 0 0 10px;
     background-color: c.$C_WHITE_40;
     font-size: 18px;
     color: c.$C_WHITE;
@@ -24,12 +25,11 @@
 
   .searchBtn {
     @include m.flex();
-    position: absolute;
-    right: 0;
     width: 50px;
     height: 50px;
     border: 0;
-    background-color: transparent;
+    border-radius: 0 10px 10px 0;
+    background-color: c.$C_WHITE_40;
     cursor: pointer;
 
     .iconSearch {

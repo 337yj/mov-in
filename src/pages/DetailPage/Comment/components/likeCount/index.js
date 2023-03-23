@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconLike } from "../../../../../assets/icon";
+import { IconHeartFilled, IconHeartOutline } from "../../../../../assets/icon";
 
 import cx from "classnames";
 import styles from "./likeCount.module.scss";
@@ -18,7 +18,8 @@ const LikeCount = () => {
 
   return (
     <button className={styles.likeCount}>
-      <IconLike onClick={LikeClick} />
+      <IconHeartFilled onClick={LikeClick} />
+      <IconHeartOutline onClick={LikeClick} />
       <span
         className={styles.like}
         onClick={() => {

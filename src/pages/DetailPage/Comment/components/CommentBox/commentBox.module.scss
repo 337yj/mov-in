@@ -33,6 +33,12 @@
   row-gap: 10px;
 }
 
+.horizontalLine {
+  width: 100%;
+  border-bottom: 1px solid c.$C_DARKGRAY;
+  text-align: center;
+}
+
 .comment {
   height: 100%;
   color: c.$C_WHITE;

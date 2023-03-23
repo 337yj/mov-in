@@ -11,3 +11,21 @@
   font-size: 14px;
   font-weight: 400;
 }
+
+> button:disabled {
+  visibility: hidden;
+}
+
+.icon {
+  position: relative;
+  border: 0px;
+  background-color: transparent;
+}
+
+.Empty {
+  cursor: pointer;
+  transition: transform;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

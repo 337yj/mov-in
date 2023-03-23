@@ -19,6 +19,12 @@
   font-weight: 400;
 }
 
+.horizontalLine {
+  width: 100%;
+  border-bottom: 1px solid c.$C_DARKGRAY;
+  text-align: center;
+}
+
 .comment {
   width: 100%;
   height: 100%;

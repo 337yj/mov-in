@@ -1,6 +1,6 @@
 @use "../../../../../styles/constants/colors" as c;
 
-.replyHeader {
+.profile {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -8,7 +8,7 @@
   color: c.$C_WHITE;
 }
 
-.profile {
+.profileImage {
   width: 40px;
   height: 40px;
   border-radius: 40px;

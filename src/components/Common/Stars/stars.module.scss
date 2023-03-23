@@ -1,0 +1,19 @@
+@use "../../../styles/constants/colors" as c;
+
+.star {
+  border: 0;
+  background-color: transparent;
+  position: relative;
+}
+
+.empty {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.half {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { IconComment } from "../../../../../assets/icon/index";
 
 import styles from "./commentCount.module.scss";
 
-const CommentCount = () => {
-  const [comment, setComment] = useState(0);
+const CommentCount = ({ comment }) => {
+  // const [comment, setComment] = useState(0);
+  const navigate = useNavigate();
+
+  const onNavigateCommetDetail = () => {
+    navigate("commentDetail");
+  };
 
   return (
-    <button className={styles.commentCount}>
+    <button className={styles.commentCount} onClick={onNavigateCommetDetail}>
       <IconComment />
-      <span
-        onClick={() => {
-          setComment(comment + 1);
-        }}
-      >
-        답글 {comment}개
-      </span>
+      {/* 답글 전체 개수 표시 */}
+      <output>답글 {comment}개</output>
     </button>
   );
 };

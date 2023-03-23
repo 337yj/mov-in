@@ -1,29 +1,32 @@
 import React from "react";
 import { IconModify, IconDelete } from "../../../../../assets/icon";
-import LikeCount from "../likeCount";
-import { HorizontalLine } from "../../../../../components/Common";
-import Profile from "../profile";
+import LikeCount from "../LikeCount";
+import Profile from "../Profile";
 
 import styles from "./replyBox.module.scss";
 
-const ReplyBox = ({ username, content, createdAt, ...props }) => {
+const ReplyBox = ({ content, ...props }) => {
+  // props type 작성
   return (
     <li className={styles.wrapper}>
       <Profile />
-      <content className={styles.replyContent}>
-        <div className={styles.comment}>{content}</div>
-        <div className={styles.icon}>
+      <section className={styles.replyContent}>
+        <contents className={styles.comment}>{content}</contents>
+        <output className={styles.icon}>
+          {/* 알림 띄우고 수정 모달로 이동 기능 추가*/}
           <IconModify />
-          <IconDelete className={styles.iconDelete} />
-        </div>
-      </content>
-      <footer className={styles.replyFooter}>
-        <HorizontalLine />
-        <div className={styles.footerContent}>
+          {/* 알림 띄우고 코멘트 삭제 기능 추가 */}
+          <IconDelete />
+        </output>
+      </section>
+      <section className={styles.replyFooter}>
+        <hr className={styles.HorizontalLine} />
+        <contents className={styles.footerContent}>
           <LikeCount />
-          <div className={styles.date}>{createdAt}</div>
-        </div>
-      </footer>
+          {/* 작성날짜 기능 추가 */}
+          <output className={styles.date}></output>
+        </contents>
+      </section>
     </li>
   );
 };

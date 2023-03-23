@@ -1,4 +1,6 @@
 export { ReactComponent as IconCheck } from "./check.svg";
+export { ReactComponent as IconClose } from "./close.svg";
+export { ReactComponent as IconGreenCheck } from "./greenCheck.svg";
 export { ReactComponent as IconModify } from "./modify.svg";
 export { ReactComponent as IconDelete } from "./delete.svg";
 export { ReactComponent as IconHeartOutline } from "./heartOutline.svg";

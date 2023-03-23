@@ -5,19 +5,13 @@ import {
 } from "react-router-dom";
 import Layout from "../components/Layout";
 
-import {
-  HomePage,
-  ComponentPage,
-  SearchResultPage,
-  CommentDetailPage,
-} from "../pages";
+import { HomePage, ComponentPage, SearchResultPage } from "../pages";
 
 const route = (
   <Route path="/" element={<Layout />}>
     <Route index element={<HomePage />} />
     <Route path="searchResult" element={<SearchResultPage />} />
-    <Route path="Commentdetail" element={<CommentDetailPage />}></Route>
-    <Route path="Components" element={<ComponentPage />} />
+    <Route path="components" element={<ComponentPage />} />
   </Route>
 );
 

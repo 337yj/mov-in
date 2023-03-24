@@ -1,15 +1,18 @@
 import React from "react";
 import { IconModify, IconDelete } from "../../../../../assets/icon";
-import LikeCount from "../LikeCount";
-import Profile from "../Profile";
+import LikeCount from "../_shared/LikeCount";
+import Profile from "../_shared/Profile";
 
 import styles from "./replyBox.module.scss";
 
+//TODO: Content / Footer 로 Component 분리
 const ReplyBox = ({ content, ...props }) => {
   // props type 작성
   return (
     <li className={styles.wrapper}>
       <Profile />
+
+      {/* Content */}
       <section className={styles.replyContent}>
         <contents className={styles.comment}>{content}</contents>
         <output className={styles.icon}>
@@ -19,6 +22,7 @@ const ReplyBox = ({ content, ...props }) => {
           <IconDelete />
         </output>
       </section>
+      {/* Footer */}
       <section className={styles.replyFooter}>
         <hr className={styles.HorizontalLine} />
         <contents className={styles.footerContent}>

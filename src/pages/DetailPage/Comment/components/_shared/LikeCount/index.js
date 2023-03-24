@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconHeartEmpty, IconHeartFull } from "../../../../../assets/icon";
+import { IconHeartEmpty, IconHeartFull } from "../../../../../../assets/icon";
 
 import styles from "./likeCount.module.scss";
 

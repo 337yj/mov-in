@@ -11,7 +11,6 @@ const Component = () => {
         <header>
           <h1>컴포넌트</h1>
         </header>
-
         <article>
           <div>
             <h2>버튼</h2>

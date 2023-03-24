@@ -3,7 +3,7 @@
 
 .wrapper {
     overflow: scroll;
-    height: 100vh;
+    max-height: calc(100vh - 70px);
     padding: 120px;
     color: c.$C_WHITE;
 
@@ -25,6 +25,10 @@
 
             >.buttons {
                 @include m.flex(flex-start);
+            }
+
+            >.tags {
+                @include m.flex(flex-start)
             }
         }
     }

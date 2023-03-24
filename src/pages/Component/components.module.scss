@@ -2,34 +2,34 @@
 @use "../../styles/mixins/" as m;
 
 .wrapper {
-    overflow: scroll;
-    max-height: calc(100vh - 70px);
-    padding: 120px;
-    color: c.$C_WHITE;
+  overflow: scroll;
+  max-height: calc(100vh - 70px);
+  padding: 120px;
+  color: c.$C_WHITE;
 
-    >header {
-        margin-bottom: 80px;
-        font-size: 36px;
-        font-weight: 800;
+  > header {
+    margin-bottom: 80px;
+    font-size: 36px;
+    font-weight: 800;
+  }
+
+  > article {
+    @include m.flex(flex-start, flex-start, column);
+    gap: 48px;
+    > div {
+      > h2 {
+        margin-bottom: 8px;
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      > .buttons {
+        @include m.flex(flex-start);
+      }
+
+      > .tags {
+        @include m.flex(flex-start);
+      }
     }
-
-    >article {
-        @include m.flex(flex-start, flex-start, column);
-        gap: 48px;
-        >div {
-            >h2 {
-                margin-bottom: 8px;
-            font-size: 24px;
-            font-weight: 600;
-            }
-
-            >.buttons {
-                @include m.flex(flex-start);
-            }
-
-            >.tags {
-                @include m.flex(flex-start)
-            }
-        }
-    }
+  }
 }

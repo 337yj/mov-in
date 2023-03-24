@@ -1,0 +1,20 @@
+@use "../../../../../styles/constants/colors" as c;
+
+//TODO: ClassName 선택자는 depth를 어느정도 유지하는 것이 좋습니다.
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 424px;
+  height: 310px;
+  padding: 20px;
+  border-radius: 4px;
+  background-color: c.$C_INDIGO;
+
+  .horizontalLine {
+    width: 100%;
+    border-bottom: 1px solid c.$C_DARKGRAY;
+    text-align: center;
+  }
+}

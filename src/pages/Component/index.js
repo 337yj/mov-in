@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from "react";
-import {Button, CheckBox, Input, Toggle, Tag, Modal, Toast} from "../../components";
-import CommentBox from "../DetailPage/Comment/components/CommentBox";
-import ReplyBox from "../DetailPage/Comment/components/ReplyBox";
+import React from "react";
+
+import { Button, CheckBox, Input, Toggle, Stars, Tag, Modal, Toast } from "../../components";
+import { CommentOutput, ReplyOutput } from "../index";
+import MyPage from "../MyPage";
+
 import styles from "./components.module.scss";
 
 const Component = () => {
@@ -37,12 +39,20 @@ const Component = () => {
             <Toggle />
           </div>
           <div>
-            <h2>코멘트박스</h2>
-            <CommentBox />
+            <h2>코멘트</h2>
+            <CommentOutput />
           </div>
           <div>
-            <h2>코멘트답글박스</h2>
-            <ReplyBox />
+            <h2>코멘트답글</h2>
+            <ReplyOutput />
+          </div>
+          <div>
+            <h2>별점</h2>
+            <Stars />
+          </div>
+          <div>
+            <h2>MYPAGE - LNB</h2>
+            <MyPage />
           </div>
           <div>
             <h2>모달</h2>

@@ -7,3 +7,7 @@ export { default as SearchInput } from "./SearchInput";
 export { default as Tag } from "./Tag";
 export { default as Toast } from "./Toast";
 export { default as Toggle } from "./Toggle";
+export { default as Stars } from "./Stars";
+export { default as Input } from "./Input";
+export { default as Toggle } from "./Toggle";
+export { default as SearchInput } from "./SearchInput";

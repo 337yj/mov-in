@@ -1,0 +1,30 @@
+@use "../../../../../../styles/constants/colors" as c;
+
+.commentFooter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 10px;
+  padding-top: 10px;
+
+  .footerContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .count {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .date {
+    display: block;
+    justify-content: flex-end;
+    color: c.$C_DARKGRAY;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Button, CheckBox, Input, Toggle, Stars } from "../../components";
-import { Comment, Reply } from "../index";
+import { CommentOutput, ReplyOutput } from "../index";
 import MyPage from "../MyPage";
 
 import styles from "./components.module.scss";
@@ -43,11 +43,11 @@ const Component = () => {
           </div>
           <div>
             <h2>코멘트</h2>
-            <Comment />
+            <CommentOutput />
           </div>
           <div>
             <h2>코멘트답글</h2>
-            <Reply />
+            <ReplyOutput />
           </div>
           <div>
             <h2>별점</h2>

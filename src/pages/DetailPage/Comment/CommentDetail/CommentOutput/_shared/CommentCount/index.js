@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { IconComment } from "../../../../../assets/icon/index";
+import { IconComment } from "../../../../../../../assets/icon";
 
 import styles from "./commentCount.module.scss";
 

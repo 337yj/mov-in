@@ -1,10 +1,10 @@
 import React from "react";
 
-import { LikeCount, CommentCount } from "./_sharedt";
+import { LikeCount, CommentCount } from "../_shared";
 
-import styles from "./commentBox.module.scss";
+import styles from "./footer.module.scss";
 
-const CommentFooter = () => {
+const CommentFooter = ({ date, ...props }) => {
   return (
     <section className={styles.commentFooter}>
       <hr className={styles.horizontalLine} />

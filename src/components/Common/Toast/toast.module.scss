@@ -4,7 +4,7 @@
 .toast {
   @include m.flex(center, center);
   position: absolute;
-  top: 50%;
+  top: 5%;
   left: 50%;
   bottom: 140px;
   height: 50px;
@@ -12,24 +12,26 @@
   border-radius: 50px;
   z-index: 2;
   transform: translate(-50%, -50%);
-  transition: all linear 0.3s;
+  animation: bounce 1s ease-in-out forwards;
   background-color: c.$C_PURPLE;
   color: c.$C_WHITE;
 
-  &.warningToast {
+  &.secondaryToast {
+    background-color: c.$C_WHITE_40;
+  }
+
+  &.dangerToast {
     background-color: c.$C_PINK;
   }
 
-  &.copyToast {
+  &.darkToast {
     background-color: c.$C_DARKINDIGO;
-  }
-
-  &.ignoreToast {
-    background-color: c.$C_WHITE_40;
   }
 
   > button {
     margin-left: 80px;
+    height: 32px;
+    width: 32px;
     background-color: #ffffff00;
     border: none;
     cursor: pointer;
@@ -45,3 +47,14 @@
   background-color: white;
   border-radius: 100%;
 }
+
+@keyframes bounce {
+  0% {
+    transform: translate(-50%, -200%);
+    }
+
+  100% {
+    transform: translate(-50%, inherit);
+  }
+  
+  }

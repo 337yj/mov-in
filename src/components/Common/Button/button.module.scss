@@ -8,8 +8,8 @@
   color: c.$C_WHITE;
   background: c.$C_PURPLE;
   border-radius: 10px;
+  font-size: 14px;
   cursor: pointer;
-  margin: 8px;
 
   &:hover {
     background-color: c.$C_PURPLE_80;
@@ -33,7 +33,7 @@
     }
   }
 
-  &.view {
+  &.warning {
     color: c.$C_BLACK;
     background: c.$C_YELLOW;
 
@@ -42,7 +42,7 @@
     }
   }
 
-  &.grade {
+  &.dark {
     padding: 18px 62px;
     background-color: c.$C_INDIGO;
 
@@ -55,27 +55,4 @@
     padding: 16px 128px;
   }
   // 로그인 버튼 없애기
-
-  &.selectTag {
-    padding: 8px 14px;
-    background-color: c.$C_DARKGRAY;
-
-    &:hover {
-      background-color: c.$C_DARKGRAY_80;
-    }
-    &:focus-within {
-      background-color: c.$C_PURPLE;
-    }
-  }
-  // 태그 컨포넌트따로 만들기
-
-  &.miniTag {
-    padding: 8px 14px;
-    border-radius: 12px;
-    cursor: default;
-
-    &:hover {
-      background-color: c.$C_PURPLE;
-    }
-  }
 }

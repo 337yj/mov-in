@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { IconHeartEmpty, IconHeartFull } from "../../../../../../assets/icon";
+import {
+  IconHeartEmpty,
+  IconHeartFull,
+} from "../../../../../../../assets/icon";
 
 import styles from "./likeCount.module.scss";
 
@@ -24,14 +27,14 @@ const LikeCount = () => {
   };
 
   return (
-    <div className={styles.likeCount} onClick={onClick}>
+    <button className={styles.likeCount} onClick={onClick}>
       {/* // 하트 클릭시 색 변하게 기능 추가 */}
       <button className={styles.icon}>
         <IconHeartFull className={styles.full} onChange={IconClick} />
-        <IconHeartEmpty className={styles.Empty} />
+        <IconHeartEmpty className={styles.empty} />
       </button>
       <output className={styles.like}>좋아요 {like}개</output>
-    </div>
+    </button>
   );
 };
 

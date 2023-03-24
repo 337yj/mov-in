@@ -1,5 +1,5 @@
 import React from "react";
-import { IconModify, IconDelete } from "../../../../../assets/icon";
+import { IconModify, IconDelete } from "../../../../../../assets/icon";
 import LikeCount from "../_shared/LikeCount";
 import Profile from "../_shared/Profile";
 

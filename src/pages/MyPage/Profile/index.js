@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./profile.module.scss";
-import { LNB } from "../../../components";
 
 const Profile = () => {
   return (

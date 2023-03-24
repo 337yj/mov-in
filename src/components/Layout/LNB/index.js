@@ -2,20 +2,18 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./lnb.module.scss";
 
-const LNB = () => {
-  const menus = [
-    { name: "프로필", path: "/myPage" },
-    { name: "회원정보", path: "/myPage/userInfo" },
-    { name: "코멘트 및 평점", path: "/myPage/comment" },
-    { name: "좋아요", path: "/myPage/like" },
-    { name: "북마크", path: "/myPage/bookmark" },
-  ];
+// MY PAGE 와 BO PAGE 스타일 동일하니 재사용 가능하도록 만듦
+const LNB = ({ title, menus, basePath }) => {
   return (
     <nav className={styles.wrapper}>
-      <h2 className={styles.title}>MY PAGE</h2>
+      <h2 className={styles.title}>{title}</h2>
       {menus.map((menu, index) => {
         return (
-          <NavLink className={styles.navMenu} to={menu.path} key={index}>
+          <NavLink
+            className={styles.navMenu}
+            to={`${basePath}${menu.path}`}
+            key={index}
+          >
             {menu.name}
           </NavLink>
         );

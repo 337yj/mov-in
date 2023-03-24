@@ -1,8 +1,9 @@
 import React from "react";
+
 import { Button, CheckBox, Input, Toggle, Stars } from "../../components";
-import CommentBox from "../DetailPage/Comment/components/CommentBox";
-import ReplyBox from "../DetailPage/Comment/components/ReplyBox";
+import { Comment, Reply } from "../index";
 import MyPage from "../MyPage";
+
 import styles from "./components.module.scss";
 
 const Component = () => {
@@ -41,12 +42,12 @@ const Component = () => {
             <Toggle />
           </div>
           <div>
-            <h2>코멘트박스</h2>
-            <CommentBox />
+            <h2>코멘트</h2>
+            <Comment />
           </div>
           <div>
-            <h2>코멘트답글박스</h2>
-            <ReplyBox />
+            <h2>코멘트답글</h2>
+            <Reply />
           </div>
           <div>
             <h2>별점</h2>

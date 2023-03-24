@@ -1,9 +1,7 @@
 import React from "react";
 import { IconModify, IconDelete } from "../../../../../../assets/icon";
-import LikeCount from "../_shared/LikeCount";
-import Profile from "../_shared/Profile";
-
-import styles from "./replyBox.module.scss";
+import { LikeCount, Profile } from "../_shared";
+import styles from "./replyOutput.module.scss";
 
 //TODO: Content / Footer 로 Component 분리
 const ReplyBox = ({ content, ...props }) => {

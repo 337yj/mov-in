@@ -1,7 +1,7 @@
 import React from "react";
 import { IconModify, IconDelete } from "../../../../../assets/icon";
-import LikeCount from "../LikeCount";
-import Profile from "../Profile";
+import LikeCount from "../_shared/LikeCount";
+import Profile from "../_shared/Profile";
 
 import styles from "./replyBox.module.scss";
 

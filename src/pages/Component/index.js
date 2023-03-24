@@ -1,13 +1,21 @@
 import React from "react";
 
-import { Button, CheckBox, Input, Toggle, Stars, Tag, Modal, Toast } from "../../components";
+import {
+  Button,
+  CheckBox,
+  Input,
+  Toggle,
+  Stars,
+  Tag,
+  Modal,
+  Toast,
+} from "../../components";
 import { CommentOutput, ReplyOutput } from "../index";
 import MyPage from "../MyPage";
 
 import styles from "./components.module.scss";
 
 const Component = () => {
-
   return (
     <main>
       <section className={styles.wrapper}>
@@ -56,7 +64,9 @@ const Component = () => {
           </div>
           <div>
             <h2>모달</h2>
-            <Modal>description</Modal>
+            <Modal title="프로필 사진 변경" subTitle="모달서브타이틀">
+              description
+            </Modal>
           </div>
           <div>
             <h2>토스트</h2>

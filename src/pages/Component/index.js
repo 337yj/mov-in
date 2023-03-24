@@ -1,6 +1,9 @@
 import React from "react";
+
 import { Button, CheckBox, Input, Toggle, Stars } from "../../components";
 import { Comment, Reply } from "../index";
+import MyPage from "../MyPage";
+
 import styles from "./components.module.scss";
 
 const Component = () => {
@@ -49,6 +52,10 @@ const Component = () => {
           <div>
             <h2>별점</h2>
             <Stars />
+          </div>
+          <div>
+            <h2>MYPAGE - LNB</h2>
+            <MyPage />
           </div>
         </article>
       </section>

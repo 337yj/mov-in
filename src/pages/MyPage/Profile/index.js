@@ -1,10 +1,11 @@
 import React from "react";
+import styles from "./profile.module.scss";
 import { LNB } from "../../../components";
 
 const Profile = () => {
   return (
-    <section>
-      <LNB />
+    <section className={styles.wrapper}>
+      <h1 className={styles.title}>프로필 페이지</h1>
     </section>
   );
 };

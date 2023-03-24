@@ -1,0 +1,8 @@
+@use "../../../styles/constants/" as c;
+
+.wrapper {
+  .title {
+    font-size: 36px;
+    color: c.$C_WHITE;
+  }
+}

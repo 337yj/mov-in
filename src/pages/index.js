@@ -8,3 +8,10 @@ export { default as Reply } from "./DetailPage/Comment/CommentDetail/Comment";
 export { default as CommentHeader } from "./DetailPage/Comment/CommentDetail/Comment";
 export { default as CommentBody } from "./DetailPage/Comment/CommentDetail/Comment";
 export { default as commentFooter } from "./DetailPage/Comment/CommentDetail/Comment";
+
+export { default as MyPage } from "./MyPage";
+export { default as UserInfo } from "./MyPage/UserInfo";
+export { default as Comment } from "./MyPage/Comment";
+export { default as Like } from "./MyPage/Like";
+export { default as Bookmark } from "./MyPage/Bookmark";
+

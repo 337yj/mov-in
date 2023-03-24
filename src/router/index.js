@@ -11,9 +11,9 @@ import {
   SearchResultPage,
   MyPage,
   UserInfo,
-  Comment,
   Like,
   Bookmark,
+  CommentAndRating,
 } from "../pages";
 
 const route = (
@@ -22,7 +22,7 @@ const route = (
     <Route path="searchResult" element={<SearchResultPage />} />
     <Route path="myPage" element={<MyPage />}>
       <Route path="/myPage/userInfo" element={<UserInfo />} />
-      <Route path="/myPage/comment" element={<Comment />} />
+      <Route path="/myPage/comment" element={<CommentAndRating />} />
       <Route path="/myPage/like" element={<Like />} />
       <Route path="/myPage/bookmark" element={<Bookmark />} />
     </Route>

@@ -11,7 +11,6 @@ export { default as commentFooter } from "./DetailPage/Comment/CommentDetail/Com
 
 export { default as MyPage } from "./MyPage";
 export { default as UserInfo } from "./MyPage/UserInfo";
-export { default as Comment } from "./MyPage/Comment";
+export { default as CommentAndRating } from "./MyPage/CommentAndRating";
 export { default as Like } from "./MyPage/Like";
 export { default as Bookmark } from "./MyPage/Bookmark";
-

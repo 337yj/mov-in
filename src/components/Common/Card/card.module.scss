@@ -1,0 +1,10 @@
+@use "../../../styles/constants" as c;
+
+.wrapper {
+  > img {
+    width: 260px;
+    height: 370px;
+    object-fit: cover;
+    padding-left: 14px;
+  }
+}

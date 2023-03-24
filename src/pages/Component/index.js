@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, CheckBox, Input, Toggle } from "../../components";
+import { Button, Carousel, CheckBox, Input, Toggle } from "../../components";
 import styles from "./components.module.scss";
 
 const Component = () => {
@@ -37,6 +37,15 @@ const Component = () => {
                     <div>
                         <h2>토글</h2>
                         <Toggle />
+                    </div>
+                    <div>
+                        <h2>캐러셀</h2>
+                        {/* 실제 작업 페이지에서 title 구현해야 됨! */}
+                        <div className={styles.title}>
+                            <h3>인기 10위</h3>
+                            <p>더보기</p>
+                        </div>
+                        <Carousel />
                     </div>
                 </article>
             </section>

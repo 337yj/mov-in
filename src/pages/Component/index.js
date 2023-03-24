@@ -2,6 +2,7 @@ import React from "react";
 import { Button, CheckBox, Input, Toggle, Stars } from "../../components";
 import CommentBox from "../DetailPage/Comment/components/CommentBox";
 import ReplyBox from "../DetailPage/Comment/components/ReplyBox";
+import MyPage from "../MyPage";
 import styles from "./components.module.scss";
 
 const Component = () => {
@@ -50,6 +51,10 @@ const Component = () => {
           <div>
             <h2>별점</h2>
             <Stars />
+          </div>
+          <div>
+            <h2>MYPAGE - LNB</h2>
+            <MyPage />
           </div>
         </article>
       </section>

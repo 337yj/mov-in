@@ -10,15 +10,18 @@ const StyledSlider = styled(Slider)`
     .slick-prev {
         left: 0px;
         z-index: 10;
+        scale: 200%;
+        margin-right: 20px;
     }
 
     .slick-next {
         right:0;
+        scale: 200%;
     }
 
     .slick-list {
-        width: 1100px; // 안 넣으니까 제대로 안 뜸
-        margin: 8px;
+        width: 1400px; // 구체적으로 안 넣으니까 제대로 안 뜸
+        margin: 10px 14px;
     }
 `;
 

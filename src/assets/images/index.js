@@ -1,1 +1,2 @@
-export { default as LogoImage } from './logo.svg';
+export * from "./logo";
+export * from "./profileImages";

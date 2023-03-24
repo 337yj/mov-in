@@ -1,0 +1,60 @@
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
+
+.toast {
+  @include m.flex(center, center);
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  bottom: 140px;
+  height: 50px;
+  padding: 12px 20px 10px 12px;
+  border-radius: 50px;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  animation: bounce 1s ease-in-out forwards;
+  background-color: c.$C_PURPLE;
+  color: c.$C_WHITE;
+
+  &.secondaryToast {
+    background-color: c.$C_WHITE_40;
+  }
+
+  &.dangerToast {
+    background-color: c.$C_PINK;
+  }
+
+  &.darkToast {
+    background-color: c.$C_DARKINDIGO;
+  }
+
+  > button {
+    margin-left: 80px;
+    height: 32px;
+    width: 32px;
+    background-color: #ffffff00;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.circle {
+  @include m.flex();
+  width: 25px;
+  height: 25px;
+  padding: 6px;
+  margin: 0px 16px 0px 6px;
+  background-color: white;
+  border-radius: 100%;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translate(-50%, -200%);
+    }
+
+  100% {
+    transform: translate(-50%, inherit);
+  }
+  
+  }

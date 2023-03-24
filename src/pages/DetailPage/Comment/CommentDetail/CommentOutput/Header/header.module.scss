@@ -1,0 +1,14 @@
+@use "../../../../../../styles/constants/colors" as c;
+
+.commentHeader {
+  display: flex;
+  flex: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .grade {
+    justify-content: end;
+    color: c.$C_WHITE;
+    font-size: 14px;
+  }
+}

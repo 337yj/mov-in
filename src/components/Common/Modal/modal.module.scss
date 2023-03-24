@@ -1,0 +1,92 @@
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
+
+.overlay {
+  @include m.flex();
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: c.$C_INDIGO_80;
+  z-index: 2;
+}
+
+// @mixin flex($justifyContent: center, $alignItems: center, $flexDirection: row) {
+//   display: flex;
+//   justify-content: $justifyContent;
+//   align-items: $alignItems;
+//   flex-direction: $flexDirection;
+// }
+
+.modal {
+  @include m.flex(center, center, column);
+  position: absolute;
+  width: 480px;
+  height: 640px;
+  padding: 60px;
+  background-color: c.$C_INDIGO;
+  box-shadow: c.$C_WHITE_40;
+  border-radius: 5px;
+  animation: fadeIn 0.5s ease-in-out forwards, fadeInShadow 0.5s ease-in-out forwards;
+  animation-direction: alternate;
+  z-index: 3;
+
+  .modalHeader {
+    @include m.flex(space-between, flex-start, row);
+    width: 100%;
+    height: 100px;
+    margin-bottom: 12px;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    .titleWrapper {
+      .modalTitle {
+        margin-bottom: 12px;
+        font-size: 36px;
+        font-weight: 700;
+      }
+
+      .modalSubTitle {
+        // @include m.flex(left, left);
+        font-size: 20px;
+        font-weight: 400;
+      }
+    }
+
+    > button {
+      // @include m.flex(center, start);
+      // margin-left: 250px;
+      background-color: #ffffff00;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  .modalContent {
+    // @include m.flex(center, center, row);
+    height: 500px;
+    width: 100%;
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      background-color: transparent;
+      color: transparent;
+    }
+
+    100% {
+      background-color: c.$C_INDIGO;
+      color: c.$C_WHITE;
+    }
+  }
+
+  @keyframes fadeInShadow {
+    0% {
+      box-shadow: transparent;
+    }
+
+    100% {
+      box-shadow: 0px 0px 20px c.$C_WHITE_40;
+    }
+  }
+}

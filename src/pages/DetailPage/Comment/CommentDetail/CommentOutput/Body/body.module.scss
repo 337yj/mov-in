@@ -1,0 +1,21 @@
+@use "../../../../../../styles/constants/colors" as c;
+
+.commentContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 10px;
+  row-gap: 10px;
+  height: 100%;
+  .comment {
+    height: 100%;
+    color: c.$C_WHITE;
+  }
+
+  .icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}

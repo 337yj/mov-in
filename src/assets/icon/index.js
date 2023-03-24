@@ -1,4 +1,11 @@
 export { ReactComponent as IconCheck } from "./check.svg";
+export { ReactComponent as IconClose } from "./close.svg";
+export { ReactComponent as IconGreenCheck } from "./greenCheck.svg";
+export { ReactComponent as IconModify } from "./modify.svg";
+export { ReactComponent as IconDelete } from "./delete.svg";
+export { ReactComponent as IconHeartEmpty } from "./heartEmpty.svg";
+export { ReactComponent as IconHeartFull } from "./heartFull.svg";
+export { ReactComponent as IconComment } from "./comment.svg";
 export { ReactComponent as IconSearch } from "./search.svg";
 export { ReactComponent as IconCaretLeft } from "./chevron-left.svg";
 export { ReactComponent as IconCaretRight } from "./chevron-right.svg";

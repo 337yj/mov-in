@@ -9,6 +9,7 @@ import {
   HomePage,
   ComponentPage,
   SearchResultPage,
+  DetailPage,
   MyPage,
   UserInfo,
   Like,
@@ -20,6 +21,7 @@ const route = (
   <Route path="/" element={<Layout />}>
     <Route index element={<HomePage />} />
     <Route path="searchResult" element={<SearchResultPage />} />
+    <Route path="detail" element={<DetailPage />} />
     <Route path="myPage" element={<MyPage />}>
       <Route path="/myPage/userInfo" element={<UserInfo />} />
       <Route path="/myPage/comment" element={<CommentAndRating />} />

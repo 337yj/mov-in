@@ -12,16 +12,14 @@ const Carousel = () => {
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 4,
-        autoplay: false,
+        autoplay: true,
         prevArrow: <IconCaretLeft />,
         nextArrow: <IconCaretRight />,
     };
 
     return (
             <StyledSlider {...settings}>
-                {data.map((movie) => (
-                    <Card movie={movie} />
-                ))}
+                {data.map(movie => <Card movie={movie} />)}
             </StyledSlider>
     );
 };

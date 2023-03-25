@@ -8,7 +8,7 @@
 >
     <path
         d="M15.5 19L9.20711 12.7071C8.81658 12.3166 8.81658 11.6834 9.20711 11.2929L15.5 5"
-        stroke="#ffffff"
+        stroke="rgba(255, 255, 255, 0.7)"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"/>

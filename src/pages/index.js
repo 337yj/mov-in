@@ -1,6 +1,7 @@
 export { default as HomePage } from "./Home";
 export { default as ComponentPage } from "./Component";
 export { default as SearchResultPage } from "./SearchResult";
+export { default as DetailPage } from "./DetailPage";
 export { default as CommetDetailPage } from "./DetailPage/Comment/CommentDetail";
 
 export { default as CommentOutput } from "./DetailPage/Comment/CommentDetail/CommentOutput";

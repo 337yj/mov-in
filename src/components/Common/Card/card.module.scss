@@ -3,6 +3,7 @@
 
 .wrapper {
   position: relative;
+  cursor: pointer;
 
   &:hover {
     > .info {
@@ -24,7 +25,6 @@
   }
 
   > .info {
-    //visibility: hidden; // 이걸 써야 안 보이게 했다가 보이게 만들 수 있는데 문제점: 애니메이션이 끊김
     position: absolute;
     left: 0;
     bottom: 0;
@@ -32,53 +32,55 @@
     width: 330px;
     height: 0px;
     transition: height 0.4s linear;
-    padding: 20px;
     margin-left: 10px;
     border-radius: 0px 0px 10px 10px;
     background-color: c.$C_INDIGO_90;
 
-    > .title {
-      @include m.flex(space-between, flex-end, row);
-      width: 100%;
-      > h3 {
-        max-width: 206px;
-        @include m.ellipse();
-        font-size: 36px;
-        font-weight: 700;
-      }
-
-      > .detail {
-        @include m.flex();
-        color: c.$C_WHITE_40;
-        font-size: 14px;
-
-        > p:first-of-type {
-          padding: 2px 2px 1px 1px; // 이렇게 해야 맞게 됨 (뭐임?)
-          margin-right: 8px;
-          border-radius: 2px;
-          background-color: c.$C_WHITE_40;
-          color: c.$C_INDIGO;
+    > .padding {
+      padding: 20px;
+      > .title {
+        @include m.flex(space-between, flex-end, row);
+        width: 100%;
+        > h3 {
+          max-width: 206px;
+          @include m.ellipse();
+          font-size: 36px;
+          font-weight: 700;
+        }
+  
+        > .detail {
+          @include m.flex();
+          color: c.$C_WHITE_40;
+          font-size: 14px;
+  
+          > p:first-of-type {
+            padding: 2px 2px 1px 1px; // 이렇게 해야 맞게 됨 (뭐임?)
+            margin-right: 8px;
+            border-radius: 2px;
+            background-color: c.$C_WHITE_40;
+            color: c.$C_INDIGO;
+          }
         }
       }
-    }
-
-    > .tags {
-      @include m.flex();
-      gap: 6px;
-      margin: 8px 0px 44px 0px;
-
-      > button {
-        padding: 2px 8px;
-        font-size: 12px;
-        font-weight: 300;
+  
+      > .tags {
+        @include m.flex(flex-start);
+        gap: 6px;
+        margin: 8px 0px 44px 0px;
+  
+        > button {
+          padding: 2px 8px;
+          font-size: 12px;
+          font-weight: 300;
+        }
       }
-    }
-
-    > p {
-      @include m.multiEllipsis(16px, 20px, 3);
-      color: c.$C_WHITE_70;
-      font-weight: 300;
-      text-align: justify;
+  
+      > p {
+        @include m.multiEllipsis(16px, 20px, 3);
+        color: c.$C_WHITE_70;
+        font-weight: 300;
+        text-align: justify;
+      }
     }
   }
 }

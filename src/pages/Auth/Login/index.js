@@ -6,8 +6,12 @@ import data from "../../../fake.json";
 import styles from "./login.module.scss";
 
 const Login = () => {
-    // 로고 누르면 홈으로 이동, 회원이~? 누르면 회원가입으로 이동
+    // 이미지 누르면 디테일로 / 로고 누르면 홈으로 / 회원이~? 누르면 회원가입으로 이동
     const navigate = useNavigate();
+
+    const onNavigateDetail = () => {
+        navigate(`/detail`);
+    };
 
     const onNavigateHome = () => {
         navigate(`/`);
@@ -40,15 +44,15 @@ const Login = () => {
     const posterIdx = Math.floor(Math.random() * posterArr.length)
     const randomPoster = posterArr[posterIdx]
 
-    // 할 것: 유효성 검사, 포스터 랜덤으로 띄우기
+    // 할 것: 유효성 검사
     return (
         <main>
             <section className={styles.wrapper}>
                 <article>
-                    <img src={randomPoster} alt="moviePoster" />
+                    <img src={randomPoster} onClick={ onNavigateDetail } alt="moviePoster" />
                 </article>
                 <article>
-                    <img src={ ImageLogo } alt="logo" onClick={ onNavigateHome } />
+                    <img src={ ImageLogo } onClick={ onNavigateHome } alt="logo" />
                     <form onSubmit={ onSubmit }>
                         <Input
                             className={styles.input}

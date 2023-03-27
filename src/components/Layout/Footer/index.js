@@ -4,6 +4,7 @@ import styles from "./footer.module.scss";
 
 const Footer = ({className, textStyle}) => {
 
+    if (window.location.pathname === '/login') return null;
     return (
         <footer className={cx(styles.footer, styles[textStyle])}>
                 <div className={cx(styles.container)}>

@@ -10,6 +10,8 @@ import {
   ComponentPage,
   SearchResultPage,
   DetailPage,
+  LoginPage,
+  RegisterPage,
   MyPage,
   UserInfo,
   Like,
@@ -22,6 +24,8 @@ const route = (
     <Route index element={<HomePage />} />
     <Route path="searchResult" element={<SearchResultPage />} />
     <Route path="detail" element={<DetailPage />} />
+    <Route path="login" element={<LoginPage />} />
+    <Route path="signup" element={<RegisterPage />} />
     <Route path="myPage" element={<MyPage />}>
       <Route path="/myPage/userInfo" element={<UserInfo />} />
       <Route path="/myPage/comment" element={<CommentAndRating />} />

@@ -1,18 +1,24 @@
 @use "../../../styles/constants" as c;
 @use "../../../styles/mixins" as m;
 
+
+
 .button {
   @include m.flex();
   padding: 6px 34px;
+  margin-left: 8px;
   border: none;
-  color: c.$C_WHITE;
-  background: c.$C_PURPLE;
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
 
-  &:hover {
-    background-color: c.$C_PURPLE_80;
+  &.primary {
+    color: c.$C_WHITE;
+    background: c.$C_PURPLE;
+
+    &:hover {
+      background-color: c.$C_PURPLE_80;
+    }
   }
 
   &.secondary {
@@ -44,6 +50,7 @@
 
   &.dark {
     padding: 18px 62px;
+    color: c.$C_WHITE;
     background-color: c.$C_INDIGO;
 
     &:hover {

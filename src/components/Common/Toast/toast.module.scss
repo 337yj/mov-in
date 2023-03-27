@@ -12,7 +12,7 @@
   border-radius: 50px;
   z-index: 2;
   transform: translate(-50%, -50%);
-  animation: bounce 1s ease-in-out forwards;
+  animation: toDown 1s ease-in-out forwards;
   background-color: c.$C_PURPLE;
   color: c.$C_WHITE;
 
@@ -32,7 +32,7 @@
     margin-left: 80px;
     height: 32px;
     width: 32px;
-    background-color: #ffffff00;
+    background-color: c.$C_TRANSPARENT;
     border: none;
     cursor: pointer;
   }
@@ -44,11 +44,11 @@
   height: 25px;
   padding: 6px;
   margin: 0px 16px 0px 6px;
-  background-color: white;
+  background-color: c.$C_WHITE;
   border-radius: 100%;
 }
 
-@keyframes bounce {
+@keyframes toDown {
   0% {
     transform: translate(-50%, -200%);
     }

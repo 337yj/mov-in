@@ -5,13 +5,12 @@ section {
   .wrapper {
     @include m.flex(center, flex-end, column);
     position: relative;
-    width: 280px;
-    padding-right: 10px;
-    row-gap: 38px;
+    padding: 80px 10px 80px 0;
+    row-gap: 46px;
     border-right: 1px solid c.$C_WHITE;
 
     .title {
-      padding: 30px 50px;
+      padding: 20px 50px;
       font-size: 36px;
       color: c.$C_WHITE;
     }
@@ -53,8 +52,5 @@ section {
     .li {
       color: c.$C_WHITE;
     }
-  }
-  .sideLine {
-    border-right: 1px solid c.$C_WHITE;
   }
 }

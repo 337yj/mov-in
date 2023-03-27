@@ -1,6 +1,6 @@
 @use "../../styles/mixins" as m;
 
 .wrapper {
-  @include m.flex(flex-start);
-  padding: 220px 50px;
+  @include m.flex(center, flex-start, row);
+  padding: 180px 0;
 }

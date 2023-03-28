@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Poster from "./poster";
 import { Input, Button } from "../../../components";
 import { ImageLogo } from "../../../assets";
-import data from "../../../fake.json";
 import styles from "./login.module.scss";
 
 const Login = () => {
-  // 이미지 누르면 디테일로 / 로고 누르면 홈으로 / 회원이~? 누르면 회원가입으로 이동
-  const navigate = useNavigate();
+    // 로고 누르면 홈으로 / 회원이~? 누르면 회원가입으로 이동
+    const navigate = useNavigate();
 
-  const onNavigateDetail = () => {
-    navigate(`/detail`);
-  };
-
-  const onNavigateHome = () => {
-    navigate(`/`);
-  };
+    const onNavigateHome = () => {
+        navigate(`/`);
+    };
 
   const onNavigateRegister = () => {
     navigate(`/signup`);
@@ -27,62 +23,59 @@ const Login = () => {
     password: "",
   });
 
-  const onChange = (e) => {
-    const { name, value } = e.currentTarget;
-    setForm({ ...form, [name]: value });
-  };
+    const onChange = (e) => {
+            const { name, value } = e.currentTarget;
+            setForm({ ...form, [name]: value });
+    };
 
-  const onSubmit = async (e) => {
-    if (!setForm) {
-      e.preventDefault();
-    }
-  };
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const { email, password } = form;
+        const response = await Login({
+            email,
+            password,
+        });
 
-  // 랜덤 영화 포스터
-  // 가짜 데이터 내의 이미지 화질이 낮아서 깨짐
-  const posterArr = data.map((movie) => movie.image);
-  const posterIdx = Math.floor(Math.random() * posterArr.length);
-  const randomPoster = posterArr[posterIdx];
+        if (response.data) {
+            const { accessToken, refreshToken } = response.data;
+            localStorage.setItem("ACCESS_TOKEN", accessToken);
+            localStorage.setItem("REFRESH_TOKEN", refreshToken);
 
-  // 할 것: 유효성 검사
-  return (
-    <main>
-      <section className={styles.wrapper}>
-        <article>
-          <img
-            src={randomPoster}
-            onClick={onNavigateDetail}
-            alt="moviePoster"
-          />
-        </article>
-        <article>
-          <img src={ImageLogo} onClick={onNavigateHome} alt="logo" />
-          <form onSubmit={onSubmit}>
-            <Input
-              className={styles.input}
-              placeholder="이메일"
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={onChange}
-            />
-            <Input
-              className={styles.input}
-              placeholder="비밀번호"
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={onChange}
-            />
-            <p onClick={onNavigateRegister}>회원이 아니신가요?</p>
-            <Button type="submit" color="login">
-              로그인
-            </Button>
-          </form>
-        </article>
-      </section>
-    </main>
-  );
+            navigate(`/`);
+        };
+    };
+
+    // 할 것: 유효성 검사
+    return (
+        <main>
+            <section className={styles.wrapper}>
+                <Poster />
+                <article>
+                    <img src={ ImageLogo } onClick={ onNavigateHome } alt="logo" />
+                        <form id="loginForm" onSubmit={ onSubmit }>
+                        <Input
+                            className={styles.input}
+                            placeholder="이메일"
+                            type="email"
+                            name="email"
+                            value={form.email}
+                            onChange={ onChange }
+                        />
+                        <Input
+                            className={styles.input}
+                            placeholder="비밀번호"
+                            type="password"
+                            name="password"
+                            value={form.password}
+                            onChange={ onChange }
+                        />
+                        <p onClick={ onNavigateRegister }>회원이 아니신가요?</p>
+                        <Button type="submit" form="loginForm" color="login">로그인</Button>
+                    </form>
+                </article>
+            </section>
+        </main>
+    );
 };
 
 export default Login;

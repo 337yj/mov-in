@@ -14,7 +14,7 @@ const Card = ({ movie, type = "default", className }) => {
   return (
     <section className={cx(styles.wrapper, styles[type])} onClick={onClick}>
       <img
-        src={movie.image}
+        src={movie.postImage}
         alt="thumbnail"
         // className={cx(styles.img, styles[type])}
       />

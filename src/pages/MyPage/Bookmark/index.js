@@ -1,9 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Card from "../../../components/Common/Card";
-// import CardPagi from "../../../components/CardPagi";
-// import Card from "../../../components/Common/Card";
 import Paging from "../../../components/Common/Pagination";
+import { getMovies, getMoviesCount } from "../../../api/Movie";
 import styles from "./bookmark.module.scss";
 
 const Bookmark = () => {
@@ -16,34 +14,46 @@ const Bookmark = () => {
   const [postPerPage] = useState(10); // 페이지당 포스트 개수
   const indexOfLastPost = page * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/mock/fake.json");
-        const posts = response.data.posts;
-        const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+        const response = await getMovies(page, postPerPage);
+        const posts = response.data.data;
         setPosts(posts);
-        setCurrentPosts(currentPosts);
+        setCurrentPosts(posts.slice(indexOfFirstPost, indexOfLastPost));
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [indexOfFirstPost, indexOfLastPost, page]);
+  }, [page, postPerPage, posts, indexOfFirstPost, indexOfLastPost]);
+
+  useEffect(() => {
+    const fetchCount = async () => {
+      try {
+        const response = await getMoviesCount();
+        setTotalCount(response.data.count);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCount();
+  }, []);
 
   return (
     <section className={styles.wrapper}>
-      <h2 className={styles.title}>{posts.length}개를 '북마크' 했어요 !</h2>
+      <h2 className={styles.title}>{totalCount}개를 '북마크' 했어요 !</h2>
       <ul className={styles.gridContainer}>
-        {currentPosts.map((movie) => (
+        {currentPosts.slice(indexOfFirstPost, indexOfLastPost).map((movie) => (
           <li key={movie.id}>
             <Card movie={movie} />
           </li>
         ))}
       </ul>
       <Paging
-        totalCount={posts.length}
+        totalCount={totalCount}
         page={page}
         postPerPage={postPerPage}
         pageRangeDisplayed={5}

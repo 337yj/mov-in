@@ -4,58 +4,53 @@ import { ImStarEmpty, ImStarFull, ImStarHalf } from "react-icons/im";
 import styles from "./stars.module.scss";
 
 const Stars = () => {
-  const ARRAY = [0, 1, 2, 3, 4];
+  const stars = Array(5).fill(0);
+  // const activeStars=
 
-  // 초기값은 빈 별5개
-  // 숫자별로 보여지는 아이콘이 다르게
-  // 1일때 꽉찬별 1개 빈별4개
-  //
+  const [starValue, setStarValue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(undefined);
 
-  const [grade, setGrade] = useState(0);
+  const handleClick = (value) => {
+    setStarValue(value);
+  };
 
-  const starsGrade = (index) => {
-    let star = [...grade];
-    for (let i = 0; i < 5; i++) {
-      star[i] = i <= index ? true : false;
-    }
-    setGrade(star);
+  const handleMouseOver = (value) => {
+    setHoverValue(value);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverValue(undefined);
   };
 
   return (
-    <output className={styles.starContainal}>
-      <button className={styles.star}>
-        {ARRAY.map((el, index) => (
-          <ImStarFull
-            key={index}
-            size="18"
-            color="#f3c623"
-            onClick={starsGrade}
-            className={styles.full}
-          />
-        ))}
-        {ARRAY.map((el, index) => (
-          <ImStarEmpty
-            key={index}
-            size="18"
-            color="#f3c623"
-            onClick={starsGrade}
-            className={styles.empty}
-          />
-        ))}
-        {ARRAY.map((el, index) => (
-          <ImStarHalf
-            key={index}
-            size="18"
-            color="#f3c623"
-            onClick={starsGrade}
-            className={styles.half}
-          />
-        ))}
-      </button>
+    <output className={styles.container}>
+      <div className={styles.star}>
+        {stars.map((_, index) => {
+          return index ? (
+            <ImStarEmpty key={index} color="#f3c623" size="18" />
+          ) : (
+            <ImStarFull
+              key={index}
+              precision={0.5}
+              color="#f3c623"
+              size="18"
+              className={styles.full}
+              hover={
+                (hoverValue || starValue) > index ? (
+                  <ImStarEmpty />
+                ) : (
+                  <ImStarFull />
+                )
+              }
+              onClick={() => handleClick(index + 1)}
+              onMouseOver={() => handleMouseOver(index + 1)}
+              onMouseLeave={handleMouseLeave}
+            />
+          );
+        })}
+      </div>
     </output>
   );
 };
-
-/* 18px, 38px 2개의 크기로 사용 가능할까? */
 
 export default Stars;

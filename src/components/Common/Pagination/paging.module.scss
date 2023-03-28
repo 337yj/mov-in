@@ -1,0 +1,43 @@
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
+
+.pagination {
+  @include m.flex();
+  margin-top: 46px;
+  height: 20px;
+}
+
+ul.pagination li {
+  @include m.flex();
+  width: 60px;
+  font-size: 24px;
+
+  > a {
+    text-decoration: none;
+    color: c.$C_WHITE;
+    width: 20px;
+    font-weight: 500;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: c.$C_YELLOW;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color: rgb(252, 33, 33);
+}
+svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // width: 40px;
+  height: 20px;
+  color: rgb(255, 34, 34);
+}

@@ -13,15 +13,15 @@ const Login = () => {
         navigate(`/`);
     };
 
-    const onNavigateRegister = () => {
-        navigate(`/signup`);
-    };
+  const onNavigateRegister = () => {
+    navigate(`/signup`);
+  };
 
-    // 로그인 form 관리 (해야 됨)
-    const [form, setForm] = useState({
-        email: "",
-        password: "",
-    });
+  // 로그인 form 관리 (해야 됨)
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
     const onChange = (e) => {
             const { name, value } = e.currentTarget;

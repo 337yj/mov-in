@@ -9,3 +9,5 @@ export { ReactComponent as IconComment } from "./comment.svg";
 export { ReactComponent as IconSearch } from "./search.svg";
 export { ReactComponent as IconCaretLeft } from "./chevron-left.svg";
 export { ReactComponent as IconCaretRight } from "./chevron-right.svg";
+export { ReactComponent as IconDoubleRightChevron } from "./doubleRightChevron.svg";
+export { ReactComponent as IconDoubleLeftChevron } from "./doubleLeftChevron.svg";

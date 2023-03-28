@@ -12,6 +12,10 @@ ul.pagination li {
   width: 60px;
   font-size: 24px;
 
+  &.active a {
+    color: c.$C_YELLOW;
+  }
+
   > a {
     text-decoration: none;
     color: c.$C_WHITE;
@@ -20,7 +24,10 @@ ul.pagination li {
 
     &:hover,
     &:active,
-    &:focus {
+    &:focus,
+    .icon:hover, // 수정된 부분
+    .firstPageIcon:hover, // 수정된 부분
+    .lastPageIcon:hover {
       color: c.$C_YELLOW;
       font-weight: 700;
       cursor: pointer;
@@ -28,16 +35,15 @@ ul.pagination li {
   }
 }
 
-.icon {
+.icon,
+.firstPageIcon,
+.lastPageIcon {
+  @include m.flex();
   width: 20px;
   height: 20px;
-  color: rgb(252, 33, 33);
 }
-svg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  // width: 40px;
-  height: 20px;
-  color: rgb(255, 34, 34);
+
+.firstPageIcon,
+.lastPageIcon {
+  width: 14px;
 }

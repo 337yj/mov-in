@@ -5,7 +5,8 @@ section {
   .wrapper {
     @include m.flex(center, flex-end, column);
     position: relative;
-    padding: 80px 10px 80px 0;
+    width: 460px;
+    padding: 80px 10px 80px 80px;
     row-gap: 46px;
     border-right: 1px solid c.$C_WHITE;
 

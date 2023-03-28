@@ -20,7 +20,9 @@ const MyPage = () => {
       <LNB title="MY PAGE" menus={menus} basePath="/myPage" />
       {/* 경로가 "/myPage"일 때만 Profile 컴포넌트를 렌더링 */}
       {pathname === "/myPage" && <Profile />}
-      <Outlet />
+      <div className={styles.outletWrapper}>
+        <Outlet />
+      </div>
     </section>
   );
 };

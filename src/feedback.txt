@@ -10,11 +10,14 @@
 
 - Common > Tag 
 영화감상포인트태그와 긴장감태그를 컴포넌트로 분리하는게 좋을까요?
+-> 리뷰를 남기는 컴포넌트 (ex : CreateComment) 에서 MoviePointTags, TensionTags라는 파일을 따로 만드는게 좋습니다.
+  -> Common에 만드는게 아니라 위의 CreateComment와 같은 폴더 내에 만드는 것이 좋습니다.
 
 
 - Common > Carousel 
 카테고리마다 캐러셀 요소 개수가 다른경우엔 컴포넌트로 따로 분리하는게 좋을까요?
 (인기 10위 - 5개 / 최신순, 로맨스 등 - 4개)
+-> Carousel > settings의 일부를 Props로 받는 것이 좋을 것 같습니다.
 
 
 - DetailPage > Body <content> 태그

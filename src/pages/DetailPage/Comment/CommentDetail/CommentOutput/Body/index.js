@@ -8,9 +8,16 @@ const CommentBody = ({ content, className = "", ...props }) => {
   // props type 작성
 
   return (
-    <body className={className}>
+    <article className={className}>
       <p className={styles.comment}>{content}</p>
       <div className={styles.icon}>
+
+    // NOTE: body태그 사용 X -> section / article
+    
+      {/* //NOTE: content -> p */}
+      {/* //NOTE: output -> 어떤 결과를 표기할 때 쓰는 태그 */}
+      {/* //NOTE: div or footer */}
+
         {/* 알림 띄우고 수정 모달로 이동 기능 추가*/}
         <button>
           <IconModify />
@@ -20,7 +27,7 @@ const CommentBody = ({ content, className = "", ...props }) => {
           <IconDelete />
         </button>
       </div>
-    </body>
+    </article>
   );
 };
 

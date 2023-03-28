@@ -1,0 +1,3 @@
+<page/DetailPage/Comment/CommentDetail/CommentOutput/index.js>
+1.평점 4를 4.0으로 표기
+2. 날짜를 년.월.일로 표기

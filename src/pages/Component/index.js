@@ -77,15 +77,7 @@ const Component = () => {
           <div>
             <h2>태그</h2>
             <div className={styles.tags}>
-              <NormalTag>OST</NormalTag>
-              <NormalTag>연기력</NormalTag>
-              <NormalTag>영상미</NormalTag>
-              {/* <Tag type="selectTag">연기력</Tag> */}
-            </div>
-            <div className={styles.tags}>
-              <TensionTag>낮음</TensionTag>
-              <TensionTag>중간</TensionTag>
-              <TensionTag>높음</TensionTag>
+              <Tag />
             </div>
           </div>
           <div>

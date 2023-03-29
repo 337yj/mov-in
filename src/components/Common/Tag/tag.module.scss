@@ -1,5 +1,5 @@
-@use "../../../../styles/constants" as c;
-@use "../../../../styles/mixins" as m;
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
 
 .tag {
   @include m.flex();
@@ -14,10 +14,6 @@
   &:hover {
     background-color: c.$C_DARKGRAY_80;
   }
-
-  // &:focus-within {
-  //   background-color: c.$C_PURPLE;
-  // }
 
   &.isSelected {
     border-radius: 12px;

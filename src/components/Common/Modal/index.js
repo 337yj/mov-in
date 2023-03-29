@@ -2,7 +2,6 @@ import React, {useState, useRef, memo} from "react";
 import cx from "classnames";
 import styles from "./modal.module.scss";
 import { IconClose } from "../../../assets";
-import { useState, useRef, memo } from "react";
 
 const Modal = ({ className, children, animation, title, subTitle, buttonFirst,
   buttonSecond }) => {

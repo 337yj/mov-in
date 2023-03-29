@@ -16,17 +16,17 @@ const Bookmark = () => {
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const [totalCount, setTotalCount] = useState(0);
 
+  const fetchData = async () => {
+    try {
+      const response = await getMovies(page, postPerPage);
+      const posts = response.data.data;
+      setPosts(posts);
+      setCurrentPosts(posts.slice(indexOfFirstPost, indexOfLastPost));
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getMovies(page, postPerPage);
-        const posts = response.data.data;
-        setPosts(posts);
-        setCurrentPosts(posts.slice(indexOfFirstPost, indexOfLastPost));
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchData();
   }, [page, postPerPage, posts, indexOfFirstPost, indexOfLastPost]);
 

@@ -26,12 +26,12 @@ const Component = () => {
           <div>
             <h2>버튼</h2>
             <div className={styles.buttons}>
-              <Button>저장</Button>
+              <Button color="primary">저장</Button>
               <Button color="secondary">취소</Button>
               <Button color="danger">탈퇴</Button>
               <Button color="warning">보기</Button>
             </div>
-            <Button color="dark">♡ 2,200</Button>
+            <Button color="dark">2,200</Button>
             <Button color="login">로그인</Button>
           </div>
           <div>
@@ -64,7 +64,9 @@ const Component = () => {
           </div>
           <div>
             <h2>모달</h2>
-            <Modal title="프로필 사진 변경" subTitle="모달서브타이틀">
+            <Modal title="프로필 사진 변경" subTitle="모달서브타이틀"
+              buttonFirst={<Button color="primary" children={"저장"} />}
+              buttonSecond={<Button color="secondary" children={"취소"} />}>
               description
             </Modal>
           </div>
@@ -75,8 +77,15 @@ const Component = () => {
           <div>
             <h2>태그</h2>
             <div className={styles.tags}>
-              <Tag>OST</Tag>
-              <Tag type="selectTag">연기력</Tag>
+              <NormalTag>OST</NormalTag>
+              <NormalTag>연기력</NormalTag>
+              <NormalTag>영상미</NormalTag>
+              {/* <Tag type="selectTag">연기력</Tag> */}
+            </div>
+            <div className={styles.tags}>
+              <TensionTag>낮음</TensionTag>
+              <TensionTag>중간</TensionTag>
+              <TensionTag>높음</TensionTag>
             </div>
           </div>
           <div>

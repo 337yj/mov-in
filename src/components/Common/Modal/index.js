@@ -1,9 +1,12 @@
+import React, {useState, useRef, memo} from "react";
 import cx from "classnames";
 import styles from "./modal.module.scss";
 import { IconClose } from "../../../assets";
 import { useState, useRef, memo } from "react";
 
-const Modal = ({ className, children, animation, title, subTitle }) => {
+const Modal = ({ className, children, animation, title, subTitle, buttonFirst,
+  buttonSecond }) => {
+
   //const background = useRef();
   const [modal, setModal] = useState(false);
 
@@ -26,7 +29,15 @@ const Modal = ({ className, children, animation, title, subTitle }) => {
                 <IconClose />
               </button>
             </header>
-            <content className={cx(styles.modalContent)}>{children}</content>
+            <main className={cx(styles.modalContent)}>
+              {children}
+              <div className={cx(styles.modalFooter)}>
+                <div>
+                  {buttonFirst}
+                  {buttonSecond}
+                </div>
+              </div>
+            </main>
           </section>
         </div>
       )}

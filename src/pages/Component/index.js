@@ -64,9 +64,12 @@ const Component = () => {
           </div>
           <div>
             <h2>모달</h2>
-            <Modal title="프로필 사진 변경" subTitle="모달서브타이틀"
+            <Modal
+              title="프로필 사진 변경"
+              subTitle="모달서브타이틀"
               buttonFirst={<Button color="primary" children={"저장"} />}
-              buttonSecond={<Button color="secondary" children={"취소"} />}>
+              buttonSecond={<Button color="secondary" children={"취소"} />}
+            >
               description
             </Modal>
           </div>

@@ -7,7 +7,7 @@ import styles from "./lnb.module.scss";
 const LNB = ({ title, menus, basePath, selectedPath }) => {
   //NOTE: 현재 경로와 메뉴에 있는 경로가 일치하는 값을 찾아서 className에 할당
   const selectedMenu = menus.find((menu) => menu.path === selectedPath);
-
+  console.log(selectedMenu);
   return (
     <nav className={styles.wrapper}>
       <h2 className={styles.title}>{title}</h2>
@@ -15,7 +15,8 @@ const LNB = ({ title, menus, basePath, selectedPath }) => {
         return (
           <NavLink
             className={cx(styles.navMenu, {
-              [styles.selected]: selectedMenu.name === menu.name,
+              [styles.selected]:
+                selectedMenu && selectedMenu.name === menu.name,
             })}
             to={`${basePath}${menu.path}`}
             key={index}

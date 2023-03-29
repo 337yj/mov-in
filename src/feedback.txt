@@ -1,25 +1,10 @@
-- Auth > Login 페이지
-로그인 페이지는 헤더와 푸터가 보이지 않도록 예외처리를 하였는데,
-새로고침을 해야 푸터가 예외처리 됩니다.
+- <page/DetailPage/Comment/CommentDetail/CommentOutput/index.js>
+1. 평점 4를 4.0으로 표기
+2. 날짜를 년.월.일로 표기
 
+- /myPage/bookmark
+1. 영화 이미지 로딩 오류 문제 (1페이지, 3페이지)
 
-- MyPage > Bookmark 페이지에 페이지네이션
-1. 페이지네이션 next, prev 버튼에 아이콘 사이즈 변경이 안됩니다.
-2. 뷰페이지가 줄어들 때, 이미지 사이의 간격이 다르게 줄어듭니다.
-
-
-- Common > Tag 
-영화감상포인트태그와 긴장감태그를 컴포넌트로 분리하는게 좋을까요?
--> 리뷰를 남기는 컴포넌트 (ex : CreateComment) 에서 MoviePointTags, TensionTags라는 파일을 따로 만드는게 좋습니다.
-  -> Common에 만드는게 아니라 위의 CreateComment와 같은 폴더 내에 만드는 것이 좋습니다.
-
-
-- Common > Carousel 
-카테고리마다 캐러셀 요소 개수가 다른경우엔 컴포넌트로 따로 분리하는게 좋을까요?
-(인기 10위 - 5개 / 최신순, 로맨스 등 - 4개)
--> Carousel > settings의 일부를 Props로 받는 것이 좋을 것 같습니다.
-
-
-- DetailPage > Body <content> 태그
-모질라에서 content, contents 태그는 더 이상 지원하지 않고 
-<slot>태그로 대체하는 것을 추천한다고 하는데 사용해도 될까요?
+- /myPage LNB 
+1. mypage 페이지 로드시 처음 활성화된 메뉴(프로필)에 스타일이 적용되게 하는 방법
+3. LNB 메뉴를 클릭하고 다른 곳을 클릭하면 적용된 스타일이 사라지는 문제

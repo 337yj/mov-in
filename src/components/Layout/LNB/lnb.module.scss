@@ -31,6 +31,11 @@ section {
         color: c.$C_YELLOW;
       }
 
+      &.selected {
+        font-weight: 700;
+        color: c.$C_YELLOW;
+      }
+
       &:focus {
         font-weight: 700;
         color: c.$C_YELLOW;

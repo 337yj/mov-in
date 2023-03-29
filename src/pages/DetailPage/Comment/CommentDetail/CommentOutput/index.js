@@ -5,7 +5,7 @@ import {
   CommentBody,
   CommentFooter,
 } from "../../../../../pages";
-
+import dayjs from "dayjs";
 import styles from "./commentOutput.module.scss";
 import { ImageProfile1 } from "../../../../../assets";
 
@@ -38,7 +38,13 @@ const ReplyOutput = ({
       <hr className={styles.horizontalLine} />
       <CommentBody className={styles.content} content={"코멘트 내용"} />
       <hr className={styles.horizontalLine} />
-      <CommentFooter className={styles.comment} date={2023.01} />
+      {/* //NOTE: dayjs를 다운로드 */}
+      {/* //NOTE: -> 2023.03.29 오전 1시 12분 */}
+      {/* //NOTE: 용량 moment.js >>> dayjs */}
+      <CommentFooter
+        className={styles.comment}
+        date={dayjs().format("YYYY.MM.DD")}
+      />
     </li>
   );
 };

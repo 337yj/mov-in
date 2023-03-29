@@ -5,6 +5,7 @@ import styles from "./detail.module.scss";
 
 const Detail = () => {
   const { title } = useParams();
+  //NOTE: state => path variable  (/detail/:id)
   const { state: { movie } = {} } = useLocation();
 
   const onGetMovieDetail = async () => {

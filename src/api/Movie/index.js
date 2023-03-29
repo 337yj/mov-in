@@ -23,7 +23,7 @@ export const getMoviesMeLike = () => {
 // 영화 장르별로 불러오기
 export const getMoviesGenre = (page = 1, limit = 20, genreIds) => {
   return apiClient.get(
-    `/movies/genre?page=${page}&limit=${limit}&genreIds=${genreIds}`
+    `/movies/genre?page=${page}&limit=${limit}&genreIds=${genreIds}`,
   );
 };
 

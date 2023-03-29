@@ -1,7 +1,9 @@
 import React from "react";
-import Card from "../Card";
+
 import { IconCaretLeft, IconCaretRight } from "../../../assets/icon";
-import data from "../../../fake.json";
+// import data from "../../../fake.json";
+import Card from "../Card";
+
 import StyledSlider from "./carouselStyle";
 
 const Carousel = () => {

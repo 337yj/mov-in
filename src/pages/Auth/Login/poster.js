@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import data from "../../../fake.json";
+import data from "../../../fake.json";
 
 const Poster = () => {
   // 이미지 누르면 디테일로 이동
@@ -12,13 +12,13 @@ const Poster = () => {
 
   // 랜덤 영화 포스터
   // 가짜 데이터 내의 이미지 화질이 낮아서 깨짐
-  // const posterArr = data.map((movie) => movie.image);
-  // const posterIdx = Math.floor(Math.random() * posterArr.length);
-  // const randomPoster = posterArr[posterIdx];
+  const posterArr = data.map((movie) => movie.image);
+  const posterIdx = Math.floor(Math.random() * posterArr.length);
+  const randomPoster = posterArr[posterIdx];
 
   return (
     <article>
-      {/* <img src={randomPoster} onClick={onNavigateDetail} alt="moviePoster" /> */}
+      <img src={randomPoster} onClick={onNavigateDetail} alt="moviePoster" />
     </article>
   );
 };

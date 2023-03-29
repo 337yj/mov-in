@@ -1,28 +1,16 @@
 @use "../../../../../../styles/constants/colors" as c;
+@use "../../../../../../styles/mixins/" as m;
 
-.commentFooter {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  row-gap: 10px;
-  padding-top: 10px;
-
-  .footerContent {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+.wrapper {
+  @include m.flex(space-between, center, row);
 
   .count {
-    display: flex;
-    flex-direction: row;
+    @include m.flex(null, center, row);
     column-gap: 10px;
-    justify-content: flex-start;
   }
 
   .date {
-    display: block;
-    justify-content: flex-end;
+    @include m.flex(flex-end, null, null);
     color: c.$C_DARKGRAY;
     font-size: 14px;
     font-weight: 400;

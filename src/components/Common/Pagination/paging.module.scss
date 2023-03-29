@@ -1,0 +1,49 @@
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
+
+.pagination {
+  @include m.flex();
+  margin-top: 46px;
+  height: 20px;
+}
+
+ul.pagination li {
+  @include m.flex();
+  width: 60px;
+  font-size: 24px;
+
+  &.active a {
+    color: c.$C_YELLOW;
+  }
+
+  > a {
+    text-decoration: none;
+    color: c.$C_WHITE;
+    width: 20px;
+    font-weight: 500;
+
+    &:hover,
+    &:active,
+    &:focus,
+    .icon:hover, // 수정된 부분
+    .firstPageIcon:hover, // 수정된 부분
+    .lastPageIcon:hover {
+      color: c.$C_YELLOW;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+}
+
+.icon,
+.firstPageIcon,
+.lastPageIcon {
+  @include m.flex();
+  width: 20px;
+  height: 20px;
+}
+
+.firstPageIcon,
+.lastPageIcon {
+  width: 14px;
+}

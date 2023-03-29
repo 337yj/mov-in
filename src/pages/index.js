@@ -1,7 +1,12 @@
 export { default as HomePage } from "./Home";
-export { default as ComponentPage } from "./Component";
+
 export { default as SearchResultPage } from "./SearchResult";
-export { default as CommetDetailPage } from "./DetailPage/Comment/CommentDetail";
+
+export { default as LoginPage } from "./Auth/Login";
+export { default as RegisterPage } from "./Auth/Register";
+
+export { default as DetailPage } from "./DetailPage";
+export { default as CommentDetailPage } from "./DetailPage/Comment/CommentDetail";
 
 export { default as CommentOutput } from "./DetailPage/Comment/CommentDetail/CommentOutput";
 export { default as ReplyOutput } from "./DetailPage/Comment/CommentDetail/CommentOutput/ReplyOutput";
@@ -14,3 +19,5 @@ export { default as UserInfo } from "./MyPage/UserInfo";
 export { default as CommentAndRating } from "./MyPage/CommentAndRating";
 export { default as Like } from "./MyPage/Like";
 export { default as Bookmark } from "./MyPage/Bookmark";
+
+export { default as ComponentPage } from "./Component";

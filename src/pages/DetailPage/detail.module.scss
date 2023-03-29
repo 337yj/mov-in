@@ -1,0 +1,33 @@
+@use "../../styles/constants" as c;
+@use "../../styles/mixins/" as m;
+
+.backgroundWrapper {
+    @include m.flex();
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+
+    .backgroundImg {
+        position: relative;
+        width: 60%;
+        height: 600px;
+        object-fit: cover;
+        object-position: center top;
+
+        &::after {
+            content: "";
+            position: absolute;
+            z-index: 1000;
+            top: 60%;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(180deg, #010226 0%, rgba(1, 2, 38, 0) 100%);
+        }
+    }
+}
+.wrapper {
+    color: white;
+    font-size: 36px;
+    height: 100vh;
+}

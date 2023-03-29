@@ -1,6 +1,12 @@
 @use "../../styles/mixins" as m;
 
 .wrapper {
-  @include m.flex(flex-start);
-  padding: 220px 50px;
+  @include m.flex(flex-start, flex-start, row);
+  margin: 180px 50px;
+
+  //TODO: footer의 height 만큼 bottom에 padding을 주자
+
+  .outletWrapper {
+    margin-left: 120px;
+  }
 }

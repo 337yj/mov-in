@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   IconHeartEmpty,
   IconHeartFull,
@@ -6,31 +7,37 @@ import {
 
 import styles from "./likeCount.module.scss";
 
-const LikeCount = () => {
+const LikeButton = () => {
   const [like, setLike] = useState(0);
   const [onIconClick, setOnIconClick] = useState(false);
 
   const onClick = () => {
-    setLike(like + 1);
+    if (onIconClick) {
+      setOnIconClick(false).setLike(like - 1);
+    } else {
+      setOnIconClick(true).setLike(like + 1);
+    }
     // 클릭 취소시 개수 줄어드는 기능 추가
+  };
+
+  const onchange = (e) => {
+    setOnIconClick(e.target.value);
   };
 
   //false 빈하트 true일때 꽉찬하트
   // 이 결과 값에 따라 false -1 true +1
 
-  const IconClick = () => {
-    if (onIconClick) {
-      setOnIconClick(false);
-    } else {
-      setOnIconClick(true);
-    }
-  };
-
   return (
-    <button className={styles.likeCount} onClick={onClick}>
+    <button type="button" className={styles.likeCount}>
       {/* // 하트 클릭시 색 변하게 기능 추가 */}
-      <button className={styles.icon}>
-        <IconHeartFull className={styles.full} onChange={IconClick} />
+      <button type="button" className={styles.icon}>
+        <IconHeartFull
+          type="Boolean"
+          value
+          className={styles.full}
+          onClick={onClick}
+          onChange={onchange}
+        />
         <IconHeartEmpty className={styles.empty} />
       </button>
       <output className={styles.like}>좋아요 {like}개</output>
@@ -38,4 +45,4 @@ const LikeCount = () => {
   );
 };
 
-export default LikeCount;
+export default LikeButton;

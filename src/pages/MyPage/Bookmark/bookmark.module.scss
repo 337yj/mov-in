@@ -1,8 +1,25 @@
-@use "../../../styles/constants/" as c;
+@use "../../../styles/mixins" as m;
 
 .wrapper {
+  @include m.flex(center, center, column);
+  // padding: 0 100px;
+
   .title {
+    width: 100%;
+    margin-bottom: 32px;
+    text-align: left;
     font-size: 36px;
-    color: c.$C_WHITE;
+    font-weight: 700;
+  }
+
+  .gridContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 2열 */
+    grid-template-rows: repeat(2, 1fr); /* 5행 */
+    // gap: 12px; /* 엘리먼트 간격 */
+    > li {
+      margin-bottom: 16px;
+      width: 80%;
+    }
   }
 }

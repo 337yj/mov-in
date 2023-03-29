@@ -31,6 +31,25 @@
         @include m.flex(flex-start);
         margin: 14px;
       }
+      
+      > .title {
+                @include m.flex(space-between);
+
+                > h3 {
+                    margin-left: 22px;
+                    font-size: 20px;
+                    font-weight: 700;
+                }
+
+                > p {
+                    margin-right: 22px;
+                    font-size: 14px;
+                }
+      }
+
+      > .buttons {
+          @include m.flex(flex-start);
+      }
     }
   }
 }

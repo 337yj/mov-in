@@ -1,21 +1,18 @@
 @use "../../../../../../styles/constants/colors" as c;
+@use "../../../../../../styles/mixins/" as m;
 
-.commentContent {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 10px;
-  row-gap: 10px;
+.comment {
   height: 100%;
-  .comment {
-    height: 100%;
-    color: c.$C_WHITE;
-  }
+  color: c.$C_WHITE;
+  font-size: 16px;
+  font-weight: 400px;
+}
 
-  .icon {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-  }
+.icon {
+  @include m.flex(flex-end, center, row);
+}
+
+button {
+  border: 0;
+  background-color: transparent;
 }

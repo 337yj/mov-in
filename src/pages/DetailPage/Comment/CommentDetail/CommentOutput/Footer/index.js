@@ -1,21 +1,34 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import { LikeCount, CommentCount } from "../_shared";
+import { LikeButton } from "../_shared";
+import { IconComment } from "../../../../../../assets/icon";
 
 import styles from "./footer.module.scss";
 
-const CommentFooter = ({ date, ...props }) => {
+const CommentFooter = ({ comment, date, className, ...props }) => {
+  const navigate = useNavigate();
+
+  const onNavigateCommetDetail = () => {
+    navigate("commentDetail");
+  };
+
   return (
-    <section className={styles.commentFooter}>
-      <hr className={styles.horizontalLine} />
-      <content className={styles.footerContent}>
-        <output className={styles.count}>
-          <LikeCount />
-          <CommentCount />
-        </output>
-        <output className={styles.date}>{date}</output>
-      </content>
-    </section>
+    <footer className={styles.wrapper}>
+      <output className={styles.count}>
+        <LikeButton />
+        <button
+          type="button"
+          className={className}
+          onClick={onNavigateCommetDetail}
+        >
+          <IconComment />
+          {/* 답글 전체 개수 표시 */}
+          <output>답글 {comment}개</output>
+        </button>
+      </output>
+      <output className={styles.date}>{date}</output>
+    </footer>
   );
 };
 

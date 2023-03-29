@@ -1,0 +1,44 @@
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
+
+.wrapper {
+  @include m.flex(flex-start);
+  max-height: 100vh;
+  color: c.$C_WHITE;
+
+  > article:first-of-type {
+    width: 60%;
+
+    > img {
+      width: 100%;
+      object-fit: contain;
+      cursor: pointer;
+    }
+  }
+
+  > article:last-of-type {
+    @include m.flex(center, center, column);
+    width: 40%;
+
+    > img {
+      margin-bottom: 60px;
+      cursor: pointer;
+    }
+
+    > form {
+      width: 66%;
+      > p {
+        color: c.$C_WHITE_60;
+        font-size: 14px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      > button {
+        width: 100%;
+        margin-top: 120px;
+        font-size: 16px;
+      }
+    }
+  }
+}

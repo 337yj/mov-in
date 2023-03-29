@@ -1,15 +1,12 @@
 import React, {useState, useRef, memo} from "react";
 import cx from "classnames";
-import {IconClose} from "../../../assets";
 import styles from "./modal.module.scss";
+import { IconClose } from "../../../assets";
+import { useState, useRef, memo } from "react";
 
-const Modal = ({
-  className,
-  description,
-  children,
-  buttonFirst,
-  buttonSecond,
-}) => {
+const Modal = ({ className, children, animation, title, subTitle, buttonFirst,
+  buttonSecond }) => {
+
   //const background = useRef();
   const [modal, setModal] = useState(false);
 
@@ -24,9 +21,9 @@ const Modal = ({
         <div className={cx(styles.overlay)}>
           <section className={cx(styles.modal)}>
             <header className={cx(styles.modalHeader)}>
-              <div>
-                <h1 className={cx(styles.modalTitle)}>Title</h1>
-                <h4 className={cx(styles.modalSubTitle)}>{description}</h4>
+              <div className={cx(styles.titleWrapper)}>
+                <h1 className={cx(styles.modalTitle)}>{title}</h1>
+                <h4 className={cx(styles.modalSubTitle)}>{subTitle}</h4>
               </div>
               <button className={cx(styles.modalIcon)} onClick={toggleModal}>
                 <IconClose />

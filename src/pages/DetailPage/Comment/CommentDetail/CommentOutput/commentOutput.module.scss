@@ -1,11 +1,9 @@
 @use "../../../../../styles/constants/colors" as c;
-
-//TODO: ClassName 선택자는 depth를 어느정도 유지하는 것이 좋습니다.
+@use "../../../../../styles/mixins/" as m;
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include m.flex(space-between, null, column);
+  row-gap: 10px;
   width: 424px;
   height: 310px;
   padding: 20px;
@@ -14,7 +12,28 @@
 
   .horizontalLine {
     width: 100%;
-    border-bottom: 1px solid c.$C_DARKGRAY;
-    text-align: center;
+    border: 1px solid c.$C_DARKGRAY;
+  }
+
+  .grade {
+    @include m.flex(null, flex-end, null);
+    color: c.$C_WHITE;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .content {
+    @include m.flex(space-between, null, column);
+    row-gap: 10px;
+  }
+
+  .comment {
+    @include m.flex(null, center, row);
+    column-gap: 4px;
+    border: 0px;
+    background-color: transparent;
+    color: c.$C_WHITE;
+    font-size: 14px;
+    font-weight: 400;
   }
 }

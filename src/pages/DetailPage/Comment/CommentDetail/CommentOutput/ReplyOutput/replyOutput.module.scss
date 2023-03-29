@@ -1,59 +1,30 @@
 @use "../../../../../../styles/constants/colors" as c;
+@use "../../../../../../styles/mixins/" as m;
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include m.flex(space-between, null, column);
+  row-gap: 10px;
   width: 828px;
   height: 150px;
   padding: 20px;
   border-radius: 4px;
   background-color: c.$C_WHITE_40;
-}
 
-.replyContent {
-  display: flex;
-  flex-direction: row;
-  padding-top: 10px;
-  color: c.$C_WHITE;
-  font-weight: 400;
-}
+  .grade {
+    display: none;
+  }
 
-.horizontalLine {
-  width: 100%;
-  border-bottom: 1px solid c.$C_DARKGRAY;
-  text-align: center;
-}
+  .content {
+    @include m.flex(space-between, center, row);
+    background-color: transparent;
+  }
 
-.comment {
-  width: 100%;
-  height: 100%;
-}
+  .horizontalLine {
+    width: 100%;
+    border: 1px solid c.$C_DARKGRAY;
+  }
 
-.icon {
-  fill: aquamarine;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.replyFooter {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  row-gap: 10px;
-  padding-top: 10px;
-}
-
-.footerContent {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.date {
-  color: c.$C_DARKGRAY;
-  font-size: 14px;
-  font-weight: 400;
+  .comment {
+    display: none;
+  }
 }

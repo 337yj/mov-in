@@ -11,3 +11,6 @@ export { ReactComponent as IconCaretLeft } from "./chevron-left.svg";
 export { ReactComponent as IconCaretRight } from "./chevron-right.svg";
 export { ReactComponent as IconDoubleRightChevron } from "./doubleRightChevron.svg";
 export { ReactComponent as IconDoubleLeftChevron } from "./doubleLeftChevron.svg";
+export { ReactComponent as IconLink } from "./link.svg";
+export { ReactComponent as IconBookmark } from "./bookmark.svg";
+export { ReactComponent as IconReview } from "./review.svg";

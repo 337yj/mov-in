@@ -8,9 +8,7 @@ const Card = ({ movie, type = "default", className }) => {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate(`/detail?movie=${movie.title}`, {
-      state: { movie },
-    });
+    navigate(`/detail/${movie.id}`);
   };
 
   return (

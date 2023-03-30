@@ -1,8 +1,6 @@
 @use "../../../styles/constants" as c;
 @use "../../../styles/mixins" as m;
 
-
-
 .button {
   @include m.flex();
   padding: 6px 34px;
@@ -54,7 +52,7 @@
     background-color: c.$C_INDIGO;
 
     &:hover {
-      background-color: c.$C_INDIGO_80;
+      background-color: c.$C_INDIGO_50;
     }
   }
 

@@ -9,6 +9,7 @@
   top: 0px;
   left: 0px;
   background-color: c.$C_INDIGO_80;
+  animation: fadeInOverlay 0.5s ease-in-out forwards;
   z-index: 2;
 }
 
@@ -38,6 +39,7 @@
     height: 100px;
     margin-bottom: 12px;
     animation: fadeIn 0.5s ease-in-out forwards;
+    
     .titleWrapper {
       .modalTitle {
         margin-bottom: 12px;
@@ -51,13 +53,14 @@
         font-weight: 400;
       }
     }
-
+    
     > button {
       // @include m.flex(center, start);
       // margin-left: 250px;
-      background-color: #ffffff00;
+      background-color: c.$C_TRANSPARENT;
       border: none;
       cursor: pointer;
+      animation: fadeInButton 0.5s ease-in-out forwards;
     }
   }
 
@@ -68,25 +71,58 @@
     animation: fadeIn 0.5s ease-in-out forwards;
   }
 
-  @keyframes fadeIn {
-    0% {
-      background-color: transparent;
-      color: transparent;
-    }
-
-    100% {
-      background-color: c.$C_INDIGO;
-      color: c.$C_WHITE;
+  .modalFooter {
+    position: absolute;
+    width: 360px;
+    margin: 0px 0px 40px 50px;
+    bottom: 0;
+    animation: fadeInButton 0.5s ease-in-out forwards;
+    
+    > div {
+      @include m.flex(flex-end);
+      margin-right: 50px;
     }
   }
+}
 
-  @keyframes fadeInShadow {
-    0% {
-      box-shadow: transparent;
-    }
+@keyframes fadeIn {
+  0% {
+    background-color: transparent;
+    color: transparent;
+  }
 
-    100% {
-      box-shadow: 0px 0px 20px c.$C_WHITE_40;
-    }
+  100% {
+    background-color: c.$C_INDIGO;
+    color: c.$C_WHITE;
+  }
+}
+
+@keyframes fadeInShadow {
+  0% {
+    box-shadow: transparent;
+  }
+
+  100% {
+    box-shadow: 0px 0px 20px c.$C_WHITE_40;
+  }
+}
+
+@keyframes fadeInOverlay {
+  0% {
+    background-color: transparent;
+  }
+
+  100% {
+    background-color: c.$C_DARKINDIGO_80;
+  }
+}
+
+@keyframes fadeInButton {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
   }
 }

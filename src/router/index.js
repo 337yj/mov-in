@@ -25,16 +25,18 @@ const route = (
   <Route path="/" element={<Layout />}>
     <Route index element={<HomePage />} />
     <Route path="searchResult" element={<SearchResultPage />} />
-    <Route path="detail" element={<DetailPage />} />
-    <Route path="comment" element={<CommentPage />} />
-    <Route path="commentDetail" element={<CommentDetailPage />} />
+    <Route path="detail" element={<DetailPage />}>
+      <Route path="comment" element={<CommentPage />} />
+      <Route path="commentDetail" element={<CommentDetailPage />} />
+    </Route>
+    <Route path="detail/:id" element={<DetailPage />} />
     <Route path="login" element={<LoginPage />} />
     <Route path="signup" element={<RegisterPage />} />
     <Route path="myPage" element={<MyPage />}>
-      <Route path="/myPage/userInfo" element={<UserInfo />} />
-      <Route path="/myPage/comment" element={<CommentAndRating />} />
-      <Route path="/myPage/like" element={<Like />} />
-      <Route path="/myPage/bookmark" element={<Bookmark />} />
+      <Route path="userInfo" element={<UserInfo />} />
+      <Route path="comment" element={<CommentAndRating />} />
+      <Route path="like" element={<Like />} />
+      <Route path="bookmark" element={<Bookmark />} />
     </Route>
     <Route path="components" element={<ComponentPage />} />
   </Route>

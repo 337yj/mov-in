@@ -1,0 +1,76 @@
+@use "../../../../styles/constants" as c;
+@use "../../../../styles/mixins/" as m;
+
+.wrapper {
+  @include m.flex(center, flex-start, row);
+  width: 100%;
+  // .icon {
+  //   width: 40px;
+  // }
+  // > svg {
+  //   width: 26px;
+  // }
+  .postImage {
+    margin-bottom: 10px;
+  }
+  .likeBtn,
+  .bookmarkBtn,
+  .ReviewBtn {
+    margin-bottom: 10px;
+  }
+
+  .infoWrapper {
+    padding: 0 24px;
+
+    > h2 {
+      padding: 16px 0;
+      border-top: 1px solid c.$C_DARKGRAY;
+      font-size: 24px;
+      font-weight: 700;
+
+      .averageScore {
+        @include m.flex(flex-start);
+        display: inline-block;
+        padding-left: 16px;
+        color: c.$C_YELLOW;
+        .nullScore {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .staffsWrapper {
+      @include m.flex();
+      font-size: 16px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 16px;
+      overflow-x: auto;
+      white-space: nowrap;
+      margin-bottom: 12px;
+      .name {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 5px;
+        .role {
+          margin-left: 10px;
+          font-size: 14px;
+          color: c.$C_WHITE_80;
+        }
+      }
+    }
+    .plot {
+      font-size: 16px;
+    }
+  }
+}
+
+svg {
+  width: 23px;
+  height: 23px;
+}
+
+svg > g {
+  width: 23px;
+  height: 23px;
+}

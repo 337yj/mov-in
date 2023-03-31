@@ -10,7 +10,10 @@ const CommentHeader = ({
   ...props
 }) => {
   // props type 작성
+
   //TODO:선택한 프로필 이미지 불러오기
+
+  // NOTE: Number().toFixed(1); => 소수점 1자리까지 표기
 
   return (
     <header className={styles.wrapper}>

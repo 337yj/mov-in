@@ -1,4 +1,79 @@
+@use "../../styles/constants" as c;
+@use "../../styles/mixins/" as m;
+
+.backgroundWrapper {
+    @include m.flex();
+    width: 100%;
+    height: 600px;
+    filter: blur(5px);
+
+    .backgroundGradient {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        width: 100%;
+        height: 40%;
+        background: linear-gradient(rgba(1, 2, 38, 0) 0%, #010226 100%);
+        z-index: 1000;
+    }
+
+    .backgroundImg {
+        position: absolute;
+        top: -4px;
+        width: 100%;
+        height: 100%;
+        transform: scale(1.01);
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+
 .wrapper {
-    color: white;
+    @include m.flex(center, center, column);
+    // min-width: 800px;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding-bottom: 200px;
+    margin-top: -160px;
+    color: c.$C_WHITE;
     font-size: 36px;
+
+    .infoWrapper {
+        @include m.flex(space-between);
+        width: 1200px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid c.$C_DARKGRAY;
+
+        .title {
+            @include m.flex();
+            > h1 {
+                padding-right: 24px;
+                font-size: 36px;
+                font-weight: 700;
+            }
+        }
+
+        .info {
+            @include m.flex(center, flex-end, row);
+            height: 36px;
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+    .detailInfoWrapper {
+        @include m.flex(flex-start, flex-start, column);
+        width: 1200px;
+        height: 100%;
+        padding: 32px 32px;
+        margin-top: 20px;
+        border-radius: 4px;
+        background-color: c.$C_WHITE_10;
+    }
+}
+
+svg {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
 }

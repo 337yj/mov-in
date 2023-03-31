@@ -17,19 +17,16 @@ const LikeButton = () => {
     } else {
       setOnIconClick(true).setLike(like + 1);
     }
-    // 클릭 취소시 개수 줄어드는 기능 추가
   };
 
   const onchange = (e) => {
     setOnIconClick(e.target.value);
   };
 
-  //false 빈하트 true일때 꽉찬하트
-  // 이 결과 값에 따라 false -1 true +1
+  //TODO:하트클릭시 색 변하게 기능 추가/취소시 좋아요 개수 줄어들기
 
   return (
-    <button type="button" className={styles.likeCount}>
-      {/* // 하트 클릭시 색 변하게 기능 추가 */}
+    <div type="button" className={styles.likeCount}>
       <button type="button" className={styles.icon}>
         <IconHeartFull
           type="Boolean"
@@ -41,7 +38,7 @@ const LikeButton = () => {
         <IconHeartEmpty className={styles.empty} />
       </button>
       <output className={styles.like}>좋아요 {like}개</output>
-    </button>
+    </div>
   );
 };
 

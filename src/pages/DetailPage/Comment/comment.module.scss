@@ -1,0 +1,25 @@
+@use "../../../styles/constants/colors" as c;
+@use "../../../styles/mixins/" as m;
+
+.wrapper {
+  margin: 240px;
+  padding: 40px;
+  width: 950px;
+  height: 1734px;
+  background-color: c.$C_WHITE_40;
+  border-radius: 4px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.commentOutput {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}

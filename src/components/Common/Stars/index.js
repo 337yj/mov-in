@@ -1,54 +1,49 @@
 import React, { useState } from "react";
-import { ImStarEmpty, ImStarFull, ImStarHalf } from "react-icons/im";
-// ImStarFull : 꽉찬 별, ImStarEmpty : 빈 별, ImStarHalf : 반쪽 별
+import { ImStarEmpty, ImStarHalf } from "react-icons/im";
+
+import cx from "classnames";
 import styles from "./stars.module.scss";
 
+const stars = Array(5).fill(0);
+
 const Stars = () => {
-  const stars = Array(5).fill(0);
-  // const activeStars=
+  const [starIndex, setStarIndex] = useState(0);
+  const [hoverIndex, setHoverIndex] = useState(undefined);
 
-  const [starValue, setStarValue] = useState(0);
-  const [hoverValue, setHoverValue] = useState(undefined);
-
-  const handleClick = (value) => {
-    setStarValue(value);
+  const onClick = (num) => {
+    setStarIndex(num);
   };
 
-  const handleMouseOver = (value) => {
-    setHoverValue(value);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(undefined);
+  const fillStarIndex = (num, event) => {
+    if (event === "enter" && hoverIndex >= num) {
+      return "#f3c623";
+    }
+    if (event === "leave" && starIndex >= num) {
+      return "#f3c623";
+    }
+    return <ImStarEmpty color="#f3c623" size="18" />;
   };
 
   return (
-    <output className={styles.container}>
-      <div className={styles.star}>
-        {stars.map((_, index) => {
-          return index ? (
-            <ImStarEmpty key={index} color="#f3c623" size="18" />
-          ) : (
-            <ImStarFull
-              key={index}
-              precision={0.5}
-              color="#f3c623"
-              size="18"
-              className={styles.full}
-              hover={
-                (hoverValue || starValue) > index ? (
-                  <ImStarEmpty />
-                ) : (
-                  <ImStarFull />
-                )
-              }
-              onClick={() => handleClick(index + 1)}
-              onMouseOver={() => handleMouseOver(index + 1)}
-              onMouseLeave={handleMouseLeave}
-            />
-          );
-        })}
-      </div>
+    <output className={styles.starContainer}>
+      {stars.map((num, index) => (
+        <button
+          key={num}
+          type="button"
+          className={styles.star}
+          onClick={onClick(num)}
+          onMouseEnter={() => setHoverIndex(num)}
+          onMouseLeave={() => setHoverIndex(0)}
+        >
+          <ImStarHalf
+            className={cx(styles.half, { [styles.rightStar]: index % 2 !== 0 })}
+            key={"half" + index}
+            size="18"
+            fill={fillStarIndex(num, hoverIndex === 0 ? "leave" : "enter")}
+          />
+        </button>
+      ))}
+      ;
     </output>
   );
 };

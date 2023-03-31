@@ -1,4 +1,5 @@
 import React from "react";
+import dayjs from "dayjs";
 
 import {
   CommentHeader,
@@ -11,7 +12,7 @@ import { ImageProfile10 } from "../../../../../../assets";
 
 //TODO: Content / Footer 로 Component 분리
 const ReplyBox = ({
-  profilImage,
+  profileImage,
   username,
   content,
   date,
@@ -28,7 +29,10 @@ const ReplyBox = ({
       />
       <CommentBody className={styles.content} content={"코멘트 답글 내용"} />
       <hr className={styles.horizontalLine} />
-      <CommentFooter className={styles.comment} date={2023.01} />
+      <CommentFooter
+        className={styles.comment}
+        date={dayjs().format("YYYY.MM.DD")}
+      />
     </li>
   );
 };

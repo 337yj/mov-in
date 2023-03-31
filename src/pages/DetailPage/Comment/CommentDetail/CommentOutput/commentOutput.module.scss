@@ -24,6 +24,7 @@
 
   .content {
     @include m.flex(space-between, null, column);
+    height: 100%;
     row-gap: 10px;
   }
 

@@ -10,15 +10,15 @@ const CommentHeader = ({
   ...props
 }) => {
   // props type 작성
+  //TODO:선택한 프로필 이미지 불러오기
 
   return (
     <header className={styles.wrapper}>
       <figure className={styles.profile}>
-        {/* 선택한 사진 불러오는 기능 */}
         <img src={profileImage} alt="" className={styles.profileImage} />
         <figcaption className={styles.username}>{username}</figcaption>
       </figure>
-      <output className={className}>평점★{grade}</output>
+      <output className={className}>평점★{grade?.toFixed(1)}</output>
     </header>
   );
 };

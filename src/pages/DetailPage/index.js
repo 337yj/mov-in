@@ -6,6 +6,9 @@ import { IconLink } from "../../assets";
 import { Toast } from "../../components";
 import styles from "./detail.module.scss";
 import MovieDetail from "./movieDetail";
+import MovieComment from "./movieDetail/movieComment";
+import MovieInfo from "./movieDetail/movieInfo";
+import RelatedMovie from "./movieDetail/relatedMovie";
 
 const Detail = () => {
   //NOTE: state => path variable  (/detail/:id)
@@ -14,6 +17,7 @@ const Detail = () => {
 
   console.log(location);
   const [movie, setMovie] = useState();
+  const [tab, setTab] = useState("movieInfo");
   // const [toastFloat, setToastFloat] = useState(false);
   const runtimeInMinutes = movie?.runtime || 0;
   const hours = Math.floor(runtimeInMinutes / 60);
@@ -30,15 +34,6 @@ const Detail = () => {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    onGetMovieDetail();
-  }, [id]);
-
-  if (!movie) {
-    return null;
-  }
-
   const onCopyClipBoard = async (text) => {
     const url = `http:/localhost:3000/${location.pathname}`;
     console.log(url);
@@ -51,6 +46,25 @@ const Detail = () => {
       console.log(err);
     }
   };
+
+  const onChangeTab = (tab) => {
+    setTab(tab);
+  };
+
+  const detailInfo = {
+    movieInfo: <MovieInfo movie={movie} onChangeTab={onChangeTab} />,
+    movieComment: <MovieComment onChangeTab={onChangeTab} />,
+    // commentDetail: <CommentDetail />,
+    relatedMovie: <RelatedMovie onChangeTab={onChangeTab} />,
+  };
+
+  useEffect(() => {
+    onGetMovieDetail();
+  }, [id]);
+
+  if (!movie) {
+    return null;
+  }
 
   return (
     <main>
@@ -75,8 +89,15 @@ const Detail = () => {
             <p>{dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}</p>
           </div>
         </article>
+        {/* //NOTE: 여기에 있는 aritcle은 삭제 가능 */}
         <article className={styles.detailInfoWrapper}>
-          <MovieDetail movie={movie} />
+          {/* {tab === "movieInfo" && <MovieInfo movie={movie} />} */}
+
+          {detailInfo[tab]}
+          {/* <MovieInfo movie={movie} />
+          <MovieComment />
+          <RelatedMovie /> */}
+          {/* <MovieDetail movie={movie} /> */}
         </article>
       </section>
     </main>

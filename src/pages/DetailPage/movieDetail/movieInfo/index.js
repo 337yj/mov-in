@@ -5,7 +5,8 @@ import { Button } from "../../../../components";
 import styles from "./movieInfo.module.scss";
 
 const MovieInfo = ({ movie }) => {
-  function getStaffs(staffs) {
+  //NOTE: 일반 함수보다는 화살표 함수 사용
+  const getStaffs = (staffs) => {
     const roleOrder = { 감독: 1, 각본: 2, 출연: 3 };
     return staffs
       .sort((a, b) => roleOrder[a.role] - roleOrder[b.role])
@@ -15,16 +16,16 @@ const MovieInfo = ({ movie }) => {
           <span className={styles.role}>{staff.role}</span>
         </p>
       ));
-  }
+  };
 
-  function getActors(actors) {
+  const getActors = (actors) => {
     return actors.map((actor) => (
       <p className={styles.name}>
         {actor.name}
         <span className={styles.role}>배우</span>
       </p>
     ));
-  }
+  };
 
   return (
     <article className={styles.wrapper}>

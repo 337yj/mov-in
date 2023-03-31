@@ -5,13 +5,17 @@ import MovieInfo from "./movieInfo";
 import RelatedMovie from "./relatedMovie";
 import styles from "./movieDetail.module.scss";
 
+//NOTE: Props Drilling
+
 const MovieDetail = ({ movie }) => {
   return (
-    <section className={styles.wrapper}>
+    <>
+      {/* <section className={styles.wrapper}> */}
       <MovieInfo movie={movie} />
       <MovieComment />
       <RelatedMovie />
-    </section>
+      {/* </section> */}
+    </>
   );
 };
 

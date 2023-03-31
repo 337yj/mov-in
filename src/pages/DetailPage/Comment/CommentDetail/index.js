@@ -2,7 +2,15 @@ import React from "react";
 import styles from "./commentDetail.module.scss";
 
 const CommentDetail = () => {
-  return <main className={styles.wrapper}>코멘트상세페이지</main>;
+  return (
+    <main>
+      <section className={styles.wrapper}>
+        <h2>{영화제목}</h2>
+        <h4>코멘트</h4>
+        <p></p>
+      </section>
+    </main>
+  );
 };
 
 export default CommentDetail;

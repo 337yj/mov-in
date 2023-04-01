@@ -1,0 +1,8 @@
+@mixin detailWrapper($color) {
+  width: 1200px;
+  height: 100%;
+  padding: 32px 32px;
+  margin-top: 20px;
+  border-radius: 4px;
+  background-color: $color;
+}

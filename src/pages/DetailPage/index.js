@@ -17,7 +17,7 @@ const Detail = () => {
 
   console.log(location);
   const [movie, setMovie] = useState();
-  const [tab, setTab] = useState("movieInfo");
+  const [tab, setTab] = useState("movieDetail");
   // const [toastFloat, setToastFloat] = useState(false);
   const runtimeInMinutes = movie?.runtime || 0;
   const hours = Math.floor(runtimeInMinutes / 60);
@@ -52,10 +52,17 @@ const Detail = () => {
   };
 
   const detailInfo = {
-    movieInfo: <MovieInfo movie={movie} onChangeTab={onChangeTab} />,
-    movieComment: <MovieComment onChangeTab={onChangeTab} />,
-    // commentDetail: <CommentDetail />,
-    relatedMovie: <RelatedMovie onChangeTab={onChangeTab} />,
+    // movieInfo: <MovieInfo movie={movie} onChangeTab={onChangeTab} />,
+    // movieComment: <MovieComment onChangeTab={onChangeTab} />,
+    // // commentDetail: <CommentDetail />,
+    // relatedMovie: <RelatedMovie onChangeTab={onChangeTab} />,
+    movieDetail: (
+      <>
+        <MovieInfo movie={movie} />
+        <MovieComment movie={movie} />
+        <RelatedMovie movie={movie} />
+      </>
+    ),
   };
 
   useEffect(() => {

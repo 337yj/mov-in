@@ -7,4 +7,5 @@ export { default as Tag } from "./Tag";
 export { default as Toast } from "./Toast";
 export { default as Stars } from "./Stars";
 export { default as Toggle } from "./Toggle";
+export { default as Card } from "./Card";
 export { default as Carousel } from "./Carousel";

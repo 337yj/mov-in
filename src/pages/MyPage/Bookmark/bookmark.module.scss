@@ -15,7 +15,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 2열 */
     grid-template-rows: repeat(2, 1fr); /* 5행 */
-    gap: 12px; /* 엘리먼트 간격 */
+    gap: 16px; /* 엘리먼트 간격 */
     > li {
       margin-bottom: 16px;
       width: 80%;

@@ -30,17 +30,17 @@
 
 .wrapper {
     @include m.flex(center, center, column);
-    // min-width: 800px;
     position: relative;
     width: 100%;
     height: 100vh;
-    padding-bottom: 200px;
-    margin-top: -160px;
+    // padding-bottom: 400px;
     color: c.$C_WHITE;
     font-size: 36px;
 
     .infoWrapper {
         @include m.flex(space-between);
+        position: absolute;
+        top: -160px;
         width: 1200px;
         padding-bottom: 20px;
         border-bottom: 1px solid c.$C_DARKGRAY;
@@ -61,12 +61,17 @@
             font-weight: 400;
         }
     }
+
     .detailInfoWrapper {
-        @include m.flex(flex-start, flex-start, column);
+        @include m.flex(flex-start, center, column);
+        position: absolute;
+        top: -100px;
         width: 1200px;
-        height: 100%;
-        padding: 32px 32px;
+        height: fit-content;
+        padding: 36px;
+        padding-bottom: 300px;
         margin-top: 20px;
+        flex-grow: 1;
         border-radius: 4px;
         background-color: c.$C_WHITE_10;
     }

@@ -1,25 +1,29 @@
-import React from "react";
-import { Button } from "../../../components";
-import MovieComment from "./movieComment";
-import MovieInfo from "./movieInfo";
-import RelatedMovie from "./relatedMovie";
-import styles from "./movieDetail.module.scss";
+export { default as MovieInfo } from "./movieInfo";
+export { default as MovieComment } from "./movieComment";
+export { default as RelatedMovie } from "./relatedMovie";
 
-//NOTE: Props Drilling
+// import React from "react";
+// import { Button } from "../../../components";
+// import MovieComment from "./movieComment";
+// import MovieInfo from "./movieInfo";
+// import RelatedMovie from "./relatedMovie";
+// import styles from "./movieDetail.module.scss";
 
-const MovieDetail = ({ movie }) => {
-  return (
-    <>
-      {/* <section className={styles.wrapper}> */}
-      <MovieInfo movie={movie} />
-      <MovieComment />
-      <RelatedMovie />
-      {/* </section> */}
-    </>
-  );
-};
+// //NOTE: Props Drilling
 
-export default MovieDetail;
+// const MovieDetail = ({ movie }) => {
+//   return (
+//     <>
+//       {/* <section className={styles.wrapper}> */}
+//       <MovieInfo movie={movie} />
+//       <MovieComment />
+//       <RelatedMovie />
+//       {/* </section> */}
+//     </>
+//   );
+// };
+
+// export default MovieDetail;
 
 // import dayjs from "dayjs";
 // import React, { useCallback, useEffect, useState } from "react";

@@ -10,6 +10,7 @@ const CommentBody = ({ content, className, ...props }) => {
   return (
     <article className={className}>
       <p className={styles.content}>{content}</p>
+      {/* 윤 - 아이콘 사이 여백 */}
       <div className={styles.icon}>
         <button>
           <IconModify />

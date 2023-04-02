@@ -4,6 +4,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { getMovie } from "../../api/Movie";
 import { IconLink } from "../../assets";
 import { Toast } from "../../components";
+import CommentDetail from "./Comment/CommentDetail";
 import styles from "./detail.module.scss";
 import MovieDetail from "./movieDetail";
 import MovieComment from "./movieDetail/movieComment";
@@ -59,10 +60,14 @@ const Detail = () => {
     movieDetail: (
       <>
         <MovieInfo movie={movie} />
-        <MovieComment movie={movie} />
+        <MovieComment
+          movie={movie}
+          onChangeTab={() => setTab("commentDetail")}
+        />
         <RelatedMovie movie={movie} />
       </>
     ),
+    commentDetail: <CommentDetail movie={movie} />,
   };
 
   useEffect(() => {

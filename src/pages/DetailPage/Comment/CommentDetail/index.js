@@ -11,7 +11,7 @@ import { Button } from "../../../../components";
 
 import styles from "./commentDetail.module.scss";
 
-const CommentDetail = ({ profileImage, username, ...props }) => {
+const CommentDetail = ({ movie, profileImage, username, ...props }) => {
   return (
     <main>
       <section className={styles.wrapper}>
@@ -19,11 +19,12 @@ const CommentDetail = ({ profileImage, username, ...props }) => {
         <h4>코멘트</h4>
         <p>
           <div>
-            <CommentHeader />
+            <CommentHeader movie={movie} />
             <hr className={styles.horizontalLine}></hr>
-            <CommentBody />
+            <CommentBody movie={movie} />
             <hr className={styles.horizontalLine}></hr>
             <CommentFooter
+              movie={movie}
               className={styles.comment}
               date={dayjs().format("YYYY.MM.DD")}
             />
@@ -38,7 +39,7 @@ const CommentDetail = ({ profileImage, username, ...props }) => {
             <input></input>
           </div>
           <hr className={styles.horizontalLine}></hr>
-          <ReplyOutput />
+          <ReplyOutput movie={movie} />
           <ReplyOutput />
           <ReplyOutput />
           <ReplyOutput />

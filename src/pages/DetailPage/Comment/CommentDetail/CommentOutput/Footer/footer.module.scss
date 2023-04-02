@@ -9,6 +9,7 @@
     column-gap: 10px;
   }
 
+  // 윤 - 뒷 인자를 안쓸때는 null안줘도됨!
   .date {
     @include m.flex(flex-end, null, null);
     color: c.$C_DARKGRAY;

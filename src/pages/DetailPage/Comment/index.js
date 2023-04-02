@@ -3,10 +3,32 @@ import styles from "./comment.module.scss";
 import { CommentOutput } from "../../index";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+// 윤 - Comment -> CommentList
 const Comment = ({ 영화제목 }) => {
-  const { "/comment/": id } = useParams();
+  // const { "/comment/": id } = useParams();
   const [comment, setComment] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
+  const [review, setReview] = useState();
+
+  const { id } = useParams();
+  const onGetMovieReview = async () => {
+    try {
+      const response = await getReviewsMovie(id);
+      if (response.status === 200) {
+        setReview(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    onGetMovieReview();
+  }, [id]);
+
+  if (!movie) {
+    return null;
+  }
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,8 +54,17 @@ const Comment = ({ 영화제목 }) => {
     // <React.Fragment>
     //   {isLoaded && (
     <article className={styles.wrapper}>
+      {/* 윤 - h4 -> h2로 변경 */}
       <h4>코멘트</h4>
       <p className={styles.commentOutput}>
+        <ul>
+          {review.map((movie) => (
+            <li key={movie.id}>
+              <CommentOutput movie={movie} />
+            </li>
+          ))}
+        </ul>
+
         <CommentOutput />
         <CommentOutput />
         <CommentOutput />

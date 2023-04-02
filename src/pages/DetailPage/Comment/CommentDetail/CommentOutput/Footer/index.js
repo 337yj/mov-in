@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
 import { LikeButton } from "../_shared";
+// 윤 - 다 assets로 export될텐데 /icon해야되나??
 import { IconComment } from "../../../../../../assets/icon";
 
 import styles from "./footer.module.scss";

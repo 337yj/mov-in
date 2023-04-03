@@ -6,41 +6,43 @@ import styles from "./home.module.scss";
 
 const Home = () => {
   const [movie, setMovie] = useState([]);
-  const [currentPosts, setCurrentPosts] = useState([]);
-
-  // 전체 영화 목록 불러오기, limit 20개 까지(임의)
-  const getMovies = (page = 1, limit = 20) => {
-    return apiClient.get(`movies?page=${page}&limit=${limit}`);
-  };
-
-  // 장르별
-  const getMoviesGenre = (page = 1, limit = 20, genreIds) => {
-    return apiClient.get(
-      `/movies/genre?page=${page}&limit=${limit}&genreIds=${genreIds}`,
-    );
-  };
-
-  // top10
-  const getMoviesTop = () => {
-    return apiClient.get(`/movies/top`);
-  };
-
-  // 영화 디테일 불러오기
-  const getMovie = (id) => {
-    return apiClient.get(`/movies/${id}/detail`);
-  };
+  const [topTen, setTopTen] = useState([]);
+  const [genre, setGenre] = useState();
 
   const onGetMovies = async () => {
     try {
       const response = await getMovies();
       if (response.status === 200) {
-        const newPosts = response.data.data;
-        setPosts([newPosts]);
+        setMovie(response.data);
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  const onGetTopTen = async () => {
+    try {
+      const response = await getMoviesTop();
+      if (response.status === 200) {
+        setTopTen(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onGetPerGenre =  async () => {
+    try {
+      const response = await getMoviesGenre();
+      if (response.status === 200) {
+        setGenre(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  console.log(topTen);
 
   useEffect(() => {
     onGetMovies();

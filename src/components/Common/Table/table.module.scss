@@ -1,0 +1,52 @@
+@use "../../../styles/constants/" as c;
+@use "../../../styles/mixins/" as m;
+
+table {
+  @include m.flex(space-between, space-between, column);
+  @include m.ellipse();
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  tbody {
+    font-size: 16px;
+  }
+
+  tr {
+    @include m.flex(space-between);
+    height: auto;
+    //padding: 8px;
+    padding: 8px 12px 8px 8px;
+    border: 2px solid c.$C_INDIGO;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  td, th {
+    @include m.flex();
+    min-width: 160px;
+    padding: 0px 18px;
+}
+
+  .headTrStyle {
+    // button 여백 맞춤...
+    padding-right: 210px;
+    background-color: c.$C_WHITE_40;
+    font: {
+      weight: 700;
+      size: 16px;
+    }
+  }
+
+  .bodyTrStyle {
+    background-color: c.$C_WHITE_10;
+
+    &.isStyle {
+      background-color: c.$C_WHITE_50;
+    }
+  }
+
+  .sortStyle {
+    font-size: 0.75rem;
+  }
+}

@@ -3,7 +3,7 @@ import cx from "classnames";
 import styles from "./tag.module.scss";
 
 //NOTE: type보다는 isSelected를 사용해서 선택이 됐음을 강조.
-const Tag = ({ className, children, isSelected, ...props }) => {
+const Tag = ({ className, text, isSelected, ...props }) => {
 
   const [isActive, setIsActive] = useState(false);
 
@@ -16,9 +16,9 @@ const Tag = ({ className, children, isSelected, ...props }) => {
     <button
     onClick={onSelect}
       type="submit"
-      className={cx(styles.tag, { [styles.isSelected]: isSelected })}
+      className={cx(styles.tag, { [styles.isActive]: isActive })}
     >
-      {children}
+      {text}
     </button>
     </>
   );

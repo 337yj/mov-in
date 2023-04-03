@@ -10,8 +10,16 @@ const Stars = () => {
   const [hover, setHover] = useState(null);
 
   const onClick = (ratingValue) => {
-    return () => {
+    return (e) => {
+      e.stopPropagation();
+
       setRating(ratingValue);
+    };
+  };
+
+  const onMouseEnter = (ratingValue) => {
+    return (e) => {
+      setHover(ratingValue);
     };
   };
 
@@ -23,12 +31,6 @@ const Stars = () => {
         const ratingRight = ratingValue;
         return (
           <label className={styles.starWrapper}>
-            <input
-              type="radio"
-              name="rating"
-              value={ratingValue}
-              onClick={onClick(ratingValue)}
-            />
             {/* {hover >= ratingValue || rating >= ratingValue ? (
               <ImStarFull />
             ) : (
@@ -36,25 +38,24 @@ const Stars = () => {
             )} */}
             {/* //TODO: div css로 조절해서 왼쪽 혹은 오른쪽만 hover/click이 되도록 설정 */}
             <div
-              onMouseEnter={(e) => {
-                console.log(e.currentTarget);
-                setHover(ratingLeft);
-              }}
+              onMouseEnter={onMouseEnter(ratingLeft)}
               onMouseLeave={() => setHover(null)}
+              onClick={onClick(ratingLeft)}
               className={cx(styles.star)}
             >
-              {hover >= ratingValue || rating >= ratingValue ? (
+              {hover >= ratingLeft || rating >= ratingLeft ? (
                 <FaStarHalf />
               ) : (
                 <FaRegStarHalf />
               )}
             </div>
             <div
-              onMouseEnter={() => setHover(ratingRight)}
+              onMouseEnter={onMouseEnter(ratingRight)}
               onMouseLeave={() => setHover(null)}
+              onClick={onClick(ratingRight)}
               className={cx(styles.star, styles.right)}
             >
-              {hover >= ratingValue || rating >= ratingValue ? (
+              {hover >= ratingRight || rating >= ratingRight ? (
                 <FaStarHalf />
               ) : (
                 <FaRegStarHalf />

@@ -3,7 +3,7 @@
 
 .starContainer {
   @include m.flex(null, null, row);
-  column-gap: 2px;
+  column-gap: 16px;
   border: 0;
   cursor: pointer;
   position: relative;
@@ -19,17 +19,19 @@
   .star {
     cursor: pointer;
 
-    width: 32px;
+    width: 16px;
     height: 32px;
+    overflow-x: hidden;
 
     > svg {
       transition: color 200ms;
       color: #f3c623;
+      position: absolute;
     }
 
     &.right {
       position: absolute;
-      right: 0px;
+      right: -16px;
       transform: scaleX(-1);
     }
   }

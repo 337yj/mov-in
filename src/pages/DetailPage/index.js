@@ -4,22 +4,20 @@ import { useParams, useLocation } from "react-router-dom";
 import { getMovie } from "../../api/Movie";
 import { IconLink } from "../../assets";
 import { Toast } from "../../components";
-import CommentDetail from "./CommentList/CommentDetail";
+import { RelatedMovie, MovieComment, MovieInfo } from "./movieDetail";
+// import CommentDetail from "./Comment/CommentDetail";
+// import CommentList from "./CommentList";
 import styles from "./detail.module.scss";
-import MovieDetail from "./movieDetail";
-import MovieComment from "./movieDetail/movieComment";
-import MovieInfo from "./movieDetail/movieInfo";
-import RelatedMovie from "./movieDetail/relatedMovie";
+import CommentDetail from "./CommentList/CommentDetail";
+import CommentList from "./CommentList";
 
 const Detail = () => {
-  //NOTE: state => path variable  (/detail/:id)
   const { id } = useParams();
-  const location = useLocation();
-
-  console.log(location);
+  const { pathname } = useLocation();
   const [movie, setMovie] = useState();
   const [tab, setTab] = useState("movieDetail");
-  // const [toastFloat, setToastFloat] = useState(false);
+  const [toastFloat, setToastFloat] = useState(false);
+
   const runtimeInMinutes = movie?.runtime || 0;
   const hours = Math.floor(runtimeInMinutes / 60);
   const minutes = runtimeInMinutes % 60;
@@ -35,14 +33,14 @@ const Detail = () => {
       console.error(error);
     }
   };
-  const onCopyClipBoard = async (text) => {
-    const url = `http:/localhost:3000/${location.pathname}`;
-    console.log(url);
+  const onCopyClipBoard = async () => {
+    const url = window.location.href;
     try {
-      await navigator.clipboard.writeText(text);
-      // alert("클립보드에 링크가 복사되었어요.");
-
+      await navigator.clipboard.writeText(url);
       setToastFloat(true);
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 1500);
     } catch (err) {
       console.log(err);
     }
@@ -60,15 +58,19 @@ const Detail = () => {
     movieDetail: (
       <>
         <MovieInfo movie={movie} />
-        <MovieComment
-          movie={movie}
-          onChangeTab={() => setTab("commentDetail")}
-        />
+        <MovieComment movie={movie} onChangeTab={onChangeTab} />
         <RelatedMovie movie={movie} />
       </>
     ),
     commentDetail: <CommentDetail movie={movie} />,
+    commentList: <CommentList movie={movie} />,
   };
+  // console.log(pathname);
+  // console.log(id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     onGetMovieDetail();
@@ -80,7 +82,11 @@ const Detail = () => {
 
   return (
     <main>
-      {/* {toastFloat && <Toast msg="copy" />} */}
+      {toastFloat && (
+        <div className={styles.toastWrapper}>
+          <Toast>링크가 복사되었습니다.</Toast>
+        </div>
+      )}
       <div className={styles.backgroundWrapper}>
         <img
           className={styles.backgroundImg}
@@ -101,7 +107,7 @@ const Detail = () => {
             <p>{dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}</p>
           </div>
         </article>
-        {/* //NOTE: 여기에 있는 article은 삭제 가능 */}
+        {/* //NOTE: 여기에 있는 aritcle은 삭제 가능 */}
         <article className={styles.detailInfoWrapper}>
           {/* {tab === "movieInfo" && <MovieInfo movie={movie} />} */}
 

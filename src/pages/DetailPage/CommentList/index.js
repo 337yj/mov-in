@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./commentList.module.scss";
 import { Comment } from "../../index";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import CommentOutput from "./CommentDetail/Comment";
 
 const CommentList = ({ movie }) => {
   const [comment, setComment] = useState({});
@@ -9,6 +10,7 @@ const CommentList = ({ movie }) => {
   const [review, setReview] = useState();
   const { id } = useParams();
 
+  console.log(review);
   const onGetMovieReview = async () => {
     try {
       const response = await getReviewsMovie(id);
@@ -22,7 +24,7 @@ const CommentList = ({ movie }) => {
     onGetMovieReview();
   }, [id]);
 
-  if (!movie) {
+  if (!review) {
     return null;
   }
 

@@ -59,6 +59,12 @@
             height: 36px;
             font-size: 14px;
             font-weight: 400;
+
+            > p:not(:first-child)::before {
+                content: "|";
+                margin: 0 10px;
+                color: c.$C_WHITE;
+            }
         }
     }
 

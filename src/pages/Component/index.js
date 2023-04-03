@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Button,
   Carousel,
@@ -9,6 +9,7 @@ import {
   Tag,
   Modal,
   Toast,
+  Table,
 } from "../../components";
 import { CommentOutput, ReplyOutput } from "../index";
 import MyPage from "../MyPage";
@@ -17,6 +18,45 @@ import styles from "./components.module.scss";
 const Component = () => {
   const [toastFloat, setToastFloat] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
+
+  const columns = [
+    // { Header: "프로필사진", accessor: "profileImage" },
+    { Header: "닉네임", accessor: "nickname" },
+    { Header: "코멘트", accessor: "comment" },
+    { Header: "좋아요", accessor: "like" },
+    { Header: "가입일자", accessor: "createdAt" },
+  ];
+
+  const data = [
+    {
+      // profileImage : "eee",
+      nickname: "박박만두",
+      comment : "5",
+      like : "124",
+      createdAt: "2022-03-29",
+    },
+    {
+      // profileImage : "eee",
+      nickname: "appleBanana",
+      comment : "5",
+      like : "1024",
+      createdAt: "2022-02-27",
+    },
+    {
+      // profileImage : "eee",
+      nickname: "독고만두",
+      comment : "125",
+      like : "1124",
+      createdAt: "2021-03-29",
+    },
+    {
+      // profileImage : "eee",
+      nickname: "제갈만두",
+      comment : "75",
+      like : "1324",
+      createdAt: "1997-03-29",
+    },
+  ];
 
   const msgList = {
     logout: "로그아웃 되었습니다",
@@ -59,10 +99,10 @@ const Component = () => {
           <div>
             <h2>버튼</h2>
             <div className={styles.buttons}>
-              <Button color="primary">저장</Button>
-              <Button color="secondary">취소</Button>
-              <Button color="danger">탈퇴</Button>
-              <Button color="warning">보기</Button>
+              <Button color="primary" text="저장" />
+              <Button color="secondary" text="취소" />
+              <Button color="danger" text="탈퇴" />
+              <Button color="warning" text="보기" />
             </div>
             <Button color="dark">2,200</Button>
             <Button color="login">로그인</Button>
@@ -96,25 +136,33 @@ const Component = () => {
             <MyPage />
           </div>
           <div>
+            <Table
+              columns={columns}
+              data={data}
+              firstButton={<Button color="warning" text="보기" />}
+              secondButton={<Button color="danger" text="탈퇴" />}
+            />
+          </div>
+          <div>
             <h2>모달</h2>
             <Modal
               title="프로필 사진 변경"
               subTitle="모달서브타이틀"
-              buttonFirst={<Button color="primary" children={"저장"} />}
-              buttonSecond={<Button color="secondary" children={"취소"} />}
+              buttonFirst={<Button color="primary" text="저장"/>}
+              buttonSecond={<Button color="secondary" text="취소" />}
             >
               description
             </Modal>
           </div>
           <div>
             <h2>토스트</h2>
-            <Button color="primary" onClick={() => toast("logout")}>저장</Button>
+            <Button color="primary" onClick={() => toast("logout")} text="로그아웃"/>
             {toastFloat && <Toast children={toastMsg} />}
           </div>
           <div>
             <h2>태그</h2>
             <div className={styles.tags}>
-              <Tag />
+              <Tag text="OST"/>
             </div>
           </div>
           <div>

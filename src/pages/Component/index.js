@@ -10,7 +10,7 @@ import {
   Modal,
   Toast,
 } from "../../components";
-import { CommentOutput, ReplyOutput } from "../index";
+import { Comment, Reply } from "../index";
 import MyPage from "../MyPage";
 import styles from "./components.module.scss";
 
@@ -81,11 +81,11 @@ const Component = () => {
           </div>
           <div>
             <h2>코멘트</h2>
-            <CommentOutput />
+            <Comment />
           </div>
           <div>
             <h2>코멘트답글</h2>
-            <ReplyOutput />
+            <Reply />
           </div>
           <div>
             <h2>별점</h2>
@@ -108,7 +108,9 @@ const Component = () => {
           </div>
           <div>
             <h2>토스트</h2>
-            <Button color="primary" onClick={() => toast("logout")}>저장</Button>
+            <Button color="primary" onClick={() => toast("logout")}>
+              저장
+            </Button>
             {toastFloat && <Toast children={toastMsg} />}
           </div>
           <div>

@@ -1,22 +1,17 @@
 import React from "react";
 import dayjs from "dayjs";
 
-import {
-  CommentHeader,
-  CommentBody,
-  CommentFooter,
-  ReplyOutput,
-} from "../../../../pages";
+import { CommentHeader, CommentBody, CommentFooter } from "./Comment/_shared";
+import { Reply } from "../../../../pages";
 import { Button } from "../../../../components";
 
 import styles from "./commentDetail.module.scss";
 
 const CommentDetail = ({ movie, profileImage, username, ...props }) => {
   return (
-    <main>
+    <article>
+      <h2>코멘트</h2>
       <section className={styles.wrapper}>
-        {/* <h2>{영화제목}</h2> */}
-        <h4>코멘트</h4>
         <p>
           <div>
             <CommentHeader movie={movie} />
@@ -39,15 +34,10 @@ const CommentDetail = ({ movie, profileImage, username, ...props }) => {
             <input></input>
           </div>
           <hr className={styles.horizontalLine}></hr>
-          <ReplyOutput movie={movie} />
-          <ReplyOutput />
-          <ReplyOutput />
-          <ReplyOutput />
-          <ReplyOutput />
-          <ReplyOutput />
+          <Reply movie={movie} />
         </p>
       </section>
-    </main>
+    </article>
   );
 };
 

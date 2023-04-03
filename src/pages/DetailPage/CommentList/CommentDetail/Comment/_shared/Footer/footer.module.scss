@@ -1,5 +1,5 @@
-@use "../../../../../../styles/constants/colors" as c;
-@use "../../../../../../styles/mixins/" as m;
+@use "../../../../../../../styles/constants/colors" as c;
+@use "../../../../../../../styles/mixins/" as m;
 
 .wrapper {
   @include m.flex(space-between, center, row);
@@ -9,9 +9,8 @@
     column-gap: 10px;
   }
 
-  // 윤 - 뒷 인자를 안쓸때는 null안줘도됨!
   .date {
-    @include m.flex(flex-end, null, null);
+    @include m.flex(flex-end);
     color: c.$C_DARKGRAY;
     font-size: 14px;
     font-weight: 400;

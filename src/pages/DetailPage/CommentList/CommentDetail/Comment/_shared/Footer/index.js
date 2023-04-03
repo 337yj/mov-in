@@ -2,9 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
-import { LikeButton } from "../_shared";
-// 윤 - 다 assets로 export될텐데 /icon해야되나??
-import { IconComment } from "../../../../../../assets/icon";
+import { LikeButton } from "../index";
+import { IconComment } from "../../../../../../../assets";
 
 import styles from "./footer.module.scss";
 
@@ -14,13 +13,6 @@ const CommentFooter = ({ getTotalComment, date, className, ...props }) => {
   const onNavigateCommentDetail = () => {
     navigate("/commentDetail");
   };
-
-  // useEffect(() => {
-  //   const getTotalComment = async () => {
-  //     const { data } = await getReviewsCounter();
-  //     return data.total;
-  //   };
-  // });
 
   //TODO: 댓글 전체 개수 표시/ 작성날짜
 

@@ -1,11 +1,2 @@
-- DetailPage > index, movieDetail, movieInfo
-
-section태그와 article태그 중첩 문제
-
-나누고 싶은 구획이 여러개 있어서 section태그와 article태그 중첩이 많이 되었는데,
-Detail 컴포넌트에서 MovieDetail 컴포넌트를 article태그로 감싸고 있는 경우엔
-MovieDetail 컴포넌트에서 최상위 태그를 section으로 하고,
-MovieInfo 컴포넌트의 최상위 태그는 article로 해도 괜찮은건지 궁금합니다.
-
-- DetailPage > movieDetail > movieInfo
-Button컴포넌트 안에 있는 아이콘 컴포넌트들의 사이즈를 개별적으로 조정하는 방법..
+1. components페이지 별점
+별을 누르면 에러가 뜹니다

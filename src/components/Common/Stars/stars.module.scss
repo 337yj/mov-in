@@ -1,32 +1,21 @@
 @use "../../../styles/constants/colors" as c;
 @use "../../../styles/mixins/" as m;
 
-.star {
+.starContainer {
   @include m.flex(null, null, row);
   column-gap: 2px;
   border: 0;
-  background-color: transparent;
   cursor: pointer;
   position: relative;
 }
 
-.full {
-  cursor: pointer;
-  size: 18px;
-}
-
-.empty {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.half {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-> input:not(:checked) + svg {
+input {
   display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+  size: 18px;
+  color: #f3c623;
 }

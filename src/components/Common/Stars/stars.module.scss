@@ -1,32 +1,38 @@
 @use "../../../styles/constants/colors" as c;
 @use "../../../styles/mixins/" as m;
 
-.star {
+.starContainer {
   @include m.flex(null, null, row);
-  column-gap: 2px;
+  column-gap: 16px;
   border: 0;
-  background-color: transparent;
   cursor: pointer;
   position: relative;
-}
 
-.full {
-  cursor: pointer;
-  size: 18px;
-}
+  input {
+    display: none;
+  }
 
-.empty {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+  .starWrapper {
+    @include m.flex(flex-start);
+    position: relative;
+  }
+  .star {
+    cursor: pointer;
 
-.half {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+    width: 16px;
+    height: 32px;
+    overflow-x: hidden;
 
-> input:not(:checked) + svg {
-  display: none;
+    > svg {
+      transition: color 200ms;
+      color: #f3c623;
+      position: absolute;
+    }
+
+    &.right {
+      position: absolute;
+      right: -16px;
+      transform: scaleX(-1);
+    }
+  }
 }

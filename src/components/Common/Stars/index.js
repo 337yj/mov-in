@@ -1,56 +1,71 @@
 import React, { useState } from "react";
+import cx from "classnames";
 import { ImStarEmpty, ImStarFull, ImStarHalf } from "react-icons/im";
-// ImStarFull : 꽉찬 별, ImStarEmpty : 빈 별, ImStarHalf : 반쪽 별
+import { FaStarHalf, FaRegStarHalf } from "react-icons/fa";
+
 import styles from "./stars.module.scss";
 
 const Stars = () => {
-  const stars = Array(5).fill(0);
-  // const activeStars=
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
 
-  const [starValue, setStarValue] = useState(0);
-  const [hoverValue, setHoverValue] = useState(undefined);
+  const onClick = (ratingValue) => {
+    return (e) => {
+      e.stopPropagation();
 
-  const handleClick = (value) => {
-    setStarValue(value);
+      setRating(ratingValue);
+    };
   };
 
-  const handleMouseOver = (value) => {
-    setHoverValue(value);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(undefined);
+  const onMouseEnter = (ratingValue) => {
+    return (e) => {
+      setHover(ratingValue);
+    };
   };
 
   return (
-    <output className={styles.container}>
-      <div className={styles.star}>
-        {stars.map((_, index) => {
-          return index ? (
-            <ImStarEmpty key={index} color="#f3c623" size="18" />
-          ) : (
-            <ImStarFull
-              key={index}
-              precision={0.5}
-              color="#f3c623"
-              size="18"
-              className={styles.full}
-              hover={
-                (hoverValue || starValue) > index ? (
-                  <ImStarEmpty />
-                ) : (
-                  <ImStarFull />
-                )
-              }
-              onClick={() => handleClick(index + 1)}
-              onMouseOver={() => handleMouseOver(index + 1)}
-              onMouseLeave={handleMouseLeave}
-            />
-          );
-        })}
-      </div>
+    <output className={styles.starContainer}>
+      {[...Array(5)].map((star, item) => {
+        const ratingValue = item + 1;
+        const ratingLeft = ratingValue - 0.5;
+        const ratingRight = ratingValue;
+        return (
+          <label className={styles.starWrapper}>
+            {/* {hover >= ratingValue || rating >= ratingValue ? (
+              <ImStarFull />
+            ) : (
+              <ImStarEmpty />
+            )} */}
+            {/* //TODO: div css로 조절해서 왼쪽 혹은 오른쪽만 hover/click이 되도록 설정 */}
+            <div
+              onMouseEnter={onMouseEnter(ratingLeft)}
+              onMouseLeave={() => setHover(null)}
+              onClick={onClick(ratingLeft)}
+              className={cx(styles.star)}
+            >
+              {hover >= ratingLeft || rating >= ratingLeft ? (
+                <FaStarHalf />
+              ) : (
+                <FaRegStarHalf />
+              )}
+            </div>
+            <div
+              onMouseEnter={onMouseEnter(ratingRight)}
+              onMouseLeave={() => setHover(null)}
+              onClick={onClick(ratingRight)}
+              className={cx(styles.star, styles.right)}
+            >
+              {hover >= ratingRight || rating >= ratingRight ? (
+                <FaStarHalf />
+              ) : (
+                <FaRegStarHalf />
+              )}
+            </div>
+          </label>
+        );
+      })}
+      {/* <FaStarHalf /> */}
     </output>
   );
 };
-
 export default Stars;

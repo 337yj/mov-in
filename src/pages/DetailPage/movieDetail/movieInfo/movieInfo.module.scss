@@ -1,0 +1,128 @@
+@use "../../../../styles/constants" as c;
+@use "../../../../styles/mixins/" as m;
+
+.wrapper {
+  @include m.flex(center, flex-start, row);
+  // @include m.detailWrapper(c.$C_WHITE_10);
+  max-width: 100%;
+  // padding-bottom: 200px;
+
+  .postWrapper {
+    @include m.flex(center, center, column);
+    width: 213px;
+
+    .postImage {
+      margin-bottom: 14px;
+      border-radius: 6px;
+    }
+
+    .likeBtn,
+    .bookmarkBtn,
+    .ReviewBtn {
+      width: 100%;
+      flex-grow: 1;
+      margin-bottom: 14px;
+      font-size: 18px;
+    }
+
+    .IconLike,
+    .IconBookmark,
+    .IconReview {
+      width: 24px;
+      margin-right: 14px;
+    }
+  }
+
+  .infoWrapper {
+    padding-left: 24px;
+
+    > h2 {
+      padding: 24px 0;
+      border-top: 1px solid c.$C_DARKGRAY;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .scoreWrapper {
+      @include m.flex(flex-start);
+      padding: 24px 0;
+      border-top: 1px solid c.$C_DARKGRAY;
+
+      > h2 {
+        padding-right: 24px;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .averageScore {
+        @include m.flex();
+        font-size: 24px;
+        font-weight: 700;
+        color: c.$C_YELLOW;
+
+        .IconStar {
+          margin-right: 6px;
+          width: 22px;
+          height: 22px;
+        }
+      }
+
+      .nullScore {
+        font-size: 18px;
+        color: c.$C_YELLOW;
+      }
+    }
+
+    .staffsWrapper {
+      @include m.flex();
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 16px;
+      max-height: 170px;
+      margin-bottom: 20px;
+      transition: max-height 0.5s ease;
+      font-size: 16px;
+      overflow: hidden;
+
+      .name {
+        margin-bottom: 5px;
+        font-size: 16px;
+        font-weight: 700;
+        color: c.$C_WHITE_90;
+
+        .role {
+          margin-left: 10px;
+          font-size: 14px;
+          color: c.$C_WHITE_60;
+        }
+      }
+
+      &.showAllStaffs {
+        max-height: none;
+      }
+    }
+
+    .btnWrapper {
+      @include m.flex(flex-end);
+
+      .moreStaffsBtn {
+        padding: 20px;
+        font-size: 16px;
+        font-weight: 700;
+        color: c.$C_WHITE_80;
+        cursor: pointer;
+
+        &:hover {
+          color: c.$C_YELLOW;
+        }
+      }
+    }
+
+    .plot {
+      font-size: 16px;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      color: c.$C_WHITE_90;
+    }
+  }
+}

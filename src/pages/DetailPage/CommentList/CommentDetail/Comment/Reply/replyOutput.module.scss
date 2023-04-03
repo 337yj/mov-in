@@ -1,0 +1,30 @@
+@use "../../../../../../styles/constants/colors" as c;
+@use "../../../../../../styles/mixins/" as m;
+
+.wrapper {
+  @include m.flex(space-between, null, column);
+  row-gap: 10px;
+  width: 828px;
+  height: 150px;
+  padding: 20px;
+  border-radius: 4px;
+  background-color: c.$C_WHITE_40;
+
+  .grade {
+    display: none;
+  }
+
+  .content {
+    @include m.flex(space-between, center, row);
+    background-color: transparent;
+  }
+
+  .horizontalLine {
+    width: 100%;
+    border: 1px solid c.$C_DARKGRAY;
+  }
+
+  .comment {
+    display: none;
+  }
+}

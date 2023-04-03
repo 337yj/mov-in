@@ -1,10 +1,6 @@
-- <page/DetailPage/Comment/CommentDetail/CommentOutput/index.js>
-1. 평점 4를 4.0으로 표기
-2. 날짜를 년.월.일로 표기
+- /components 페이지 별점
+별점을 누르면 에러가 뜹니다
 
-- /myPage/bookmark
-1. 영화 이미지 로딩 오류 문제 (1페이지, 3페이지)
-
-- /myPage LNB 
-1. mypage 페이지 로드시 처음 활성화된 메뉴(프로필)에 스타일이 적용되게 하는 방법
-3. LNB 메뉴를 클릭하고 다른 곳을 클릭하면 적용된 스타일이 사라지는 문제
+- myPage/bookmark > 영화디테일페이지
+1. 연관된 영화 가로스크롤 도중에 세로스크롤이 발생되는 문제
+2. 연관된 영화를 클릭할시 페이지 상단으로 이동이 안되는 문제

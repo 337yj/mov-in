@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Tag from "../Tag";
+import { BsStarFill } from "react-icons/bs";
 import cx from "classnames";
 import styles from "./card.module.scss";
 
@@ -8,9 +9,7 @@ const Card = ({ movie, type = "default", className }) => {
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate(`/detail?movie=${movie.title}`, {
-      state: { movie },
-    });
+    navigate(`/detail/${movie.id}`);
   };
 
   return (
@@ -18,12 +17,19 @@ const Card = ({ movie, type = "default", className }) => {
       <img
         src={movie.postImage}
         alt="thumbnail"
-        // className={cx(styles.img, styles[type])}
+        className={cx(styles.img, className)}
       />
       {type === "default" && (
         <div className={styles.infoWrapper}>
           <h2 className={styles.title}>{movie.title}</h2>
-          <p>별점</p>
+          {movie.averageScore ? (
+            <span className={styles.score}>
+              {<BsStarFill className={styles.star} />}
+              {movie.averageScore.toFixed(1)}
+            </span>
+          ) : (
+            <p className={styles.nullScore}>평가된 별점이 없습니다.</p>
+          )}
         </div>
       )}
       {type === "carousel" && (

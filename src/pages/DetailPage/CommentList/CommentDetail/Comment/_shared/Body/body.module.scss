@@ -1,0 +1,19 @@
+@use "../../../../../../../styles/constants/colors" as c;
+@use "../../../../../../../styles/mixins/" as m;
+
+.content {
+  height: 100%;
+  color: c.$C_WHITE;
+  font-size: 16px;
+  font-weight: 400px;
+}
+
+.icon {
+  @include m.flex(flex-end, center, row);
+  column-gap: 5px;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+}

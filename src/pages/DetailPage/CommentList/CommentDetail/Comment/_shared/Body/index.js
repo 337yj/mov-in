@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IconModify, IconDelete } from "../../../../../../assets/icon";
+import { IconModify, IconDelete } from "../../../../../../../assets";
 //아이콘 수정
 import styles from "./body.module.scss";
 

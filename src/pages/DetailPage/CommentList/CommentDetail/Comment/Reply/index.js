@@ -1,11 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 
-import {
-  CommentHeader,
-  CommentBody,
-  CommentFooter,
-} from "../../../../../../pages";
+import { CommentHeader, CommentBody, CommentFooter } from "../_shared";
 
 import styles from "./replyOutput.module.scss";
 import { ImageProfile10 } from "../../../../../../assets";

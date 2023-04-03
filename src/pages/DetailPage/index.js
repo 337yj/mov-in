@@ -4,7 +4,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { getMovie } from "../../api/Movie";
 import { IconLink } from "../../assets";
 import { Toast } from "../../components";
-import CommentDetail from "./Comment/CommentDetail";
+import CommentDetail from "./CommentList/CommentDetail";
 import styles from "./detail.module.scss";
 import MovieDetail from "./movieDetail";
 import MovieComment from "./movieDetail/movieComment";
@@ -101,7 +101,7 @@ const Detail = () => {
             <p>{dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}</p>
           </div>
         </article>
-        {/* //NOTE: 여기에 있는 aritcle은 삭제 가능 */}
+        {/* //NOTE: 여기에 있는 article은 삭제 가능 */}
         <article className={styles.detailInfoWrapper}>
           {/* {tab === "movieInfo" && <MovieInfo movie={movie} />} */}
 

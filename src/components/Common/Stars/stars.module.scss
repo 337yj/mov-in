@@ -12,10 +12,25 @@
     display: none;
   }
 
+  .starWrapper {
+    @include m.flex(flex-start);
+    position: relative;
+  }
   .star {
     cursor: pointer;
-    transition: color 200ms;
-    size: 18px;
-    color: #f3c623;
+
+    width: 32px;
+    height: 32px;
+
+    > svg {
+      transition: color 200ms;
+      color: #f3c623;
+    }
+
+    &.right {
+      position: absolute;
+      right: 0px;
+      transform: scaleX(-1);
+    }
   }
 }

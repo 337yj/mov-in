@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getMovie } from "../../api/Movie";
 import { IconLink } from "../../assets";
@@ -12,6 +12,7 @@ import CommentDetail from "./CommentList/CommentDetail";
 import CommentList from "./CommentList";
 
 const Detail = () => {
+  const ref = useRef(null);
   const { id } = useParams();
   const { pathname } = useLocation();
   const [movie, setMovie] = useState();
@@ -69,7 +70,14 @@ const Detail = () => {
   // console.log(id);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!ref.current) return;
+
+    //NOTE: ref를 사용해서 스크롤 위치를 변경
+    ref.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
   }, [pathname]);
 
   useEffect(() => {
@@ -81,7 +89,7 @@ const Detail = () => {
   }
 
   return (
-    <main>
+    <main ref={ref}>
       {toastFloat && (
         <div className={styles.toastWrapper}>
           <Toast>링크가 복사되었습니다.</Toast>

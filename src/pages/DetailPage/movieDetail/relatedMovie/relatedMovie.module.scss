@@ -17,11 +17,11 @@
     display: flex;
     flex-wrap: nowrap;
     gap: 70px;
-    overflow-x: auto;
+    overflow-x: scroll;
 
     justify-content: flex-start;
     align-items: center;
-    scroll-snap-type: x mandatory;
+    // scroll-snap-type: x mandatory;
     .card {
       // width: 260px;
       // width: 100%;

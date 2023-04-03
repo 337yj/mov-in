@@ -3,11 +3,11 @@ import dayjs from "dayjs";
 
 import { CommentHeader, CommentBody, CommentFooter } from "../_shared";
 
-import styles from "./replyOutput.module.scss";
+import styles from "./reply.module.scss";
 import { ImageProfile10 } from "../../../../../../assets";
 
 //TODO: Content / Footer 로 Component 분리
-const ReplyBox = ({
+const Reply = ({
   profileImage,
   username,
   content,
@@ -33,4 +33,4 @@ const ReplyBox = ({
   );
 };
 
-export default ReplyBox;
+export default Reply;

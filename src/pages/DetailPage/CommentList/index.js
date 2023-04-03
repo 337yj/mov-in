@@ -5,17 +5,15 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CommentOutput from "./CommentDetail/Comment";
 
 const CommentList = ({ movie }) => {
-  const [comment, setComment] = useState({});
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [review, setReview] = useState();
+  const [comment, setComment] = useState();
   const { id } = useParams();
 
-  console.log(review);
+  console.log(comment);
   const onGetMovieReview = async () => {
     try {
       const response = await getReviewsMovie(id);
       if (response.status === 200) {
-        setReview(response.data);
+        setComment(response.data);
       }
     } catch (error) {}
   };
@@ -24,7 +22,7 @@ const CommentList = ({ movie }) => {
     onGetMovieReview();
   }, [id]);
 
-  if (!review) {
+  if (!comment) {
     return null;
   }
 
@@ -38,7 +36,7 @@ const CommentList = ({ movie }) => {
         <ul>
           {review.map((movie) => (
             <li key={movie.id}>
-              <CommentOutput movie={movie} />
+              <Comment movie={movie} />
             </li>
           ))}
         </ul>

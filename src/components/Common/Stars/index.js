@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import cx from "classnames";
-import { ImStarEmpty, ImStarFull, ImStarHalf } from "react-icons/im";
 import { FaStarHalf, FaRegStarHalf } from "react-icons/fa";
 
 import styles from "./stars.module.scss";
 
-const Stars = () => {
-  const [rating, setRating] = useState(null);
+const Stars = ({ rating, onRatingChange }) => {
   const [hover, setHover] = useState(null);
 
   const onClick = (ratingValue) => {
     return (e) => {
       e.stopPropagation();
-
-      setRating(ratingValue);
+      onRatingChange(ratingValue);
     };
   };
 
@@ -30,13 +27,7 @@ const Stars = () => {
         const ratingLeft = ratingValue - 0.5;
         const ratingRight = ratingValue;
         return (
-          <label className={styles.starWrapper}>
-            {/* {hover >= ratingValue || rating >= ratingValue ? (
-              <ImStarFull />
-            ) : (
-              <ImStarEmpty />
-            )} */}
-            {/* //TODO: div css로 조절해서 왼쪽 혹은 오른쪽만 hover/click이 되도록 설정 */}
+          <label className={styles.starWrapper} key={item}>
             <div
               onMouseEnter={onMouseEnter(ratingLeft)}
               onMouseLeave={() => setHover(null)}
@@ -64,7 +55,6 @@ const Stars = () => {
           </label>
         );
       })}
-      {/* <FaStarHalf /> */}
     </output>
   );
 };

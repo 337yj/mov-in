@@ -32,11 +32,6 @@ const Bookmark = () => {
     } catch (error) {
       console.error(error);
     }
-    // console.log(page);
-    // console.log(postPerPage);
-    // console.log(indexOfLastPost);
-    // console.log(indexOfFirstPost);
-    // console.log(posts);
   };
 
   const onGetMoviesCount = async () => {
@@ -57,7 +52,9 @@ const Bookmark = () => {
 
   return (
     <section className={styles.wrapper}>
-      <h2 className={styles.title}>{totalCount}개를 '북마크' 했어요 !</h2>
+      <h2 className={styles.title}>
+        <span>{totalCount}</span>개의 영화를 '북마크' 했어요 !
+      </h2>
       <ul className={styles.gridContainer}>
         {currentPosts.slice(indexOfFirstPost, indexOfLastPost).map((movie) => (
           <li key={movie.id}>

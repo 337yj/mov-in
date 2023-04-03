@@ -20,21 +20,23 @@ const RelatedMovie = ({ movie }) => {
       console.log(error);
     }
   };
-  const handleScroll = (e) => {
+
+  const onWheel = (e) => {
     const container = containerRef.current;
     container.scrollLeft += e.deltaY;
   };
 
   useEffect(() => {
-    const element = document.querySelector(".grid");
+    const element = document.querySelector(".listWrapper");
     if (element) {
-      element.addEventListener("wheel", handleScroll, { passive: false });
+      element.addEventListener("wheel", onWheel, { passive: false });
 
       return () => {
-        element.removeEventListener("wheel", handleScroll);
+        element.removeEventListener("wheel", onWheel);
       };
     }
   }, []);
+
   useEffect(() => {
     onGetRelatedMovie();
   }, [id]);
@@ -44,18 +46,16 @@ const RelatedMovie = ({ movie }) => {
   }
 
   return (
-    <section className={styles.wrapper} onWheel={handleScroll}>
+    <section className={styles.wrapper} onWheel={onWheel}>
       <h2>연관된 영화</h2>
-      <div className={styles.gridWrapper}>
-        <ul className={styles.grid} ref={containerRef}>
-          {/* 캐러셀로 대체 */}
-          {relatedMovie.map((movie) => (
-            <li key={movie.id} className={styles.card}>
-              <Card className={styles.cardImg} movie={movie} />
-            </li>
-          ))}
-        </ul>
-      </div>
+
+      <ul className={styles.listWrapper} ref={containerRef}>
+        {relatedMovie.map((movie) => (
+          <li key={movie.id} className={styles.card}>
+            <Card className={styles.cardImg} movie={movie} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };

@@ -4,9 +4,9 @@
 .starContainer {
   @include m.flex(null, null, row);
   column-gap: 16px;
+  position: relative;
   border: 0;
   cursor: pointer;
-  position: relative;
 
   input {
     display: none;
@@ -16,17 +16,19 @@
     @include m.flex(flex-start);
     position: relative;
   }
+
   .star {
+    width: 44px;
+    height: 60px;
+    overflow-x: hidden;
     cursor: pointer;
 
-    width: 16px;
-    height: 32px;
-    overflow-x: hidden;
-
     > svg {
+      position: absolute;
+      width: 60px;
+      height: 60px;
       transition: color 200ms;
       color: #f3c623;
-      position: absolute;
     }
 
     &.right {

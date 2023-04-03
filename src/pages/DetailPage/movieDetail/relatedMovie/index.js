@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getRelatedMovies } from "../../../../api/Movie";
 import { Card } from "../../../../components";
@@ -6,6 +6,7 @@ import styles from "./relatedMovie.module.scss";
 
 // 연관된 영화 불러오기
 const RelatedMovie = ({ movie }) => {
+  const containerRef = useRef(null);
   const { id } = useParams();
   const [relatedMovie, setRelatedMovie] = useState();
 
@@ -19,7 +20,21 @@ const RelatedMovie = ({ movie }) => {
       console.log(error);
     }
   };
+  const handleScroll = (e) => {
+    const container = containerRef.current;
+    container.scrollLeft += e.deltaY;
+  };
 
+  useEffect(() => {
+    const element = document.querySelector(".grid");
+    if (element) {
+      element.addEventListener("wheel", handleScroll, { passive: false });
+
+      return () => {
+        element.removeEventListener("wheel", handleScroll);
+      };
+    }
+  }, []);
   useEffect(() => {
     onGetRelatedMovie();
   }, [id]);
@@ -29,10 +44,10 @@ const RelatedMovie = ({ movie }) => {
   }
 
   return (
-    <section className={styles.wrapper}>
+    <section className={styles.wrapper} onWheel={handleScroll}>
       <h2>연관된 영화</h2>
       <div className={styles.gridWrapper}>
-        <ul className={styles.grid}>
+        <ul className={styles.grid} ref={containerRef}>
           {/* 캐러셀로 대체 */}
           {relatedMovie.map((movie) => (
             <li key={movie.id} className={styles.card}>

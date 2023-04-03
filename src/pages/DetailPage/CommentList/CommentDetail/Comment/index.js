@@ -31,8 +31,6 @@ const CommentOutput = ({
   // };
 
   return (
-    // 윤 - 코멘트상자 컴포넌트 아닌가?? 최상위 태그를 li로한 이유?
-    // section이 좋을듯 어차피 상위 컴포넌트에서 불러올 때 li.map으로 해야되니..
     <li className={styles.wrapper} onClick={props.onClick}>
       <CommentHeader
         className={styles.grade}

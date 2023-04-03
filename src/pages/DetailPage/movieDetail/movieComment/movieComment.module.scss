@@ -11,4 +11,20 @@
     font-size: 24px;
     font-weight: 700;
   }
+
+  .btnWrapper {
+    @include m.flex(flex-end);
+
+    .moreBtn {
+      padding: 20px;
+      font-size: 16px;
+      font-weight: 700;
+      color: c.$C_WHITE_80;
+      cursor: pointer;
+
+      &:hover {
+        color: c.$C_YELLOW;
+      }
+    }
+  }
 }

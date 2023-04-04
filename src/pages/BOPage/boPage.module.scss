@@ -1,0 +1,11 @@
+@use "../../styles/constants" as c;
+@use "../../styles/mixins" as m;
+
+.wrapper {
+  @include m.flex(flex-start, flex-start, row);
+  padding: 180px 50px;
+
+  .outletWrapper {
+    margin-left: 120px;
+  }
+}

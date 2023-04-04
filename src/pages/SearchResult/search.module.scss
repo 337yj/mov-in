@@ -1,12 +1,11 @@
 @use "../../styles/constants/" as c;
 @use "../../styles/mixins/" as m;
 
-main {
-    @include m.flex();
-    width: 100%;
-    height: 100vh;
-}
+// .body {
+//     @include m.flex();
+//     width: 100%;
+//     height: 100vh;
+// }
 
-.noMovieInfo {
-
-}
+// .noMovieInfo {
+// }

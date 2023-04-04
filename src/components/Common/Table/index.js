@@ -21,7 +21,7 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
 
   const onCheckedAll = (e) => {
     setIsChecked(!isChecked);
-  }
+  };
 
   // 체크박스 단일 선택
   const handleSingleCheck = (checked, id) => {
@@ -57,10 +57,13 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
             className={styles.headTrStyle}
             {...headerGroup.getHeaderGroupProps()}
           >
-            <CheckBox
-              onChange={(e) => handleAllCheck(e.target.checked)}
-              checked={checkItems.length === data.length ? true : false}
-            />
+            <td>
+              <CheckBox
+                onChange={(e) => handleAllCheck(e.target.checked)}
+                checked={checkItems.length === data.length ? true : false}
+              />
+            </td>
+
             {headerGroup.headers.map((column) => (
               <th
                 className={styles.thStyle}
@@ -93,9 +96,16 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
               })}
               {...row.getRowProps()}
             >
-              <CheckBox />
+              <td>
+                <CheckBox />
+              </td>
+
               {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                return (
+                  <td {...cell.getCellProps()}>
+                    {cell.row.original[cell.column.id]}
+                  </td>
+                );
               })}
               {firstButton}
               {secondButton}

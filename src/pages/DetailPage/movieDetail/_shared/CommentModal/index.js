@@ -18,15 +18,14 @@ const CommentModal = ({
   const [selectedPoints, setSelectedPoints] = useState([]);
   const [selectedTension, setSelectedTension] = useState(null);
 
-  const onPointSelect = (text) => {
-    const isSelected = selectedPoints.includes(text);
-    const canSelectMore =
-      (!isSelected && selectedPoints.length < 3) || isSelected;
+  const onPointSelect = (id) => {
+    const isSelected = selectedPoints.includes(id);
+    const canSelectMore = !isSelected && selectedPoints.length < 3;
     if (canSelectMore) {
+      setSelectedPoints((prevSelectedPoints) => [...prevSelectedPoints, id]);
+    } else if (isSelected) {
       setSelectedPoints((prevSelectedPoints) =>
-        isSelected
-          ? prevSelectedPoints.filter((point) => point !== text)
-          : [...prevSelectedPoints, text],
+        prevSelectedPoints.filter((point) => point !== id),
       );
     }
   };
@@ -58,13 +57,14 @@ const CommentModal = ({
               <Tag
                 className={styles.pointTag}
                 key={point.id}
+                id={point.id}
                 text={point.name}
-                isSelected={selectedPoints.includes(point.name)}
+                isSelected={selectedPoints.includes(point.id)}
                 onSelect={onPointSelect}
                 selectedPoints={selectedPoints}
                 isDisabled={
                   selectedPoints.length >= 3 &&
-                  !selectedPoints.includes(point.name)
+                  !selectedPoints.includes(point.id)
                 }
               />
             ))}

@@ -1,21 +1,23 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { getMovies } from "../../api/Movie";
 import { Card } from "../../components";
+import cx from "classnames";
 //import { RecommendMovie } from "./RecommendMovie";
 import styles from "./search.module.scss";
 
 const SearchResult = () => {
   const { state } = useLocation();
   const [movies, setMovies] = useState([]);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isFind, setIsFind] = useState(false);
   const searchText = state.keyword;
 
-  const filteredFirst = movies.filter((item) =>
+  const searchAll = movies.filter((item) =>
     item.title.replace(/ /g, "").includes(searchText.replace(/ /g, "")),
   );
 
-  const result = [...filteredFirst];
+  const result = [...searchAll];
 
   const onGetMovies = async () => {
     const response = await getMovies(1, 200);
@@ -23,40 +25,51 @@ const SearchResult = () => {
     if (response.status === 200) {
       const items = [...response.data.data];
       setMovies(items);
-      setIsSuccess(true);
+      setIsFind(!isFind);
     }
   };
 
   useEffect(() => {
-    setIsSuccess(false);
+    setIsFind(false);
     onGetMovies();
   }, []);
 
   return (
-    <main className={styles.body}>
+    <main className={styles.searchWrapper}>
       {searchText !== "" && result.length !== 0 && (
-        <div className={styles.searchedMovies}>
-          <h2>{`"${searchText}"의 검색 결과입니다.`}</h2>
-          <div className={styles.showMovies}>
+        <section>
+          <h2 className={styles.searchTitle}>
+            '<span className={styles.strongWord}>{searchText}</span>' 에 대한
+            검색 결과입니다.
+          </h2>
+          <div className={styles.resultStyle}>
             {result.map((item) => {
-              return <Card movie={item} key={item.id} />;
+              return (
+                <div className={styles.resultCard}>
+                  <Card movie={item} key={item.id} />
+                </div>
+              );
             })}
           </div>
-        </div>
+        </section>
       )}
-      {(searchText === "" || result.length === 0) && isSuccess && (
-        <div className={styles.searchedNoMovies}>
-          <h2>{`입력하신 검색어 "${searchText}" 와(과) 일치하는 결과가 없습니다.`}</h2>
-          <div>
-            도움이 필요하신가요?
-            <br />
-            단어나 문장이 정확한지 확인해보세요.
-            <br />
-            오타가 없는지 확인해보세요.
-            <br />
-            검색어의 단어 수를 줄이거나, 다른 검색어로 검색해보세요.
+      {(searchText === "" || result.length === 0) && isFind && (
+        <section>
+          <h2 className={styles.searchTitle}>
+            '<span className={styles.strongWord}>{searchText}</span>' 에
+            대한 결과를 찾지 못했습니다 :/
+          </h2>
+          <div className={styles.helpWrapper}>
+            <h4>도움이 필요하신가요?</h4>
+            <ul>
+              <li>단어나 문장이 정확한지 확인해보세요.</li>
+              <li>오타가 없는지 확인해보세요.</li>
+              <li>검색어의 단어 수를 줄이거나, 다른 검색어로 검색해보세요.</li>
+              <li className={styles.emailStyle}>teamtwo@movin.com으로 메일을 보내주세요.</li>
+            </ul>
           </div>
-        </div>
+          {/* <RecommendMovie /> */}
+        </section>
       )}
     </main>
   );

@@ -16,7 +16,7 @@ const MovieInfo = ({ movie }) => {
     return filteredStaffs
       .sort((a, b) => roleOrder[a.role] - roleOrder[b.role])
       .map((staff) => (
-        <p className={styles.name}>
+        <p className={styles.name} key={staff.id}>
           {staff.name}
           <span className={styles.role}>{staff.role}</span>
         </p>
@@ -25,7 +25,7 @@ const MovieInfo = ({ movie }) => {
 
   const getActors = (actors) => {
     return actors.map((actor) => (
-      <p className={styles.name}>
+      <p className={styles.name} key={actor.id}>
         {actor.name}
         <span className={styles.role}>배우</span>
       </p>

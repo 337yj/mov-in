@@ -1,48 +1,45 @@
 import React, { useEffect, useState } from "react";
 import cx from "classnames";
 import { Carousel } from "../../components";
-import { getMovies, getMovie, getMoviesGenre, getMoviesTop  } from "../../api/Movie";
 import styles from "./home.module.scss";
 
-const Home = () => {
-  const [movie, setMovie] = useState([]);
-  const [topTen, setTopTen] = useState([]);
-  const [genre, setGenre] = useState();
+const Home = () => {  
+  const [posts, setPosts] = useState([]);
+  const [currentPosts, setCurrentPosts] = useState([]);
+
+  //영화 장르별로 불러오기
+  const getMoviesGenre = (genreIds) => {
+    return apiClient.get(
+      `/movies/genre?page=${page}&limit=${limit}&genreIds=${genreIds}`,
+    );
+  };
+
+  // top10 영화 불러오기
+  const getMoviesTop = () => {
+    return apiClient.get(`/movies/top`);
+  };
+
+  // 영화 전체 수 불러오기
+  const getMoviesCount = () => {
+    return apiClient.get(`/movies/count`);
+  };
 
   const onGetMovies = async () => {
     try {
       const response = await getMovies();
       if (response.status === 200) {
-        setMovie(response.data);
+        const newPosts = response.data.data;
+        setPosts([newPosts]);
       }
     } catch (error) {
       console.error(error);
     }
+    // console.log(page);
+    // console.log(postPerPage);
+    // console.log(indexOfLastPost);
+    // console.log(indexOfFirstPost);
+    // console.log(posts);
   };
-
-  const onGetTopTen = async () => {
-    try {
-      const response = await getMoviesTop();
-      if (response.status === 200) {
-        setTopTen(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const onGetPerGenre =  async () => {
-    try {
-      const response = await getMoviesGenre();
-      if (response.status === 200) {
-        setGenre(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  console.log(topTen);
 
   useEffect(() => {
     onGetMovies();
@@ -51,16 +48,13 @@ const Home = () => {
   return (
     <main className={styles.wrapper}>
       <section>
-        <article>
+        <div>
           <img></img>
-        </article>
-
-        <article>
+        </div>
+        <div>
           <h2>인기 10위</h2>
-          <div>
-            <Carousel />
-          </div>
-        </article>
+
+        </div>
       </section>
     </main>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Tag from "../Tag";
 import { BsStarFill } from "react-icons/bs";
+import dayjs from "dayjs";
 import cx from "classnames";
 import styles from "./card.module.scss";
 
@@ -40,18 +41,16 @@ const Card = ({ movie, type = "default", className }) => {
               <h3>{movie.title}</h3>
               <div className={styles.detail}>
                 <p>15</p>
-                <p>2시간 27분</p>
+                <p>
+                  {dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}
+                </p>
               </div>
             </div>
             <div className={styles.tags}>
               <Tag type="selectTag">태그1</Tag>
               <Tag type="selectTag">태그2</Tag>
             </div>
-            <p>
-              낮에는 자동차 정비 일과 영화 촬영장에서 자동차 스턴트 일을 하고,
-              밤에는 범죄자들의 도주를 도와주는 주인공 '드라이버(라이언
-              고슬링)가 이웃집 여인 아이린(캐리 멀리건)과 친해지게 되는데
-            </p>
+            <p>{movie.plot}</p>
           </div>
         </article>
       )}

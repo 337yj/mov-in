@@ -1,6 +1,2 @@
-- /components 페이지 별점
-별점을 누르면 에러가 뜹니다
-
-- myPage/bookmark > 영화디테일페이지
-1. 연관된 영화 가로스크롤 도중에 세로스크롤이 발생되는 문제
-2. 연관된 영화를 클릭할시 페이지 상단으로 이동이 안되는 문제
+- DetailPage > movieDetail > _shared > CommentModal
+myPage/bookmark/ 영화상세페이지에 코멘트모달 추가하였습니다

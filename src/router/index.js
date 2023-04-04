@@ -19,6 +19,10 @@ import {
   Like,
   Bookmark,
   CommentAndRating,
+  BOPage,
+  BOUser,
+  BOComment,
+  BOReport,
 } from "../pages";
 
 const route = (
@@ -36,6 +40,11 @@ const route = (
       <Route path="comment" element={<CommentAndRating />} />
       <Route path="like" element={<Like />} />
       <Route path="bookmark" element={<Bookmark />} />
+    </Route>
+    <Route path="boPage" element={<BOPage />}>
+      <Route path="boUser" element={<BOUser />} />
+      <Route path="boComment" element={<BOComment />} />
+      <Route path="boReport" element={<BOReport />} />
     </Route>
     <Route path="components" element={<ComponentPage />} />
   </Route>

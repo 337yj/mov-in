@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { Button, Modal, Stars } from "../../../../components";
-import { BsBookmark, BsHeart, BsPencil, BsStarFill } from "react-icons/bs";
+import {
+  BsBookmark,
+  BsBookmarkFill,
+  BsFillHeartFill,
+  BsHeart,
+  BsPencil,
+  BsStarFill,
+} from "react-icons/bs";
 import styles from "./movieInfo.module.scss";
 import cx from "classnames";
 import CommentModal from "../_shared/CommentModal";
 
 const MovieInfo = ({ movie }) => {
   const [showAllStaffs, setShowAllStaffs] = useState(false);
+  const [liked, setLiked] = useState(movie.isLiked || false);
+  const [bookmark, setBookmark] = useState(false);
   const [modal, setModal] = useState(false);
   const [rating, setRating] = useState(null);
 
@@ -16,7 +25,7 @@ const MovieInfo = ({ movie }) => {
     return filteredStaffs
       .sort((a, b) => roleOrder[a.role] - roleOrder[b.role])
       .map((staff) => (
-        <p className={styles.name}>
+        <p className={styles.name} key={staff.id}>
           {staff.name}
           <span className={styles.role}>{staff.role}</span>
         </p>
@@ -25,11 +34,19 @@ const MovieInfo = ({ movie }) => {
 
   const getActors = (actors) => {
     return actors.map((actor) => (
-      <p className={styles.name}>
+      <p className={styles.name} key={actor.id}>
         {actor.name}
         <span className={styles.role}>배우</span>
       </p>
     ));
+  };
+
+  const onClickLike = () => {
+    setLiked(!liked);
+  };
+
+  const onClickBookmark = () => {
+    setBookmark(!bookmark);
   };
 
   const onClickModal = () => {
@@ -48,12 +65,24 @@ const MovieInfo = ({ movie }) => {
           src={movie.postImage}
           alt="thumbnail"
         />
-        <Button className={styles.likeBtn} color="dark">
-          <BsHeart className={styles.IconLike} />
+        <Button className={styles.likeBtn} color="dark" onClick={onClickLike}>
+          {liked ? (
+            <BsFillHeartFill className={styles.IconFillLike} />
+          ) : (
+            <BsHeart className={styles.IconLike} />
+          )}
           좋아요
         </Button>
-        <Button className={styles.bookmarkBtn} color="dark">
-          <BsBookmark className={styles.IconBookmark} />
+        <Button
+          className={styles.bookmarkBtn}
+          color="dark"
+          onClick={onClickBookmark}
+        >
+          {bookmark ? (
+            <BsBookmarkFill className={styles.IconFillBookmark} />
+          ) : (
+            <BsBookmark className={styles.IconBookmark} />
+          )}
           북마크
         </Button>
         <Button
@@ -73,21 +102,6 @@ const MovieInfo = ({ movie }) => {
           setRating={setRating}
           onRatingChange={onRatingChange}
         />
-        {/* {modal && (
-          <Modal
-            className={styles.modal}
-            title={movie.title}
-            onClick={onClickModal}
-          >
-            <p>영화를 평가해주세요.</p>
-            <Stars rating={rating} onRatingChange={onRatingChange} />
-            <p>
-              어떤 점이 좋았나요?
-              <br />
-              감상 포인트를 추천해 주세요!
-            </p>
-          </Modal>
-        )} */}
       </div>
       <div className={styles.infoWrapper}>
         <div className={styles.scoreWrapper}>

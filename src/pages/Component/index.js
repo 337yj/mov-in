@@ -31,29 +31,29 @@ const Component = () => {
     {
       // profileImage : "eee",
       nickname: "박박만두",
-      comment : "5",
-      like : "124",
+      comment: "5",
+      like: "124",
       createdAt: "2022-03-29",
     },
     {
       // profileImage : "eee",
       nickname: "appleBanana",
-      comment : "5",
-      like : "1024",
+      comment: "5",
+      like: "1024",
       createdAt: "2022-02-27",
     },
     {
       // profileImage : "eee",
       nickname: "독고만두",
-      comment : "125",
-      like : "1124",
+      comment: "125",
+      like: "1124",
       createdAt: "2021-03-29",
     },
     {
       // profileImage : "eee",
       nickname: "제갈만두",
-      comment : "75",
-      like : "1324",
+      comment: "75",
+      like: "1324",
       createdAt: "1997-03-29",
     },
   ];
@@ -145,24 +145,28 @@ const Component = () => {
           </div>
           <div>
             <h2>모달</h2>
-            <Modal
+            {/* <Modal
               title="프로필 사진 변경"
               subTitle="모달서브타이틀"
-              buttonFirst={<Button color="primary" text="저장"/>}
+              buttonFirst={<Button color="primary" text="저장" />}
               buttonSecond={<Button color="secondary" text="취소" />}
             >
               description
-            </Modal>
+            </Modal> */}
           </div>
           <div>
             <h2>토스트</h2>
-            <Button color="primary" onClick={() => toast("logout")} text="로그아웃"/>
+            <Button
+              color="primary"
+              onClick={() => toast("logout")}
+              text="로그아웃"
+            />
             {toastFloat && <Toast children={toastMsg} />}
           </div>
           <div>
             <h2>태그</h2>
             <div className={styles.tags}>
-              <Tag text="OST"/>
+              <Tag text="OST" />
             </div>
           </div>
           <div>
@@ -172,7 +176,7 @@ const Component = () => {
               <h3>인기 10위</h3>
               <p>더보기</p>
             </div>
-            <Carousel />
+            {/* <Carousel /> */}
           </div>
         </article>
       </section>

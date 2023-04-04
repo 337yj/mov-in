@@ -1,15 +1,18 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./button.module.scss";
-import {IconHeartEmpty} from "../../../assets";
+import { IconHeartEmpty } from "../../../assets";
 
-const Button = ({className, color, text, ...props}) => {
+
+const Button = ({ className, color, children, ...props }) => {
+
   return (
     <button
       className={cx(styles.button, className, styles[color])}
       type="submit"
-      {...props}>
-      {text}
+      {...props}
+    >
+      {children}
     </button>
   );
 };

@@ -5,7 +5,7 @@ import { Card } from "../../../components";
 import styles from "./recommendMovie.module.scss";
 
 // 연관된 영화 불러오기
-const RelatedMovie = ({ movie }) => {
+const RecommendMovie = ({ movie }) => {
   const containerRef = useRef(null);
   const { id } = useParams();
   const [relatedMovie, setRelatedMovie] = useState();

@@ -9,18 +9,15 @@ const Tag = ({
   id,
   isSelected,
   onSelect,
+  isDisabled,
   selectedPoints = [],
   ...props
 }) => {
   const [isActive, setIsActive] = useState(isSelected || false);
 
-  const handleClick = () => {
-    const canSelectMore = selectedPoints.length < 3 || isActive;
-    if (canSelectMore) {
+  const onClick = () => {
+    if (!isDisabled) {
       setIsActive(!isActive);
-      onSelect(id);
-    } else if (selectedPoints.includes(id)) {
-      setIsActive(false);
       onSelect(id);
     }
   };
@@ -31,7 +28,8 @@ const Tag = ({
 
   return (
     <button
-      onClick={handleClick}
+      disabled={isDisabled}
+      onClick={onClick}
       type="button"
       className={cx(styles.tag, className, { [styles.isActive]: isActive })}
     >

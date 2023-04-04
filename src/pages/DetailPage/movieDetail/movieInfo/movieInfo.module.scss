@@ -19,17 +19,26 @@
     .likeBtn,
     .bookmarkBtn,
     .ReviewBtn {
-      width: 100%;
       flex-grow: 1;
+      width: 100%;
       margin-bottom: 14px;
       font-size: 18px;
+      line-height: 1.2;
     }
 
     .IconLike,
+    .IconFillLike,
     .IconBookmark,
+    .IconFillBookmark,
     .IconReview {
       width: 24px;
       margin-right: 14px;
+    }
+    .IconFillLike {
+      color: c.$C_PINK;
+    }
+    .IconFillBookmark {
+      color: c.$C_PURPLE;
     }
   }
 

@@ -1,19 +1,17 @@
 import React from "react";
-
 import { IconCaretLeft, IconCaretRight } from "../../../assets/icon";
-import data from "../../../fake.json";
 import Card from "../Card";
 
 import StyledSlider from "./carouselStyle";
 
-const Carousel = () => {
+const Carousel = ({ slidesToShow, slidesToScroll, movies }) => {
   const settings = {
     arrow: false,
     dots: false,
     infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    speed: 700,
+    slidesToShow: parseInt(slidesToShow),
+    slidesToScroll: parseInt(slidesToScroll),
     autoplay: true,
     prevArrow: <IconCaretLeft />,
     nextArrow: <IconCaretRight />,
@@ -21,7 +19,7 @@ const Carousel = () => {
 
   return (
     <StyledSlider {...settings}>
-      {data.map((movie) => (
+      {movies.map((movie) => (
         <Card movie={movie} type="carousel" />
       ))}
     </StyledSlider>

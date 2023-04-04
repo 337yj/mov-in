@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Button } from "../../../../components";
+import { Button, Modal, Stars } from "../../../../components";
 import { BsBookmark, BsHeart, BsPencil, BsStarFill } from "react-icons/bs";
 import styles from "./movieInfo.module.scss";
 import cx from "classnames";
+import CommentModal from "../_shared/CommentModal";
 
 const MovieInfo = ({ movie }) => {
   const [showAllStaffs, setShowAllStaffs] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [rating, setRating] = useState(null);
 
   const getStaffs = (staffs) => {
     const roleOrder = { 감독: 1, 각본: 2 };
@@ -29,6 +32,14 @@ const MovieInfo = ({ movie }) => {
     ));
   };
 
+  const onClickModal = () => {
+    setModal(!modal);
+  };
+
+  const onRatingChange = (newRating) => {
+    setRating(newRating);
+  };
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.postWrapper}>
@@ -45,10 +56,38 @@ const MovieInfo = ({ movie }) => {
           <BsBookmark className={styles.IconBookmark} />
           북마크
         </Button>
-        <Button className={styles.ReviewBtn} color="dark">
+        <Button
+          className={styles.ReviewBtn}
+          color="dark"
+          onClick={onClickModal}
+        >
           <BsPencil className={styles.IconReview} />
           코멘트
         </Button>
+        <CommentModal
+          movie={movie}
+          title={movie.title}
+          modal={modal}
+          rating={rating}
+          setModal={setModal}
+          setRating={setRating}
+          onRatingChange={onRatingChange}
+        />
+        {/* {modal && (
+          <Modal
+            className={styles.modal}
+            title={movie.title}
+            onClick={onClickModal}
+          >
+            <p>영화를 평가해주세요.</p>
+            <Stars rating={rating} onRatingChange={onRatingChange} />
+            <p>
+              어떤 점이 좋았나요?
+              <br />
+              감상 포인트를 추천해 주세요!
+            </p>
+          </Modal>
+        )} */}
       </div>
       <div className={styles.infoWrapper}>
         <div className={styles.scoreWrapper}>

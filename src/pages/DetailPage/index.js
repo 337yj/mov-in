@@ -1,20 +1,19 @@
-import dayjs from "dayjs";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getMovie } from "../../api/Movie";
-import { IconLink } from "../../assets";
-import { Toast } from "../../components";
 import { RelatedMovie, MovieComment, MovieInfo } from "./movieDetail";
-// import CommentDetail from "./Comment/CommentDetail";
-// import CommentList from "./CommentList";
-import styles from "./detail.module.scss";
 import CommentDetail from "./CommentList/CommentDetail";
 import CommentList from "./CommentList";
+import { IconLink } from "../../assets";
+import { Toast } from "../../components";
+import dayjs from "dayjs";
+import styles from "./detail.module.scss";
 
 const Detail = () => {
   const ref = useRef(null);
   const { id } = useParams();
   const { pathname } = useLocation();
+
   const [movie, setMovie] = useState();
   const [tab, setTab] = useState("movieDetail");
   const [toastFloat, setToastFloat] = useState(false);
@@ -34,6 +33,7 @@ const Detail = () => {
       console.error(error);
     }
   };
+
   const onCopyClipBoard = async () => {
     const url = window.location.href;
     try {
@@ -66,8 +66,6 @@ const Detail = () => {
     commentDetail: <CommentDetail movie={movie} />,
     commentList: <CommentList movie={movie} />,
   };
-  // console.log(pathname);
-  // console.log(id);
 
   useEffect(() => {
     if (!ref.current) return;

@@ -1,3 +1,4 @@
+@use "../../../styles/constants" as c;
 @use "../../../styles/mixins" as m;
 
 .wrapper {
@@ -9,13 +10,18 @@
     text-align: left;
     font-size: 36px;
     font-weight: 700;
+
+    > span {
+      color: c.$C_YELLOW;
+    }
   }
 
   .gridContainer {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 2열 */
-    grid-template-rows: repeat(2, 1fr); /* 5행 */
-    gap: 16px; /* 엘리먼트 간격 */
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 16px;
+
     > li {
       margin-bottom: 16px;
       width: 80%;

@@ -4,7 +4,7 @@
 .wrapper {
   width: 100%;
   padding-top: 12px;
-  max-height: 600px;
+  // height: 600px;
   > h2 {
     padding: 24px 0;
     border-top: 1px solid c.$C_DARKGRAY;
@@ -12,16 +12,15 @@
     font-weight: 700;
   }
 
-  .grid {
-    height: 100%;
-    display: flex;
+  height: 500px;
+  .listWrapper {
+    @include m.flex(flex-start);
+    // height: 100%;
     flex-wrap: nowrap;
     gap: 70px;
     overflow-x: scroll;
-
-    justify-content: flex-start;
-    align-items: center;
-    // scroll-snap-type: x mandatory;
+    // height: 500px;
+    overflow-y: hidden;
     .card {
       // width: 260px;
       // width: 100%;

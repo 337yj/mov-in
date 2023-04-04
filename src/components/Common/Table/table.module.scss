@@ -24,13 +24,13 @@ table {
 
   td, th {
     @include m.flex();
-    min-width: 160px;
+    min-width: 140px;
     padding: 0px 18px;
 }
 
   .headTrStyle {
     // button 여백 맞춤...
-    padding-right: 210px;
+    padding-right: 206px;
     background-color: c.$C_WHITE_40;
     font: {
       weight: 700;
@@ -41,12 +41,14 @@ table {
   .bodyTrStyle {
     background-color: c.$C_WHITE_10;
 
-    &.isStyle {
+    &.isSelected {
       background-color: c.$C_WHITE_50;
     }
   }
 
-  .sortStyle {
-    font-size: 0.75rem;
+    svg {
+      height : 12px;
+      width: 12px;
+    }
   }
-}
+

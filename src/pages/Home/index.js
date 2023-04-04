@@ -51,11 +51,17 @@ const Home = () => {
     } catch (error) {
       console.error(error);
     }
+    // console.log(page);
+    // console.log(postPerPage);
+    // console.log(indexOfLastPost);
+    // console.log(indexOfFirstPost);
+    // console.log(posts);
   };
   // useEffect(() => {
   //   const fantasyGenre = genreList.filter((movie) =>
   //     movie.genres.some((genre) => genre.genre === "멜로/로맨스"),
   //   );
+
 
   //   const uniqueMovies = Array.from(
   //     new Set(fantasyGenre.map((movie) => movie.id)),
@@ -67,6 +73,7 @@ const Home = () => {
   //     setSelect(uniqueMovies);
   //   }
   // }, [genreList]);
+
 
   useEffect(() => {
     onGetMovies();

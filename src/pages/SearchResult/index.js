@@ -1,9 +1,87 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
+import { useParams, useNavigate } from "react-router-dom";
+import { getMovies } from "../../api/Movie";
+import { Card } from "../../components";
+//import { RecommendMovie } from "./RecommendMovie";
+import styles from "./search.module.scss";
 
 const SearchResult = () => {
+  const { state } = useLocation();
+  const [movie, setMovie] = useState([]);
+  const [isFind, setIsFind] = useState(false);
   const { searchText } = useParams();
-  return <div>검색결과 : {searchText}</div>;
+
+  const searchTitle = movie.filter((item) =>
+    item.title?.replace(/ /g, "").includes(searchText?.replace(/ /g, "")),
+  );
+
+  const totalResult = [...searchTitle];
+
+  const onGetMovies = async () => {
+    try {
+      const response = await getMovies();
+      if (response.status === 200) {
+        const items = [response.data.data];
+        setMovie(items);
+        setIsFind(!isFind);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onNavigateDetail = (id) => {
+    return () => {
+      navigate(`/movies/detail/${id}`);
+    };
+  };
+
+  useEffect(() => {
+    setIsFind(false);
+    onGetMovies();
+  }, []);
+
+  console.log(state);
+
+  return (
+    <main>
+      {searchText !== "" && totalResult.length !== 0 && (
+        <section className={styles.movieInfo}>
+          <h2>{`"${searchText}"에 대한 검색 결과입니다.`}</h2>
+          <article>
+            {totalResult.map((item) => {
+              return (
+                <Card
+                  key={item.id}
+                  item={item}
+                  onClick={onNavigateDetail(item.id)}
+                />
+              );
+            })}
+          </article>
+        </section>
+      )}
+      {(searchText === "" || totalResult.length === 0) && isFind && (
+          <section className={styles.noMovieInfo}>
+            <h2>
+              <span>{`${searchText}`}</span>에 대한 결과가 없습니다.
+            </h2>
+            <article>
+              <ul>
+                도움이 필요하신가요?
+                <li>단어나 문장이 정확한지 확인해보세요.</li>
+                <li>오타가 없는지 확인해보세요.</li>
+                <li>
+                  검색어의 단어 수를 줄이거나, 다른 검색어로 검색해보세요.
+                </li>
+              </ul>
+            </article>
+          </section>
+          /* <RecommendMovie /></> */
+      )}
+    </main>
+  );
 };
 
 export default SearchResult;

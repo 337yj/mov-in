@@ -40,15 +40,16 @@ const Card = ({ movie, type = "default", className }) => {
             <div className={styles.title}>
               <h3>{movie.title}</h3>
               <div className={styles.detail}>
-                <p>15</p>
+                {/* <p>15</p> */}
                 <p>
                   {dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}
                 </p>
               </div>
             </div>
             <div className={styles.tags}>
-              <Tag type="selectTag">태그1</Tag>
-              <Tag type="selectTag">태그2</Tag>
+              <Tag 
+                text={movie.genres.map((genre) => genre.name).join(", ")}
+              ></Tag>
             </div>
             <p>{movie.plot}</p>
           </div>

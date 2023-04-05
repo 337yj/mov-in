@@ -1,2 +1,5 @@
-- DetailPage > movieDetail > _shared > CommentModal
-myPage/bookmark/ 영화상세페이지에 코멘트모달 추가하였습니다
+- Bo page > _shared
+모달 파일들을 따로 shared에 분리하는게 좋을까요? 아니면 Bo page > BoComment,BoMovie,BoUser에 같이 넣는게 좋을까요??
+
+- Bo page > BoMovie의 영화 제목을 10자만 표기 하고 싶습니다
+

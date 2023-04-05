@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
 import { LikeButton } from "../index";
-import { IconComment } from "../../../../../../../assets";
+import { TfiCommentAlt } from "react-icons/tfi";
 
 import styles from "./footer.module.scss";
 
@@ -29,7 +29,7 @@ const CommentFooter = ({ getTotalComment, date, className, ...props }) => {
           className={className}
           onClick={onNavigateCommentDetail}
         >
-          <IconComment />
+          <TfiCommentAlt />
           <output>답글 {getTotalComment}개</output>
         </button>
       </output>

@@ -1,35 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Table } from "../../../components/Common";
-import { LNB } from "../../../components/Layout";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+
+import { getUsers, getUsersCount } from "../../../api/User";
+
+import { Table, Button, Paging } from "../../../components/Common";
+import { BoUserModal } from "../_shared";
+
 import styles from "./boUser.module.scss";
-import { getMovies } from "../../../api/Movie";
 
 const columns = [
-  { Header: "제목", accessor: "movie" },
-  { Header: "감독", accessor: "actor" },
-  { Header: "장르", accessor: "genres" },
-  { Header: "평균평점", accessor: "averageScore" },
-  { Header: "개봉일자", accessor: "releasedAt" },
+  { Header: "닉네임", accessor: "닉네임" },
+  { Header: "코멘트", accessor: "코멘트" },
+  { Header: "좋아요", accessor: "좋아요" },
+  { Header: "가입일자", accessor: "가입일자" },
 ];
 
-const BOUser = () => {
-  const [movies, setMovies] = useState([]);
-  const data = movies.map((movie) => ({
-    제목: movie.title,
-    감독: movie.staffs.find((staff) => staff.role === "감독"),
-    장르: movie.genres.map((genre) => genre?.name).join(", "),
-    평균평점: movie.averageScore,
-    개봉일자: movie.releasedAt,
+const POST_PER_PAGE = 10;
+
+const BOUser = ({ user }) => {
+  const [users, setUsers] = useState([]);
+  // const [likeCount, setLikeCount] = useState([]);
+  // const [commentCount, setCommentCount] = useState([]);
+  const [currentPage, setCurrentPage] = useState([]); // 보여줄 페이지
+  const [page, setPage] = useState(1); // 현재 페이지
+  const nextPage = page * POST_PER_PAGE;
+  const PrevPage = nextPage - POST_PER_PAGE;
+  const [totalCount, setTotalCount] = useState(0);
+
+  const [modal, setModal] = useState(false);
+
+  const data = users.map((user) => ({
+    닉네임: user.nickname,
+    코멘트: user.reviewCount,
+    좋아요: user.likeCount,
+    가입일자: dayjs(user.createdAt, "YYYYMMDD").format("YYYY.MM.DD"),
   }));
 
-  const onGetMovies = async () => {
+  const onClickModal = () => {
+    setModal(!modal);
+  };
+
+  const onChange = (page) => {
+    setPage(page);
+  };
+
+  const onGetUsers = async () => {
     try {
-      const response = await getMovies();
+      const response = await getUsers(page, POST_PER_PAGE);
       if (response.status === 200) {
-        const items = [...response.data.data];
-        setMovies(items);
+        const newUsers = [...response.data.data];
+        setUsers([...users, ...newUsers]);
+        setCurrentPage([...users, ...newUsers]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onGetUsersCount = async () => {
+    try {
+      const response = await getUsersCount();
+      if (response.status === 200) {
+        setTotalCount(response.data.count);
       }
     } catch (error) {
       console.error(error);
@@ -37,15 +68,31 @@ const BOUser = () => {
   };
 
   useEffect(() => {
-    onGetMovies();
-  }, []);
+    onGetUsers();
+    onGetUsersCount();
+  }, [page]);
 
-  console.log(movies);
+  console.log(users);
 
   return (
     <section className={styles.wrapper}>
-      <div>유저관리페이지</div>
-      <Table columns={columns} data={data} />
+      <h1>유저 관리 페이지</h1>
+      <Table
+        columns={columns}
+        data={data}
+        firstButton={
+          <Button color={"warning"} children={"보기"} onclick={onClickModal} />
+        }
+        secondButton={<Button color={"danger"} children={"탈퇴"} />}
+      />
+      <BoUserModal user={user} modal={modal} setModal={setModal} />
+      <Paging
+        totalCount={totalCount}
+        page={page}
+        postPerPage={POST_PER_PAGE}
+        pageRangeDisplayed={5}
+        onChange={onChange}
+      />
     </section>
   );
 };

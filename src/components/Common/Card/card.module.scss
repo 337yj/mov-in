@@ -59,9 +59,10 @@
       }
     }
     > img {
+      position: relative;
       width: 330px;
       height: 495px;
-      object-fit: contain;
+      object-fit: cover;
       margin-left: 10px;
       border-radius: 10px;
     }
@@ -94,13 +95,13 @@
             color: c.$C_WHITE_40;
             font-size: 14px;
 
-            > p:first-of-type {
-              padding: 2px 2px 1px 1px; // 이렇게 해야 맞게 됨 (뭐임?)
-              margin-right: 8px;
-              border-radius: 2px;
-              background-color: c.$C_WHITE_40;
-              color: c.$C_INDIGO;
-            }
+            // > p:first-of-type {
+            //   padding: 2px 2px 1px 1px; // 이렇게 해야 맞게 됨 (뭐임?)
+            //   margin-right: 8px;
+            //   border-radius: 2px;
+            //   background-color: c.$C_WHITE_10;
+            //   color: c.$C_INDIGO;
+            // }
           }
         }
 
@@ -110,9 +111,11 @@
           margin: 8px 0px 44px 0px;
 
           > button {
-            padding: 2px 8px;
+            padding: 4px 8px;
             font-size: 12px;
             font-weight: 300;
+            background-color: c.$C_PURPLE;
+            cursor: default;
           }
         }
 

@@ -2,7 +2,7 @@
 @use "../../../styles/mixins/" as m;
 
 table {
-  @include m.flex(space-between, space-between, column);
+  @include m.flex(left, space-between, column);
   @include m.ellipse();
   width: 100%;
   border-collapse: separate;
@@ -13,10 +13,9 @@ table {
   }
 
   tr {
-    @include m.flex(space-between);
+    @include m.flex(left);
     height: auto;
-    //padding: 8px;
-    padding: 8px 12px 8px 8px;
+    padding: 8px 12px 8px 0px;
     border: 2px solid c.$C_INDIGO;
     border-radius: 10px;
     overflow: hidden;
@@ -25,12 +24,13 @@ table {
   td, th {
     @include m.flex();
     min-width: 140px;
-    padding: 0px 18px;
+    
+    &:first-child {
+      min-width: 50px;
+    }
 }
 
   .headTrStyle {
-    // button 여백 맞춤...
-    padding-right: 206px;
     background-color: c.$C_WHITE_40;
     font: {
       weight: 700;

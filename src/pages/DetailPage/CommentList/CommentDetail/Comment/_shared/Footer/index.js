@@ -7,14 +7,18 @@ import { IconComment } from "../../../../../../../assets";
 
 import styles from "./footer.module.scss";
 
+//TODO: 댓글 전체 개수 표시/ 작성날짜
+//TODO: 영화 리뷰 수 구하기
+// export const getReviewsCount = () => {
+//   return apiClient.get(`/reviews/count`);
+// };
+
 const CommentFooter = ({ getTotalComment, date, className, ...props }) => {
   const navigate = useNavigate();
 
   const onNavigateCommentDetail = () => {
     navigate("/commentDetail");
   };
-
-  //TODO: 댓글 전체 개수 표시/ 작성날짜
 
   return (
     <footer className={styles.wrapper}>

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
+
+import { getReviewsDetail } from "../../../../api/Review";
 
 import { CommentHeader, CommentBody, CommentFooter } from "./Comment/_shared";
 import { Reply } from "../../../../pages";
@@ -7,23 +10,29 @@ import { Button } from "../../../../components";
 
 import styles from "./commentDetail.module.scss";
 
-const CommentDetail = ({ movie, profileImage, username, ...props }) => {
-  const [comment, setComment] = useState();
+//TODO: 영화 리뷰 상세 조회
+// export const getReviewsDetail = (id) => {
+//   return apiClient.get(`/reviews/${id}/detail`);
+// };
 
-  const onGetMovieReview = async () => {
+const CommentDetail = ({ profileImage, username, ...props }) => {
+  const [commentDetail, setCommentDetail] = useState();
+  const { id } = useParams();
+
+  const onGetReviewsDetail = async () => {
     try {
-      const response = await getReviewsMovie(id);
+      const response = await getReviewsDetail(id);
       if (response.status === 200) {
-        setComment(response.data);
+        setCommentDetail(response.data);
       }
     } catch (error) {}
   };
 
   useEffect(() => {
-    onGetMovieReview();
+    onGetReviewsDetail();
   }, [id]);
 
-  if (!comment) {
+  if (!commentDetail) {
     return null;
   }
 

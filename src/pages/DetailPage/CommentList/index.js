@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import styles from "./commentList.module.scss";
-import { Comment } from "../../index";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import CommentOutput from "./CommentDetail/Comment";
+
+import { getReviewsMovie } from "../../../api/Review";
+import { Comment } from "../../index";
+
+import styles from "./commentList.module.scss";
+//TODO: 영화 리뷰 목록 조회
+// export const getReviewsMovie = (movieId) => {
+//   return apiClient.get(`/reviews/movie/${movieId}`);
+// };
 
 const CommentList = ({ movie }) => {
   const [comment, setComment] = useState();
   const { id } = useParams();
 
   console.log(comment);
-  const onGetMovieReview = async () => {
+  const onGetReviewsMovie = async () => {
     try {
       const response = await getReviewsMovie(id);
       if (response.status === 200) {
@@ -19,7 +25,7 @@ const CommentList = ({ movie }) => {
   };
 
   useEffect(() => {
-    onGetMovieReview();
+    onGetReviewsMovie();
   }, [id]);
 
   if (!comment) {

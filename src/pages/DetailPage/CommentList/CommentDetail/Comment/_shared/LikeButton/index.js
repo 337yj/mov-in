@@ -4,6 +4,16 @@ import { IconHeartEmpty, IconHeartFull } from "../../../../../../../assets";
 
 import styles from "./likeCount.module.scss";
 
+//TODO:하트클릭시 색 변하게 기능 추가/취소시 좋아요 개수 줄어들기
+//TODO: 리뷰 좋아요
+// export const createReviewsLike = (id) => {
+//   return apiClient.post(`/reviews/${id}/like`);
+// };
+//TODO: 리뷰 좋아요 삭제
+// export const deleteReviewsLike = (id) => {
+//   return apiClient.delete(`/reviews/${id}/like`);
+// };
+
 const LikeButton = () => {
   const [like, setLike] = useState(0);
   const [onIconClick, setOnIconClick] = useState(false);
@@ -19,8 +29,6 @@ const LikeButton = () => {
   const onchange = (e) => {
     setOnIconClick(e.target.value);
   };
-
-  //TODO:하트클릭시 색 변하게 기능 추가/취소시 좋아요 개수 줄어들기
 
   return (
     <div type="button" className={styles.likeCount}>

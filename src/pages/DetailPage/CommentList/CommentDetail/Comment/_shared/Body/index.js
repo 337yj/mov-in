@@ -4,13 +4,20 @@ import { IconModify, IconDelete } from "../../../../../../../assets";
 //아이콘 수정
 import styles from "./body.module.scss";
 
-const CommentBody = ({ content, className, ...props }) => {
-  //TODO:알림 띄우고 수정 모달로 이동 기능 추가/알림띄우고 코멘트 삭제 기능 추가
+//TODO:알림 띄우고 수정 모달로 이동 기능 추가/알림띄우고 코멘트 삭제 기능 추가
+//TODO: 리뷰 수정
+// export const updateReviews = (id, body) => {
+//   return apiClient.patch(`/reviews/${id}`, body);
+// };
+//TODO: 리뷰 삭제
+// export const deleteReviews = (id) => {
+//   return apiClient.delete(`/reviews/${id}`);
+// };
 
+const CommentBody = ({ content, className, ...props }) => {
   return (
     <article className={className}>
       <p className={styles.content}>{content}</p>
-      {/* 윤 - 아이콘 사이 여백 */}
       <div className={styles.icon}>
         <button>
           <IconModify />

@@ -12,7 +12,7 @@ const CommentModal = ({
   setRating,
   onRatingChange,
 }) => {
-  const onClickModal = () => {
+  const onClickModal = ({ id }) => {
     setModal(!modal);
   };
   const [selectedPoints, setSelectedPoints] = useState([]);

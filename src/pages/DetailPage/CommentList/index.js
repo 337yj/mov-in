@@ -14,7 +14,6 @@ const CommentList = ({ movie }) => {
   const [comment, setComment] = useState();
   const { id } = useParams();
 
-  console.log(comment);
   const onGetReviewsMovie = async () => {
     try {
       const response = await getReviewsMovie(id);

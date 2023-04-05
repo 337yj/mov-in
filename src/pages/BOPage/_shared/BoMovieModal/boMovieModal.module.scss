@@ -1,0 +1,10 @@
+@use "../../../../styles/constants/colors" as c;
+@use "../../../../styles/mixins/" as m;
+
+.boMovieModal {
+  .wrapper {
+    width: 540px;
+    height: 510px;
+    background-color: c.$C_INDIGO;
+  }
+}

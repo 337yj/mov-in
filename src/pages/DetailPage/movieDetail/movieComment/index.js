@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReviewsMovie } from "../../../../api/Review";
-import CommentOutput from "../../CommentList/CommentDetail/Comment";
+import Comment from "../../CommentList/CommentDetail/Comment";
 // import CommentOutput from "../movieComment";
 import styles from "./movieComment.module.scss";
 
@@ -41,7 +41,7 @@ const MovieComment = ({ movie, onChangeTab }) => {
   return (
     <section className={styles.wrapper}>
       <h2>코멘트</h2>
-      <CommentOutput onClick={() => onClickMovie("commentDetail")} />
+      <Comment onClick={() => onClickMovie("commentDetail")} />
       <div className={styles.btnWrapper}>
         <button
           className={styles.moreBtn}

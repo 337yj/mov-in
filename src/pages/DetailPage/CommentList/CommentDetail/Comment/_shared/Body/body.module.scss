@@ -11,6 +11,16 @@
 .icon {
   @include m.flex(flex-end, center, row);
   column-gap: 5px;
+
+  .modify {
+    color: c.$C_DARKGRAY;
+    size: 0.7x;
+  }
+
+  .delete {
+    size: 18px;
+    color: c.$C_DARKGRAY;
+  }
 }
 
 button {

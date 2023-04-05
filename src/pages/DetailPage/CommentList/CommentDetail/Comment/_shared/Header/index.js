@@ -20,8 +20,12 @@ const CommentHeader = ({
   return (
     <article className={styles.wrapper}>
       <figure className={styles.profile}>
-        <img src={profileImage} alt="" className={styles.profileImage} />
-        <figcaption className={styles.username}>{username}</figcaption>
+        <img
+          src={user.profileImage}
+          alt="profileImage"
+          className={styles.profileImage}
+        />
+        <figcaption className={styles.nickname}>{user.nickname}</figcaption>
       </figure>
       <output className={className}>평점★{grade?.toFixed(1)}</output>
     </article>

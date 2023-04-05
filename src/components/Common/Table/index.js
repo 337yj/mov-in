@@ -47,7 +47,7 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
     }
   };
 
-  const rowsPerPage = rows.slice(0, 7);
+  const rowsPerPage = rows.slice(0, 10);
 
   return (
     <table {...getTableProps()}>

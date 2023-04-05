@@ -2,9 +2,10 @@
 @use "../../../styles/mixins/" as m;
 
 table {
-  @include m.flex(left, space-between, column);
+  @include m.flex(flex-start, space-between, column);
   @include m.ellipse();
   width: 100%;
+  row-gap: 10px;
   border-collapse: separate;
   border-spacing: 0;
 
@@ -21,34 +22,46 @@ table {
     overflow: hidden;
   }
 
-  td, th {
+  td,
+  th {
     @include m.flex();
     min-width: 140px;
-    
+
     &:first-child {
       min-width: 50px;
     }
-}
+  }
 
   .headTrStyle {
     background-color: c.$C_WHITE_40;
     font: {
       weight: 700;
-      size: 16px;
+      size: 20px;
     }
   }
 
   .bodyTrStyle {
     background-color: c.$C_WHITE_10;
+    column-gap: 10px;
+    font: {
+      weight: 400;
+      size: 16px;
+    }
+
+    > td {
+      max-width: 140px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
 
     &.isSelected {
       background-color: c.$C_WHITE_50;
     }
   }
 
-    svg {
-      height : 12px;
-      width: 12px;
-    }
+  svg {
+    height: 12px;
+    width: 12px;
   }
-
+}

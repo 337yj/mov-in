@@ -7,8 +7,12 @@
   .img {
     width: 260px;
     height: 370px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
+
+    &.shadow {
+      border : 1px solid c.$C_WHITE_10;
+    }
   }
 
   .infoWrapper {
@@ -61,8 +65,8 @@
     }
     > img {
       position: relative;
-      width: 330px;
-      height: 495px;
+      width: 310px;
+      height: 455px;
       object-fit: cover;
       margin-left: 10px;
       border-radius: 10px;
@@ -72,7 +76,7 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      width: 330px;
+      width: 310px;
       height: 0px;
       transition: height 0.4s linear;
       margin-left: 10px;
@@ -87,7 +91,7 @@
           > h3 {
             @include m.ellipse();
             max-width: 206px;
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
           }
 
@@ -109,7 +113,7 @@
         .tags {
           @include m.flex(flex-start);
           gap: 6px;
-          margin: 8px 0px 44px 0px;
+          margin: 8px 0px 10px 0px;
 
           > button {
             padding: 4px 8px;
@@ -121,7 +125,7 @@
         }
 
         > p {
-          @include m.multiEllipsis(16px, 20px, 3);
+          @include m.multiEllipsis(14px, 20px, 5);
           color: c.$C_WHITE_70;
           font-weight: 300;
           text-align: justify;

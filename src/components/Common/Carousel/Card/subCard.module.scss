@@ -1,0 +1,94 @@
+@use "../../../../styles/constants" as c;
+@use "../../../../styles/mixins" as m;
+
+.wrapper {
+  position: relative;
+  width: 240px;
+
+  .img {
+    width: 240px;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 10px;
+
+    &.shadow {
+      border: 1px solid c.$C_WHITE_10;
+    }
+  }
+
+  &:hover {
+    .info {
+      height: 180px;
+      transform: translateY();
+
+      .tags {
+        @include m.flex(flex-start, flex-start, row);
+      }
+    }
+  }
+
+  > img {
+    position: relative;
+    width: 240px;
+    object-fit: cover;
+    margin-left: 10px;
+    border-radius: 10px;
+  }
+
+  .info {
+    @include m.flex(flex-start, flex-start, column);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    height: 0px;
+    transition: height 0.4s linear;
+    margin: 10px 10px 0px 10px;
+    border-radius: 0px 0px 10px 10px;
+    background-color: c.$C_INDIGO_90;
+
+    .padding {
+      max-width: 240px;
+      padding: 20px;
+
+      .title {
+        @include m.flex(space-between, flex-end, row);
+
+        > h3 {
+          @include m.ellipse();
+          max-width: 200px;
+          font-size: 24px;
+          font-weight: 700;
+        }
+      }
+
+      .date {
+        @include m.flex(column);
+        color: c.$C_WHITE_40;
+        font-size: 12px;
+      }
+
+      .plot {
+        @include m.multiEllipsis(14px, 20px, 4);
+          overflow: hidden;
+          color: c.$C_WHITE_70;
+          font-weight: 300;
+          text-align: left;
+      }
+    }
+
+    .tags {
+      @include m.flex(flex-start);
+      gap: 6px;
+      margin: 10px 0px;
+
+      > button {
+        padding: 4px 8px;
+        font-size: 8px;
+        font-weight: 300;
+        background-color: c.$C_PURPLE;
+        cursor: default;
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import cx from "classnames";
 import {
   getMovies,
   getMovie,
@@ -8,7 +9,7 @@ import {
   getMoviesGenre,
   getMoviesTop,
 } from "../../api/Movie";
-import Carousel from "../../components/Common/Carousel";
+import { Button, Carousel } from "../../components/Common";
 import genre from "./Genre/genre";
 import { BsStarFill } from "react-icons/bs";
 import styles from "./home.module.scss";
@@ -17,9 +18,11 @@ const HORROR_ID = "a3864a82-d9c1-4bf5-a891-0acc2e479090";
 const ROMANCE_ID = "73fa7e1d-0e3e-4506-9432-21c29faa8dd7";
 const ACTION_ID = "fc84777a-d713-4539-a5b9-8c24f0c85b99";
 const FANTASY_ID = "360b5842-fc83-4ea9-a7fa-0d62017b975b";
+const MAIN_ID = "0cb81bbb-0c66-4152-8ca5-680ffb717779";
 
 const Home = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [movie, setMovie] = useState([]);
   const [topTen, setTopTen] = useState([]);
@@ -85,10 +88,9 @@ const Home = () => {
     // console.log(posts);
   };
 
-  // id === "0cb81bbb-0c66-4152-8ca5-680ffb717779";
   const onGetMainDetail = async () => {
     try {
-      const response = await getMovie("0cb81bbb-0c66-4152-8ca5-680ffb717779");
+      const response = await getMovie(MAIN_ID);
       if (response.status === 200) {
         setMainInfo(response.data);
       }
@@ -96,7 +98,10 @@ const Home = () => {
       console.error(error);
     }
   };
-  console.log("mainInfo : " + mainInfo);
+
+  const onClickDetail = () => {
+    navigate(`/detail/${MAIN_ID}`);
+  };
 
   // useEffect(() => {
   //   const fantasyGenre = genreList.filter((movie) =>
@@ -131,26 +136,21 @@ const Home = () => {
         <div className={styles.bgWrapper}>
           <div className={styles.textWrapper}>
             <h1>{mainInfo?.title}</h1>
-            {/* <h1>영화의 거리</h1> */}
             <p>
               {dayjs(mainInfo?.releasedAt, "YYYYMMDD").format("YYYY.MM")}
-              {/* 2021.09 */}
               <span>
                 <BsStarFill className={styles.star} />
                 {mainInfo?.averageScore.toFixed(1)}
               </span>
             </p>
-            <p className={styles.plot}>
-              {mainInfo?.plot}
-              {/* 만나고, 사랑하고, 헤어지고, ‘일’로 다시 만났다!영화 로케이션
-              매니저와 감독으로 부산에서 재회한 선화와 도영.헤어진 연인에서 일로
-              만난 사이가 된 이들의 끝났는데 끝난 것 같지 않은 쎄한 fall in
-              럽케이션 밀당 로맨스가 시작된다! */}
-            </p>
+            <p className={styles.plot}>{mainInfo?.plot}</p>
+            <Button color={"warning"} children={"더보기"} className={styles.btnStyle} onClick={onClickDetail}/>
           </div>
         </div>
         <div className={styles.listWrapper}>
-          <h1 className={styles.mainTitle}>인기 10위 영화</h1>
+          <h1 className={styles.mainTitle}>
+            인기 10위 영화
+          </h1>
           <Carousel slidesToShow="4" slidesToScroll="4" movies={topTen} />
           <h1 className={styles.mainTitle}>연애세포를 깨우는 로맨스 영화</h1>
           <Carousel slidesToShow="5" slidesToScroll="5" movies={romanceList} />

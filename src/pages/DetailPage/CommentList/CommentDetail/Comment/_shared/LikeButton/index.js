@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { IconHeartEmpty, IconHeartFull } from "../../../../../../../assets";
+import { BsFillHeartFill, BsHeart } from "react-icons/bs";
 
 import styles from "./likeCount.module.scss";
 
@@ -33,14 +33,14 @@ const LikeButton = () => {
   return (
     <div type="button" className={styles.likeCount}>
       <button type="button" className={styles.icon}>
-        <IconHeartFull
+        <BsFillHeartFill
           type="Boolean"
           value
           className={styles.full}
           onClick={onClick}
           onChange={onchange}
         />
-        <IconHeartEmpty className={styles.empty} />
+        <BsHeart className={styles.empty} />
       </button>
       <output className={styles.like}>좋아요 {like}개</output>
     </div>

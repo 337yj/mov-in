@@ -6,6 +6,7 @@ import useMe from "../../../../../hooks/useMe";
 import { POINTS, TENSIONS } from "../constants";
 import styles from "./commentModal.module.scss";
 
+
 const CommentModal = ({ title, movie, modal, setModal, onClickModal }) => {
   const [content, setContent] = useState("");
 

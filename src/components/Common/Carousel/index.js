@@ -1,6 +1,7 @@
 import React from "react";
 import { IconCaretLeft, IconCaretRight } from "../../../assets/icon";
 import Card from "../Card";
+//import Card from "../Carousel/Card"
 
 import StyledSlider from "./carouselStyle";
 

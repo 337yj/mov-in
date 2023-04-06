@@ -1,2 +1,12 @@
 @use "../../../styles/constants" as c;
 @use "../../../styles/mixins" as m;
+
+.wrapper {
+  @include m.flex(flex-start, flex-start, column);
+  row-gap: 20px;
+
+  > h1 {
+    font-size: 36px;
+    font-weight: 700;
+  }
+}

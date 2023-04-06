@@ -16,7 +16,9 @@ const CommentList = ({ movie }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+
   // console.log(comments.comments[0].content);
+
   const onGetReviewsMovie = async () => {
     try {
       const response = await getReviewsMovie(id);

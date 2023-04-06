@@ -11,7 +11,6 @@ const Bookmark = () => {
   const [posts, setPosts] = useState([]);
   const [currentPosts, setCurrentPosts] = useState([]); // 보여줄 포스트
   const [page, setPage] = useState(1); // 현재 페이지
-  // const [postPerPage] = useState(10); // 페이지당 포스트 개수
   const indexOfLastPost = page * POST_PER_PAGE;
   const indexOfFirstPost = indexOfLastPost - POST_PER_PAGE;
   const [totalCount, setTotalCount] = useState(0);

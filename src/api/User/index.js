@@ -1,5 +1,10 @@
 import apiClient from "../apiClient";
 
+// 전체 이용자 수 구하기
+export const getUsersCount = () => {
+  return apiClient.get(`/users/count`);
+};
+
 // 나의 정보 불러오기
 export const getUsersMe = () => {
   return apiClient.get(`/users/me`);

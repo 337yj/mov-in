@@ -1,7 +1,7 @@
 import React from "react";
 
-import { IconModify, IconDelete } from "../../../../../../../assets";
-//아이콘 수정
+import { BsPencilSquare, BsTrash } from "react-icons/bs";
+
 import styles from "./body.module.scss";
 
 //TODO:알림 띄우고 수정 모달로 이동 기능 추가/알림띄우고 코멘트 삭제 기능 추가
@@ -20,10 +20,10 @@ const CommentBody = ({ className, comment, ...props }) => {
       <p className={styles.content}>{comment.content}</p>
       <div className={styles.icon}>
         <button>
-          <IconModify />
+          <BsPencilSquare className={styles.modify} />
         </button>
         <button>
-          <IconDelete />
+          <BsTrash className={styles.delete} />
         </button>
       </div>
     </article>

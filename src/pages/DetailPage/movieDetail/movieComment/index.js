@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReviewsMovie } from "../../../../api/Review";
 import Comment from "../../CommentList/CommentDetail/Comment";
-import CommentOutput from "../../CommentList/CommentDetail/Comment";
 // import CommentOutput from "../movieComment";
 import styles from "./movieComment.module.scss";
 

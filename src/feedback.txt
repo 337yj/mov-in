@@ -1,2 +1,1 @@
-- DetailPage > movieDetail > _shared > CommentModal
-myPage/bookmark/ 영화상세페이지에 코멘트모달 추가하였습니다
+- Bo page > BoMovie의 영화 제목을 10자만 표기 하고 싶습니다

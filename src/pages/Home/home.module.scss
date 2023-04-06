@@ -2,39 +2,62 @@
 @use "../../styles/mixins/" as m;
 
 .wrapper {
-  @include m.flex();
+  //@include m.flex();
   width: 100%;
   min-height: 100vh;
   overflow: auto;
 
   .mainTitle {
-    padding: 50px 0 0 18px;
+    padding: 80px 0 10px 18px;
     font-weight: 700;
     font-size: 30px;
   }
   .listWrapper {
-    padding: 0 10rem 12rem 10rem;
+    width: 84.7%;
+    padding: 0 0 100px 200px; // <--- 약간 어거지로 맞춤..ㅜ
+  }
+
+  .bgWrapper {
+    @include m.flex(left);
+    width: 100%;
+    min-height: 750px;
+    object-fit: contain;
+    background: linear-gradient(c.$C_TRANSPARENT, c.$C_INDIGO_30, c.$C_INDIGO_30, c.$C_INDIGO), 
+    url("https://t1.daumcdn.net/movie/41172a2470f7122450d5d0932550daae5dc6f7b2");
+    background-size: cover;
+    background-position: 10% 10%;
+    background-repeat: no-repeat;
   }
 }
 
-.bgWrapper {
-  width: 100%;
-  min-height: 800px;
-  background-image: url("https://t1.daumcdn.net/movie/b660a635fa94630561b78d0fe37c72a2982c49b2");
-  background-position: 20% 70%;
-  //background-size: cover;
-  object-fit: contain;
-  background-color: c.$C_INDIGO;
-  padding-bottom: 2rem;
 
-  .textWrapper {
-    @include m.flex(left);
-    padding: 390px 0 0 160px;
+.textWrapper {
+  padding: 160px 0 0 160px;
 
-    > h4 {
-      font-weight: 800;
-      font-size: 68px;
-      text-shadow: 2px 2px 4px c.$C_BLACK_40;
+  > h1 {
+    padding-bottom: 22px;
+    font-weight: 800;
+    font-size: 72px;
+    text-shadow: 2px 2px 4px c.$C_BLACK_40;
+  }
+
+  > p {
+    padding-left : 10px;
+    font-size: 24px;
+    
+    > span {
+      padding: 10px;
+      color: c.$C_YELLOW;
+      
+      > svg {
+        height: 16px;
+      }
     }
+  }
+
+  .plot {
+    @include m.multiEllipsis(16px, 18px, 3);
+    width: 500px;
+    margin : 20px 0px;
   }
 }

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import dayjs from "dayjs";
 import {
   getMovies,
   getMovie,
@@ -8,14 +10,25 @@ import {
 } from "../../api/Movie";
 import Carousel from "../../components/Common/Carousel";
 import genre from "./Genre/genre";
+import { BsStarFill } from "react-icons/bs";
 import styles from "./home.module.scss";
 
+const HORROR_ID = "a3864a82-d9c1-4bf5-a891-0acc2e479090";
+const ROMANCE_ID = "73fa7e1d-0e3e-4506-9432-21c29faa8dd7";
+const ACTION_ID = "fc84777a-d713-4539-a5b9-8c24f0c85b99";
+const FANTASY_ID = "360b5842-fc83-4ea9-a7fa-0d62017b975b";
+
 const Home = () => {
+  const { id } = useParams();
+
   const [movie, setMovie] = useState([]);
   const [topTen, setTopTen] = useState([]);
   const [genreList, setGenreList] = useState([]);
   const [romanceList, setRomanceList] = useState([]);
-  const [mainInfo, setMainInfo] = useState([]);
+  const [horrorList, setHorrorList] = useState([]);
+  const [fantasyList, setFantasyList] = useState([]);
+
+  const [mainInfo, setMainInfo] = useState();
   //const [allGenre, setAllGenre] = useState([]);
 
   const onGetMovies = async () => {
@@ -47,10 +60,18 @@ const Home = () => {
       const response = await getMoviesGenre(1, 20, genreId);
       if (response.status === 200) {
         const items = [...response.data.data];
-        if (genreId.includes("fc84777a-d713-4539-a5b9-8c24f0c85b99")) {
-          let newArr = [...genreList, ...items];
-          setGenreList(newArr);
-          // console.log(genreList);
+        if (genreId.includes(ACTION_ID)) {
+          let action = [...genreList, ...items];
+          setGenreList(action);
+        } else if (genreId.includes(HORROR_ID)) {
+          let horror = [...horrorList, ...items];
+          setHorrorList(horror);
+        } else if (genreId.includes(ROMANCE_ID)) {
+          let romance = [...romanceList, ...items];
+          setRomanceList(romance);
+        } else if (genreId.includes(FANTASY_ID)) {
+          let fantasy = [...fantasyList, ...items];
+          setFantasyList(fantasy);
         }
       }
     } catch (error) {
@@ -63,35 +84,18 @@ const Home = () => {
     // console.log(posts);
   };
 
-  const onGetRomanceGenre = async (genreId) => {
-    try {
-      const response = await getMoviesGenre(1, 20, genreId);
-      if (response.status === 200) {
-        const items = [...response.data.data];
-        if (genreId.includes("73fa7e1d-0e3e-4506-9432-21c29faa8dd7")) {
-          let romanceArr = [...romanceList, ...items];
-          setRomanceList(romanceArr);
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
-  const onMain = async (id) => {
-    try {
-      const response = await getMovie(id);
-      if (response.status === 200) {
-        const items = [...response.data.data];
-        if (id === "d52bc79e-3c3b-4c73-ab80-76a80cd331fb") {
-          let mainArr = [...mainInfo, ...items];
-          setMainInfo(mainArr);
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // id === "0cb81bbb-0c66-4152-8ca5-680ffb717779";
+  // const onGetMainDetail = async () => {
+  //   try {
+  //     const response = await getMovie(id);
+  //     if (response.status === 200) {
+  //       setMainInfo(response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // console.log("mainInfo : " + mainInfo);
 
   // useEffect(() => {
   //   const fantasyGenre = genreList.filter((movie) =>
@@ -114,31 +118,48 @@ const Home = () => {
     onGetTopTen();
 
     genre.forEach(({ id }) => onGetPerGenre(id));
-    genre.forEach(({ id }) => onGetRomanceGenre(id));
   }, []);
+
+  // useEffect(() => {
+  //   onGetMainDetail();
+  // }, [id]);
 
   return (
     <main className={styles.wrapper}>
       <section>
         <div className={styles.bgWrapper}>
           <div className={styles.textWrapper}>
-            <h4>나를 구하지 마세요</h4>
-
+            {/* <h1>{mainInfo.title}</h1> */}
+            <h1>영화의 거리</h1>
+            <p>
+              {/* {dayjs(mainInfo.releasedAt, "YYYYMMDD").format("YYYY.MM")} */}
+              2021.09
+              <span>
+                <BsStarFill className={styles.star} />
+                4.0
+              </span>
+            </p>
+            <p className={styles.plot}>
+              만나고, 사랑하고, 헤어지고, ‘일’로 다시 만났다!영화 로케이션
+              매니저와 감독으로 부산에서 재회한 선화와 도영.헤어진 연인에서 일로
+              만난 사이가 된 이들의 끝났는데 끝난 것 같지 않은 쎄한 fall in
+              럽케이션 밀당 로맨스가 시작된다!
+            </p>
           </div>
         </div>
         <div className={styles.listWrapper}>
           <h1 className={styles.mainTitle}>인기 10위 영화</h1>
-          <Carousel  slidesToShow="4" slidesToScroll="4" movies={topTen} />
-          <h1 className={styles.mainTitle}>연애 세포를 깨우는 로맨스</h1>
+          <Carousel slidesToShow="4" slidesToScroll="4" movies={topTen} />
+          <h1 className={styles.mainTitle}>연애세포를 깨우는 로맨스 영화</h1>
           <Carousel slidesToShow="5" slidesToScroll="5" movies={romanceList} />
           <h1 className={styles.mainTitle}>긴장감 넘치는 액션 영화</h1>
           <Carousel slidesToShow="5" slidesToScroll="5" movies={genreList} />
+          <h1 className={styles.mainTitle}>오싹한 공포 영화</h1>
+          <Carousel slidesToShow="5" slidesToScroll="5" movies={horrorList} />
+          {/* <h1 className={styles.mainTitle}>판타지</h1>
+          <Carousel slidesToShow="5" slidesToScroll="5" movies={fantasyList} /> */}
         </div>
         {/* <h1 className={styles.header}>최신순</h1>
-        <Carousel slidesToShow="5" slidesToScroll="5" movies={} />
-        <h1 className={styles.header}>로맨스</h1>
-        <Carousel slidesToShow="5" slidesToScroll="5" movies={} />
-        <h1 className={styles.header}>공포</h1>
         <Carousel slidesToShow="5" slidesToScroll="5" movies={} />
         <ul>
           {select.map((movie) => (

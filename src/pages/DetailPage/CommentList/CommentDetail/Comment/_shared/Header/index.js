@@ -13,6 +13,7 @@ const CommentHeader = ({
   username,
   grade,
   className,
+  comment,
   ...props
 }) => {
   // NOTE: Number().toFixed(1); => 소수점 1자리까지 표기
@@ -21,9 +22,9 @@ const CommentHeader = ({
     <article className={styles.wrapper}>
       <figure className={styles.profile}>
         <img src={profileImage} alt="" className={styles.profileImage} />
-        <figcaption className={styles.username}>{username}</figcaption>
+        <figcaption className={styles.username}>{comment.user.name}</figcaption>
       </figure>
-      <output className={className}>평점★{grade?.toFixed(1)}</output>
+      {/* <output className={className}>평점★{grade?.toFixed(1)}</output> */}
     </article>
   );
 };

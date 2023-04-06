@@ -11,15 +11,17 @@ import styles from "./commentList.module.scss";
 // };
 
 const CommentList = ({ movie }) => {
-  const [comment, setComment] = useState();
+  const [comments, setComments] = useState();
   const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  console.log(comment);
+  // console.log(comments.comments[0].content);
   const onGetReviewsMovie = async () => {
     try {
       const response = await getReviewsMovie(id);
       if (response.status === 200) {
-        setComment(response.data);
+        setComments(response.data);
       }
     } catch (error) {}
   };
@@ -28,21 +30,18 @@ const CommentList = ({ movie }) => {
     onGetReviewsMovie();
   }, [id]);
 
-  if (!comment) {
+  if (!comments) {
     return null;
   }
-
-  const navigate = useNavigate();
-  const location = useLocation();
 
   return (
     <article className={styles.wrapper}>
       <h2>코멘트</h2>
       <p className={styles.commentOutput}>
         <ul>
-          {review.map((movie) => (
-            <li key={movie.id}>
-              <Comment movie={movie} />
+          {comments.map((comment) => (
+            <li key={comment.id}>
+              <Comment comment={comment} />
             </li>
           ))}
         </ul>

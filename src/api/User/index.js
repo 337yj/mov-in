@@ -25,7 +25,7 @@ export const getUsers = (
   page = 1,
   limit = 20,
   name = null,
-  nickname = null
+  nickname = null,
 ) => {
   let url = `/users?page=${page}&limit=${limit}`;
   if (name) {
@@ -50,4 +50,8 @@ export const updateUser = (id, body) => {
 // 유저 삭제하기
 export const deleteUser = (id) => {
   return apiClient.delete(`/users/${id}`);
+};
+
+export const countUsers = () => {
+  return apiClient.get(`users/count`);
 };

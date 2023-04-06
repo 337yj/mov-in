@@ -14,10 +14,10 @@ import styles from "./body.module.scss";
 //   return apiClient.delete(`/reviews/${id}`);
 // };
 
-const CommentBody = ({ content, className, ...props }) => {
+const CommentBody = ({ className, comment, ...props }) => {
   return (
     <article className={className}>
-      <p className={styles.content}>{content}</p>
+      <p className={styles.content}>{comment.content}</p>
       <div className={styles.icon}>
         <button>
           <IconModify />

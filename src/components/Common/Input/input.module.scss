@@ -18,7 +18,23 @@
     font-size: 18px;
     color: c.$C_WHITE;
 
-    &::placeholder {
+    .errorText {
+      font-size: 12px;
+      color: c.$C_PINK;
+    }
+
+    &.error {
+      .input {
+        border: 1px solid c.$C_PINK;
+        // background-color: c.$C_WHITE;
+      }
+    }
+
+    // &::placeholder {
+    //   font-size: 18px;
+    //   color: c.$C_WHITE_40;
+    // }
+    &:not(.error)::placeholder {
       font-size: 18px;
       color: c.$C_WHITE_40;
     }

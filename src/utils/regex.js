@@ -1,5 +1,20 @@
-// utils 파일 : 정규표현식 패턴이나 공통 함수 등 공통으로 사용하는 유틸 파일을 구분해둠
-// regEx = regular expression
-export const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-// 대문자, 소문자, 숫자, 8~20자리 수
-export const passwordRegEx = /^[A-Za-z0-9]{8,20}$/;
+export const isValidateEmail = (email) => {
+  const emailReg =
+    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+  if (!emailReg.test(email)) {
+    return false;
+  }
+  return true;
+};
+
+//영문,숫자,특수문자(!@$%^&* 만 허용)를 조합하여 8~12자로 구성
+export const isValidatePassword = (password) => {
+  const passwordReg =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}$/;
+
+  if (!passwordReg.test(password)) {
+    return false;
+  }
+  return true;
+};

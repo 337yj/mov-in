@@ -15,6 +15,8 @@ import styles from "./body.module.scss";
 // };
 
 const CommentBody = ({ className, comment, ...props }) => {
+  // console.log(comment.content);
+  // console.log(comment);
   return (
     <article className={className}>
       <p className={styles.content}>{comment.content}</p>

@@ -5,7 +5,7 @@ import { saveTokens } from "../../../utils";
 import { validateForm } from "./utils";
 import { Input, Button } from "../../../components";
 import { ImageLogo } from "../../../assets";
-import Poster from "../Login/poster";
+import Poster from "../_shared/poster";
 import styles from "./register.module.scss";
 
 const Register = () => {

@@ -6,7 +6,6 @@ import useMe from "../../../../../hooks/useMe";
 import { POINTS, TENSIONS } from "../constants";
 import styles from "./commentModal.module.scss";
 
-
 const CommentModal = ({ title, movie, modal, setModal, onClickModal }) => {
   const [content, setContent] = useState("");
 
@@ -91,17 +90,6 @@ export default CommentModal;
 //   };
 //   const onSelectTension = (id) => {
 //     setSelectedTension(id);
-//   };
-
-//   const onSubmit = async (e) => {
-//     e.preventDefault();
-//     const commentData = {
-//       content: comment,
-//     };
-//     const response = await createReviews(review.id, commentData);
-//     checkResponse(response.status, '댓글 생성', 201);
-//     onGetReviewDetail(review.id);
-//     setComment("");
 //   };
 
 //   return (

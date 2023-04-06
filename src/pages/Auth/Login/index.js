@@ -4,7 +4,7 @@ import { login } from "../../../api/Auth";
 import { isValidateEmail } from "../../../utils";
 import { Input, Button } from "../../../components";
 import { ImageLogo } from "../../../assets";
-import Poster from "./poster";
+import Poster from "../_shared/poster";
 import styles from "./login.module.scss";
 
 // yun@aa.aa

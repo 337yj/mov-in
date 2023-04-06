@@ -6,7 +6,13 @@ import dayjs from "dayjs";
 import cx from "classnames";
 import styles from "./card.module.scss";
 
-const Card = ({ movie, type = "default", className }) => {
+const Card = ({
+  movie,
+  type = "default",
+  className,
+  hoverCardClassName,
+  wrapperClassName,
+}) => {
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -14,7 +20,10 @@ const Card = ({ movie, type = "default", className }) => {
   };
 
   return (
-    <section className={cx(styles.wrapper, styles[type])} onClick={onClick}>
+    <section
+      className={cx(styles.wrapper, styles[type], wrapperClassName)}
+      onClick={onClick}
+    >
       <img
         src={movie.postImage}
         alt="thumbnail"
@@ -34,7 +43,7 @@ const Card = ({ movie, type = "default", className }) => {
         </div>
       )}
       {type === "carousel" && (
-        <article className={styles.info}>
+        <article className={cx(styles.info, hoverCardClassName)}>
           <div className={styles.padding}>
             {/* article에서 바로 padding 넣으니까 정보가 완전히 안 가려져서 따로 만듦 */}
             <div className={styles.title}>
@@ -47,7 +56,7 @@ const Card = ({ movie, type = "default", className }) => {
               </div>
             </div>
             <div className={styles.tags}>
-              <Tag 
+              <Tag
                 text={movie.genres.map((genre) => genre.name).join(", ")}
               ></Tag>
             </div>

@@ -27,6 +27,7 @@ const Home = () => {
   const [romanceList, setRomanceList] = useState([]);
   const [horrorList, setHorrorList] = useState([]);
   const [fantasyList, setFantasyList] = useState([]);
+  //NOTE: setInterval을 사용해서 mainInfo를 시간이 지남에 따라 교체
 
   const [mainInfo, setMainInfo] = useState();
   //const [allGenre, setAllGenre] = useState([]);
@@ -85,17 +86,17 @@ const Home = () => {
   };
 
   // id === "0cb81bbb-0c66-4152-8ca5-680ffb717779";
-  // const onGetMainDetail = async () => {
-  //   try {
-  //     const response = await getMovie(id);
-  //     if (response.status === 200) {
-  //       setMainInfo(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  // console.log("mainInfo : " + mainInfo);
+  const onGetMainDetail = async () => {
+    try {
+      const response = await getMovie("0cb81bbb-0c66-4152-8ca5-680ffb717779");
+      if (response.status === 200) {
+        setMainInfo(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.log("mainInfo : " + mainInfo);
 
   // useEffect(() => {
   //   const fantasyGenre = genreList.filter((movie) =>
@@ -120,30 +121,31 @@ const Home = () => {
     genre.forEach(({ id }) => onGetPerGenre(id));
   }, []);
 
-  // useEffect(() => {
-  //   onGetMainDetail();
-  // }, [id]);
+  useEffect(() => {
+    onGetMainDetail();
+  }, [id]);
 
   return (
     <main className={styles.wrapper}>
       <section>
         <div className={styles.bgWrapper}>
           <div className={styles.textWrapper}>
-            {/* <h1>{mainInfo.title}</h1> */}
-            <h1>영화의 거리</h1>
+            <h1>{mainInfo?.title}</h1>
+            {/* <h1>영화의 거리</h1> */}
             <p>
-              {/* {dayjs(mainInfo.releasedAt, "YYYYMMDD").format("YYYY.MM")} */}
-              2021.09
+              {dayjs(mainInfo?.releasedAt, "YYYYMMDD").format("YYYY.MM")}
+              {/* 2021.09 */}
               <span>
                 <BsStarFill className={styles.star} />
-                4.0
+                {mainInfo?.averageScore.toFixed(1)}
               </span>
             </p>
             <p className={styles.plot}>
-              만나고, 사랑하고, 헤어지고, ‘일’로 다시 만났다!영화 로케이션
+              {mainInfo?.plot}
+              {/* 만나고, 사랑하고, 헤어지고, ‘일’로 다시 만났다!영화 로케이션
               매니저와 감독으로 부산에서 재회한 선화와 도영.헤어진 연인에서 일로
               만난 사이가 된 이들의 끝났는데 끝난 것 같지 않은 쎄한 fall in
-              럽케이션 밀당 로맨스가 시작된다!
+              럽케이션 밀당 로맨스가 시작된다! */}
             </p>
           </div>
         </div>

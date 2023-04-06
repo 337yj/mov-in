@@ -29,6 +29,8 @@ const BOMovie = ({ movie }) => {
   const [modal, setModal] = useState(false);
 
   const data = movies.map((movie) => ({
+    //NOTE: substring을 통한 문자열 자르기
+    // 제목: movie.title.substring(0, 10),
     제목: movie.title,
     감독: movie.staffs.find((staff) => staff.role === "감독")?.name,
     장르: movie.genres.map((genre) => genre?.name).join(", "),

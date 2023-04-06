@@ -6,6 +6,7 @@ import { Table, Button, Paging } from "../../../components/Common";
 import { BoUserModal } from "../_shared";
 
 import styles from "./boUser.module.scss";
+import dayjs from "dayjs";
 
 const columns = [
   { Header: "닉네임", accessor: "닉네임" },
@@ -29,9 +30,9 @@ const BOUser = ({ user }) => {
   const [modal, setModal] = useState(false);
 
   const data = users.map((user) => ({
-    닉네임: user.nickname,
-    코멘트: user.reviewCount,
-    좋아요: user.likeCount,
+    닉네임: user.nickname ?? "-",
+    코멘트: user.reviewCount ?? "-",
+    좋아요: user.likeCount ?? "-",
     가입일자: dayjs(user.createdAt, "YYYYMMDD").format("YYYY.MM.DD"),
   }));
 
@@ -48,6 +49,7 @@ const BOUser = ({ user }) => {
       const response = await getUsers(page, POST_PER_PAGE);
       if (response.status === 200) {
         const newUsers = [...response.data.data];
+        //NOTE: 페이지가 바뀌면 기존 데이터를 지우고 새로운 데이터를 추가
         setUsers([...users, ...newUsers]);
         setCurrentPage([...users, ...newUsers]);
       }

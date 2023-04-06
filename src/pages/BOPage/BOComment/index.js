@@ -9,6 +9,7 @@ import {
 import { Table, Button, Paging } from "../../../components";
 
 import styles from "./boComment.module.scss";
+import dayjs from "dayjs";
 
 const columns = [
   { Header: "닉네임", accessor: "닉네임" },

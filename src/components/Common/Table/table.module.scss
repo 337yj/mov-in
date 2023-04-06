@@ -34,6 +34,7 @@ table {
 
   .headTrStyle {
     background-color: c.$C_WHITE_40;
+    column-gap: 10px;
     font: {
       weight: 700;
       size: 20px;
@@ -42,6 +43,7 @@ table {
 
   .bodyTrStyle {
     background-color: c.$C_WHITE_10;
+    //NOTE: column-gap을 통해서 너비 조절
     column-gap: 10px;
     font: {
       weight: 400;
@@ -49,7 +51,10 @@ table {
     }
 
     > td {
+      //NOTE:  ellipsis 사용을 위해서는 block 요소여야 합니다.
+      display: inline-block;
       max-width: 140px;
+      text-align: center;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;

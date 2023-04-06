@@ -7,9 +7,9 @@ import styles from "./movieComment.module.scss";
 
 const MovieComment = ({ movie, onChangeTab }) => {
   const { id } = useParams();
-  const [review, setReview] = useState();
+  const [comments, setComments] = useState([]);
 
-  console.log(review);
+  console.log(comments);
 
   const onClickMovie = (type) => {
     if (type === "commentDetail") {
@@ -23,7 +23,7 @@ const MovieComment = ({ movie, onChangeTab }) => {
     try {
       const response = await getReviewsMovie(id);
       if (response.status === 200) {
-        setReview(response.data);
+        setComments(response.data);
       }
     } catch (error) {
       console.error(error);
@@ -41,7 +41,16 @@ const MovieComment = ({ movie, onChangeTab }) => {
   return (
     <section className={styles.wrapper}>
       <h2>코멘트</h2>
-      <Comment onClick={() => onClickMovie("commentDetail")} />
+      <ul>
+        {comments.map((comment) => (
+          <li key={comment.id}>
+            <Comment
+              comment={comment}
+              onClick={() => onClickMovie("commentDetail")}
+            />
+          </li>
+        ))}
+      </ul>
       <div className={styles.btnWrapper}>
         <button
           className={styles.moreBtn}

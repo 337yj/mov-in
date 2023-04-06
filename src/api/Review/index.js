@@ -10,7 +10,7 @@ export const getReviews = (
   page = 1,
   limit = 20,
   name = null,
-  nickname = null
+  nickname = null,
 ) => {
   let url = `/reviews?page=${page}&limit=${limit}`;
   if (name) {
@@ -33,7 +33,7 @@ export const getReviewsDetail = (id) => {
 };
 
 // 영화 리뷰 생성
-export const createReviews = (movieId, body) => {
+export const createReview = (movieId, body) => {
   return apiClient.post(`/reviews/${movieId}`, body);
 };
 

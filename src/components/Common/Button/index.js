@@ -3,9 +3,7 @@ import cx from "classnames";
 import styles from "./button.module.scss";
 import { IconHeartEmpty } from "../../../assets";
 
-
 const Button = ({ className, color, children, ...props }) => {
-
   return (
     <button
       className={cx(styles.button, className, styles[color])}

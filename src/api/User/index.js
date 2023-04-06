@@ -56,3 +56,7 @@ export const updateUser = (id, body) => {
 export const deleteUser = (id) => {
   return apiClient.delete(`/users/${id}`);
 };
+
+export const countUsers = () => {
+  return apiClient.get(`users/count`);
+};

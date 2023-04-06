@@ -15,13 +15,13 @@ import { useParams } from "react-router-dom";
 // };
 
 const Comment = ({
-  movie,
+  comment,
   profileImage,
   username,
   grade,
-  content,
   date,
   className,
+
   ...props
 }) => {
   return (
@@ -29,18 +29,29 @@ const Comment = ({
       <CommentHeader
         className={styles.grade}
         profileImage={ImageProfile1}
-        username={"닉네임"}
-        grade={4.0}
+        comment={comment}
       />
-      {/* <hr className={styles.horizontalLine} /> */}
-      <CommentBody className={styles.content} content={"코멘트 내용"} />
-      {/* <hr className={styles.horizontalLine} /> */}
-      <CommentFooter
-        className={styles.comment}
-        date={dayjs().format("YYYY.MM.DD")}
-      />
+      <CommentBody className={styles.content} comment={comment} />
     </section>
   );
 };
 
 export default Comment;
+{
+  /* <section className={styles.wrapper} onClick={props.onClick}>
+      <CommentHeader
+        className={styles.grade}
+        profileImage={ImageProfile1}
+        username={"닉네임"}
+        grade={4.0}
+      />
+
+      <CommentBody className={styles.content} comment={comment} />
+
+      <CommentFooter
+        className={styles.comment}
+        date={dayjs().format("YYYY.MM.DD")}
+        comment={comment}
+      />
+    </section> */
+}

@@ -16,14 +16,14 @@ import styles from "./commentDetail.module.scss";
 // };
 
 const CommentDetail = ({ profileImage, username, ...props }) => {
-  const [commentDetail, setCommentDetail] = useState();
+  const [comment, setComment] = useState();
   const { id } = useParams();
 
   const onGetReviewsDetail = async () => {
     try {
       const response = await getReviewsDetail(id);
       if (response.status === 200) {
-        setCommentDetail(response.data);
+        setComment(response.data);
       }
     } catch (error) {}
   };

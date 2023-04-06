@@ -20,7 +20,7 @@ const CommentHeader = ({
 
   return (
     <article className={styles.wrapper}>
-      <figure className={styles.profile}>
+      {/* <figure className={styles.profile}>
 
         <img src={profileImage} alt="" className={styles.profileImage} />
         <figcaption className={styles.username}>{comment.user.name}</figcaption>
@@ -31,7 +31,7 @@ const CommentHeader = ({
         />
         <figcaption className={styles.nickname}>{user.nickname}</figcaption>
       </figure>
-      {/* <output className={className}>평점★{grade?.toFixed(1)}</output> */}
+      <output className={className}>평점★{grade?.toFixed(1)}</output> */}
     </article>
   );
 };

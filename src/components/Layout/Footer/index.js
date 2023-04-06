@@ -19,7 +19,7 @@ const Footer = ({ className, textStyle }) => {
             href="https://github.com/337yj/mov-in"
             className={cx(styles.projectName, styles.nameLink)}
           >
-            MOV"IN
+            MOV'IN
           </a>
         </p>
         <span>by </span>

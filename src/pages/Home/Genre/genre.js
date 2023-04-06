@@ -8,6 +8,7 @@ export const genre = [
   { id: "73fa7e1d-0e3e-4506-9432-21c29faa8dd7", genre: "멜로/로맨스" },
   { id: "079e9098-ff7c-49c7-8d71-fe3fd066aafb", genre: "스릴러" },
   { id: "6853de88-2380-4d2c-90b1-05fec52bef9b", genre: "미스터리" },
+  { id: "a3864a82-d9c1-4bf5-a891-0acc2e479090", genre: "공포" },
 ];
 
 export default genre;

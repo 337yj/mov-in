@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Tag from "../Tag";
+import noPoster from "../../../assets/images/poster/noPoster.png";
 import { BsStarFill } from "react-icons/bs";
 import dayjs from "dayjs";
 import cx from "classnames";
@@ -24,11 +25,15 @@ const Card = ({
       className={cx(styles.wrapper, styles[type], wrapperClassName)}
       onClick={onClick}
     >
-      <img
-        src={movie.postImage}
-        alt="thumbnail"
-        className={cx(styles.img, className)}
-      />
+      {movie.postImage ? (
+        <img
+          src={movie.postImage}
+          alt="thumbnail"
+          className={cx(styles.img, className)}
+        />
+      ) : (
+        <img src={noPoster} className={cx(styles.img, styles.shadow)}/>
+      )}
       {type === "default" && (
         <div className={styles.infoWrapper}>
           <h2 className={styles.title}>{movie.title}</h2>

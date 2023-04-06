@@ -8,20 +8,20 @@ import styled from "styled-components";
 
 const StyledSlider = styled(Slider)`
   .slick-prev {
-    left: 0px;
+    //left: 0px;
     z-index: 10;
     scale: 200%;
     margin-right: 20px;
   }
 
   .slick-next {
-    right: 0;
+    //right: 0;
     scale: 200%;
   }
 
   .slick-list {
-    width: 1400px; // 구체적으로 안 넣으니까 제대로 안 뜸
-    margin: 10px 14px;
+    width: 100%; // 구체적으로 안 넣으니까 제대로 안 뜸
+    // margin: 10px 14px;
   }
 `;
 

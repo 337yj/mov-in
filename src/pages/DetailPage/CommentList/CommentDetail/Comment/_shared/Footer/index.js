@@ -13,30 +13,39 @@ import styles from "./footer.module.scss";
 //   return apiClient.get(`/reviews/count`);
 // };
 
-const CommentFooter = ({ getTotalComment, date, className, ...props }) => {
+const CommentFooter = ({
+  comment,
+  getTotalComment,
+  date,
+  className,
+  ...props
+}) => {
   const navigate = useNavigate();
 
   const onNavigateCommentDetail = () => {
     navigate("/commentDetail");
   };
-
+  // console.log(comment);
+  // 윤 - output 요소는 결과를 출력하기 위해 사용되는 요소로,
+  // 특히 <form> 요소 내의 input, select, textarea 요소 등과 함께 사용한다고 하네
+  // 영화 리뷰 카드의 하단 부분에서는 단순히 정보를 표시하고 있으므로 div, p태그로 구분하는게 적절할거같아
   return (
-    <footer className={styles.wrapper}>
-      <output className={styles.count}>
+    <div className={styles.wrapper}>
+      <div className={styles.btnWrapper}>
         <LikeButton />
         <button
           type="button"
-          className={className}
+          className={styles.commentBtn}
           onClick={onNavigateCommentDetail}
         >
-          <TfiCommentAlt />
-          <output>답글 {getTotalComment}개</output>
+          <TfiCommentAlt className={styles.iconReply} />
+          <span>댓글 {comment.comments?.length}개</span>
         </button>
-      </output>
-      <output className={styles.date} date={dayjs().format("YYYY.MM.DD")}>
-        {date}
-      </output>
-    </footer>
+      </div>
+      <p className={styles.date}>
+        {dayjs(comment?.updatedAt).format("YYYY.MM.DD")}
+      </p>
+    </div>
   );
 };
 

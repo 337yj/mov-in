@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import { getReviewsMovie } from "../../../api/Review";
 import { Comment } from "../../index";
-
 import styles from "./commentList.module.scss";
-//TODO: 영화 리뷰 목록 조회
-// export const getReviewsMovie = (movieId) => {
-//   return apiClient.get(`/reviews/movie/${movieId}`);
-// };
 
-const CommentList = ({ movie }) => {
-  const [comments, setComments] = useState();
+const CommentList = ({ movie, onChangeTab, onChangeSelectedCommentId }) => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-
-  // console.log(comments.comments[0].content);
+  const [comments, setComments] = useState();
 
   const onGetReviewsMovie = async () => {
     try {
@@ -25,7 +14,9 @@ const CommentList = ({ movie }) => {
       if (response.status === 200) {
         setComments(response.data);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -36,18 +27,24 @@ const CommentList = ({ movie }) => {
     return null;
   }
 
+  const onClickMovie = (tap, id) => {
+    onChangeTab(tap);
+    onChangeSelectedCommentId(id);
+  };
+
   return (
     <article className={styles.wrapper}>
       <h2>코멘트</h2>
-      <p className={styles.commentOutput}>
-        <ul>
-          {comments.map((comment) => (
-            <li key={comment.id}>
-              <Comment comment={comment} />
-            </li>
-          ))}
-        </ul>
-      </p>
+      <ul className={styles.commentList}>
+        {comments.map((comment) => (
+          <li key={comment.id} className={styles.comment}>
+            <Comment
+              comment={comment}
+              onClick={() => onClickMovie("commentDetail", comment.id)}
+            />
+          </li>
+        ))}
+      </ul>
     </article>
   );
 };

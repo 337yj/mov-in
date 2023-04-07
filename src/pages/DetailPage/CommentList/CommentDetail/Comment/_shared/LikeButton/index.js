@@ -32,7 +32,7 @@ const LikeButton = () => {
 
   return (
     <div type="button" className={styles.likeCount}>
-      <button type="button" className={styles.icon}>
+      <button type="button" className={styles.likeBtn}>
         <BsFillHeartFill
           type="Boolean"
           value
@@ -42,7 +42,7 @@ const LikeButton = () => {
         />
         <BsHeart className={styles.empty} />
       </button>
-      <output className={styles.like}>좋아요 {like}개</output>
+      <output className={styles.like}>{like}개</output>
     </div>
   );
 };

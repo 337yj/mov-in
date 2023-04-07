@@ -17,6 +17,7 @@ const Detail = () => {
   const [movie, setMovie] = useState();
   const [tab, setTab] = useState("movieDetail");
   const [toastFloat, setToastFloat] = useState(false);
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
 
   const runtimeInMinutes = movie?.runtime || 0;
   const hours = Math.floor(runtimeInMinutes / 60);
@@ -48,7 +49,14 @@ const Detail = () => {
   };
 
   const onChangeTab = (tab) => {
+    if (tab !== "commentDetail") {
+      setSelectedCommentId(null);
+    }
     setTab(tab);
+  };
+
+  const onChangeSelectedCommentId = (id) => {
+    setSelectedCommentId(id);
   };
 
   const detailInfo = {
@@ -59,12 +67,24 @@ const Detail = () => {
     movieDetail: (
       <>
         <MovieInfo movie={movie} />
-        <MovieComment movie={movie} onChangeTab={onChangeTab} />
+        <MovieComment
+          movie={movie}
+          onChangeTab={onChangeTab}
+          onChangeSelectedCommentId={onChangeSelectedCommentId}
+        />
         <RelatedMovie movie={movie} />
       </>
     ),
-    commentDetail: <CommentDetail movie={movie} />,
-    commentList: <CommentList movie={movie} />,
+    commentDetail: (
+      <CommentDetail movie={movie} selectedCommentId={selectedCommentId} />
+    ),
+    commentList: (
+      <CommentList
+        movie={movie}
+        onChangeTab={onChangeTab}
+        onChangeSelectedCommentId={onChangeSelectedCommentId}
+      />
+    ),
   };
 
   useEffect(() => {

@@ -4,13 +4,24 @@
 .wrapper {
   @include m.flex(space-between, center, row);
 
-  .count {
-    @include m.flex(null, center, row);
+  .btnWrapper {
+    @include m.flex();
     column-gap: 10px;
+
+    .commentBtn {
+      @include m.flex();
+
+      .iconReply {
+        width: 22px;
+        height: 22px;
+        margin-right: 6px;
+      }
+    }
   }
 
   .date {
     @include m.flex(flex-end);
+
     color: c.$C_DARKGRAY;
     font-size: 14px;
     font-weight: 400;

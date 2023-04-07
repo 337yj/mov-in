@@ -9,7 +9,7 @@ const useMe = () => {
     const me = await getUsersMe();
     if (me.data) {
       setMe(me.data);
-      console.log(me);
+      // console.log(me);
     }
   };
 

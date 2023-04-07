@@ -2,50 +2,54 @@
 @use "../../../../styles/mixins/" as m;
 
 .wrapper {
-  margin: 100px;
-  padding: 40px;
-  width: 950px;
-  height: 1734px;
-  background-color: c.$C_WHITE_40;
-  border-radius: 4px;
-  justify-content: flex-start;
-  align-items: center;
+  @include m.flex(center, flex-start, column);
+  width: 100%;
 
-  .commentDetail {
-    margin: 400px;
-    width: 868px;
-    height: 1540px;
-    background-color: c.$C_INDIGO;
-    border-radius: 4px;
-    justify-content: flex-start;
-    align-items: center;
-  }
+  .innerWrapper {
+    > h2 {
+      font-size: 24;
+      font-weight: 700;
+      margin-bottom: 34px;
+    }
 
-  .content {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
+    .selectedComment {
+    }
   }
+  // .commentDetail {
+  //   margin: 400px;
+  //   width: 868px;
+  //   height: 1540px;
+  //   background-color: c.$C_INDIGO;
+  //   border-radius: 4px;
+  //   justify-content: flex-start;
+  //   align-items: center;
+  // }
 
-  .commentOutput {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+  // .content {
+  //   display: flex;
+  //   flex-direction: column;
+  //   row-gap: 10px;
+  // }
 
-  .comment {
-    @include m.flex(null, center, row);
-    column-gap: 4px;
-    border: 0px;
-    background-color: transparent;
-    color: c.$C_WHITE;
-    font-size: 14px;
-    font-weight: 400;
-  }
+  // .commentOutput {
+  //   display: flex;
+  //   flex-direction: row;
+  //   flex-wrap: wrap;
+  //   gap: 10px;
+  // }
 
-  .horizontalLine {
-    width: 100%;
-    border: 1px solid c.$C_DARKGRAY;
-  }
+  // .comment {
+  //   @include m.flex(null, center, row);
+  //   column-gap: 4px;
+  //   border: 0px;
+  //   background-color: transparent;
+  //   color: c.$C_WHITE;
+  //   font-size: 14px;
+  //   font-weight: 400;
+  // }
+
+  // .horizontalLine {
+  //   width: 100%;
+  //   border: 1px solid c.$C_DARKGRAY;
+  // }
 }

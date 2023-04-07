@@ -1,9 +1,5 @@
-- Bo page > BoMovie의 영화 제목을 중앙정렬로 10자까지만 표기 하고 싶습니다
-
-- Home 에서 캐러셀안의 요소가 5개일 때 사이즈, 간격 조절을 어떻게 해야할지 잘 모르겠습니다 / 새로 만들어서 하는게 나을까요?
-
-- Home 에서 배경으로 설정한 영화의 디테일 정보를 불러오는데에 어려움이 있습니다  (현재 영화의거리로 설정 되어있습니다) 
-
-- DetailPage 에서만 Footer가 중간에 위치해있습니다
-
-- 유저 로그인, 회원가입페이지 추가하였습니다
+- 영화디테일페이지에서 코멘트카드를 클릭할 때 발생하는 에러
+DetailPage > CommentDetail > index.js
+CommentDetail컴포넌트에서는 detailComment데이터에 접근이 잘되는데, 
+영화디테일페이지 > 코멘트카드 클릭 or 더보기 > 코멘트카드를 클릭하면 
+Cannot read properties of undefined (reading 'content')에러가 발생합니다.

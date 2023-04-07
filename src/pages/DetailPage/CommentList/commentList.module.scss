@@ -2,24 +2,20 @@
 @use "../../../styles/mixins/" as m;
 
 .wrapper {
-  margin: 240px;
-  padding: 40px;
-  width: 950px;
-  height: 1734px;
-  background-color: c.$C_WHITE_40;
-  border-radius: 4px;
-  justify-content: flex-start;
-  align-items: center;
-}
-.content {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-}
+  @include m.flex(center, flex-start, column);
+  width: 100%;
 
-.commentOutput {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
+  > h2 {
+    font-size: 24;
+    font-weight: 700;
+    margin-bottom: 34px;
+  }
+
+  .commentList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 20px;
+  }
 }

@@ -10,7 +10,10 @@
   font-size: 14px;
   font-weight: 400;
 
-  .icon {
+  // relative, absolute 사용이유?
+
+  .likeBtn {
+    @include m.flex();
     position: relative;
     border: 0px;
     background-color: transparent;
@@ -19,11 +22,14 @@
       visibility: hidden;
     }
     .empty {
+      width: 22px;
+      height: 22px;
       transition: transform;
       cursor: pointer;
       position: absolute;
       top: 0;
       left: 0;
+      color: c.$C_WHITE;
     }
   }
 }

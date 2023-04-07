@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReviewsMovie } from "../../../../api/Review";
 import Comment from "../../CommentList/CommentDetail/Comment";
-// import CommentOutput from "../movieComment";
 import styles from "./movieComment.module.scss";
 
-const MovieComment = ({ movie, onChangeTab }) => {
+const MovieComment = ({ movie, onChangeTab, onChangeSelectedCommentId }) => {
   const { id } = useParams();
   const [comments, setComments] = useState([]);
 
-  console.log(comments);
-
-  const onClickMovie = (type) => {
+  const onClickMovie = (type, commentId) => {
     if (type === "commentDetail") {
       onChangeTab("commentDetail");
+      onChangeSelectedCommentId(commentId);
     } else if (type === "commentList") {
       onChangeTab("commentList");
     }
@@ -41,13 +39,14 @@ const MovieComment = ({ movie, onChangeTab }) => {
   return (
     <section className={styles.wrapper}>
       <h2>코멘트</h2>
-      <ul>
-        {comments.map((comment) => (
+      <ul className={styles.commentWrapper}>
+        {comments.slice(0, 2).map((comment) => (
           <li key={comment.id}>
             <Comment
               comment={comment}
-              onClick={() => onClickMovie("commentDetail")}
+              onClick={() => onClickMovie("commentDetail", comment.id)}
             />
+            {/* {console.log(comment.id)} */}
           </li>
         ))}
       </ul>

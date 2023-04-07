@@ -1,29 +1,38 @@
 @use "../../../../../../../styles/constants/colors" as c;
 @use "../../../../../../../styles/mixins/" as m;
 
-.content {
-  height: 100%;
-  color: c.$C_WHITE;
-  font-size: 16px;
-  font-weight: 400px;
-}
+.wrapper {
+  width: 100%;
+  padding: 12px 0;
+  border-top: 1px solid c.$C_DARKGRAY_80;
+  border-bottom: 1px solid c.$C_DARKGRAY_80;
 
-.icon {
-  @include m.flex(flex-end, center, row);
-  column-gap: 5px;
-
-  .modify {
-    color: c.$C_DARKGRAY;
-    size: 0.7x;
+  .content {
+    min-height: 170px;
+    color: c.$C_WHITE;
+    font-size: 16px;
+    font-weight: 400px;
   }
 
-  .delete {
-    size: 18px;
-    color: c.$C_DARKGRAY;
-  }
-}
+  .btnWrapper {
+    @include m.flex(flex-end, center, row);
+    column-gap: 16px;
 
-button {
-  border: 0;
-  background-color: transparent;
+    .modifyBtn,
+    .deleteBtn {
+      border: 0;
+      background-color: transparent;
+
+      .iconModify,
+      .iconDelete {
+        width: 23px;
+        height: 23px;
+        color: c.$C_DARKGRAY_80;
+
+        &:hover {
+          color: c.$C_LIGHTGRAY;
+        }
+      }
+    }
+  }
 }

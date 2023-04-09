@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { register } from "../../../api/Auth";
+import { adminRegister } from "../../../api/Auth";
 import { saveTokens } from "../../../utils";
 import { validateForm } from "./utils";
-import { Input, Button } from "../../../components";
-import { ImageLogo } from "../../../assets";
+import { Button, Input } from "../../../components";
 import Poster from "../_shared/poster";
-import styles from "./register.module.scss";
+import { ImageLogo } from "../../../assets";
+import styles from "./adminRegister.module.scss";
 
-const Register = () => {
+const AdminRegister = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -50,13 +50,13 @@ const Register = () => {
     };
 
     try {
-      const response = await register(userData);
+      const response = await adminRegister(userData);
       if (response.status === 200) {
         const data = response.data;
         saveTokens(data);
       }
-      console.log("가입됐당");
-      navigate("/auth/login");
+      console.log("어드민 가입됐당");
+      navigate("/auth/adminLogin");
     } catch (error) {
       console.log(error);
     }
@@ -125,7 +125,7 @@ const Register = () => {
               autoComplete="off"
             />
             <Button type="submit" form="registerForm" color="primary">
-              회원가입
+              관리자 등록
             </Button>
           </form>
         </article>
@@ -134,4 +134,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default AdminRegister;

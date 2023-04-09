@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, Stars } from "../../../../components";
+import CommentModal from "../_shared/CommentModal";
 import {
   BsBookmark,
   BsBookmarkFill,
@@ -8,9 +9,8 @@ import {
   BsPencil,
   BsStarFill,
 } from "react-icons/bs";
-import styles from "./movieInfo.module.scss";
 import cx from "classnames";
-import CommentModal from "../_shared/CommentModal";
+import styles from "./movieInfo.module.scss";
 
 const MovieInfo = ({ movie }) => {
   const [showAllStaffs, setShowAllStaffs] = useState(false);

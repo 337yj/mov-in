@@ -4,14 +4,17 @@ import { getReviewsMovie } from "../../../../api/Review";
 import Comment from "../../CommentList/CommentDetail/Comment";
 import styles from "./movieComment.module.scss";
 
-const MovieComment = ({ movie, onChangeTab, onChangeSelectedCommentId }) => {
+const MovieComment = ({ onChangeTab }) => {
   const { id } = useParams();
   const [comments, setComments] = useState([]);
 
+  // if (!movie) {
+  //   return null;
+  // }
+
   const onClickMovie = (type, commentId) => {
     if (type === "commentDetail") {
-      onChangeTab("commentDetail");
-      onChangeSelectedCommentId(commentId);
+      onChangeTab("commentDetail", commentId);
     } else if (type === "commentList") {
       onChangeTab("commentList");
     }
@@ -32,10 +35,6 @@ const MovieComment = ({ movie, onChangeTab, onChangeSelectedCommentId }) => {
     onGetMovieReview();
   }, [id]);
 
-  if (!movie) {
-    return null;
-  }
-
   return (
     <section className={styles.wrapper}>
       <h2>코멘트</h2>
@@ -46,7 +45,6 @@ const MovieComment = ({ movie, onChangeTab, onChangeSelectedCommentId }) => {
               comment={comment}
               onClick={() => onClickMovie("commentDetail", comment.id)}
             />
-            {/* {console.log(comment.id)} */}
           </li>
         ))}
       </ul>

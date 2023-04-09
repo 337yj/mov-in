@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getMovie } from "../../api/Movie";
+import { useSetRecoilState } from "recoil";
+import { commentIdState } from "../../state";
 import { RelatedMovie, MovieComment, MovieInfo } from "./movieDetail";
 import CommentDetail from "./CommentList/CommentDetail";
 import CommentList from "./CommentList";
-import { IconLink } from "../../assets";
 import { Toast } from "../../components";
 import dayjs from "dayjs";
+import { IconLink } from "../../assets";
 import styles from "./detail.module.scss";
 
 const Detail = () => {
@@ -17,7 +19,8 @@ const Detail = () => {
   const [movie, setMovie] = useState();
   const [tab, setTab] = useState("movieDetail");
   const [toastFloat, setToastFloat] = useState(false);
-  const [selectedCommentId, setSelectedCommentId] = useState(null);
+  // const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const setCommentId = useSetRecoilState(commentIdState);
 
   const runtimeInMinutes = movie?.runtime || 0;
   const hours = Math.floor(runtimeInMinutes / 60);
@@ -48,43 +51,24 @@ const Detail = () => {
     }
   };
 
-  const onChangeTab = (tab) => {
+  const onChangeTab = (tab, id) => {
     if (tab !== "commentDetail") {
-      setSelectedCommentId(null);
+      setCommentId(null);
     }
     setTab(tab);
-  };
-
-  const onChangeSelectedCommentId = (id) => {
-    setSelectedCommentId(id);
+    setCommentId(id);
   };
 
   const detailInfo = {
-    // movieInfo: <MovieInfo movie={movie} onChangeTab={onChangeTab} />,
-    // movieComment: <MovieComment onChangeTab={onChangeTab} />,
-    // // commentDetail: <CommentDetail />,
-    // relatedMovie: <RelatedMovie onChangeTab={onChangeTab} />,
     movieDetail: (
       <>
         <MovieInfo movie={movie} />
-        <MovieComment
-          movie={movie}
-          onChangeTab={onChangeTab}
-          onChangeSelectedCommentId={onChangeSelectedCommentId}
-        />
+        <MovieComment onChangeTab={onChangeTab} />
         <RelatedMovie movie={movie} />
       </>
     ),
-    commentDetail: (
-      <CommentDetail movie={movie} selectedCommentId={selectedCommentId} />
-    ),
-    commentList: (
-      <CommentList
-        movie={movie}
-        onChangeTab={onChangeTab}
-        onChangeSelectedCommentId={onChangeSelectedCommentId}
-      />
-    ),
+    commentDetail: <CommentDetail movie={movie} />,
+    commentList: <CommentList movie={movie} onChangeTab={onChangeTab} />,
   };
 
   useEffect(() => {
@@ -133,15 +117,8 @@ const Detail = () => {
             <p>{dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}</p>
           </div>
         </article>
-        {/* //NOTE: 여기에 있는 article은 삭제 가능 */}
         <article className={styles.detailInfoWrapper}>
-          {/* {tab === "movieInfo" && <MovieInfo movie={movie} />} */}
-
           {detailInfo[tab]}
-          {/* <MovieInfo movie={movie} />
-          <MovieComment />
-          <RelatedMovie /> */}
-          {/* <MovieDetail movie={movie} /> */}
         </article>
       </section>
     </main>

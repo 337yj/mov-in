@@ -23,6 +23,8 @@ import {
   BOUser,
   BOComment,
   BOReport,
+  AdminLoginPage,
+  AdminRegisterPage,
 } from "../pages";
 
 const route = (
@@ -34,6 +36,8 @@ const route = (
     <Route path="auth">
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
+      <Route path="adminLogin" element={<AdminLoginPage />} />
+      <Route path="adminRegister" element={<AdminRegisterPage />} />
     </Route>
 
     <Route path="myPage" element={<MyPage />}>

@@ -27,9 +27,15 @@
       margin-right: 48px;
     }
 
+    .profileImage {
+      width: 52px;
+      height: 52px;
+      margin-right: -16px;
+    }
+
     > button {
       flex-shrink: 0;
-      padding: 30px;
+      padding: 30px 40px;
       border: 0;
       background-color: transparent;
       font-size: 18px;

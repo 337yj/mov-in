@@ -26,8 +26,8 @@ apiClient.interceptors.response.use(
       error?.response?.data?.statusCode === 401 &&
       error?.response?.data?.message === "TOKEN_EXPIRED"
     ) {
-      const refreshToken = localStorage.getItem("REFRESH_TOKEN");
       const accessToken = localStorage.getItem("ACCESS_TOKEN");
+      const refreshToken = localStorage.getItem("REFRESH_TOKEN");
       //NOTE: Refresh API 호출
       const response = await axios.post(`${config.API_URL}/auth/refresh`, {
         refreshToken,

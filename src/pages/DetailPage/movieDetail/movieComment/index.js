@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { getReviewsMovie } from "../../../../api/Review";
+import { commentsState } from "../../../../state";
 import Comment from "../../CommentList/CommentDetail/Comment";
 import styles from "./movieComment.module.scss";
 
 const MovieComment = ({ onChangeTab }) => {
   const { id } = useParams();
-  const [comments, setComments] = useState([]);
-
-  // if (!movie) {
-  //   return null;
-  // }
+  // const [comments, setComments] = useState([]);
+  const [comments, setComments] = useRecoilState(commentsState);
 
   const onClickMovie = (type, commentId) => {
     if (type === "commentDetail") {
@@ -24,7 +23,8 @@ const MovieComment = ({ onChangeTab }) => {
     try {
       const response = await getReviewsMovie(id);
       if (response.status === 200) {
-        setComments(response.data);
+        const data = response.data;
+        setComments(data);
       }
     } catch (error) {
       console.error(error);

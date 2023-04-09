@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useRecoilState } from "recoil";
+import { modalState } from "../../../../state";
 import { Button, Modal, Stars } from "../../../../components";
 import CommentModal from "../_shared/CommentModal";
 import {
@@ -13,11 +15,17 @@ import cx from "classnames";
 import styles from "./movieInfo.module.scss";
 
 const MovieInfo = ({ movie }) => {
+  const [modal, setModal] = useRecoilState(modalState);
+
   const [showAllStaffs, setShowAllStaffs] = useState(false);
   const [liked, setLiked] = useState(movie.isLiked || false);
   const [bookmark, setBookmark] = useState(false);
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
   const [rating, setRating] = useState(null);
+
+  const onClickModal = () => {
+    setModal(!modal);
+  };
 
   const getStaffs = (staffs) => {
     const roleOrder = { 감독: 1, 각본: 2 };
@@ -47,10 +55,6 @@ const MovieInfo = ({ movie }) => {
 
   const onClickBookmark = () => {
     setBookmark(!bookmark);
-  };
-
-  const onClickModal = () => {
-    setModal(!modal);
   };
 
   const onRatingChange = (newRating) => {
@@ -97,10 +101,10 @@ const MovieInfo = ({ movie }) => {
           movie={movie}
           title={movie.title}
           modal={modal}
-          rating={rating}
           setModal={setModal}
-          setRating={setRating}
+          rating={rating}
           onRatingChange={onRatingChange}
+          onClose={() => setModal(false)}
         />
       </div>
       <div className={styles.infoWrapper}>

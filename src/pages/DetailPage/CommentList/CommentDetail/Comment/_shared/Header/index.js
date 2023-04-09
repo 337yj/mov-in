@@ -26,9 +26,9 @@ const CommentHeader = ({
           className={styles.profileImage}
         />
         <p className={styles.username}>
-          {comment.user.nickname ?? comment.user.name}
+          {comment.user?.nickname ?? comment.user?.name}
         </p>
-        {user && <p className={styles.username}>{user && user.nickname}</p>}
+        {/* {user && <p className={styles.username}>{user && user?.nickname}</p>} */}
       </div>
       {children}
     </div>

@@ -6,12 +6,12 @@ import { IconClose } from "../../../assets";
 const Modal = ({
   className,
   children,
-  animation,
   title,
   subTitle,
   buttonFirst,
   buttonSecond,
   onClick,
+  setModal,
 }) => {
   return (
     <div className={cx(styles.overlay)}>
@@ -21,7 +21,10 @@ const Modal = ({
             <h1 className={cx(styles.modalTitle)}>{title}</h1>
             <h2 className={cx(styles.modalSubTitle)}>{subTitle}</h2>
           </div>
-          <button className={cx(styles.closeBtn)} onClick={onClick}>
+          <button
+            className={cx(styles.closeBtn)}
+            onClick={() => setModal(false)}
+          >
             <IconClose />
           </button>
         </header>

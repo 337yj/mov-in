@@ -31,7 +31,7 @@ const CommentFooter = ({ className, comment, ...props }) => {
           onClick={onNavigateCommentDetail}
         >
           <TfiCommentAlt className={styles.iconReply} />
-          <span>댓글 {comment.comments.length}개</span>
+          <span>댓글 {comment.comments?.length}개</span>
         </button>
       </div>
       <p className={styles.date}>

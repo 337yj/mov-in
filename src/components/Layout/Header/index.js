@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { ImageLogo } from "../../../assets";
@@ -10,7 +10,7 @@ import styles from "./header.module.scss";
 const Header = () => {
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userState);
-
+  console.log(user);
   const onClickNavigate = (path) => {
     return () => {
       navigate(path);
@@ -22,6 +22,10 @@ const Header = () => {
     setUser(null);
     console.log("로그아웃");
   };
+
+  useEffect(() => {
+    console.log("userState changed");
+  }, [user]);
 
   // if (window.location.pathname === "auth/login") return null;
 

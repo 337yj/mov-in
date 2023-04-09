@@ -18,7 +18,7 @@ const Tag = ({
     setIsActive(isSelected);
   }, [isSelected]);
 
-  const handleClick = () => {
+  const onActiveClick = () => {
     if (isActive) {
       setIsActive(false);
       onClick(id, false);
@@ -30,7 +30,7 @@ const Tag = ({
   return (
     <button
       disabled={isDisabled}
-      onClick={handleClick}
+      onClick={onActiveClick}
       type="button"
       className={cx(styles.tag, className, { [styles.isActive]: isActive })}
     >

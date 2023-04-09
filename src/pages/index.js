@@ -4,6 +4,8 @@ export { default as SearchResultPage } from "./SearchResult";
 
 export { default as LoginPage } from "./Auth/Login";
 export { default as RegisterPage } from "./Auth/Register";
+export { default as AdminLoginPage } from "./Auth/AdminLogin";
+export { default as AdminRegisterPage } from "./Auth/AdminRegister";
 
 export { default as DetailPage } from "./DetailPage";
 export { default as CommentPage } from "./DetailPage/CommentList";

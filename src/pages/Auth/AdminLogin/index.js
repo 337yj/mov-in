@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../../api/Auth";
+import { adminLogin } from "../../../api/Auth";
 import { saveTokens } from "../../../utils";
 import { getUsersMe } from "../../../api/User";
-import { useSetRecoilState } from "recoil";
 import { userState } from "../../../state";
-import { Input, Button } from "../../../components";
+import { useSetRecoilState } from "recoil";
+import { Button, Input } from "../../../components";
 import Poster from "../_shared/poster";
 import { ImageLogo } from "../../../assets";
-import styles from "./login.module.scss";
+import styles from "./adminLogin.module.scss";
 
-// yun@aa.aa
+// adminYun@aa.aa
 // 12345678
-const Login = () => {
+// adad@aa.aa
+// 123123123
+const AdminLogin = () => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userState);
 
@@ -40,6 +42,12 @@ const Login = () => {
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
+  const onClickNavigate = (path) => {
+    return () => {
+      navigate(path);
+    };
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,24 +57,18 @@ const Login = () => {
     };
 
     try {
-      const response = await login(userData);
+      const response = await adminLogin(userData);
       if (response.status === 200) {
         const data = response.data;
         saveTokens(data);
       }
-      console.log("로그인성공");
-      navigate("/");
+      console.log("어드민 로그인성공");
+      navigate("/boPage");
       onGetMe();
     } catch (error) {
       // 404: 존재하지 않는 유저
       console.log(error);
     }
-  };
-
-  const onClickNavigate = (path) => {
-    return () => {
-      navigate(path);
-    };
   };
 
   return (
@@ -93,7 +95,9 @@ const Login = () => {
               onChange={onChange}
               autoComplete="off"
             />
-            <p onClick={onClickNavigate("auth/register")}>회원이 아니신가요?</p>
+            <p onClick={onClickNavigate("auth/adminRegister")}>
+              관리자 등록을 하시겠습니까?
+            </p>
             <Button type="submit" form="loginForm" color="primary">
               로그인
             </Button>
@@ -104,4 +108,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

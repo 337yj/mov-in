@@ -8,13 +8,13 @@
   padding: 20px;
   border-radius: 10px;
   background-color: c.$C_INDIGO;
-
   cursor: pointer;
 
   .userScore {
     @include m.flex();
     font-size: 14px;
     line-height: 1.2;
+
     .star {
       width: 14px;
       height: 14px;

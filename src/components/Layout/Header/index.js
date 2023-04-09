@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { ImageLogo } from "../../../assets";
+import { userState } from "../../../state";
 import { SearchInput } from "../../Common";
-
+import { ImageProfile2 } from "../../../assets";
 import styles from "./header.module.scss";
 
 const Header = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userState);
 
   const onClickNavigate = (path) => {
     return () => {
@@ -14,7 +17,14 @@ const Header = () => {
     };
   };
 
-  if (window.location.pathname === "auth/login") return null;
+  const logout = () => {
+    localStorage.clear();
+    setUser(null);
+    console.log("로그아웃");
+  };
+
+  // if (window.location.pathname === "auth/login") return null;
+
   return (
     <header className={styles.header}>
       <img
@@ -28,12 +38,31 @@ const Header = () => {
           className={styles.searchInput}
           placeholder={"영화, 감독, 유저를 검색해보세요."}
         />
-        <button type="button" onClick={onClickNavigate("auth/login")}>
-          로그인
-        </button>
-        <button type="button" onClick={onClickNavigate("auth/register")}>
-          회원가입
-        </button>
+        {user ? (
+          <>
+            <button type="button" onClick={logout}>
+              로그아웃
+            </button>
+
+            <img
+              src={user.profileImage ?? ImageProfile2}
+              alt="profileImage"
+              className={styles.profileImage}
+            />
+            <button type="button" onClick={onClickNavigate("myPage")}>
+              {user.nickname ?? user.name}
+            </button>
+          </>
+        ) : (
+          <>
+            <button type="button" onClick={onClickNavigate("auth/login")}>
+              로그인
+            </button>
+            <button type="button" onClick={onClickNavigate("auth/register")}>
+              회원가입
+            </button>
+          </>
+        )}
       </div>
     </header>
   );

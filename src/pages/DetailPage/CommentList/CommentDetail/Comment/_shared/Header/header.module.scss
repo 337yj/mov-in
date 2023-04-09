@@ -4,7 +4,7 @@
 .wrapper {
   @include m.flex(space-between, flex-end, row);
   color: c.$C_WHITE;
-  // padding-bottom: 2px;
+  padding-bottom: 6px;
 
   .profile {
     @include m.flex(center, center, row);

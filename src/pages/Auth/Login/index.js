@@ -16,15 +16,6 @@ const Login = () => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userState);
 
-  const onGetMe = async () => {
-    const response = await getUsersMe();
-    if (response.status === 200) {
-      const data = response.data;
-      setUser(data);
-    }
-    console.log(response.data);
-  };
-
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -34,6 +25,15 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const onGetMe = async () => {
+    const response = await getUsersMe();
+    if (response.status === 200) {
+      const data = response.data;
+      setUser(data);
+    }
+    console.log(response.data);
+  };
 
   const onChange = (e) => {
     const { name, value } = e.currentTarget;

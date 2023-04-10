@@ -9,8 +9,9 @@ import { commentsState } from "../../../../../state";
 const Comment = ({ comment, profileImage, className, ...props }) => {
   const comments = useRecoilValue(commentsState);
   console.log(comments);
-  const enjoyPoints = comments.enjoyPoints ? comments.enjoyPoints : [];
-  const tensions = comments.tensions ? comments.tensions : [];
+  //NOTE: comments.enjoyPoints => comment.enjoyPoints
+  const enjoyPoints = comment.enjoyPoints ? comment.enjoyPoints : [];
+  const tensions = comment.tensions ? comment.tensions : [];
 
   if (!comment) {
     return null;

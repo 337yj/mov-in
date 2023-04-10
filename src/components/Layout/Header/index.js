@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { ImageLogo } from "../../../assets";
 import { userState } from "../../../state";
 import { SearchInput } from "../../Common";
 import { ImageProfile2 } from "../../../assets";
 import styles from "./header.module.scss";
+import useMe from "../../../hooks/useMe";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useRecoilState(userState);
-  console.log(user);
+  const setUser = useSetRecoilState(userState);
+  const user = useMe();
+
   const onClickNavigate = (path) => {
     return () => {
       navigate(path);
@@ -23,9 +25,9 @@ const Header = () => {
     console.log("로그아웃");
   };
 
-  useEffect(() => {
-    console.log("userState changed");
-  }, [user]);
+  // useEffect(() => {
+  //   console.log("userState changed");
+  // }, [user]);
 
   // if (window.location.pathname === "auth/login") return null;
 

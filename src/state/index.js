@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 
+//NOTE: atom => import { recoilPersist } from 'recoil-persist';
 export const userState = atom({
   key: "userState",
   default: null,

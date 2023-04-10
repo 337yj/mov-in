@@ -29,6 +29,7 @@ const useMe = () => {
 
   const onGetMe = async () => {
     const me = await getUsersMe();
+
     if (me.data) {
       setUser(me.data);
     }

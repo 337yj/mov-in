@@ -28,6 +28,12 @@ const CommentModal = ({ title, movie, modal, setModal }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log({
+        content,
+        score: rating,
+        enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
+        tensions: selectedTension !== null ? [selectedTension] : null,
+      });
       await createReview(movie.id, {
         content,
         score: rating,
@@ -58,16 +64,16 @@ const CommentModal = ({ title, movie, modal, setModal }) => {
     setSelectedTension(null);
   }, [modal]);
 
-  const onClickPoint = (id) => {
-    if (selectedPoints.includes(id)) {
-      setSelectedPoints(selectedPoints.filter((pointId) => pointId !== id));
+  const onClickPoint = (name) => {
+    if (selectedPoints.includes(name)) {
+      setSelectedPoints(selectedPoints.filter((pointId) => pointId !== name));
     } else if (selectedPoints.length < 3) {
-      setSelectedPoints([...selectedPoints, id]);
+      setSelectedPoints([...selectedPoints, name]);
     }
   };
 
-  const onClickTension = (id) => {
-    setSelectedTension(id);
+  const onClickTension = (name) => {
+    setSelectedTension(name);
   };
 
   return (
@@ -90,12 +96,12 @@ const CommentModal = ({ title, movie, modal, setModal }) => {
                 key={point.id}
                 id={point.id}
                 text={point.name}
-                isSelected={selectedPoints.includes(point.id)}
+                isSelected={selectedPoints.includes(point.name)}
                 isDisabled={
                   selectedPoints.length >= 3 &&
-                  !selectedPoints.includes(point.id)
+                  !selectedPoints.includes(point.name)
                 }
-                onClick={() => onClickPoint(point.id)}
+                onClick={() => onClickPoint(point.name)}
               />
             ))}
           </div>
@@ -107,8 +113,8 @@ const CommentModal = ({ title, movie, modal, setModal }) => {
                 key={tension.id}
                 id={tension.id}
                 text={tension.name}
-                isSelected={selectedTension === tension.id}
-                onClick={() => onClickTension(tension.id)}
+                isSelected={selectedTension === tension.name}
+                onClick={() => onClickTension(tension.name)}
               />
             ))}
           </div>

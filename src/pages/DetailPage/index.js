@@ -84,6 +84,7 @@ const Detail = () => {
 
   useEffect(() => {
     onGetMovieDetail();
+    setTab("movieDetail");
   }, [id]);
 
   if (!movie) {

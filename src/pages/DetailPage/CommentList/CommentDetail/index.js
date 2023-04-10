@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { getReviewsDetail } from "../../../../api/Review";
-import { commentIdState, userState } from "../../../../state";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { CommentHeader, CommentBody, CommentFooter } from "./Comment/_shared";
-import { Reply } from "../../../../pages";
-import { Button } from "../../../../components";
+import { getReviewsDetail } from "../../../../api/Review";
 import { ImageProfile1 } from "../../../../assets";
+import { commentIdState, userState } from "../../../../state";
+import { CommentBody, CommentFooter, CommentHeader } from "./Comment/_shared";
 import styles from "./commentDetail.module.scss";
 
 const CommentDetail = ({ comment, onChangeTab, ...props }) => {
   const [detailComment, setDetailComment] = useState();
   const commentId = useRecoilValue(commentIdState);
   const [user, setUser] = useRecoilState(userState);
-
-  if (!commentId) {
-    return null;
-  }
 
   const onGetReviewsDetail = async () => {
     try {
@@ -34,6 +28,11 @@ const CommentDetail = ({ comment, onChangeTab, ...props }) => {
 
   console.log(detailComment);
   // console.log(user);
+
+  //NOTE: return null은 보통 맨 마지막에 위치
+  if (!commentId) {
+    return null;
+  }
 
   return (
     <article className={styles.wrapper}>

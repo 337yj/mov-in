@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { getMovie } from "../../api/Movie";
 import { useSetRecoilState } from "recoil";
 import { commentIdState } from "../../state";
@@ -46,8 +46,8 @@ const Detail = () => {
       setTimeout(() => {
         setToastFloat(false);
       }, 1500);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 

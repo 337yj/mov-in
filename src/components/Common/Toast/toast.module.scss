@@ -3,8 +3,8 @@
 
 .toast {
   @include m.flex(center, center);
-  position: absolute;
-  top: 5%;
+  position: fixed;
+  top: 10%;
   left: 50%;
   bottom: 140px;
   height: 50px;
@@ -14,6 +14,7 @@
   transform: translate(-50%, -50%);
   animation: toDown 1s ease-in-out forwards;
   background-color: c.$C_PURPLE;
+  font-size: 16px;
   color: c.$C_WHITE;
 
   &.secondaryToast {
@@ -51,10 +52,9 @@
 @keyframes toDown {
   0% {
     transform: translate(-50%, -200%);
-    }
+  }
 
   100% {
     transform: translate(-50%, inherit);
   }
-  
-  }
+}

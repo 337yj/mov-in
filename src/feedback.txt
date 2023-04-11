@@ -2,20 +2,23 @@
 yun@aa.aa
 12345678
 
-어드민
+어드민 auth/adminLogin
 adminYun@aa.aa 
 12345678
 
-- 영화디테일페이지에서 Comment카드를 클릭 or 더보기>Comment카드를 클릭해서 
-CommentDetail로 넘기는 comment id를 리코일로 관리하였는데 맞게 사용한걸까요? 
+1. DetailPage > CommentList > CommentDetail > index.js
+리뷰 댓글작성 부분에 CommentHeader컴포넌트를 이용하고 싶은데 
+CommentHeader는 각 comment들의 유저이름을 렌더링하는데
+넘겨주는 데이터가 로그인한 user일때는 어떻게 처리해야 하는걸까요..
 
-- 새로고침시 로그인은 유지되는것 같은데(리뷰작성가능) 헤더가 로그인전 상태가 되는 문제
-(로그인한 유저는 헤더에 로그아웃, 프로필사진,닉네임이 뜸)
+2. DetailPage > movieDetail > movieInfo
+영화디테일페이지에서 코멘트버튼을 누르고 코멘트모달의
+별점버튼 제외한 아무 버튼을 누르면 코멘트디테일로 이동되는 문제, 
+이전엔 리뷰저장이 정상으로 됐는데 404에러가 발생합니다
 
-- 유저 로그인시에는 헤더에 로그아웃, 유저이름이 잘 뜨는데
-어드민 로그인시에는 뜨지 않는 문제 
+DetailPage > CommentList > Comment > _shared > Body에서 
+수정버튼을 누르면 CommentModal이 뜨도록 했는데 여기서 문제가 생긴걸까요
+(수정버튼은 로그인한 유저의 리뷰에만 뜸 - 영화 미스터 보스, 아이윌송, 초록밤)
 
-- 영화디테일페이지에서 코멘트 작성시 문제
-감상포인트, 긴장감지수를 선택하고 저장을 클릭하면 
-400에러가 뜨는데 어떻게 해결해야될지 모르겠습니다..
-(리뷰 작성은 되는데 감사포인트랑 긴장감지수는 반영이 X)
+3. DetailPage > CommentList > Comment > _shared > Body
+로그인한 유저가 쓴 리뷰를 삭제할시 바로 반영이 안되는 문제(페이지 나갔다가 들어와야 없어짐)

@@ -1,6 +1,11 @@
 import apiClient from "../apiClient";
 
-// 나의 북마크 조회
+// 내가 북마크한 영화를 조회
+export const getMyBookmarks = () => {
+  return apiClient.get("/bookmarks/me");
+};
+
+// 나의 북마크 조회 (page)
 export const getBookmarks = (page = 1, limit = 20) => {
   return apiClient.get(`/bookmarks/me/paging?page=${page}&limit=${limit}`);
 };

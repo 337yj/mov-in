@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { getReviewsDetail } from "../../../../api/Review";
 import { ImageProfile1 } from "../../../../assets";
+import { Button } from "../../../../components";
 import { commentIdState, userState } from "../../../../state";
+import Reply from "./Comment/Reply";
 import { CommentBody, CommentFooter, CommentHeader } from "./Comment/_shared";
 import styles from "./commentDetail.module.scss";
 
@@ -46,9 +48,9 @@ const CommentDetail = ({ comment, onChangeTab, ...props }) => {
           <CommentFooter comment={detailComment} />
         </section>
         <section className={styles.replyInputWrapper}>
-          {/* <CommentHeader user={user} profileImage={ImageProfile1}>
+          <CommentHeader user={user} profileImage={ImageProfile1}>
             <Button>등록</Button>
-          </CommentHeader> */}
+          </CommentHeader>
           <p>{user?.nickname}</p>
           <textarea
             className={styles.replyInput}
@@ -58,15 +60,14 @@ const CommentDetail = ({ comment, onChangeTab, ...props }) => {
           ></textarea>
         </section>
         <section>
-          {/* 이건 출력되는데 */}
-          {/* {detailComment.comments[0].content} */}
           <ul>
-            {/* 이건 왜 출력이안될까 */}
-            {detailComment?.comments.map((reply) => {
-              <li key={reply.id}>
-                {detailComment?.comments.content}
-                {/* <Reply detailComment={detailComment}></Reply> */}
-              </li>;
+            {detailComment?.comments?.map((reply) => {
+              return (
+                <li key={reply.id}>
+                  <Reply reply={reply} />
+                  {console.log(reply)}
+                </li>
+              );
             })}
           </ul>
         </section>

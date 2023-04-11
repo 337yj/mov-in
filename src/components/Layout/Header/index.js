@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { ImageLogo } from "../../../assets";
 import { userState } from "../../../state";
 import { SearchInput } from "../../Common";
@@ -24,10 +24,6 @@ const Header = () => {
     setUser(null);
     console.log("로그아웃");
   };
-
-  // useEffect(() => {
-  //   console.log("userState changed");
-  // }, [user]);
 
   // if (window.location.pathname === "auth/login") return null;
 

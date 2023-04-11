@@ -32,6 +32,11 @@ export const getReviewsDetail = (id) => {
   return apiClient.get(`/reviews/${id}/detail`);
 };
 
+// 나의 영화 리뷰 조회
+export const getMovieMyReview = (id) => {
+  return apiClient.get(`/reviews/movie/${id}/me`);
+};
+
 // 영화 리뷰 생성
 export const createReview = (movieId, body) => {
   return apiClient.post(`/reviews/${movieId}`, body);

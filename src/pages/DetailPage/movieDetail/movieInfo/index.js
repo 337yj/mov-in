@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { modalState } from "../../../../state";
 import { Button, Modal, Stars } from "../../../../components";
@@ -52,6 +52,7 @@ const MovieInfo = ({ movie }) => {
   const onClickLike = () => {
     setLiked(!liked);
   };
+  useEffect(() => {setLiked}, []);
 
   const onClickBookmark = () => {
     setBookmark(!bookmark);

@@ -83,6 +83,7 @@ const MovieInfo = ({ movie }) => {
       return;
     }
   };
+  useEffect(() => {setLiked}, []);
 
   const onClickLike = async () => {
     onClickNotUser();

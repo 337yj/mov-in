@@ -6,6 +6,7 @@ yun@aa.aa
 adminYun@aa.aa 
 12345678
 
+
 1. DetailPage > CommentList > CommentDetail > index.js
 리뷰 댓글작성 부분에 CommentHeader컴포넌트를 이용하고 싶은데 
 CommentHeader는 각 comment들의 유저이름을 렌더링하는데
@@ -22,3 +23,6 @@ DetailPage > CommentList > Comment > _shared > Body에서
 
 3. DetailPage > CommentList > Comment > _shared > Body
 로그인한 유저가 쓴 리뷰를 삭제할시 바로 반영이 안되는 문제(페이지 나갔다가 들어와야 없어짐)
+
+4. Bopage < 영화관리페이지에서 보기 버튼을 눌렀을때 모달띄우는게 적용되지 않습니다
+

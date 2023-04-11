@@ -17,12 +17,12 @@ CommentHeader는 각 comment들의 유저이름을 렌더링하는데
 별점버튼 제외한 아무 버튼을 누르면 코멘트디테일로 이동되는 문제, 
 이전엔 리뷰저장이 정상으로 됐는데 404에러가 발생합니다
 
-DetailPage > CommentList > Comment > _shared > Body에서 
+3. DetailPage > CommentList > Comment > _shared > Body에서 
 수정버튼을 누르면 CommentModal이 뜨도록 했는데 여기서 문제가 생긴걸까요
 (수정버튼은 로그인한 유저의 리뷰에만 뜸 - 영화 미스터 보스, 아이윌송, 초록밤)
 
-3. DetailPage > CommentList > Comment > _shared > Body
+4. DetailPage > CommentList > Comment > _shared > Body
 로그인한 유저가 쓴 리뷰를 삭제할시 바로 반영이 안되는 문제(페이지 나갔다가 들어와야 없어짐)
 
-4. Bopage < 영화관리페이지에서 보기 버튼을 눌렀을때 모달띄우는게 적용되지 않습니다
+5. Bopage < 영화관리페이지에서 보기 버튼을 눌렀을때 모달띄우는게 적용되지 않습니다
 

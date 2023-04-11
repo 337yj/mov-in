@@ -4,6 +4,7 @@
 .wrapper {
   position: relative;
   width: 240px;
+  cursor: pointer;
 
   .img {
     width: 240px;
@@ -80,7 +81,7 @@
     .tags {
       @include m.flex(flex-start);
       gap: 6px;
-      margin: 10px 0px;
+      margin: 8px 0px 10px 0px;
 
       > button {
         padding: 4px 8px;

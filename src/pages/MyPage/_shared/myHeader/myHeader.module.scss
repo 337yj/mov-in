@@ -1,0 +1,40 @@
+@use "../../../../styles/constants/" as c;
+@use "../../../../styles/mixins/" as m;
+
+.wrapper {
+
+  .header {
+    width: 100%;
+
+    .titleWrapper {
+      @include m.flex(row);
+
+      .title {
+        font : {
+          size: 36px;
+          weight: 700;
+        }
+        color: c.$C_WHITE;
+      }
+
+      > button {
+        margin-left: 12px;
+        padding: 6px 12px;
+        border-radius: 12px;
+
+        &.isPublic {
+          background-color: c.$C_DARKGRAY;
+        }
+      }
+    }
+
+    .subTitle {
+      padding-top: 12px;
+
+      font : {
+        size: 20px;
+        weight: 400;
+      }
+    }
+  }
+}

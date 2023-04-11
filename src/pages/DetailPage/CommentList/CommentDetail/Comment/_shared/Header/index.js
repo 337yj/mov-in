@@ -11,7 +11,7 @@ const CommentHeader = ({
   children,
   ...props
 }) => {
-  if (!comment) {
+  if (!comment && !user) {
     return null;
   }
   // 윤 -  figure, figcaption, output은 그림,도표,차트,코드블록,수식 등의 콘텐츠를 표시할 때 사용
@@ -25,10 +25,12 @@ const CommentHeader = ({
           alt="userProfileImage"
           className={styles.profileImage}
         />
-        <p className={styles.username}>
-          {comment.user?.nickname ?? comment.user?.name}
-        </p>
-        {/* {user && <p className={styles.username}>{user && user?.nickname}</p>} */}
+        {comment && (
+          <p className={styles.username}>
+            {comment.user?.nickname ?? comment.user?.name}
+          </p>
+        )}
+        {user && <p className={styles.username}>{user && user?.nickname}</p>}
       </div>
       {children}
     </div>

@@ -6,10 +6,11 @@ import { getMovie } from "../../../../api/Movie";
 import { Modal, Button } from "../../../../components";
 
 import styles from "./boMovieModal.module.scss";
+import { BsFillHeartFill } from "react-icons/bs";
 
-const BoMovieModal = ({ movie, modal, setModal }) => {
+const BoMovieModal = ({ movie, modal, onCloseModal }) => {
   const onClickModal = () => {
-    setModal(!modal);
+    onCloseModal();
   };
 
   const { id } = useParams();
@@ -31,6 +32,7 @@ const BoMovieModal = ({ movie, modal, setModal }) => {
     onGetMovieDetail();
   }, [id]);
 
+  console.log({ modal, movie });
   if (!movie) {
     return null;
   }

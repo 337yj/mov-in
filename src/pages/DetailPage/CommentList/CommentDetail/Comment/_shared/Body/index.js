@@ -27,10 +27,12 @@ const CommentBody = ({ className, comment, ...props }) => {
       tensions: selectedTension !== null ? [selectedTension] : null,
     });
     setModal(false);
+    //NOTE: recoil state도 변경
   };
 
   const deleteMyComment = async () => {
     await deleteReviews(myComment.id);
+    //NOTE: 삭제하고 나서 tab을 초기화 + alert + recoil state도 변경
   };
   // 내가 쓴 리뷰가 있는 곳에서만 myComment.id뜸
   // console.log(myComment);

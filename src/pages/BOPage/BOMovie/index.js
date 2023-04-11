@@ -20,10 +20,12 @@ const POST_PER_PAGE = 10;
 
 const BOMovie = ({ movie }) => {
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(false); // 현재 페이지
+  const [page, setPage] = useState(1); // 현재 페이지
   const [totalCount, setTotalCount] = useState(0);
 
   const [modal, setModal] = useState(false);
+  //NOTE: 선택된 영화를 관리하기 위한 state
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const data = movies.map((movie) => ({
     //NOTE: substring을 통한 문자열 자르기
@@ -35,8 +37,15 @@ const BOMovie = ({ movie }) => {
     개봉일자: dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));
 
-  const onClickModal = () => {
-    setModal(!modal);
+  const onClickModal = (movie) => {
+    return () => {
+      setModal(!modal);
+      setSelectedMovie(movie);
+    };
+  };
+  const onCloseModal = () => {
+    setModal(false);
+    setSelectedMovie(null);
   };
 
   const onChange = (page) => {
@@ -70,7 +79,6 @@ const BOMovie = ({ movie }) => {
     onGetMoviesCount();
   }, [page]);
 
-  console.log(movies);
   return (
     <section className={styles.wrapper}>
       <h1>영화 관리 페이지</h1>
@@ -82,11 +90,24 @@ const BOMovie = ({ movie }) => {
         columns={columns}
         data={data}
         firstButton={
-          <Button color={"warning"} children={"보기"} onclick={onClickModal} />
+          // NOTE: 어떤 영화를 선택했는지 알 수가 없다.
+          // NOTE: 선택한 영화를 담을 state가 없다.
+          // NOTE: 아래와 같이 함수를 사용
+          (movie) => (
+            <Button
+              color={"warning"}
+              children={"보기"}
+              onClick={onClickModal(movie)}
+            />
+          )
         }
         secondButton={<Button color={"primary"} children={"삭제"} />}
       />
-      <BoMovieModal movie={movie} modal={modal} setModal={setModal} />
+      <BoMovieModal
+        movie={selectedMovie}
+        modal={modal}
+        onCloseModal={onCloseModal}
+      />
       <Paging
         totalCount={totalCount}
         page={page}

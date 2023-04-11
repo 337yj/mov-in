@@ -14,6 +14,7 @@ const MovieComment = ({ onChangeTab }) => {
   const user = useRecoilValue(userState);
 
   const onClickMovie = (type, commentId) => {
+    console.log({ type, commentId });
     if (type === "commentDetail") {
       onChangeTab("commentDetail", commentId);
     } else if (type === "commentList") {
@@ -37,7 +38,7 @@ const MovieComment = ({ onChangeTab }) => {
   // console.log(user);
   // console.log(comments);
   // console.log(myComment);
-
+  console.log({ comments });
   useEffect(() => {
     onGetMovieReview();
   }, [id]);

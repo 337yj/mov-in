@@ -17,6 +17,7 @@ const Detail = () => {
   const { pathname } = useLocation();
 
   const [movie, setMovie] = useState();
+  //NOTE: tab은 리코일로 사용하는게 더 편하다
   const [tab, setTab] = useState("movieDetail");
   const [toastFloat, setToastFloat] = useState(false);
   // const [selectedCommentId, setSelectedCommentId] = useState(null);
@@ -59,6 +60,9 @@ const Detail = () => {
     setCommentId(id);
   };
 
+  //NOTE: 같이 API를 많이 사용하거나, 생성 수정 삭제 등의 데이터의 변경이 일어나는 경우에는
+  //NOTE: tab을 통해서 구분하는 것보다 페이지를 만드는게 정신건강에 좋다.
+  //NOTE: 방법2) react-query 사용
   const detailInfo = {
     movieDetail: (
       <>

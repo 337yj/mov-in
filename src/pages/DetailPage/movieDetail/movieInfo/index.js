@@ -21,7 +21,9 @@ import cx from "classnames";
 import styles from "./movieInfo.module.scss";
 
 const MovieInfo = ({ movie }) => {
-  const [modal, setModal] = useRecoilState(modalState);
+  //NOTE: 모달을 recoil로 관리하는 경우 => 모달 컴포넌트를 한곳에만 선언을 하고, state를 통해서만 modal의 상태를 관리하고 싶을 때
+  // const [modal, setModal] = useRecoilState(modalState);
+  const [modal, setModal] = useState(false);
   const [showAllStaffs, setShowAllStaffs] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);

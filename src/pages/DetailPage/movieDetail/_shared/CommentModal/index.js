@@ -13,6 +13,7 @@ const CommentModal = ({ title, movie, comment, modal, setModal }) => {
   const [rating, setRating] = useState(null);
   const [selectedPoints, setSelectedPoints] = useState([]);
   const [selectedTension, setSelectedTension] = useState(null);
+  //NOTE: recoil 사용 X
   const [comments, setComments] = useRecoilState(commentsState);
   const [toastFloat, setToastFloat] = useState(false);
   const user = useRecoilValue(userState);
@@ -45,17 +46,19 @@ const CommentModal = ({ title, movie, comment, modal, setModal }) => {
         enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
         tensions: selectedTension !== null ? [selectedTension] : null,
       });
-      await createReview(movie?.id, {
+      const response = await createReview(movie?.id, {
         content,
         score: rating,
         enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
         tensions: selectedTension !== null ? [selectedTension] : null,
       });
       setModal((prev) => !prev);
-      console.error("성공");
+
       // commentsState 업데이트
       setComments((comments) => [
         {
+          // NOTE: id를 같이 state에 넣어줘야 합니다~
+          id: response.data.id,
           content,
           score: rating,
           enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
@@ -146,6 +149,7 @@ const CommentModal = ({ title, movie, comment, modal, setModal }) => {
               className={styles.submitBtn}
               color="primary"
               form="reviewForm"
+              type="submit"
               onClick={onClickNotUser}
             >
               저장

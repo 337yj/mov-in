@@ -28,8 +28,8 @@ const CommentDetail = ({ comment, onChangeTab, ...props }) => {
     onGetReviewsDetail();
   }, [commentId]);
 
-  console.log(detailComment);
-  // console.log(user);
+  // console.log(detailComment);
+  // console.log({ user });
 
   //NOTE: return null은 보통 맨 마지막에 위치
   if (!commentId) {

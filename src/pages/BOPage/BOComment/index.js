@@ -6,7 +6,7 @@ import {
   getReviews,
 } from "../../../api/Review";
 
-import { Table, Button, Paging } from "../../../components";
+import { SearchInput, Table, Button, Paging } from "../../../components";
 
 import styles from "./boComment.module.scss";
 import dayjs from "dayjs";
@@ -23,20 +23,17 @@ const POST_PER_PAGE = 10;
 
 const BOComment = () => {
   const [comments, setComments] = useState([]);
-  const [currentPage, setCurrentPage] = useState([]); // 보여줄 페이지
   const [page, setPage] = useState(1); // 현재 페이지
-  const nextPage = page * POST_PER_PAGE;
-  const PrevPage = nextPage - POST_PER_PAGE;
   const [totalCount, setTotalCount] = useState(0);
 
   const [modal, setModal] = useState(false);
 
   const data = comments.map((comment) => ({
-    닉네임: comment.nickname,
-    코멘트: comment.content,
-    평점: comment.score.toFixed(1),
-    좋아요: comment.likeCount,
-    작성일자: dayjs(comment.createdAt, "YYYYMMDD").format("YYYY.MM.DD"),
+    닉네임: comment.nickname ?? "-",
+    코멘트: comment.content ?? "-",
+    평점: comment.score.toFixed(1) ?? "-",
+    좋아요: comment.likeCount ?? "-",
+    작성일자: dayjs(comment.createdAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));
 
   const onClickModal = () => {
@@ -51,9 +48,7 @@ const BOComment = () => {
     try {
       const response = await getReviews(page, POST_PER_PAGE);
       if (response.status === 200) {
-        const newComments = [...response.data.data];
-        setComments([...comments, ...newComments]); // 기존 데이터와 새로운 데이터를 합쳐서 저장
-        setCurrentPage([...comments, ...newComments]); // 기존 데이터와 새로운 데이터를 합쳐서 현재 보여주는 데이터로 저장
+        setComments(response.data.data);
       }
     } catch (error) {
       console.error(error);
@@ -79,6 +74,10 @@ const BOComment = () => {
   return (
     <section className={styles.wrapper}>
       <h1>코멘트 관리 페이지</h1>
+      <div>
+        <SearchInput placeholder={"회원 닉네임을 검색하세요."} />
+        <Button color={"primary"} children={"삭제"} />
+      </div>
       <Table
         columns={columns}
         data={data}

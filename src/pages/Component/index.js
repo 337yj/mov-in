@@ -120,12 +120,12 @@ const Component = () => {
             <Toggle />
           </div>
           <div>
-            <h2>코멘트</h2>
+            {/* <h2>코멘트</h2>
             <Comment />
           </div>
           <div>
             <h2>코멘트답글</h2>
-            <Reply />
+            <Reply /> */}
           </div>
           <div>
             <h2>별점</h2>
@@ -164,10 +164,10 @@ const Component = () => {
             {toastFloat && <Toast children={toastMsg} />}
           </div>
           <div>
-            <h2>태그</h2>
+            {/* <h2>태그</h2>
             <div className={styles.tags}>
               <Tag text="OST" />
-            </div>
+            </div> */}
           </div>
           <div>
             <h2>캐러셀</h2>

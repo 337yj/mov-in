@@ -2,14 +2,23 @@
 @use "../../../styles/mixins/" as m;
 
 .wrapper {
-  @include m.flex(flex-start, flex-start, column);
+  @include m.flex(flex-start, center, column);
   margin: 80px, 80px, 80px, 20px;
   padding: 80px, 80px, 80px, 20px;
   row-gap: 20px;
   width: 100%;
 
   > h1 {
-    font-size: 36px;
-    font-weight: 700;
+    width: 100%;
+    text-align: left;
+    font: {
+      size: 36px;
+      weight: 700;
+    }
+  }
+
+  > div {
+    @include m.flex(flex-end, null, row);
+    column-gap: 10px;
   }
 }

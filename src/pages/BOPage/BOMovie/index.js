@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 import { getMovies, getMoviesCount } from "../../../api/Movie";
 
-import { Table, Button, Paging } from "../../../components";
+import { SearchInput, Table, Button, Paging } from "../../../components";
 import { BoMovieModal } from "../_shared";
 
 import styles from "./boMovie.module.scss";
@@ -20,10 +20,7 @@ const POST_PER_PAGE = 10;
 
 const BOMovie = ({ movie }) => {
   const [movies, setMovies] = useState([]);
-  const [currentPage, setCurrentPage] = useState([]); // 보여줄 페이지
-  const [page, setPage] = useState(1); // 현재 페이지
-  const nextPage = page * POST_PER_PAGE;
-  const PrevPage = nextPage - POST_PER_PAGE;
+  const [page, setPage] = useState(false); // 현재 페이지
   const [totalCount, setTotalCount] = useState(0);
 
   const [modal, setModal] = useState(false);
@@ -31,11 +28,11 @@ const BOMovie = ({ movie }) => {
   const data = movies.map((movie) => ({
     //NOTE: substring을 통한 문자열 자르기
     // 제목: movie.title.substring(0, 10),
-    제목: movie.title,
-    감독: movie.staffs.find((staff) => staff.role === "감독")?.name,
-    장르: movie.genres.map((genre) => genre?.name).join(", "),
-    평균평점: movie.averageScore.toFixed(1),
-    개봉일자: dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD"),
+    제목: movie.title ?? "-",
+    감독: movie.staffs.find((staff) => staff.role === "감독")?.name ?? "-",
+    장르: movie.genres.map((genre) => genre?.name).join(", ") ?? "-",
+    평균평점: movie.averageScore.toFixed(1) ?? "-",
+    개봉일자: dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));
 
   const onClickModal = () => {
@@ -50,9 +47,7 @@ const BOMovie = ({ movie }) => {
     try {
       const response = await getMovies(page, POST_PER_PAGE);
       if (response.status === 200) {
-        const newMovies = [...response.data.data];
-        setMovies([...movies, ...newMovies]);
-        setCurrentPage([...movies, ...newMovies]);
+        setMovies(response.data.data);
       }
     } catch (error) {
       console.error(error);
@@ -79,6 +74,10 @@ const BOMovie = ({ movie }) => {
   return (
     <section className={styles.wrapper}>
       <h1>영화 관리 페이지</h1>
+      <div className={styles.search}>
+        <SearchInput placeholder={"영화명을 검색하세요."} />
+        <Button color={"primary"} children={"삭제"} />
+      </div>
       <Table
         columns={columns}
         data={data}

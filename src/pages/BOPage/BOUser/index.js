@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { getUsers, getUsersCount } from "../../../api/User";
 
-import { Table, Button, Paging } from "../../../components/Common";
+import { SearchInput, Table, Button, Paging } from "../../../components/Common";
 import { BoUserModal } from "../_shared";
 
 import styles from "./boUser.module.scss";
@@ -48,10 +48,8 @@ const BOUser = ({ user }) => {
     try {
       const response = await getUsers(page, POST_PER_PAGE);
       if (response.status === 200) {
-        const newUsers = [...response.data.data];
         //NOTE: 페이지가 바뀌면 기존 데이터를 지우고 새로운 데이터를 추가
-        setUsers([...users, ...newUsers]);
-        setCurrentPage([...users, ...newUsers]);
+        setUsers(response.data.data);
       }
     } catch (error) {
       console.error(error);
@@ -79,6 +77,10 @@ const BOUser = ({ user }) => {
   return (
     <section className={styles.wrapper}>
       <h1>유저 관리 페이지</h1>
+      <div>
+        <SearchInput placeholder={"회원 닉네임을 검색하세요."} />
+        <Button color={"danger"} children={"탈퇴"} />
+      </div>
       <Table
         columns={columns}
         data={data}

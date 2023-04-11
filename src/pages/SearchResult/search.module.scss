@@ -22,7 +22,7 @@
     .resultStyle {
         @include m.flex(row);
         flex-wrap: wrap;
-        padding: 2rem 8rem 14rem 8rem;
+        padding: 2rem 12rem;
     
         .resultCard {
             padding :14px;

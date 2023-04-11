@@ -12,6 +12,10 @@
     font-weight: 700;
   }
 
+  .myComment {
+    margin-bottom: 16px;
+  }
+
   .commentWrapper {
     @include m.flex();
     column-gap: 16px;

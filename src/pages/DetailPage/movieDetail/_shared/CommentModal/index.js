@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { createReview } from "../../../../../api/Review";
 import { getUsersMe } from "../../../../../api/User";
-import { Modal, Stars, Tag, Button } from "../../../../../components";
+import { Modal, Stars, Tag, Button, Toast } from "../../../../../components";
 import useMe from "../../../../../hooks/useMe";
 import { commentsState, userState } from "../../../../../state";
 import { POINTS, TENSIONS } from "../constants";
 import styles from "./commentModal.module.scss";
 
-const CommentModal = ({ title, movie, modal, setModal }) => {
+const CommentModal = ({ title, movie, comment, modal, setModal }) => {
   const [content, setContent] = useState("");
   const [rating, setRating] = useState(null);
   const [selectedPoints, setSelectedPoints] = useState([]);
   const [selectedTension, setSelectedTension] = useState(null);
   const [comments, setComments] = useRecoilState(commentsState);
+  const [toastFloat, setToastFloat] = useState(false);
   const user = useRecoilValue(userState);
 
   const onRatingChange = (newRating) => {
@@ -25,6 +26,16 @@ const CommentModal = ({ title, movie, modal, setModal }) => {
     setContent(value);
   };
 
+  const onClickNotUser = () => {
+    if (!user) {
+      setToastFloat(true);
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 1500);
+      return;
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -34,13 +45,13 @@ const CommentModal = ({ title, movie, modal, setModal }) => {
         enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
         tensions: selectedTension !== null ? [selectedTension] : null,
       });
-      await createReview(movie.id, {
+      await createReview(movie?.id, {
         content,
         score: rating,
         enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
         tensions: selectedTension !== null ? [selectedTension] : null,
       });
-      setModal(false);
+      setModal((prev) => !prev);
       console.error("성공");
       // commentsState 업데이트
       setComments((comments) => [
@@ -79,6 +90,7 @@ const CommentModal = ({ title, movie, modal, setModal }) => {
   return (
     modal && (
       <Modal className={styles.commentModal} title={title} setModal={setModal}>
+        {toastFloat && <Toast>로그인 후 이용 가능합니다.</Toast>}
         <form className={styles.wrapper} id="reviewForm" onSubmit={onSubmit}>
           <p>영화를 평가해주세요.</p>
           <div className={styles.ratingWrapper}>
@@ -134,13 +146,14 @@ const CommentModal = ({ title, movie, modal, setModal }) => {
               className={styles.submitBtn}
               color="primary"
               form="reviewForm"
+              onClick={onClickNotUser}
             >
               저장
             </Button>
             <Button
               className={styles.cancelBtn}
               color="secondary"
-              onClick={() => setModal(false)}
+              onClick={() => setModal((prev) => !prev)}
             >
               취소
             </Button>

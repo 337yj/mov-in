@@ -10,6 +10,7 @@ import { ImageProfile10 } from "../../../../../../assets";
 
 const Reply = ({
   profileImage,
+  reply,
   username,
   content,
   date,
@@ -24,8 +25,10 @@ const Reply = ({
         profileImage={ImageProfile10}
         username={"닉네임"}
       /> */}
-      <CommentBody className={styles.content} content={"코멘트 답글 내용"} />
-      {/* <hr className={styles.horizontalLine} /> */}
+      <p>{reply.content}</p>
+      <p>{dayjs(reply.updatedAt).format("YYYY.MM.DD")}</p>
+
+      <CommentBody className={styles.content} comment={reply.content} />
       <CommentFooter
         className={styles.comment}
         date={dayjs().format("YYYY.MM.DD")}

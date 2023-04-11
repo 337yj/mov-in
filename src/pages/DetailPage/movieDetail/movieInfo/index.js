@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { modalState } from "../../../../state";
-import { Button, Modal, Stars } from "../../../../components";
+import { createMovieLike, deleteMovieLike } from "../../../../api/Movie";
+import {
+  createBookmarks,
+  deleteBookmarks,
+  getMyBookmarks,
+} from "../../../../api/Bookmark";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { modalState, userState } from "../../../../state";
 import CommentModal from "../_shared/CommentModal";
+import { Button, Toast } from "../../../../components";
 import {
   BsBookmark,
   BsBookmarkFill,
@@ -16,16 +22,13 @@ import styles from "./movieInfo.module.scss";
 
 const MovieInfo = ({ movie }) => {
   const [modal, setModal] = useRecoilState(modalState);
-
   const [showAllStaffs, setShowAllStaffs] = useState(false);
-  const [liked, setLiked] = useState(movie.isLiked || false);
-  const [bookmark, setBookmark] = useState(false);
-  // const [modal, setModal] = useState(false);
-  const [rating, setRating] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isBookmark, setIsBookmark] = useState(false);
+  const [toastFloat, setToastFloat] = useState(false);
+  const user = useRecoilValue(userState);
 
-  const onClickModal = () => {
-    setModal(!modal);
-  };
+  const toggleModal = () => setModal((prev) => !prev);
 
   const getStaffs = (staffs) => {
     const roleOrder = { 감독: 1, 각본: 2 };
@@ -49,21 +52,75 @@ const MovieInfo = ({ movie }) => {
     ));
   };
 
-  const onClickLike = () => {
-    setLiked(!liked);
+  const checkIsLiked = async () => {
+    if (user) {
+      setIsLiked(movie.isLiked);
+    } else {
+      setIsLiked(false);
+    }
+  };
+
+  const checkIsBookmarked = async () => {
+    const response = await getMyBookmarks();
+    const isBookmarked = response.data.some(
+      (bookmark) => bookmark.movie.id === movie.id,
+    );
+
+    if (user && isBookmarked) {
+      setIsBookmark(true);
+    } else {
+      setIsBookmark(false);
+    }
+    // console.log(response.data);
+  };
+
+  const onClickNotUser = () => {
+    if (!user) {
+      setToastFloat(true);
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 1500);
+      return;
+    }
   };
   useEffect(() => {setLiked}, []);
 
-  const onClickBookmark = () => {
-    setBookmark(!bookmark);
+  const onClickLike = async () => {
+    onClickNotUser();
+    try {
+      if (isLiked) {
+        await deleteMovieLike(movie.id);
+      } else {
+        await createMovieLike(movie.id);
+      }
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const onRatingChange = (newRating) => {
-    setRating(newRating);
+  const onClickBookmark = async () => {
+    onClickNotUser();
+    try {
+      if (isBookmark) {
+        await deleteBookmarks(movie.id);
+      } else {
+        await createBookmarks(movie.id);
+      }
+      setIsBookmark(!isBookmark);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    checkIsLiked();
+    checkIsBookmarked();
+  }, [movie.id]);
 
   return (
     <section className={styles.wrapper}>
+      {toastFloat && <Toast>로그인 후 이용 가능합니다.</Toast>}
       <div className={styles.postWrapper}>
         <img
           className={styles.postImage}
@@ -71,7 +128,7 @@ const MovieInfo = ({ movie }) => {
           alt="thumbnail"
         />
         <Button className={styles.likeBtn} color="dark" onClick={onClickLike}>
-          {liked ? (
+          {isLiked ? (
             <BsFillHeartFill className={styles.IconFillLike} />
           ) : (
             <BsHeart className={styles.IconLike} />
@@ -83,18 +140,14 @@ const MovieInfo = ({ movie }) => {
           color="dark"
           onClick={onClickBookmark}
         >
-          {bookmark ? (
+          {isBookmark ? (
             <BsBookmarkFill className={styles.IconFillBookmark} />
           ) : (
             <BsBookmark className={styles.IconBookmark} />
           )}
           북마크
         </Button>
-        <Button
-          className={styles.ReviewBtn}
-          color="dark"
-          onClick={onClickModal}
-        >
+        <Button className={styles.ReviewBtn} color="dark" onClick={toggleModal}>
           <BsPencil className={styles.IconReview} />
           코멘트
         </Button>
@@ -103,9 +156,6 @@ const MovieInfo = ({ movie }) => {
           title={movie.title}
           modal={modal}
           setModal={setModal}
-          rating={rating}
-          onRatingChange={onRatingChange}
-          onClose={() => setModal(false)}
         />
       </div>
       <div className={styles.infoWrapper}>

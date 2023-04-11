@@ -15,11 +15,6 @@ export const getMoviesCount = () => {
   return apiClient.get(`/movies/count`);
 };
 
-// 내가 좋아요 한 영화 불러오기
-export const getMoviesMeLike = () => {
-  return apiClient.get(`/movies/me/like`);
-};
-
 // 내가 북마크 한 영화 불러오기
 export const getBookmarks = () => {
   return apiClient.get(`/movies/bookmarks/me`)
@@ -60,6 +55,11 @@ export const updateMovie = (id, data) => {
 // 영화 삭제하기
 export const deleteMovie = (id) => {
   return apiClient.delete(`/movies/${id}`);
+};
+
+// 내가 좋아요 한 영화 불러오기
+export const getMoviesMeLike = () => {
+  return apiClient.get(`/movies/me/like`);
 };
 
 // 영화 좋아요 생성

@@ -52,12 +52,25 @@
         size: 24px;
       }
     }
-
     .profileImg {
       height: 50px;
       width: 50px;
       cursor: pointer;
     }
+  }
+}
+
+.introWrapper {
+  vertical-align: middle;
+
+  .introText {
+    @include m.flex(center);
+    width: 50vw;
+    margin-bottom: 80px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: c.$C_WHITE_10;
+    //border-radius: 10px;
   }
 }
 

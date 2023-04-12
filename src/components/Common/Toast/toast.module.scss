@@ -4,7 +4,7 @@
 .toast {
   @include m.flex(center, center);
   position: fixed;
-  top: 14%;
+  top: 5%;
   left: 50%;
   bottom: 140px;
   height: 50px;
@@ -12,7 +12,7 @@
   border-radius: 50px;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  animation: toDown 1s ease-in-out forwards;
+  //animation: toDown 1s ease-in-out forwards;
   background-color: c.$C_PURPLE;
   font-size: 16px;
   color: c.$C_WHITE;
@@ -49,12 +49,12 @@
   border-radius: 100%;
 }
 
-@keyframes toDown {
-  0% {
-    transform: translate(-50%, -200%);
-  }
+// @keyframes toDown {
+//   0% {
+//     transform: translate(-50%, -200%);
+//   }
 
-  100% {
-    transform: translate(-50%, inherit);
-  }
-}
+//   100% {
+//     transform: translate(-50%, 20%);
+//   }
+// }

@@ -14,6 +14,7 @@ import {
   Toast,
 } from "../../../components";
 // import EditMode from "./EditMode";
+import MyCard from "./MyCard";
 import { AlertModal, ImageModal } from "../_shared";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
 import styles from "./profile.module.scss";
@@ -39,7 +40,7 @@ const Profile = ({open}) => {
     try {
       const response = await getReviewMe();
       if (response.status === 200) {
-        const items = [...response.data].slice(0, 3);
+        const items = [...response.data].slice(0, 5);
         setMyReviews(items);
       }
     } catch (error) {
@@ -91,7 +92,7 @@ const Profile = ({open}) => {
 
   useEffect(() => {
     getMyMovieList();
-    updateUserInfo();
+    //updateUserInfo();
   }, []);
 
   useEffect(() => {
@@ -157,7 +158,7 @@ const Profile = ({open}) => {
         </div>
         <div className={styles.cardList}>
           {myReviews.map((review) => (
-            <Card movie={review} />
+            <MyCard movie={review} />
           ))}
         </div>
 
@@ -173,7 +174,7 @@ const Profile = ({open}) => {
             children="취소"
             onClick={() => toast("cancel")}
           />
-          {floatToast && <Toast children={toastMsg} />}
+          <Toast children={toastMsg} float={floatToast}/>
           <Button
             color="primary"
             children="저장"
@@ -182,7 +183,7 @@ const Profile = ({open}) => {
               toast("save")
             }}
           />
-          {floatToast && <Toast children={toastMsg} />}
+          <Toast children={toastMsg} float={floatToast}/>
           {/* <AlertModal /> */}
         </div>
       </section>

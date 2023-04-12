@@ -95,10 +95,12 @@
   @include m.flex(left);
   height: 80%;
   width: 50vw;
+  padding-bottom: 20px;
 }
 
 .checkInfo {
   @include m.flex(left);
+  padding-top: 35px;
 
   > h5 {
     padding: 0px 590px 0px 8px;
@@ -110,7 +112,7 @@
 }
 
 .checkbox {
-  padding-top: 20px;
+  padding-top: 10px;
 
   > svg {
     width: 14px !important;

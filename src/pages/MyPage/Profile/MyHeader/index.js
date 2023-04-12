@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./myHeader.module.scss";
 
 
-const myHeader = (title, subtitle, section) => {
+const MyHeader = (title, subtitle, section) => {
   return (
       <section className={styles.header}>
         <div className={styles.titleWrapper}>
@@ -14,4 +14,4 @@ const myHeader = (title, subtitle, section) => {
   );
 };
 
-export default myHeader;
+export default MyHeader;

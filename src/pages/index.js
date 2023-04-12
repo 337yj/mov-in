@@ -7,9 +7,9 @@ export { default as RegisterPage } from "./Auth/Register";
 export { default as AdminLoginPage } from "./Auth/AdminLogin";
 export { default as AdminRegisterPage } from "./Auth/AdminRegister";
 
-export { default as DetailPage } from "./DetailPage";
-export { default as CommentPage } from "./DetailPage/CommentList";
-export { default as CommentDetailPage } from "./DetailPage/CommentList/CommentDetail";
+// export { default as DetailPage } from "./DetailPage";
+// export { default as CommentPage } from "./DetailPage/CommentList";
+// export { default as CommentDetailPage } from "./DetailPage/CommentList/CommentDetail";
 
 export { default as MyPage } from "./MyPage";
 export { default as UserInfo } from "./MyPage/UserInfo";
@@ -22,7 +22,7 @@ export { default as BOUser } from "./BOPage/./BOUser";
 export { default as BOComment } from "./BOPage/BOComment";
 export { default as BOReport } from "./BOPage/BOReport";
 
-export { default as Comment } from "./DetailPage/CommentList/CommentDetail/Comment";
-export { default as Reply } from "./DetailPage/CommentList/CommentDetail/Comment/Reply";
+// export { default as Comment } from "./DetailPage/CommentList/CommentDetail/Comment";
+// export { default as Reply } from "./DetailPage/CommentList/CommentDetail/Comment/Reply";
 
 export { default as ComponentPage } from "./Component";

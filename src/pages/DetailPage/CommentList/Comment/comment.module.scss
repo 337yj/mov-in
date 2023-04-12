@@ -1,0 +1,140 @@
+@use "../../../../styles/constants/colors" as c;
+@use "../../../../styles/mixins" as m;
+
+.wrapper {
+  @include m.flex(center, flex-start, column);
+  width: 100%;
+  // row-gap: 10px;
+  height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: c.$C_INDIGO;
+
+  .commentHeader {
+    @include m.flex(space-between, center, row);
+    width: 100%;
+
+    .userInfo {
+      @include m.flex();
+      column-gap: 10px;
+
+      .profileImage {
+        width: 40px;
+        // margin-right: 16px;
+      }
+
+      .username {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .points {
+        > span {
+          width: 30px;
+          height: 30px;
+          background-color: c.$C_PURPLE;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .userScore {
+      @include m.flex();
+      font-size: 16px;
+      line-height: 1.2;
+
+      .star {
+        width: 16px;
+        height: 16px;
+        margin: 0 6px;
+        color: c.$C_YELLOW;
+      }
+
+      > span {
+        color: c.$C_YELLOW;
+      }
+    }
+  }
+
+  .commentBody {
+    width: 100%;
+    padding: 12px 0;
+    margin: 12px 0;
+    border-top: 1px solid c.$C_DARKGRAY_80;
+    border-bottom: 1px solid c.$C_DARKGRAY_80;
+    cursor: pointer;
+
+    .content {
+      min-height: 170px;
+      color: c.$C_WHITE;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .bodyBtnWrapper {
+      @include m.flex(flex-end, center, row);
+      column-gap: 14px;
+
+      .modifyBtn,
+      .deleteBtn {
+        // border: 0;
+        // background-color: transparent;
+
+        .iconModify,
+        .iconDelete {
+          width: 23px;
+          height: 23px;
+          color: c.$C_DARKGRAY_80;
+
+          &:hover {
+            color: c.$C_LIGHTGRAY;
+          }
+        }
+      }
+    }
+  }
+
+  .commentFooter {
+    @include m.flex(space-between, center, row);
+    width: 100%;
+
+    .footerBtnWrapper {
+      @include m.flex();
+      column-gap: 10px;
+
+      .likeBtn {
+        @include m.flex();
+        margin-right: 6px;
+        .IconFillLike {
+          width: 22px;
+          height: 22px;
+          margin-right: 8px;
+          color: c.$C_PINK;
+        }
+        .IconLike {
+          width: 22px;
+          height: 22px;
+          margin-right: 8px;
+        }
+      }
+
+      .commentBtn {
+        @include m.flex();
+
+        .iconReply {
+          width: 20px;
+          height: 20px;
+          margin-right: 8px;
+        }
+      }
+    }
+
+    .date {
+      @include m.flex(flex-end);
+
+      color: c.$C_DARKGRAY;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}

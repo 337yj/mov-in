@@ -1,0 +1,21 @@
+@use "../../../styles/constants/colors" as c;
+@use "../../../styles/mixins/" as m;
+
+.wrapper {
+  @include m.flex(center, flex-start, column);
+  width: 100%;
+
+  > h2 {
+    font-size: 24;
+    font-weight: 700;
+    margin-bottom: 34px;
+  }
+
+  .commentList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 20px;
+  }
+}

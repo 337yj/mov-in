@@ -22,6 +22,12 @@
     grid-template-rows: repeat(2, 1fr);
     gap: 16px;
 
+    img {
+      width: 228px;
+      height: 326px;
+      border-radius: 10px;
+    }
+    
     > li {
       margin-bottom: 16px;
       width: 80%;

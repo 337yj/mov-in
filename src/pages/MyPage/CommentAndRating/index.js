@@ -38,7 +38,7 @@ const CommentAndRating = () => {
   return (
     <section className={styles.wrapper}>
       <h2 className={styles.title}>
-        <span>{totalCount}</span>개의 영화를 '좋아요' 했어요 !
+        <span>{totalCount}</span>개의 영화를 평가했어요 !
       </h2>
       <div className={styles.gridContainer}>
         {movies.map((movie) => (

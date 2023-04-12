@@ -35,6 +35,7 @@ const route = (
     <Route path="commentList/:id" element={<CommentPage />} />
     <Route path="commentDetail/:id" element={<CommentDetailPage />} />
 
+
     <Route path="auth">
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />

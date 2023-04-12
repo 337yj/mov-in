@@ -5,10 +5,10 @@ import cx from "classnames";
 import { useMe } from "../../../hooks";
 import { userState } from "../../../state";
 import { getReviewMe } from "../../../api/Review";
+import { updateUser } from "../../../api/User";
 import {
   Button,
   Card,
-  Carousel,
   CheckBox,
   Input,
   Toast,
@@ -18,36 +18,53 @@ import { AlertModal, ImageModal } from "../_shared";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
 import styles from "./profile.module.scss";
 
-const Profile = () => {
+const Profile = ({open}) => {
   const { id } = useParams();
   const user = useMe();
-  //const [myInfo, setMyInfo] = useState();
   const [isPublic, setIsPublic] = useState(false);
   const [introduce, setIntroduce] = useState("");
   const [floatToast, setFloatToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
+  const [myReviews, setMyReviews] = useState([]);
 
   const navigate = useNavigate();
-  const setUser = useSetRecoilState(userState);
+  //const [myInfo, setMyInfo] = useSetRecoilState(userState);
 
   const msgList = {
     cancel: "취소 되었습니다",
     save: "저장 되었습니다",
   };
 
-  const getMyMovie = async () => {
+  const getMyMovieList = async () => {
     try {
       const response = await getReviewMe();
       if (response.status === 200) {
-        setRelatedMovie(response.data);
+        const items = [...response.data].slice(0, 3);
+        setMyReviews(items);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  // const updateUserInfo = async () => {
+  //   try {
+  //     const response = await updateUser();
+  //     if (response.status === 204) {
+  //       const text = [...response.data];
+  //       setIntroduce(text);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+
+  const onClickReview = () => {
+    navigate("/myPage/comment");
+  };
+
   const onClickImage = () => {
-    //navigate(`/myPage/userInfo${user.id}`);
     navigate("/myPage/userInfo");
   };
 
@@ -59,13 +76,11 @@ const Profile = () => {
     setIsPublic(!isPublic);
   };
 
-  const onClickDetail = () => {
-    navigate(`/detail/${movie.id}`);
-  };
+  const onClickSave = async (e) => {
+    e.preventDefault();
+    return
+  }
 
-  const onClickReview = () => {
-    navigate("/myPage/comment");
-  };
 
   const toast = (msg) => {
     if (!floatToast) {
@@ -75,7 +90,8 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    getMyMovie();
+    getMyMovieList();
+    updateUserInfo();
   }, []);
 
   useEffect(() => {
@@ -121,11 +137,12 @@ const Profile = () => {
           />
           <h4>{user?.nickname} 님</h4>
         </div>
+
         <div className={styles.introWrapper}>
           <textarea
-            rows="1"
             className={styles.introText}
-            value={!introduce ? "소개글이 작성 되지 않았습니다" : introduce}
+            value={introduce}
+            placeholder={"소개글을 작성해주세요"}
             onChange={onChangeIntro}
           />
         </div>
@@ -135,9 +152,13 @@ const Profile = () => {
           onChange={onChangeIntro}
         /> */}
         <div className={styles.ratedMovie}>
-          <h1>최근 평가한 영화</h1>
+          <h1>평가한 영화</h1>
           <h6 onClick={onClickReview}>더보기</h6>
-          {/* <Card movie={movie}/> */}
+        </div>
+        <div className={styles.cardList}>
+          {myReviews.map((review) => (
+            <Card movie={review} />
+          ))}
         </div>
 
         <div className={styles.checkInfo}>
@@ -157,8 +178,8 @@ const Profile = () => {
             color="primary"
             children="저장"
             onClick={() => {
-              toast("save");
-              onChangeIntro;
+              onClickSave()
+              toast("save")
             }}
           />
           {floatToast && <Toast children={toastMsg} />}
@@ -169,7 +190,6 @@ const Profile = () => {
       {/* <section>
       {user && !isPublic ? <EditMode /> : <div></div>}
       </section> */}
-
     </main>
   );
 };

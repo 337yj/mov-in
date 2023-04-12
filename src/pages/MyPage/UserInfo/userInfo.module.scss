@@ -1,8 +1,31 @@
 @use "../../../styles/constants/" as c;
+@use "../../../styles/mixins/" as m;
 
 .wrapper {
-  .title {
-    font-size: 36px;
-    color: c.$C_WHITE;
+  padding: 100px 0px;
+
+  .header {
+    width: 100%;
+
+    .titleWrapper {
+      @include m.flex(row);
+
+      .title {
+        font : {
+          size: 36px;
+          weight: 700;
+        }
+        color: c.$C_WHITE;
+      }
+    }
+
+    .subTitle {
+      padding-top: 12px;
+
+      font : {
+        size: 20px;
+        weight: 400;
+      }
+    }
   }
 }

@@ -2,32 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useMe } from "../../../hooks";
 import { updateUser } from "../../../api/User";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
-import {
-  Button,
-  Card,
-  CheckBox,
-  Input,
-  Toast,
-} from "../../../components";
+import { Button, Card, CheckBox, Input, Toast } from "../../../components";
 import styles from "./userInfo.module.scss";
 
 const UserInfo = () => {
-
   const user = useMe();
   const [info, setInfo] = useState({
-    nickname : "",
-    email : "",
-    password : "",
-    birth : ""
+    nickname: "",
+    email: "",
+    password: "",
+    birth: "",
   });
 
-  const myInfoList = {
-    nickname : user.nickname,
-    email : user.email,
-    password : user.password,
-    birth : user.birth
-  }
-  
+  const myInfoData = {
+    nickname: user.nickname,
+    email: user.email,
+    password: user.password,
+    birth: user.birth,
+  };
+
   const onChangeInfo = (e) => {
     const { name, value } = e.target;
     setInfo({
@@ -35,8 +28,6 @@ const UserInfo = () => {
       [name]: value,
     });
   };
-
-
 
   return (
     <main className={styles.wrapper}>
@@ -48,7 +39,7 @@ const UserInfo = () => {
       </header>
       <section>
         <div>
-
+          <img></img>
         </div>
       </section>
     </main>

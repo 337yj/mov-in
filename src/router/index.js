@@ -31,7 +31,10 @@ const route = (
   <Route path="/" element={<Layout />}>
     <Route index element={<HomePage />} />
     <Route path="searchResult" element={<SearchResultPage />} />
-    {/* <Route path="detail/:id" element={<DetailPage />} /> */}
+    <Route path="detail/:id" element={<DetailPage />} />
+    <Route path="commentList/:id" element={<CommentPage />} />
+    <Route path="commentDetail/:id" element={<CommentDetailPage />} />
+
 
     <Route path="auth">
       <Route path="login" element={<LoginPage />} />

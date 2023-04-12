@@ -1,0 +1,158 @@
+@use "../../../styles/constants/colors" as c;
+@use "../../../styles/mixins/" as m;
+
+.backgroundWrapper {
+  @include m.flex();
+  width: 100%;
+  height: 600px;
+  filter: blur(5px);
+
+  .backgroundGradient {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    width: 100%;
+    height: 40%;
+    background: c.$C_INDIGO_GRADIENT;
+    z-index: 1000;
+  }
+
+  .backgroundImg {
+    position: absolute;
+    top: -4px;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.01);
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+.wrapper {
+  @include m.flex(center, center, column);
+  position: relative;
+  width: 100%;
+  //NOTE: margin-top 을 부모 요소에 넣어서 위로 올려버리시면 됩니다~
+  margin-top: -120px;
+
+  .infoWrapper {
+    @include m.flex(space-between);
+    //NOTE: position absolute를 넣으면 부모 요소의 height가 0이 됩니다.
+    // position: absolute;
+    width: 1200px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid c.$C_DARKGRAY;
+
+    .title {
+      @include m.flex();
+      > h1 {
+        padding-right: 24px;
+        font-size: 36px;
+        font-weight: 700;
+      }
+    }
+
+    .info {
+      @include m.flex(center, flex-end, row);
+      height: 36px;
+      font-size: 14px;
+      font-weight: 400;
+
+      > p:not(:first-child)::before {
+        content: "|";
+        margin: 0 10px;
+        color: c.$C_WHITE;
+      }
+    }
+  }
+
+  .detailInfoWrapper {
+    @include m.flex(flex-start, center, column);
+    width: 1200px;
+    height: fit-content;
+    padding: 36px;
+    padding-bottom: 300px;
+    margin-top: 20px;
+    flex-grow: 1;
+    border-radius: 4px;
+    background-color: c.$C_WHITE_10;
+
+    .commentWrapper {
+      width: 100%;
+
+      > h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 34px;
+      }
+
+      .innerWrapper {
+        width: 100%;
+        height: 100%;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: c.$C_INDIGO;
+
+        .commentSection {
+          width: 100%;
+        }
+
+        .replyInputSection {
+          width: 100%;
+          height: 100%;
+          padding-top: 14px;
+          padding-bottom: 6px;
+          margin-top: 14px;
+          margin-bottom: 22px;
+          border-top: 1px solid c.$C_DARKGRAY_80;
+          border-bottom: 1px solid c.$C_DARKGRAY_80;
+
+          .profileWrapper {
+            @include m.flex(space-between);
+
+            .profile {
+              @include m.flex();
+
+              .profileImage {
+                width: 40px;
+                margin-right: 12px;
+              }
+
+              .username {
+                font-size: 18px;
+                font-weight: 700;
+              }
+            }
+          }
+
+          .replyInput {
+            width: 100%;
+            height: 160px;
+            padding: 16px;
+            margin: 12px 0;
+            border-radius: 10px;
+            background-color: c.$C_WHITE_40;
+
+            &::placeholder {
+              color: c.$C_WHITE_70;
+            }
+          }
+        }
+        .replyWrapper {
+          @include m.flex(center, center, column);
+
+          .reply {
+            width: 100%;
+            margin-bottom: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+svg {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}

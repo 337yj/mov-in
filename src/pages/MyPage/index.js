@@ -10,12 +10,14 @@ const MyPage = () => {
 
   return (
     <section className={styles.wrapper}>
-      <LNB
-        title="MY PAGE"
-        menus={menus}
-        basePath="/myPage"
-        selectedPath={pathname.split("/myPage").at(1)}
-      />
+      <div className={styles.lnbWapper}>
+        <LNB
+          title="MY PAGE"
+          menus={menus}
+          basePath="/myPage"
+          selectedPath={pathname.split("/myPage").at(1)}
+        />
+      </div>
       {/* 경로가 "/myPage"일 때만 Profile 컴포넌트를 렌더링 */}
       {pathname === "/myPage" && <Profile />}
       <div className={styles.outletWrapper}>

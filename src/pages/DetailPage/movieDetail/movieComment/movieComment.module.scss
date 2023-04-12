@@ -1,0 +1,43 @@
+@use "../../../../styles/constants" as c;
+@use "../../../../styles/mixins/" as m;
+
+.wrapper {
+  width: 100%;
+  padding: 12px 0;
+
+  > h2 {
+    padding: 24px 0;
+    border-top: 1px solid c.$C_DARKGRAY;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .myComment {
+    margin-bottom: 16px;
+  }
+
+  .commentWrapper {
+    @include m.flex();
+    column-gap: 16px;
+
+    > li {
+      width: 100%;
+    }
+  }
+
+  .btnWrapper {
+    @include m.flex(flex-end);
+
+    .moreBtn {
+      padding: 20px;
+      font-size: 16px;
+      font-weight: 700;
+      color: c.$C_WHITE_80;
+      cursor: pointer;
+
+      &:hover {
+        color: c.$C_YELLOW;
+      }
+    }
+  }
+}

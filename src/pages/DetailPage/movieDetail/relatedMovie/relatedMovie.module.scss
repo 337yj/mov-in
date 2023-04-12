@@ -1,0 +1,32 @@
+@use "../../../../styles/constants" as c;
+@use "../../../../styles/mixins/" as m;
+
+.wrapper {
+  width: 100%;
+  padding-top: 12px;
+  height: 540px;
+  > h2 {
+    padding: 24px 0;
+    border-top: 1px solid c.$C_DARKGRAY;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .listWrapper {
+    @include m.flex(flex-start);
+    // height: 100%;
+    flex-wrap: nowrap;
+    gap: 16px;
+    overflow-x: scroll;
+    // height: 500px;
+    overflow-y: hidden;
+    .card {
+      // width: 260px;
+      // width: 100%;
+      .cardImg {
+        width: 260px;
+        border-radius: 6px;
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useMe } from "../../../hooks";
 import { updateUser } from "../../../api/User";
-import { ImageProfile2 } from "../../../assets/images/profileImages";
-import { Button, Card, CheckBox, Input, } from "../../../components";
+import { ImageProfile3 } from "../../../assets/images/profileImages";
+import { Button, Card, CheckBox, Input, Toast } from "../../../components";
 import styles from "./userInfo.module.scss";
 
 const UserInfo = () => {
@@ -44,7 +44,7 @@ const UserInfo = () => {
           <article className={styles.imgWrapper}>
             <img
               className={styles.profileImg}
-              src={user?.profileImage ?? ImageProfile2} />
+              src={user?.profileImage ?? ImageProfile3} />
             <p>프로필 사진 변경하기</p>
           </article>
           <article className={styles.infoWrapper}>

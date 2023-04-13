@@ -7,29 +7,38 @@ import styles from "./userInfo.module.scss";
 
 const UserInfo = () => {
   const user = useMe();
-  const [info, setInfo] = useState({
+  const [floatToast, setFloatToast] = useState(false);
+  const [toastMsg, setToastMsg] = useState("");
+  const [form, setForm] = useState({
     nickname: "",
     email: "",
     password: "",
     birth: "",
   });
-  const [floatToast, setFloatToast] = useState(false);
-  const [toastMsg, setToastMsg] = useState("");
 
   const myInfoData = {
-    // nickname: user.nickname,
-    // email: user.email,
-    // password: user.password,
-    // birth: user.birth,
+    nickname: user?.nickname,
+    email: user?.email,
+    password: user?.password,
+    birth: user?.birth,
   };
 
   const onChangeInfo = (e) => {
     const { name, value } = e.target;
-    setInfo({
-      ...info,
+    setForm({
+      ...form,
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    setForm({
+      nickname: form?.nickname,
+      email: form?.email,
+      password: '',
+      birth: user?.birth,
+    });
+  }, [form]);
 
   return (
     <main className={styles.wrapper}>
@@ -49,22 +58,35 @@ const UserInfo = () => {
           </article>
           <article className={styles.infoWrapper}>
             <div>
-              <p>닉네임</p>
-              <Input 
-                className={styles.inputText}
-                placeholder={user?.nickname} />
+              <Input
+                name="nickname"
+                label="닉네임"
+                value={form?.nickname}
+                onChange={onChangeInfo}
+                className={styles.inputText} />
             </div>
             <div>
-              <p>이메일</p>
-              <Input className={styles.inputText} />
+              <Input
+                name="email"
+                label="이메일"
+                value={form?.email}
+                onChange={onChangeInfo}
+                className={styles.inputText} />
             </div>
             <div>
-              <p>비밀번호</p>
-              <Input className={styles.inputText} />
+              <Input
+                name="password"
+                label="비밀번호"
+                value={form?.password}
+                onChange={onChangeInfo}
+                className={styles.inputText} />
             </div>
             <div>
-              <p>생년월일</p>
-              <Input className={styles.inputText} />
+              <Input
+                name="birth"
+                label="생년월일"
+                value={user?.birth}
+                className={styles.inputText} />
             </div>
           </article>
         </article>

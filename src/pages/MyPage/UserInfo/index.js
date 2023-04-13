@@ -94,7 +94,7 @@ const UserInfo = () => {
           <article className={styles.imgWrapper}>
             <img
               className={styles.profileImg}
-              src={user?.profileImage ?? ImageProfile3} />
+              src={user?.profileImage ?? ImageProfile2} />
             <p>프로필 사진 변경하기</p>
           </article>
           <article className={styles.infoWrapper}>

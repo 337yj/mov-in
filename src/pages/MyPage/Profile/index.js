@@ -27,11 +27,6 @@ const Profile = () => {
   const navigate = useNavigate();
   //const [myInfo, setMyInfo] = useSetRecoilState(userState);
 
-  const msgList = {
-    cancel: "취소 되었습니다",
-    save: "저장 되었습니다",
-  };
-
   const getMyMovieList = async () => {
     try {
       const response = await getReviewMe();

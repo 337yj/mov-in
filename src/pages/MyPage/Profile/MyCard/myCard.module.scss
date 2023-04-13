@@ -44,7 +44,7 @@
     }
 
     .myScore {
-      //@include m.flex();
+      @include m.flex();
       margin-top: 4px;
       font-size: 14px;
       color: c.$C_WHITE;

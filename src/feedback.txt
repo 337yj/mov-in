@@ -21,3 +21,4 @@ adminYun@aa.aa
 4. myPage > 코멘트 및 평점, 북마크
 undefined로 넘어오는 문제
 
+5. Bopage > Bomovie 모달 X를 누르면 에러가 뜹니다ㅜㅜ

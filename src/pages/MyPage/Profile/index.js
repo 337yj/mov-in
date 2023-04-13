@@ -142,14 +142,14 @@ const Profile = () => {
           onChange={onChangeIntro}
         /> */}
         <div className={styles.ratedMovie}>
-          <h1>평가한 영화</h1>
-          <h6 onClick={onClickReview}>더보기</h6>
+          <h1>최근 평가한 영화</h1>
         </div>
         <div className={styles.cardList}>
           {myReviews.map((review) => (
             <MyCard movie={review} />
-          ))}
+            ))}
         </div>
+        <h6 onClick={onClickReview}>더보기</h6>
 
         <div className={styles.checkInfo}>
           <CheckBox

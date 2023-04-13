@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMe } from "../../../hooks";
 import { updateUser } from "../../../api/User";
-import { ImageProfile2 } from "../../../assets/images/profileImages";
+import { ImageProfile3 } from "../../../assets/images/profileImages";
 import { Button, Card, CheckBox, Input, Toast } from "../../../components";
 import styles from "./userInfo.module.scss";
 
@@ -39,7 +39,7 @@ const UserInfo = () => {
       </header>
       <section>
         <div>
-          <img></img>
+          <img src={user?.profileImage ?? ImageProfile3}></img>
         </div>
       </section>
     </main>

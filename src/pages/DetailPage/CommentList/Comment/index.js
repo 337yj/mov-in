@@ -143,7 +143,7 @@ const Comment = ({
         <p className={styles.userScore}>
           평점
           <BsStarFill className={styles.star} />
-          <span>{comment.score?.toFixed(1)}</span>
+          {/* <span>{comment.score?.toFixed(1)}</span> */}
         </p>
       </div>
       <div className={styles.commentBody}>

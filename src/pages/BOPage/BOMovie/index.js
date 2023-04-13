@@ -33,7 +33,7 @@ const BOMovie = ({ movie }) => {
     제목: movie.title ?? "-",
     감독: movie.staffs.find((staff) => staff.role === "감독")?.name ?? "-",
     장르: movie.genres.map((genre) => genre?.name).join(", ") ?? "-",
-    평균평점: movie.averageScore.toFixed(1) ?? "-",
+    // 평균평점: movie.averageScore.toFixed(1) ?? "-",
     개봉일자: dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));
 

@@ -2,7 +2,7 @@
 @use "../../../styles/mixins/" as m;
 
 .wrapper {
-  padding: 100px 0px;
+  padding: 100px 100px;
 
   .header {
     width: 100%;
@@ -25,6 +25,63 @@
       font : {
         size: 20px;
         weight: 400;
+      }
+    }
+  }
+
+  .section {
+    margin-top: 60px;
+    width: 100%;
+
+    .upper {
+      @include m.flex(space-between);
+
+      .imgWrapper {
+        @include m.flex(center, center, column);
+        margin-right: 100px;
+
+        > img {
+          margin-bottom: 36px;
+        }
+
+        font : {
+          size: 14px;
+        }
+        color: c.$C_WHITE_70;
+      }
+
+      .infoWrapper {
+        > div {
+
+          > label {
+            @include m.flex();
+            font-size: 24px;
+
+            p {
+              width: 200px;
+            }
+          }
+
+          > .inputText {
+            width: 662px;
+          }
+        }
+      }
+    }
+
+    .bottom {
+      > p {
+        @include m.flex(flex-end);
+        color: c.$C_PINK_80;
+      }
+
+      > .btns {
+        @include m.flex(flex-end);
+        margin-top: 35px;
+
+        > button {
+          margin-left: 10px;
+        }
       }
     }
   }

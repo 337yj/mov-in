@@ -6,21 +6,28 @@ import { IconGreenCheck } from "../../../assets/icon";
 import { IconClose } from "../../../assets/icon";
 
 const transitionStyle = {
-  entering: {
-    transform: "translate(-50%, 40px)",
-    transition: "transform 1s ease-in-out",
+  entering : {
+    opacity : 1,
+    //위치 조정
+    transform: "translate(-50%, 140%)",
+    //애니메이션 조정
+    transition: "opacity 500ms ease-in-out"
   },
 
-  exiting: {
-    transform: "translate(-50%, -100px)",
-    transition: "transform 1s ease-in-out",
+  exiting : {
+    opacity : 0,
+    //위치 조정
+    transform: "translate(-50%, 140%)",
+    //애니메이션 조정
+    transition: "opacity 500ms ease-in-out"
   },
 
-  exited: {
-    transform: "translate(-50%, -100px)",
-    transition: "transform 1s ease-in-out",
-  },
-};
+//   exited: {
+//     opacity : 0,
+//     transform: 'translate(-50%, 140%)',
+//     transition: "opacity 500ms ease-in-out"
+// }
+}
 
 const Toast = ({ className, type, children, func, float, ...props }) => {
   return (

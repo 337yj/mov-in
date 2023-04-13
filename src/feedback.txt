@@ -6,6 +6,7 @@ yun@aa.aa
 adminYun@aa.aa 
 12345678
 
+
 1. 리뷰 수정시 400에러
 (DetailPage > _shared > CommentModal - CommentList > Comment)
 
@@ -16,3 +17,7 @@ adminYun@aa.aa
 
 3. 코멘트 디테일 페이지에서 댓글을 남기고 
 뒤로가기를 2번 눌러야 코멘트리스트페이지로 이동이됨
+
+4. myPage > 코멘트 및 평점, 북마크
+undefined로 넘어오는 문제
+

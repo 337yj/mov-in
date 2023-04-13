@@ -7,14 +7,14 @@ import { Modal, Button } from "../../../../components";
 
 import styles from "./boUserModal.module.scss";
 
-const BoUserModal = ({ user, modal, setModal }) => {
-  const onClickModal = () => {
-    setModal(!modal);
-  };
-
+const BoUserModal = ({ user, modal, onCloseModal }) => {
   const { id, userId } = useParams();
 
   const [users, setUsers] = useState([]);
+
+  const onClickModal = () => {
+    onCloseModal();
+  };
 
   const onGetUsersDetail = async () => {
     try {
@@ -62,8 +62,8 @@ const BoUserModal = ({ user, modal, setModal }) => {
                   src={user.id.profileImage}
                   alt="thumbnail"
                 />
-                <Button color={"dark"} children={user.id.likeCount} />
-                <Button color={"dark"} children={user.id.reviewCount} />
+                <Button color={"dark"}>{user.id.likeCount}</Button>
+                <Button color={"dark"}>{user.id.reviewCount}</Button>
               </figure>
 
               <div className={styles.content}>
@@ -82,16 +82,12 @@ const BoUserModal = ({ user, modal, setModal }) => {
               </div>
             </section>
             <div className={styles.buttonWrapper}>
-              <Button
-                className={styles.modify}
-                color={"danger"}
-                children={"탈퇴"}
-              />
-              <Button
-                className={styles.cancel}
-                color={"secondary"}
-                children={"취소"}
-              />
+              <Button className={styles.modify} color={"danger"}>
+                탈퇴
+              </Button>
+              <Button className={styles.cancel} color={"secondary"}>
+                취소
+              </Button>
             </div>
           </form>
         </Modal>

@@ -7,20 +7,20 @@ import { Modal, Button } from "../../../../components";
 
 import styles from "./boCommentModal.module.scss";
 
-const BoMovieModal = ({ movie, modal, setModal }) => {
+const BoMovieModal = ({ comment, user, modal, onCloseModal }) => {
+  const { id, profileImage } = useParams();
+
+  const [comments, setComments] = useState([]);
+
   const onClickModal = () => {
-    setModal(!modal);
+    onCloseModal();
   };
-
-  const { id } = useParams();
-
-  const [comment, setComment] = useState([]);
 
   const onGetCommentsDetail = async () => {
     try {
       const response = await getReviewsDetail(id);
       if (response.status === 200) {
-        setComment(response.data);
+        setComments(response.data);
       }
     } catch (error) {
       console.error(error);
@@ -39,7 +39,7 @@ const BoMovieModal = ({ movie, modal, setModal }) => {
     modal && (
       <Modal
         className={styles.boCommentModal}
-        review={id}
+        review={comment}
         title={"코멘트 관리"}
         onClick={onClickModal}
       >
@@ -47,7 +47,7 @@ const BoMovieModal = ({ movie, modal, setModal }) => {
           <section className={styles.content}>
             <figure className={styles.profile}>
               <img
-                src={id.profileImage}
+                src={user.profileImage}
                 alt="profileImage"
                 className={styles.profileImage}
               />
@@ -64,16 +64,12 @@ const BoMovieModal = ({ movie, modal, setModal }) => {
             />
           </section>
           <div className={styles.buttonWrapper}>
-            <Button
-              className={styles.delete}
-              color={"primary"}
-              children={"삭제"}
-            />
-            <Button
-              className={styles.cancel}
-              color={"secondary"}
-              children={"취소"}
-            />
+            <Button className={styles.delete} color={"primary"}>
+              삭제
+            </Button>
+            <Button className={styles.cancel} color={"secondary"}>
+              취소
+            </Button>
           </div>
         </form>
       </Modal>

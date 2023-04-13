@@ -139,8 +139,8 @@ const Component = () => {
             <Table
               columns={columns}
               data={data}
-              firstButton={<Button color="warning" text="보기" />}
-              secondButton={<Button color="danger" text="탈퇴" />}
+              firstButton={<Button color="warning" children="보기" />}
+              secondButton={<Button color="danger" children="탈퇴" />}
             />
           </div>
           <div>

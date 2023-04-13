@@ -5,3 +5,9 @@ export const menus = [
   { name: "좋아요", path: "/like" },
   { name: "북마크", path: "/bookmark" },
 ];
+
+export const msgList = {
+  save : "저장 되었습니다",
+  cancel : "취소 되었습니다",
+  delete : "탈퇴 되었습니다"
+}

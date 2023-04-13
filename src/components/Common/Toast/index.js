@@ -22,11 +22,11 @@ const transitionStyle = {
     transition: "opacity 500ms ease-in-out"
   },
 
-//   exited: {
-//     opacity : 0,
-//     transform: 'translate(-50%, 140%)',
-//     transition: "opacity 500ms ease-in-out"
-// }
+  exited: {
+    opacity : 0,
+    transform: 'translate(-50%, 140%)',
+    transition: "opacity 500ms ease-in-out"
+}
 }
 
 const Toast = ({ className, type, children, func, float, ...props }) => {

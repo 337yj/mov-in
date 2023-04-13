@@ -19,12 +19,8 @@ const POST_PER_PAGE = 10;
 
 const BOUser = ({ user }) => {
   const [users, setUsers] = useState([]);
-  // const [likeCount, setLikeCount] = useState([]);
-  // const [commentCount, setCommentCount] = useState([]);
-  const [currentPage, setCurrentPage] = useState([]); // 보여줄 페이지
+  const [selectedUser, setSelectedUser] = useState(null);
   const [page, setPage] = useState(1); // 현재 페이지
-  const nextPage = page * POST_PER_PAGE;
-  const PrevPage = nextPage - POST_PER_PAGE;
   const [totalCount, setTotalCount] = useState(0);
 
   const [modal, setModal] = useState(false);
@@ -36,8 +32,16 @@ const BOUser = ({ user }) => {
     가입일자: dayjs(user.createdAt, "YYYYMMDD").format("YYYY.MM.DD"),
   }));
 
-  const onClickModal = () => {
-    setModal(!modal);
+  const onClickModal = (user) => {
+    return () => {
+      setModal(!modal);
+      selectedUser(user);
+    };
+  };
+
+  const onCloseModal = () => {
+    setModal(false);
+    setSelectedUser(null);
   };
 
   const onChange = (page) => {
@@ -67,6 +71,17 @@ const BOUser = ({ user }) => {
     }
   };
 
+  const onGetUserDelete = async () => {
+    try {
+      const response = await deleteUser(id);
+      if (response.status === 204) {
+        setUsers(response.data.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     onGetUsers();
     onGetUsersCount();
@@ -84,10 +99,12 @@ const BOUser = ({ user }) => {
       <Table
         columns={columns}
         data={data}
-        firstButton={
-          <Button color={"warning"} children={"보기"} onclick={onClickModal} />
-        }
-        secondButton={<Button color={"danger"} children={"탈퇴"} />}
+        firstButton={(user) => (
+          <Button color={"warning"} onclick={onCloseModal(user)}>
+            보기
+          </Button>
+        )}
+        secondButton={<Button color={"danger"}>탈퇴</Button>}
       />
       <BoUserModal user={user} modal={modal} setModal={setModal} />
       <Paging

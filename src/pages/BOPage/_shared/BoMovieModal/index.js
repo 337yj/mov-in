@@ -9,13 +9,13 @@ import styles from "./boMovieModal.module.scss";
 import { BsFillHeartFill } from "react-icons/bs";
 
 const BoMovieModal = ({ movie, modal, onCloseModal }) => {
-  const onClickModal = () => {
-    onCloseModal();
-  };
-
   const { id } = useParams();
 
   const [movies, setMovies] = useState([]);
+
+  const onClickModal = () => {
+    onCloseModal();
+  };
 
   const onGetMovieDetail = async () => {
     try {
@@ -29,7 +29,7 @@ const BoMovieModal = ({ movie, modal, onCloseModal }) => {
   };
 
   useEffect(() => {
-    onGetMovieDetail();
+    onGetMovieDetail(movie);
   }, [id]);
 
   console.log({ modal, movie });
@@ -74,16 +74,12 @@ const BoMovieModal = ({ movie, modal, onCloseModal }) => {
             </div>
           </section>
           <div className={styles.buttonWrapper}>
-            <Button
-              className={styles.modify}
-              color={"primary"}
-              children={"수정"}
-            />
-            <Button
-              className={styles.cancel}
-              color={"secondary"}
-              children={"취소"}
-            />
+            <Button className={styles.modify} color={"primary"}>
+              수정
+            </Button>
+            <Button className={styles.cancel} color={"secondary"}>
+              취소
+            </Button>
           </div>
         </form>
       </Modal>

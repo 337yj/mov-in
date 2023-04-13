@@ -7,6 +7,7 @@ import {
 } from "../../../api/Review";
 
 import { SearchInput, Table, Button, Paging } from "../../../components";
+import { BoCommentModal } from "../_shared";
 
 import styles from "./boComment.module.scss";
 import dayjs from "dayjs";
@@ -21,8 +22,9 @@ const columns = [
 
 const POST_PER_PAGE = 10;
 
-const BOComment = () => {
+const BOComment = ({ comment }) => {
   const [comments, setComments] = useState([]);
+  const [selectedComment, setSelectedComment] = useState(null);
   const [page, setPage] = useState(1); // 현재 페이지
   const [totalCount, setTotalCount] = useState(0);
 
@@ -36,8 +38,16 @@ const BOComment = () => {
     작성일자: dayjs(comment.createdAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));
 
-  const onClickModal = () => {
-    setModal(!modal);
+  const onClickModal = (comment) => {
+    return () => {
+      setModal(!modal);
+      selectedComment(comment);
+    };
+  };
+
+  const onCloseModal = () => {
+    setModal(false);
+    setSelectedComment(null);
   };
 
   const onChange = (page) => {
@@ -81,10 +91,17 @@ const BOComment = () => {
       <Table
         columns={columns}
         data={data}
-        firstButton={
-          <Button color={"warning"} children={"보기"} onclick={onClickModal} />
-        }
-        secondButton={<Button color={"primary"} children={"삭제"} />}
+        firstButton={(comment) => (
+          <Button color={"warning"} onclick={onClickModal(comment)}>
+            보기
+          </Button>
+        )}
+        secondButton={<Button color={"primary"}>삭제</Button>}
+      />
+      <BoCommentModal
+        comment={selectedComment}
+        modal={modal}
+        onCloseModal={onCloseModal}
       />
       <Paging
         totalCount={totalCount}

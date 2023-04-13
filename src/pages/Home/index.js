@@ -140,7 +140,7 @@ const Home = () => {
               {dayjs(mainInfo?.releasedAt, "YYYYMMDD").format("YYYY.MM")}
               <span>
                 <BsStarFill className={styles.star} />
-                {mainInfo?.averageScore.toFixed(1)}
+                {/* {mainInfo?.averageScore.toFixed(1)} */}
               </span>
             </p>
             <p className={styles.plot}>{mainInfo?.plot}</p>

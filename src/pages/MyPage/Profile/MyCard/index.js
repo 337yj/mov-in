@@ -31,7 +31,7 @@ const MyCard = ({ movie }) => {
           {movie.movie.averageScore ? (
             <span className={styles.score}>
               {<BsStarFill className={styles.star} />}
-              {movie.averageScore.toFixed(1)}
+              {/* {movie.averageScore.toFixed(1)} */}
             </span>
           ) : (
             // 에러 -> 목록 확인 불가로 평균 평점 임시로 띄움
@@ -39,7 +39,7 @@ const MyCard = ({ movie }) => {
           )}
           <span className={styles.myScore}>
             {<BsStarFill className={styles.star} />}
-            {movie.score.toFixed(1)}
+            {/* {movie.score.toFixed(1)} */}
           </span>
         </div>
       </div>

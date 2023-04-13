@@ -40,7 +40,7 @@ const Card = ({
           {movie.averageScore ? (
             <span className={styles.score}>
               {<BsStarFill className={styles.star} />}
-              {movie.averageScore.toFixed(1)}
+              {/* {movie.averageScore.toFixed(1)} */}
             </span>
           ) : (
             <p className={styles.nullScore}>평가된 별점이 없습니다.</p>

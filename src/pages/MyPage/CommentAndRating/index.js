@@ -8,7 +8,10 @@ const POST_PER_PAGE = 10;
 
 const CommentAndRating = () => {
   const [movies, setMovies] = useState([]);
+  const [currentMovies, setCurrentMovies] = useState([]);
   const [page, setPage] = useState(1);
+  const indexOfLastPost = page * POST_PER_PAGE;
+  const indexOfFirstPost = indexOfLastPost - POST_PER_PAGE;
   const [totalCount, setTotalCount] = useState(0);
 
   const onChange = (page) => {
@@ -16,10 +19,11 @@ const CommentAndRating = () => {
   };
 
   const onGetMovies = async () => {
-    const response = await getReviewMe();
+    const response = await getReviewMe(page, POST_PER_PAGE);
     if (response.status === 200) {
       const movie = [...response.data];
       setMovies(movie);
+      setCurrentMovies(movie);
     }
   };
 
@@ -33,18 +37,20 @@ const CommentAndRating = () => {
   useEffect(() => {
     onGetMovies();
     onGetMoviesCount();
-  }, []);
+  }, [page]);
 
   return (
     <section className={styles.wrapper}>
       <h2 className={styles.title}>
         <span>{totalCount}</span>개의 영화를 평가했어요 !
       </h2>
-      <div className={styles.gridContainer}>
-        {movies.map((movie) => (
-            <Card movie={movie} />
+      <ul className={styles.gridContainer}>
+        {currentMovies.slice(indexOfFirstPost, indexOfLastPost).map((movie) => (
+            <li key={movie.id}>
+              <Card movie={movie} />
+            </li>
         ))}
-      </div>
+      </ul>
       <Paging
         totalCount={totalCount}
         page={page}

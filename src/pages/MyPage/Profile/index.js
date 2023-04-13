@@ -19,10 +19,10 @@ import { AlertModal, ImageModal } from "../_shared";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
 import styles from "./profile.module.scss";
 
-const Profile = ({open}) => {
-  const { id } = useParams();
-  const user = useMe();
+const Profile = () => {
+  const user = useRecoilValue(userState);
   const [isPublic, setIsPublic] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [introduce, setIntroduce] = useState("");
   const [floatToast, setFloatToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");

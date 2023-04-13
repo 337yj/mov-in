@@ -15,8 +15,5 @@ detailComment.movie.id를 넣어봐도 에러가 생겨서
 
 2. DetailPage 구조를 변경해보았는데 적절하게 한건지 궁금합니다
 
-3. mypage/profile
-useMe로 소개글을 어떻게 넘겨야할지 감이 잘 안옵니다..
-
-4. Layout > Header
+3. Layout > Header
 최상단에만 고정되고, 스크롤을 내리면 화면에 안보이게 하는법

@@ -34,15 +34,12 @@ const route = (
     <Route path="detail/:id" element={<DetailPage />} />
     <Route path="commentList/:id" element={<CommentPage />} />
     <Route path="commentDetail/:id" element={<CommentDetailPage />} />
-
-
     <Route path="auth">
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="adminLogin" element={<AdminLoginPage />} />
       <Route path="adminRegister" element={<AdminRegisterPage />} />
     </Route>
-
     <Route path="myPage" element={<MyPage />}>
       <Route path="userInfo" element={<UserInfo />} />
       <Route path="comment" element={<CommentAndRating />} />

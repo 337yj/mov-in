@@ -57,24 +57,29 @@ const CommentDetail = ({ comment, ...props }) => {
     // onGetMovieDetail();
   }, [id]);
 
-  // console.log(detailComment.movie.id);
-  // const movieId = detailComment.movie.id
-  // const onGetMovieDetail = async () => {
-  //   try {
-  //     const response = await getMovie(movieId);
-  //     if (response.status === 200) {
-  //       setDetailMovie(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const onGetMovieDetail = async () => {
+    try {
+      const movieId = detailComment?.movie?.id;
+      const response = await getMovie(movieId);
+      if (response.status === 200) {
+        setDetailMovie(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   //NOTE: return null은 보통 맨 마지막에 위치
   // if (!id) {
   //   return null;
   // }
   // const formattedRuntime = formatRuntime(movie?.runtime || 0);
+
+  useEffect(() => {
+    if (detailComment?.movie) {
+      onGetMovieDetail();
+    }
+  }, [detailComment]);
   return (
     <main>
       <div className={styles.backgroundWrapper}>

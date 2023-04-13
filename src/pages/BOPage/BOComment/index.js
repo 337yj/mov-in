@@ -31,7 +31,7 @@ const BOComment = () => {
   const data = comments.map((comment) => ({
     닉네임: comment.nickname ?? "-",
     코멘트: comment.content ?? "-",
-    평점: comment.score.toFixed(1) ?? "-",
+    // 평점: comment.score.toFixed(1) ?? "-",
     좋아요: comment.likeCount ?? "-",
     작성일자: dayjs(comment.createdAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));

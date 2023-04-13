@@ -6,14 +6,5 @@ yun@aa.aa
 adminYun@aa.aa 
 12345678
 
-1. DetailPage > CommentDetail
-영화디테일페이지의 레이아웃을(뒷배경, 영화제목, 장르 등) 
-코멘트 디테일페이지, 코멘트 리스트페이지에서도 똑같이 하고 싶은데
-detailComment.movie.id를 넣어봐도 에러가 생겨서
-해당 리뷰의 movie id를 어떻게 얻어야 할까요?
-
-2. DetailPage 구조를 변경해보았는데 적절하게 한건지 궁금합니다
- -> CommentList 페이지 레이아웃만 수정하면 될 것 같습니다!
-
-3. Layout > Header
-최상단에만 고정되고, 스크롤을 내리면 화면에 안보이게 하는법
+1. myPage > 코멘트 및 평점, 북마크
+undefined로 넘어오는 문제

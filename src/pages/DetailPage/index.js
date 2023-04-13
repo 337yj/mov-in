@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { getMovie } from "../../api/Movie";
+import { useLocation, useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
+import { getMovie } from "../../api/Movie";
 import { commentIdState } from "../../state";
-import { RelatedMovie, MovieComment, MovieInfo } from "./movieDetail";
-
-import CommentList from "./CommentList";
+import { MovieComment, MovieInfo, RelatedMovie } from "./movieDetail";
 
 import dayjs from "dayjs";
 import { IconLink } from "../../assets";
-import styles from "./detail.module.scss";
 import { Toast } from "../../components";
 import { formatRuntime } from "./_shared/formatRuntime";
+import styles from "./detail.module.scss";
 
 const Detail = () => {
   const ref = useRef(null);

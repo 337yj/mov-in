@@ -34,6 +34,8 @@ const MovieComment = ({ movie }) => {
     }
   };
 
+  console.log({ comments });
+
   useEffect(() => {
     onGetMovieReview();
   }, [id]);

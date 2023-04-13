@@ -6,13 +6,7 @@ import { useMe } from "../../../hooks";
 import { userState } from "../../../state";
 import { getReviewMe } from "../../../api/Review";
 import { updateUser } from "../../../api/User";
-import {
-  Button,
-  Card,
-  CheckBox,
-  Input,
-  Toast,
-} from "../../../components";
+import { Button, Card, CheckBox, Input, Toast } from "../../../components";
 // import EditMode from "./EditMode";
 import MyCard from "./MyCard";
 import { AlertModal, ImageModal } from "../_shared";
@@ -20,7 +14,9 @@ import { ImageProfile2 } from "../../../assets/images/profileImages";
 import styles from "./profile.module.scss";
 
 const Profile = () => {
-  const user = useRecoilValue(userState);
+  //const user = useRecoilValue(userState);
+  const { id } = useParams();
+  const user = useMe();
   const [isPublic, setIsPublic] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [introduce, setIntroduce] = useState("");
@@ -60,7 +56,6 @@ const Profile = () => {
   //   }
   // };
 
-
   const onClickReview = () => {
     navigate("/myPage/comment");
   };
@@ -79,9 +74,8 @@ const Profile = () => {
 
   const onClickSave = async (e) => {
     e.preventDefault();
-    return
-  }
-
+    return;
+  };
 
   const toast = (msg) => {
     if (!floatToast) {
@@ -174,16 +168,16 @@ const Profile = () => {
             children="취소"
             onClick={() => toast("cancel")}
           />
-          <Toast children={toastMsg} float={floatToast}/>
+          <Toast children={toastMsg} float={floatToast} />
           <Button
             color="primary"
             children="저장"
             onClick={() => {
-              onClickSave()
-              toast("save")
+              onClickSave();
+              toast("save");
             }}
           />
-          <Toast children={toastMsg} float={floatToast}/>
+          <Toast children={toastMsg} float={floatToast} />
           {/* <AlertModal /> */}
         </div>
       </section>

@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+import {
+  createReviewsLike,
+  deleteReviews,
+  deleteReviewsLike,
+  getMovieMyReview,
+} from "../../../../api/Review";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../../state";
+import { Tag, Toast } from "../../../../components";
+import CommentModal from "../../_shared/CommentModal";
 import {
   BsFillHeartFill,
   BsHeart,
@@ -7,29 +18,36 @@ import {
   BsStarFill,
   BsTrash,
 } from "react-icons/bs";
-import styles from "./comment.module.scss";
-import { ImageProfile1 } from "../../../../assets";
-import { useNavigate } from "react-router-dom";
-import CommentModal from "../../_shared/CommentModal";
-import { Tag, Toast } from "../../../../components";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { myCommentState, userState } from "../../../../state";
-import {
-  createReviewsLike,
-  deleteReviews,
-  deleteReviewsLike,
-} from "../../../../api/Review";
 import { TfiCommentAlt } from "react-icons/tfi";
+import { ImageProfile1 } from "../../../../assets";
+import styles from "./comment.module.scss";
 
-const Comment = ({ comment, profileImage, className, ...props }) => {
+const Comment = ({
+  comment,
+  profileImage,
+  className,
+  onGetCommentDetail,
+  onGetReviewsMovie,
+  ...props
+}) => {
   const navigate = useNavigate();
-  const [toastFloat, setToastFloat] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [myComment, setMyComment] = useRecoilState(myCommentState);
-  const user = useRecoilValue(userState);
-  const [isModified, setIsModified] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const [updatedComment, setUpdatedComment] = useState(comment);
+  const [isModified, setIsModified] = useState(false);
+  const [review, setReview] = useState({});
+  const [myComment, setMyComment] = useState();
+  const [modal, setModal] = useState(false);
+  const [toastFloat, setToastFloat] = useState(false);
+  const enjoyPoints = comment?.enjoyPoints ? comment?.enjoyPoints : [];
+  const tensions = comment?.tensions ? comment?.tensions : [];
+  const user = useRecoilValue(userState);
+
+  const isAuthor = comment?.user?.id === user?.id;
+
+  const onClickNavigate = (path) => {
+    return () => {
+      navigate(path);
+    };
+  };
 
   const checkIsLiked = async () => {
     if (user) {
@@ -38,9 +56,7 @@ const Comment = ({ comment, profileImage, className, ...props }) => {
       setIsLiked(false);
     }
   };
-  const onEditClick = () => {
-    setModal(true);
-  };
+
   const onClickNotUser = () => {
     if (!user) {
       setToastFloat(true);
@@ -51,64 +67,52 @@ const Comment = ({ comment, profileImage, className, ...props }) => {
     }
   };
 
-  const onClickCommentLike = async (e) => {
+  const onClickCommentLike = async () => {
     onClickNotUser();
     try {
       if (isLiked) {
         await deleteReviewsLike(comment?.id);
+        onGetCommentDetail();
       } else {
         await createReviewsLike(comment?.id);
+        onGetCommentDetail();
       }
       setIsLiked(!isLiked);
     } catch (error) {
       console.error(error);
     }
   };
-  console.log(isLiked);
-  console.log(comment);
 
-  // useEffect(() => {
-  //   setIsLiked(comment?.isLiked);
-  // }, [comment]);
+  const onEditClick = () => {
+    setModal(true);
+    setIsModified(true);
+  };
+
+  const onClickDelete = async () => {
+    await deleteReviews(comment?.id);
+    const currentPathname = window.location.pathname;
+    if (currentPathname.startsWith("/commentDetail")) {
+      onGetCommentDetail();
+      navigate(-1);
+    }
+    onGetReviewsMovie();
+  };
+
+  const onGetMyComment = async () => {
+    const response = await getMovieMyReview(comment?.movie?.id);
+    if (response.status === 200) {
+      if (response.data) setMyComment(response.data);
+    }
+  };
+  console.log(myComment);
+  useEffect(() => {
+    setIsLiked(review.isLiked);
+  }, [review]);
 
   useEffect(() => {
     checkIsLiked();
+    onGetMyComment();
   }, [comment?.id]);
-
-  const enjoyPoints = comment?.enjoyPoints ? comment?.enjoyPoints : [];
-  const tensions = comment?.tensions ? comment?.tensions : [];
-
-  const toggleModal = () => setModal((prev) => !prev);
-  const isAuthor = comment?.user?.id === user?.id;
-
-  const onClickModified = () => {
-    setIsModified(true);
-  };
-  const onClickNavigate = (path) => {
-    return () => {
-      navigate(path);
-    };
-  };
-  const onClickDelete = async () => {
-    await deleteReviews(myComment?.id);
-    //NOTE: 삭제하고 나서 tab을 초기화 + alert + recoil state도 변경
-    // navigate(`commentList/:${comment.movie.id}`);
-    navigate(-1);
-    setToastFloat(true);
-    setTimeout(() => {
-      setToastFloat(false);
-    }, 1500);
-  };
-
-  useEffect(() => {
-    setToastFloat(false); // 페이지 렌더링될 때 toastFloat 초기화
-  }, []);
-
-  useEffect(() => {
-    if (!comment && toastFloat) {
-      setToastFloat(false); // 페이지가 404 에러가 발생했을 때 toastFloat 초기화
-    }
-  }, [comment, toastFloat]);
 
   if (!comment) {
     return null;
@@ -142,12 +146,14 @@ const Comment = ({ comment, profileImage, className, ...props }) => {
           {/* <span>{comment.score?.toFixed(1)}</span> */}
         </p>
       </div>
-      <div
-        className={styles.commentBody}
-        onClick={onClickNavigate(`/commentDetail/${comment.id}`)}
-      >
-        {toastFloat && <Toast>코멘트가 삭제되었습니다.</Toast>}
-        <p className={styles.content}>{comment.content}</p>
+      <div className={styles.commentBody}>
+        {/* <Toast float={toastFloat}>코멘트가 삭제되었습니다.</Toast> */}
+        <p
+          className={styles.content}
+          onClick={onClickNavigate(`/commentDetail/${comment.id}`)}
+        >
+          {comment.content}
+        </p>
         {isAuthor && (
           <div className={styles.bodyBtnWrapper}>
             <button className={styles.modifyBtn} onClick={onEditClick}>
@@ -165,10 +171,11 @@ const Comment = ({ comment, profileImage, className, ...props }) => {
           modal={modal}
           isModified={isModified}
           setModal={setModal}
+          myComment={myComment}
         />
       </div>
       <div className={styles.commentFooter}>
-        {toastFloat && <Toast>로그인 후 이용 가능합니다.</Toast>}
+        {/* {toastFloat && <Toast>로그인 후 이용 가능합니다.</Toast>} */}
         <div className={styles.footerBtnWrapper}>
           <button className={styles.likeBtn} onClick={onClickCommentLike}>
             {isLiked ? (
@@ -176,11 +183,11 @@ const Comment = ({ comment, profileImage, className, ...props }) => {
             ) : (
               <BsHeart className={styles.IconLike} />
             )}
-            <span>좋아요 {comment?.likeCount ?? "0"}개</span>
+            <span>좋아요 {comment?.likeCount ?? "0"}</span>
           </button>
           <button type="button" className={styles.commentBtn}>
             <TfiCommentAlt className={styles.iconReply} />
-            <span>댓글 {comment?.comments?.length ?? "0"}개</span>
+            <span>댓글 {comment?.comments?.length ?? "0"}</span>
           </button>
         </div>
         <p className={styles.date}>

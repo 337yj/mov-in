@@ -1,26 +1,14 @@
 import React, { useEffect, useState } from "react";
-import dayjs from "dayjs";
-
-import styles from "./reply.module.scss";
-import { ImageProfile4 } from "../../../../assets";
-import { userState } from "../../../../state";
-import { useRecoilValue } from "recoil";
-import {
-  BsCheck,
-  BsCheck2,
-  BsHeart,
-  BsHeartFill,
-  BsPencilSquare,
-  BsTrash,
-  BsX,
-  BsXSquare,
-} from "react-icons/bs";
 import {
   deleteReviewsComments,
   updateReviewsComments,
 } from "../../../../api/Review";
-
-//TODO:
+import { userState } from "../../../../state";
+import { useRecoilValue } from "recoil";
+import dayjs from "dayjs";
+import { ImageProfile4 } from "../../../../assets";
+import { BsCheck2, BsPencilSquare, BsTrash, BsX } from "react-icons/bs";
+import styles from "./reply.module.scss";
 
 const Reply = ({
   profileImage,
@@ -33,7 +21,7 @@ const Reply = ({
   ...props
 }) => {
   const [replyContent, setReplyContent] = useState(reply.content);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isModify, setIsModify] = useState(false);
   const user = useRecoilValue(userState);
   const isAuthor = reply?.user?.id === user?.id;
 
@@ -42,26 +30,26 @@ const Reply = ({
   };
 
   const onSubmit = async () => {
-    if (!isEditing) return;
+    if (!isModify) return;
 
     const replyData = { content: replyContent };
     try {
       await updateReviewsComments(reply.id, replyData);
-      await onGetCommentDetail();
-      setIsEditing(false);
+      // await onGetCommentDetail();
+      setIsModify(false);
     } catch (error) {
       console.error(error);
     }
   };
 
   const onClickModify = () => {
-    setIsEditing(true);
+    setIsModify(true);
     setReplyContent(reply.content);
   };
 
   const onClickCancel = () => {
     setReplyContent(reply.content);
-    setIsEditing(false);
+    setIsModify(false);
   };
 
   const onClickDelete = async () => {
@@ -81,7 +69,7 @@ const Reply = ({
           {reply.user?.nickname ?? reply.user?.name}
         </p>
       </div>
-      {isEditing ? (
+      {isModify ? (
         <textarea
           className={styles.content}
           name="myReply"
@@ -89,44 +77,42 @@ const Reply = ({
           onChange={onChange}
         ></textarea>
       ) : (
-        <p className={styles.content}>{replyContent}</p>
+        <p className={styles.readOnlyContent}>{replyContent}</p>
       )}
       <div className={styles.replyInfoWrapper}>
-        <div>
-          {isAuthor && (
-            <>
-              {isEditing ? (
-                <>
-                  <button
-                    className={styles.saveBtn}
-                    type="submit"
-                    onClick={onSubmit}
-                  >
-                    <BsCheck2 className={styles.iconSave} />
-                  </button>
-                  <button className={styles.cancelBtn} onClick={onClickCancel}>
-                    <BsX className={styles.iconCancel} />
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button className={styles.modifyBtn}>
-                    <BsPencilSquare
-                      className={styles.iconModify}
-                      onClick={onClickModify}
-                    />
-                  </button>
-                  <button className={styles.deleteBtn} onClick={onClickDelete}>
-                    <BsTrash className={styles.iconDelete} />
-                  </button>
-                </>
-              )}
-            </>
-          )}
-          <p className={styles.date}>
-            {dayjs(reply.updatedAt).format("YYYY.MM.DD")}
-          </p>
-        </div>
+        {isAuthor && (
+          <div className={styles.btnWrapper}>
+            {isModify ? (
+              <>
+                <button
+                  className={styles.saveBtn}
+                  type="submit"
+                  onClick={onSubmit}
+                >
+                  <BsCheck2 className={styles.iconSave} />
+                </button>
+                <button className={styles.cancelBtn} onClick={onClickCancel}>
+                  <BsX className={styles.iconCancel} />
+                </button>
+              </>
+            ) : (
+              <>
+                <button className={styles.modifyBtn}>
+                  <BsPencilSquare
+                    className={styles.iconModify}
+                    onClick={onClickModify}
+                  />
+                </button>
+                <button className={styles.deleteBtn} onClick={onClickDelete}>
+                  <BsTrash className={styles.iconDelete} />
+                </button>
+              </>
+            )}
+          </div>
+        )}
+        <p className={styles.date}>
+          {dayjs(reply.updatedAt).format("YYYY.MM.DD")}
+        </p>
       </div>
     </section>
   );

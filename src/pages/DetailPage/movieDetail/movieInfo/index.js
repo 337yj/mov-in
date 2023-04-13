@@ -125,7 +125,7 @@ const MovieInfo = ({ movie }) => {
 
   return (
     <section className={styles.wrapper}>
-      {toastFloat && <Toast>로그인 후 이용 가능합니다.</Toast>}
+      <Toast float={toastFloat}>로그인 후 이용 가능합니다.</Toast>
       <div className={styles.postWrapper}>
         <img
           className={styles.postImage}

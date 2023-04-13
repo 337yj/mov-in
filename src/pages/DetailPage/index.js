@@ -10,19 +10,16 @@ import { IconLink } from "../../assets";
 import { Toast } from "../../components";
 import { formatRuntime } from "./_shared/formatRuntime";
 import styles from "./detail.module.scss";
+import { getReviewsMovie } from "../../api/Review";
 
 const Detail = () => {
   const ref = useRef(null);
   const { id } = useParams();
   const { pathname } = useLocation();
-
   const [movie, setMovie] = useState();
   //NOTE: tab은 리코일로 사용하는게 더 편하다
-  const [tab, setTab] = useState("movieDetail");
   const [toastFloat, setToastFloat] = useState(false);
-  // const [selectedCommentId, setSelectedCommentId] = useState(null);
-  const setCommentId = useSetRecoilState(commentIdState);
-
+  const [comments, setComments] = useState([]);
   const formattedRuntime = formatRuntime(movie?.runtime || 0);
 
   const onGetMovieDetail = async () => {
@@ -51,6 +48,10 @@ const Detail = () => {
   //NOTE: 같이 API를 많이 사용하거나, 생성 수정 삭제 등의 데이터의 변경이 일어나는 경우에는
   //NOTE: tab을 통해서 구분하는 것보다 페이지를 만드는게 정신건강에 좋다.
   //NOTE: 방법2) react-query 사용
+  const onGetComments = async () => {
+    const response = await getReviewsMovie(id);
+    setComments(response.data);
+  };
 
   useEffect(() => {
     if (!ref.current) return;
@@ -65,7 +66,7 @@ const Detail = () => {
 
   useEffect(() => {
     onGetMovieDetail();
-    setTab("movieDetail");
+    onGetComments();
   }, [id]);
 
   if (!movie) {
@@ -100,7 +101,6 @@ const Detail = () => {
           </div>
         </article>
         <article className={styles.detailInfoWrapper}>
-          {/* {detailInfo[tab]} */}
           <MovieInfo movie={movie} />
           <MovieComment movie={movie} />
           <RelatedMovie movie={movie} />

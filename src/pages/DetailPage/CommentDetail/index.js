@@ -12,7 +12,8 @@ import Comment from "../CommentList/Comment";
 import Reply from "./Reply";
 import { Button } from "../../../components";
 import { formatRuntime } from "../_shared/formatRuntime";
-import { ImageProfile3 } from "../../../assets";
+import dayjs from "dayjs";
+import { ImageProfile2 } from "../../../assets";
 import styles from "./commentDetail.module.scss";
 
 const CommentDetail = ({ comment, ...props }) => {
@@ -21,6 +22,7 @@ const CommentDetail = ({ comment, ...props }) => {
   const [content, setContent] = useState("");
   const [detailMovie, setDetailMovie] = useState();
   const [user, setUser] = useRecoilState(userState);
+  const formattedRuntime = formatRuntime(detailComment?.movie?.runtime || 0);
 
   const onGetCommentDetail = async () => {
     try {
@@ -73,44 +75,51 @@ const CommentDetail = ({ comment, ...props }) => {
   // if (!id) {
   //   return null;
   // }
-  // const formattedRuntime = formatRuntime(movie?.runtime || 0);
 
   useEffect(() => {
     if (detailComment?.movie) {
       onGetMovieDetail();
     }
   }, [detailComment]);
+
   return (
     <main>
       <div className={styles.backgroundWrapper}>
-        {/* <img
+        <img
           className={styles.backgroundImg}
-          src={detailComment.movie.postImage}
+          src={detailComment?.movie?.postImage}
           alt="thumbnail"
-        /> */}
+        />
         <div className={styles.backgroundGradient} />
       </div>
       <section className={styles.wrapper}>
         <article className={styles.infoWrapper}>
-          {/* <div className={styles.title}>
-            <h1>{detailComment.title}</h1>
+          <div className={styles.title}>
+            <h1>{detailComment?.movie?.title}</h1>
           </div>
           <div className={styles.info}>
-            <p>{detailComment.formattedRuntime}</p>
-             <p>{detailComment.movie.genres.map((genre) => genre.name).join(", ")}</p>
+            <p>{formattedRuntime}</p>
             <p>
-              {dayjs(detailComment.movie.releasedAt, "YYYYMMDD").format(
+              {detailComment?.movie?.genres
+                .map((genre) => genre.name)
+                .join(", ")}
+            </p>
+            <p>
+              {dayjs(detailComment?.movie?.releasedAt, "YYYYMMDD").format(
                 "YYYY.MM.DD",
               )}
             </p>
-          </div> */}
+          </div>
         </article>
         <article className={styles.detailInfoWrapper}>
           <div className={styles.commentWrapper}>
             <h2>코멘트</h2>
             <div className={styles.innerWrapper}>
               <section className={styles.commentSection}>
-                <Comment comment={detailComment} />
+                <Comment
+                  comment={detailComment}
+                  onGetCommentDetail={onGetCommentDetail}
+                />
               </section>
               <section className={styles.replyInputSection}>
                 <form id="replyForm" onSubmit={onSubmit}>
@@ -119,7 +128,7 @@ const CommentDetail = ({ comment, ...props }) => {
                       <div className={styles.profile}>
                         <img
                           // src={comment.user.profileImage ?? profileImage}
-                          src={ImageProfile3}
+                          src={ImageProfile2}
                           alt="userProfileImage"
                           className={styles.profileImage}
                         />

@@ -6,14 +6,13 @@ yun@aa.aa
 adminYun@aa.aa 
 12345678
 
-1. DetailPage > CommentDetail
-영화디테일페이지의 레이아웃을(뒷배경, 영화제목, 장르 등) 
-코멘트 디테일페이지, 코멘트 리스트페이지에서도 똑같이 하고 싶은데
-detailComment.movie.id를 넣어봐도 에러가 생겨서
-해당 리뷰의 movie id를 어떻게 얻어야 할까요?
+1. 리뷰 수정시 400에러
+(DetailPage > _shared > CommentModal - CommentList > Comment)
 
-2. DetailPage 구조를 변경해보았는데 적절하게 한건지 궁금합니다
- -> CommentList 페이지 레이아웃만 수정하면 될 것 같습니다!
+1. 영화디테일 페이지 or 코멘트리스트 페이지에서 리뷰 좋아요 누를시 409에러
+(DetailPage > Comment)
 
-3. Layout > Header
-최상단에만 고정되고, 스크롤을 내리면 화면에 안보이게 하는법
+2. 영화디테일 > 코멘트리스트 > 코멘트디테일 페이지에서 리뷰를 삭제할시 404에러
+
+3. 코멘트 디테일 페이지에서 댓글을 남기고 
+뒤로가기를 2번 눌러야 코멘트리스트페이지로 이동이됨

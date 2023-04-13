@@ -28,7 +28,7 @@ const MyCard = ({ movie }) => {
         <img src={noPoster} className={cx(styles.img, styles.shadow)} />
       )}
       <div className={styles.infoWrapper}>
-        <h2 className={styles.title}>{movie.title}</h2>
+        <h2 className={styles.title}>{movie?.movie.title}</h2>
         <div>
           <span className={styles.score}>
             <p>전체</p> 

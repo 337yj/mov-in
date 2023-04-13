@@ -69,7 +69,6 @@ const UserInfo = () => {
       }, 2000);
     }
   }, [floatToast]);
-
 //=======
   useEffect(() => {
     setForm({

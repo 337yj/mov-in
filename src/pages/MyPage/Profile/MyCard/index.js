@@ -5,7 +5,9 @@ import { BsStarFill } from "react-icons/bs";
 import styles from "./myCard.module.scss";
 import cx from "classnames";
 
+//NOTE: movie가 아니라 review => key값이 다릅니다.
 const MyCard = ({ movie }) => {
+  console.log({ movie });
   const navigate = useNavigate();
   //const location = useLocation();
 
@@ -16,11 +18,11 @@ const MyCard = ({ movie }) => {
 
   return (
     <section className={styles.wrapper} onClick={onClick}>
-      {movie.postImage ? (
+      {movie.movie.postImage ? (
         <img
-          src={movie.postImage}
+          src={movie.movie.postImage}
           alt="thumbnail"
-          className={cx(styles.img, className)}
+          className={cx(styles.img)}
         />
       ) : (
         <img src={noPoster} className={cx(styles.img, styles.shadow)} />

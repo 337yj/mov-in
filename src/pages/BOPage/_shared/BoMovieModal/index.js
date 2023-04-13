@@ -66,7 +66,7 @@ const BoMovieModal = ({ movie, modal, onCloseModal }) => {
                 {movie.averageScore ? (
                   <span className={styles.averageScore}>
                     {<BsStarFill className={styles.IconStar} />}
-                    {movie.averageScore.toFixed(1)}
+                    {/* {movie.averageScore.toFixed(1)} */}
                   </span>
                 ) : null}
               </Button>

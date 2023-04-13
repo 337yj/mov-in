@@ -11,7 +11,7 @@ const MovieComment = ({ movie }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [comments, setComments] = useState([]);
-  const [myComment, setMyComment] = useRecoilState(myCommentState);
+  const [myComment, setMyComment] = useState();
   const user = useRecoilValue(userState);
 
   const onClickNavigate = (path) => {
@@ -20,14 +20,21 @@ const MovieComment = ({ movie }) => {
     };
   };
 
-  const onGetMovieReview = async () => {
+  const onGetMyComment = async () => {
+    const response = await getMovieMyReview(id);
+    if (response.status === 200) {
+      if (response.data) setMyComment(response.data);
+    }
+    // onGetMovieComment();
+  };
+  // console.log(myComment);
+
+  const onGetMovieComment = async () => {
     try {
-      const response = await getReviewsMovie(id);
+      const response = await getReviewsMovie(movie?.id);
       if (response.status === 200) {
         const data = response.data;
         setComments(data);
-        const myComment = data.find((review) => review?.user?.id === user?.id);
-        setMyComment(myComment);
       }
     } catch (error) {
       console.error(error);
@@ -35,17 +42,20 @@ const MovieComment = ({ movie }) => {
   };
 
   useEffect(() => {
-    onGetMovieReview();
+    onGetMovieComment();
+    onGetMyComment();
   }, [id]);
 
   return (
     <section className={styles.wrapper}>
       <h2>코멘트</h2>
       <div className={styles.myComment}>
-        <Comment
-          comment={myComment}
-          onClick={onClickNavigate(`/commentDetail/${myComment?.id}`)}
-        />
+        {myComment && (
+          <Comment
+            comment={myComment}
+            onClick={onClickNavigate(`/commentDetail/${myComment?.id}`)}
+          />
+        )}
       </div>
       <ul className={styles.commentWrapper}>
         {comments

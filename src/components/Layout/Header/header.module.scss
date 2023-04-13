@@ -3,15 +3,19 @@
 
 .header {
   @include m.flex(space-between);
-  position: absolute;
+  // position: sticky;
   // position: relative;
   // position: fixed;
-  top: 0;
+  // top: 0;
+  position: relative;
+  z-index: 1000;
   width: 100%;
   height: 90px;
   padding: 0 82px;
   // background-color: c.$C_BLACK_20;
   background: linear-gradient(to bottom, #01022662, rgba(79, 68, 214, 0));
+  // background-color: transparent;
+
   z-index: 1000;
 
   .logo {

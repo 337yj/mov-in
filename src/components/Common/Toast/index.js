@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from "react-transition-group";
 import cx from "classnames";
 import styles from "./toast.module.scss";
 import { IconGreenCheck } from "../../../assets/icon";
@@ -31,21 +31,20 @@ const transitionStyle = {
 
 const Toast = ({ className, type, children, func, float, ...props }) => {
   return (
-    <CSSTransition
-      in={float}
-      timeout={3000}
-      unmountOnExit
-    >
+    <CSSTransition in={float} timeout={3000} unmountOnExit>
       {(state) => (
-      <section style={{...transitionStyle[state]}} className={cx(styles.toast, className, styles[type])}>
-        <figure className={cx(styles.circle)}>
-          <IconGreenCheck />
-        </figure>
-        {children}
-        {/* <button onClick={func}>
+        <section
+          style={{ ...transitionStyle[state] }}
+          className={cx(styles.toast, className, styles[type])}
+        >
+          <figure className={cx(styles.circle)}>
+            <IconGreenCheck />
+          </figure>
+          {children}
+          {/* <button onClick={func}>
               <IconClose />
             </button> */}
-      </section>
+        </section>
       )}
     </CSSTransition>
   );

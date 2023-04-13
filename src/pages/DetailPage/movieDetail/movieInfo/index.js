@@ -125,7 +125,7 @@ const MovieInfo = ({ movie }) => {
 
   return (
     <section className={styles.wrapper}>
-      {toastFloat && <Toast>로그인 후 이용 가능합니다.</Toast>}
+      <Toast float={toastFloat}>로그인 후 이용 가능합니다.</Toast>
       <div className={styles.postWrapper}>
         <img
           className={styles.postImage}
@@ -169,7 +169,7 @@ const MovieInfo = ({ movie }) => {
           {movie.averageScore ? (
             <span className={styles.averageScore}>
               {<BsStarFill className={styles.IconStar} />}
-              {movie.averageScore.toFixed(1)}
+              {/* {movie.averageScore.toFixed(1)} */}
             </span>
           ) : (
             <p className={styles.nullScore}>

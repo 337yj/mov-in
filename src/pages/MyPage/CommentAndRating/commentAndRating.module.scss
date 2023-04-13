@@ -3,6 +3,7 @@
 
 .wrapper {
   @include m.flex(center, center, column);
+  margin: 100px;
 
   .title {
     width: 100%;
@@ -20,17 +21,22 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 16px;
+    //gap: 16px;
+    width: 980px;
 
     img {
-      width: 228px;
-      height: 326px;
+      width: 178px;
+      height: 254px;
       border-radius: 10px;
+    }
+    
+    h2 {
+      width: 178px;
     }
 
     > li {
-      margin-bottom: 16px;
-      width: 80%;
+      margin-left: -4px;
+      margin-bottom: 48px;
     }
   }
 }

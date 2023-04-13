@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { createReview, updateReviews } from "../../../../api/Review";
+import {
+  createReview,
+  getMovieMyReview,
+  updateReviews,
+} from "../../../../api/Review";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../../state";
 import { Modal, Stars, Tag, Button, Toast } from "../../../../components";
-import { myCommentState, userState } from "../../../../state";
 import { POINTS, TENSIONS } from "../pointTag";
 import styles from "./commentModal.module.scss";
+import { useParams } from "react-router-dom";
 
 const CommentModal = ({
   title,
@@ -13,70 +18,36 @@ const CommentModal = ({
   isModified,
   modal,
   setModal,
+  myComment,
 }) => {
+  const { id } = useParams();
   const [content, setContent] = useState(comment ? comment.content : "");
   const [rating, setRating] = useState(comment ? comment.score : null);
-  const [myComment, setMyComment] = useRecoilState(myCommentState);
   const [selectedPoints, setSelectedPoints] = useState(
     comment ? comment?.enjoyPoints : [],
   );
   const [selectedTension, setSelectedTension] = useState(
     comment ? comment?.tensions?.[0] : null,
   );
-  const [comments, setComments] = useState([]);
+  // const [myComment, setMyComment] = useState();
   const [toastFloat, setToastFloat] = useState(false);
   const user = useRecoilValue(userState);
 
-  const onRatingChange = (newRating) => {
-    setRating(newRating);
-  };
+  // const onGetMyComment = async () => {
+  //   const response = await getMovieMyReview(id);
+  //   if (response.status === 200) {
+  //     if (response.data) setMyComment(response.data);
+  //   }
+  // };
 
   const onChange = (e) => {
     const { value } = e.currentTarget;
     setContent(value);
   };
 
-  const onClickNotUser = () => {
-    if (!user) {
-      setToastFloat(true);
-      setTimeout(() => {
-        setToastFloat(false);
-      }, 1500);
-      return;
-    }
+  const onRatingChange = (newRating) => {
+    setRating(newRating);
   };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (isModified) {
-        await updateReviews(myComment.id, {
-          content,
-          score: rating,
-          enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
-          tensions: selectedTension !== null ? [selectedTension] : null,
-        });
-        // onClickModified(false);
-      } else {
-        await createReview(movie?.id, {
-          content,
-          score: rating,
-          enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
-          tensions: selectedTension !== null ? [selectedTension] : null,
-        });
-      }
-      setModal((prev) => !prev);
-    } catch (error) {
-      console.error(error, "실패");
-    }
-  };
-
-  useEffect(() => {
-    setContent(comment ? comment.content : "");
-    setRating(comment ? comment.score : null);
-    setSelectedPoints(comment ? comment?.enjoyPoints : []);
-    setSelectedTension(comment ? comment?.tensions?.[0] : null);
-  }, [modal]);
 
   const onClickPoint = (name) => {
     if (selectedPoints.includes(name)) {
@@ -90,11 +61,47 @@ const CommentModal = ({
     setSelectedTension(name);
   };
 
+  const onClickNotUser = () => {
+    if (!user) {
+      setToastFloat(true);
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 1500);
+      return;
+    }
+  };
+
+  const onClick = async (e) => {
+    e.preventDefault();
+    const commentData = {
+      content,
+      score: rating,
+      enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
+      tensions: selectedTension !== null ? [selectedTension] : null,
+    };
+    if (isModified) {
+      await updateReviews(myComment?.id, commentData);
+    } else {
+      await createReview(movie?.id, commentData);
+    }
+    setModal((prev) => !prev);
+  };
+
+  console.log(myComment);
+  // console.log(isModified);
+  useEffect(() => {
+    // setContent(comment ? comment.content : "");
+    // setRating(comment ? comment.score : null);
+    // setSelectedPoints(comment ? comment?.enjoyPoints : []);
+    // setSelectedTension(comment ? comment?.tensions?.[0] : null);
+    // onGetMyComment();
+  }, []);
+
   return (
     modal && (
       <Modal className={styles.commentModal} title={title} setModal={setModal}>
         {toastFloat && <Toast>로그인 후 이용 가능합니다.</Toast>}
-        <form className={styles.wrapper} id="reviewForm" onSubmit={onSubmit}>
+        <section className={styles.wrapper}>
           <p>영화를 평가해주세요.</p>
           <div className={styles.ratingWrapper}>
             <Stars rating={rating} onRatingChange={onRatingChange} />
@@ -134,7 +141,7 @@ const CommentModal = ({
             ))}
           </div>
           <textarea
-            className={styles.commentArea}
+            className={styles.commentContent}
             name="content"
             placeholder={
               user
@@ -145,15 +152,23 @@ const CommentModal = ({
             onChange={onChange}
           />
           <div className={styles.btnWrapper}>
-            <Button
-              className={styles.submitBtn}
-              color="primary"
-              form="reviewForm"
-              type="submit"
-              onClick={onClickNotUser}
-            >
-              저장
-            </Button>
+            {isModified ? (
+              <Button
+                className={styles.submitBtn}
+                color="primary"
+                onClick={onClick}
+              >
+                수정
+              </Button>
+            ) : (
+              <Button
+                className={styles.submitBtn}
+                color="primary"
+                onClick={onClick}
+              >
+                저장
+              </Button>
+            )}
             <Button
               className={styles.cancelBtn}
               color="secondary"
@@ -162,7 +177,7 @@ const CommentModal = ({
               취소
             </Button>
           </div>
-        </form>
+        </section>
       </Modal>
     )
   );

@@ -91,8 +91,10 @@ const Comment = ({
   const onClickDelete = async () => {
     await deleteReviews(comment?.id);
     const currentPathname = window.location.pathname;
+    console.log({ currentPathname });
     if (currentPathname.startsWith("/commentDetail")) {
-      onGetCommentDetail();
+      //NOTE: 삭제 이후에는 404에러 발생
+      // onGetCommentDetail();
       navigate(-1);
     }
     onGetReviewsMovie();

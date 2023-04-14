@@ -19,8 +19,10 @@ const CommentAndRating = () => {
   };
 
   const onGetMovies = async () => {
+    //NOTE: reviews/me/paging이 페이지네이션이 있는 "내 리뷰 불러오기" API 입니다.
     const response = await getReviewMe(page, POST_PER_PAGE);
     if (response.status === 200) {
+      //NOTE: getReviewMe는 review를 불러오기 때문에 response.data []=> { ... , movie}
       const movie = [...response.data];
       setMovies(movie);
       setCurrentMovies(movie);
@@ -45,11 +47,15 @@ const CommentAndRating = () => {
         <span>{totalCount}</span>개의 영화를 평가했어요 !
       </h2>
       <ul className={styles.gridContainer}>
-        {currentMovies.slice(indexOfFirstPost, indexOfLastPost).map((movie) => (
-            <li key={movie.id}>
-              <Card movie={movie} />
-            </li>
-        ))}
+        {currentMovies
+          .slice(indexOfFirstPost, indexOfLastPost)
+          .map(({ movie }) => {
+            return (
+              <li key={movie.id}>
+                <Card movie={movie} />
+              </li>
+            );
+          })}
       </ul>
       <Paging
         totalCount={totalCount}

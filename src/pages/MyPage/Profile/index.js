@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useMount } from "react-use";
+import { useRecoilState } from "recoil";
 import cx from "classnames";
 import { useMe } from "../../../hooks";
 import { userState } from "../../../state";
 import { getReviewMe } from "../../../api/Review";
-import { updateUser } from "../../../api/User";
-import { Button, Card, CheckBox, Input, Toast } from "../../../components";
-// import EditMode from "./EditMode";
+import { updateUser, getUsersMe } from "../../../api/User";
+import { Button, CheckBox, Toast } from "../../../components";
 import MyCard from "./MyCard";
+//import EditMode from "./EditMode";
+import { msgList } from "../constants";
 import { AlertModal, ImageModal } from "../_shared";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
 import styles from "./profile.module.scss";
@@ -17,15 +19,22 @@ const Profile = () => {
   //const user = useRecoilValue(userState);
   const { id } = useParams();
   const user = useMe();
-  const [isPublic, setIsPublic] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [me, setMe] = useRecoilState(userState);
+  const [isChangePublic, setIsChangePublic] = useState(false);
   const [introduce, setIntroduce] = useState("");
   const [floatToast, setFloatToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
   const [myReviews, setMyReviews] = useState([]);
+  const [form, setForm] = useState({
+    description: ''
+  });
 
   const navigate = useNavigate();
-  //const [myInfo, setMyInfo] = useSetRecoilState(userState);
+
+  const onChange = (e) => {
+    const { name, value } = e.currentTarget;
+    setForm({ ...form, [name]: value });
+  };
 
   const getMyMovieList = async () => {
     try {
@@ -38,6 +47,44 @@ const Profile = () => {
       console.log(error);
     }
   };
+  
+    const onGetMe = async () => {
+      const response = await getUsersMe();
+      if(response.status === 200) {
+        setMe(response.data);
+      }
+    }
+  
+    useMount(()=>{
+      onGetMe();
+    })
+
+  const onClickCheckbox =async () =>{
+    const userData = {
+     isPublic:!me?.isPublic,
+    }
+    const response = await updateUser(userData);
+    if(response.status === 204){
+      onGetMe();
+      onClickPublic();
+    }else{
+      console.log("에러!");
+    }
+  }
+
+  const onSubmit = async (e) => {
+    // if (e && e.preventDefault) { e.preventDefault(); }
+    e.preventDefault();
+    try {
+      const responsePatch = await updateUser(form);
+      if (responsePatch.status === 204) {
+        onGetMe();
+      }
+    } catch (err) {
+      const errData = err.response.data;
+      alert(errData.message);
+    }
+  }
 
   // const updateUserInfo = async () => {
   //   try {
@@ -64,7 +111,7 @@ const Profile = () => {
   };
 
   const onClickPublic = () => {
-    setIsPublic(!isPublic);
+    setIsChangePublic(!isChangePublic);
   };
 
   const onClickSave = async (e) => {
@@ -81,8 +128,11 @@ const Profile = () => {
 
   useEffect(() => {
     getMyMovieList();
+    setForm({
+      description: me?.description
+    });
     //updateUserInfo();
-  }, []);
+  }, [me]);
 
   useEffect(() => {
     if (floatToast) {
@@ -92,7 +142,7 @@ const Profile = () => {
     }
   }, [floatToast]);
 
-  console.log(introduce);
+  console.log(user);
 
   return (
     <main className={styles.wrapper}>
@@ -100,7 +150,7 @@ const Profile = () => {
       <header className={styles.header}>
         <div className={styles.titleWrapper}>
           <h1 className={styles.title}>프로필</h1>
-          {user && isPublic ? (
+          {user && isChangePublic ? (
             <Button
               color={"primary"}
               children={"공개"}
@@ -131,9 +181,9 @@ const Profile = () => {
         <div className={styles.introWrapper}>
           <textarea
             className={styles.introText}
-            value={introduce}
+            value={form?.description}
             placeholder={"소개글을 작성해주세요"}
-            onChange={onChangeIntro}
+            onChange={onChange}
           />
         </div>
         {/* <Input
@@ -154,8 +204,8 @@ const Profile = () => {
         <div className={styles.checkInfo}>
           <CheckBox
             className={styles.checkbox}
-            onClick={onClickPublic}
-            check={isPublic}
+            onClick={onClickCheckbox}
+            check={isChangePublic}
           />
           <h5>공개 모드로 전환하기</h5>
           <Button
@@ -168,7 +218,7 @@ const Profile = () => {
             color="primary"
             children="저장"
             onClick={() => {
-              onClickSave();
+              onSubmit();
               toast("save");
             }}
           />
@@ -176,7 +226,6 @@ const Profile = () => {
           {/* <AlertModal /> */}
         </div>
       </section>
-
       {/* <section>
       {user && !isPublic ? <EditMode /> : <div></div>}
       </section> */}

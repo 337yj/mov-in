@@ -86,6 +86,11 @@
 
         > img {
           margin-bottom: 36px;
+          cursor: pointer;
+        }
+
+        > p {
+          cursor: pointer;
         }
 
         font : {
@@ -117,6 +122,7 @@
       > p {
         @include m.flex(flex-end);
         color: c.$C_PINK_80;
+        cursor: pointer;
       }
 
       > .btns {

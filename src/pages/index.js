@@ -12,6 +12,7 @@ export { default as CommentPage } from "./DetailPage/CommentList";
 export { default as CommentDetailPage } from "./DetailPage/CommentDetail";
 
 export { default as MyPage } from "./MyPage";
+//export { default as Profile } from "./MyPage/Profile";
 export { default as UserInfo } from "./MyPage/UserInfo";
 export { default as CommentAndRating } from "./MyPage/CommentAndRating";
 export { default as Like } from "./MyPage/Like";

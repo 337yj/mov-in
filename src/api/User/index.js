@@ -52,6 +52,11 @@ export const updateUser = (id, body) => {
   return apiClient.patch(`/users/${id}`, body);
 };
 
+// 유저 수정하기
+export const updateMe = (body) => {
+  return apiClient.patch(`/users/`, body);
+};
+
 // 유저 삭제하기
 export const deleteUser = (id) => {
   return apiClient.delete(`/users/${id}`);

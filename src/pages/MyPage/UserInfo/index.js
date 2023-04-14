@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useRecoilValue, atom, useRecoilState } from "recoil";
 import dayjs from "dayjs";
+import { useMount } from "react-use";
 import { useMe } from "../../../hooks";
-import { updateUser } from "../../../api/User";
+import { updateUser, getUsersMe, deleteUser, updateMe } from "../../../api/User";
 import { userState } from "../../../state";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
 import { Button, Input, Toast } from "../../../components";
@@ -11,36 +13,21 @@ import { msgList } from "../constants";
 import styles from "./userInfo.module.scss";
 
 const UserInfo = () => {
-// <<<<<<< KNI
-  //const user = useMe();
-  //const user = useRecoilValue(userState);
-  //const [floatToast, setFloatToast] = useState(false);
-  const [openImgModal, setOpenImgModal] = useState(false);
-  //const [toastMsg, setToastMsg] = useState("");
-  //const [info, setInfo] = useState({
-  //  nickname: '',
-  //  email : '',
-  //  password: '',
-  //  profileImage: '',
-  //});
-
-// =======
   const user = useMe();
+  const [me, setMe] = useRecoilState(userState);
+  const [openImgModal, setOpenImgModal] = useState(false);
   const [floatToast, setFloatToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
   const [form, setForm] = useState({
-    nickname: "",
-    email: "",
-    password: "",
-    birth: "",
+    nickname: '',
+    email: '',
+    password: '',
+    birth: '',
+    profileImage: '',
   });
 
-  const myInfoData = {
-    nickname: user?.nickname,
-    email: user?.email,
-    password: user?.password,
-    birth: user?.birth,
-  };
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const onChangeInfo = (e) => {
     const { name, value } = e.target;
@@ -50,10 +37,60 @@ const UserInfo = () => {
     });
   };
 
-//<<<<<<< KNI
+  //내 정보 불러오기
+  const onGetMe = async () => {
+    const response = await getUsersMe();
+    if(response.status === 200) {
+      setMe(response.data);
+    }
+  }
+
+  //회원탈퇴
+  const onDelete = async () => {
+    const response = await deleteUser(user?.id);
+    if (response.status === 204) {
+      alert('삭제 완료 되었습니다');
+      navigate('/');
+    } else {
+      alert('오류!');
+    }
+  };
+
+  useMount(()=>{
+    onGetMe();
+  })
+
+  //저장
+  const onSubmit = async (e) => {
+    // if (e && e.preventDefault) { e.preventDefault(); }
+    e.preventDefault();
+    
+    const myInfoData = {
+      nickname: form?.nickname,
+      email: form?.email,
+      password: form?.password,
+      birth: form?.birth,
+      profileImage: form?.profileImage
+    };
+
+    try {
+      const responsePatch = await updateMe(myInfoData);
+      if (responsePatch.status === 204) {
+        onGetMe();
+        //toast("save");
+      }
+    } catch (err) {
+      const errData = err.response.data;
+      alert(errData.message);
+      //toast("fail");
+    }
+  };
+
+  //프로필 모달
   const onClickImg = () => {
     setOpenImgModal(!openImgModal);
   };
+
 
   const toast = (msg) => {
     if (!floatToast) {
@@ -69,16 +106,19 @@ const UserInfo = () => {
       }, 2000);
     }
   }, [floatToast]);
-//=======
+  
   useEffect(() => {
     setForm({
-      nickname: form?.nickname,
-      email: form?.email,
-      password: '',
-      birth: user?.birth,
+      nickname: me?.nickname,
+      email: me?.email,
+      password: me?.password,
+      birth: me?.birth,
+      profileImage: me?.profileImage,
     });
-  }, [form]);
-//>>>>>>> main
+  }, [me]);
+
+  console.log(form);
+  console.log(user);
 
   return (
     <main className={styles.wrapper}>
@@ -92,9 +132,11 @@ const UserInfo = () => {
         <article className={styles.upper}>
           <article className={styles.imgWrapper}>
             <img
+              onClick={onClickImg}
               className={styles.profileImg}
-              src={user?.profileImage ?? ImageProfile2} />
-            <p>프로필 사진 변경하기</p>
+              src={user?.profileImage ?? ImageProfile2}
+            />
+            <p onClick={onClickImg}>프로필 사진 변경하기</p>
           </article>
           <article className={styles.infoWrapper}>
             <div>
@@ -103,7 +145,8 @@ const UserInfo = () => {
                 label="닉네임"
                 value={form?.nickname}
                 onChange={onChangeInfo}
-                className={styles.inputText} />
+                className={styles.inputText}
+              />
             </div>
             <div>
               <Input
@@ -111,91 +154,53 @@ const UserInfo = () => {
                 label="이메일"
                 value={form?.email}
                 onChange={onChangeInfo}
-                className={styles.inputText} />
+                className={styles.inputText}
+              />
             </div>
             <div>
               <Input
                 name="password"
                 label="비밀번호"
+                type="password"
                 value={form?.password}
                 onChange={onChangeInfo}
-                className={styles.inputText} />
+                className={styles.inputText}
+              />
             </div>
             <div>
               <Input
                 name="birth"
                 label="생년월일"
-                value={user?.birth}
-                className={styles.inputText} />
+                //value={dayjs(user?.birth, "YYMMDD").format("YY.MM.DD")}
+                value={form?.birth}
+                className={styles.inputText}
+                readOnly
+              />
             </div>
           </article>
         </article>
         <article className={styles.bottom}>
-            <p>회원 탈퇴</p>
-            <div className={styles.btns}>
-              <Button
-                color="primary"
-                children="저장"
-                // onClick={() => {onChangeInfo(); toast("save");}}
-              />
-              <Button
-                color="secondary"
-                children="취소"
-                // onClick={() => toast("cancel")}
-              />
-            </div>
-          </article>
+          <p onClick={() => onDelete(user.id)}>회원 탈퇴</p>
+          <div className={styles.btns}>
+            <Button
+              color="secondary"
+              children="취소"
+              onClick={() => toast("cancel")}
+            />
+            <Button
+              color="primary"
+              children="저장"
+              onClick={(e) => {
+                onSubmit(e);
+                toast("save");
+              }}
+            />
+            <Toast children={toastMsg} float={floatToast} />
+          </div>
+        </article>
       </section>
     </main>
   );
 };
 
 export default UserInfo;
-
-
-{/*  
-    <main className={styles.wrapper}>
-      <header className={styles.header}>
-        <div className={styles.titleWrapper}>
-          <h1 className={styles.title}>회원 정보</h1>
-        </div>
-         <h3 className={styles.subTitle}>회원 정보를 변경할 수 있습니다</h3>
-      </header>
-      <section>
-        <article className={styles.info}>
-          <div className={styles.image}>
-            <img src={user?.userImage ?? ImageProfile2} />
-            <h5>프로필 사진 변경하기</h5>
-          </div>
-          <div className={styles.infoInput}>
-            <Input label={"닉네임"} value={user?.nickname} />
-            <Input label={"이메일"} value={user?.email} />
-            <Input label={"비밀번호"} />
-            <Input label={"생년월일"} readOnly value={dayjs(user?.birth, "YYMMDD").format("YY.MM.DD")}/>
-          </div>
-        </article>
-        <div className={styles.deleteUser}>
-          <h5>회원탈퇴</h5>
-        </div>
-        </section>
-      <div className={styles.btn}>
-        <Button
-          color="secondary"
-          children="취소"
-          onClick={() => toast("cancel")}
-        />
-        <Toast children={toastMsg} float={floatToast} />
-        <Button
-          color="primary"
-          children="저장"
-          onClick={() => {
-            toast("save");
-          }}
-        />
-        <Toast children={toastMsg} float={floatToast} />
-          <ImageModal />
-      </div>
-    </main>
-  );
-};
-*/}

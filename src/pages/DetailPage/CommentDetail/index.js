@@ -40,7 +40,9 @@ const CommentDetail = ({ comment, ...props }) => {
     setContent(value);
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
+    //NOTE: form tag의 onSubmit은 preventDefault을 해야 페이지가 리로드 되지 않습니다.
+    e.preventDefault();
     const commentData = {
       content: content,
     };

@@ -17,7 +17,9 @@ const UserInfo = () => {
   const [me, setMe] = useRecoilState(userState);
   const [openImgModal, setOpenImgModal] = useState(false);
   const [floatToast, setFloatToast] = useState(false);
+  const [openImgModal, setOpenImgModal] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
+
   const [form, setForm] = useState({
     nickname: '',
     email: '',
@@ -106,7 +108,7 @@ const UserInfo = () => {
       }, 2000);
     }
   }, [floatToast]);
-  
+
   useEffect(() => {
     setForm({
       nickname: me?.nickname,
@@ -120,8 +122,56 @@ const UserInfo = () => {
   console.log(form);
   console.log(user);
 
+
   return (
     <main className={styles.wrapper}>
+      <header className={styles.header}>
+        <div className={styles.titleWrapper}>
+          <h1 className={styles.title}>회원 정보</h1>
+        </div>
+         <h3 className={styles.subTitle}>회원 정보를 변경할 수 있습니다</h3>
+      </header>
+      <section>
+        <article className={styles.info}>
+          <div className={styles.image}>
+            <img src={user?.userImage ?? ImageProfile2} />
+            <h5>프로필 사진 변경하기</h5>
+          </div>
+          <div className={styles.infoInput}>
+            <Input label={"닉네임"} value={user?.nickname} />
+            <Input label={"이메일"} value={user?.email} />
+            <Input label={"비밀번호"} />
+            <Input label={"생년월일"} readOnly value={dayjs(user?.birth, "YYMMDD").format("YY.MM.DD")}/>
+          </div>
+        </article>
+        <div className={styles.deleteUser}>
+          <h5>회원탈퇴</h5>
+        </div>
+        </section>
+      <div className={styles.btn}>
+        <Button
+          color="secondary"
+          children="취소"
+          onClick={() => toast("cancel")}
+        />
+        <Toast children={toastMsg} float={floatToast} />
+        <Button
+          color="primary"
+          children="저장"
+          onClick={() => {
+            toast("save");
+          }}
+        />
+        <Toast children={toastMsg} float={floatToast} />
+          <ImageModal />
+      </div>
+    </main>
+  );
+};
+
+export default UserInfo;
+
+{/* <main className={styles.wrapper}>
       <header className={styles.header}>
         <div className={styles.titleWrapper}>
           <h1 className={styles.title}>회원 정보</h1>

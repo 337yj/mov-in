@@ -22,6 +22,7 @@ const Bookmark = () => {
   const onGetMovies = async () => {
     const response = await getMyBookmarks(page, POST_PER_PAGE);
     if (response.status === 200) {
+      //NOTE: API Response를 잘 확인하고 데이터로 사용을 해야한다.
       const movie = [...response.data];
       setMovies(movie);
       setCurrentMovies(movie);
@@ -46,11 +47,13 @@ const Bookmark = () => {
         <span>{totalCount}</span>개의 영화를 '북마크' 했어요 !
       </h2>
       <ul className={styles.gridContainer}>
-        {currentMovies.slice(indexOfFirstPost, indexOfLastPost).map((movie) => (
+        {currentMovies
+          .slice(indexOfFirstPost, indexOfLastPost)
+          .map(({ movie }) => (
             <li key={movie.id}>
               <Card movie={movie} />
             </li>
-        ))}
+          ))}
       </ul>
       <Paging
         totalCount={totalCount}

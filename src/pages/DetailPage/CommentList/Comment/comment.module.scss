@@ -69,7 +69,6 @@
     border-top: 1px solid c.$C_DARKGRAY_80;
     border-bottom: 1px solid c.$C_DARKGRAY_80;
     overflow: hidden;
-    cursor: pointer;
 
     .content {
       width: 100%;
@@ -77,6 +76,10 @@
       color: c.$C_WHITE;
       font-size: 16px;
       font-weight: 400;
+
+      > p {
+        cursor: pointer;
+      }
     }
 
     .bodyBtnWrapper {

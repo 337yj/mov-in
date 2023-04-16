@@ -2,28 +2,34 @@
 @use "../../../styles/mixins" as m;
 
 .wrapper {
-    @include m.flex(flex-start);
-    max-height: 100vh;
+    @include m.flex(space-between);
+    width: 100%;
+    height: 100vh;
 
     > article:first-of-type {
-        width: 60%;
+        width: 60vw;
+        height: 100vh;
+        overflow: hidden;
 
         > img {
             width: 100%;
-            object-fit: contain;
+            height: 100%;
+            object-fit: cover;
         }
     }
 
     > article:last-of-type {
         @include m.flex(center, center, column);
-        width: 40%;
+        width: 40vw;
+        height: 100vh;
 
         > img {
             margin-bottom: 60px;
         }
 
         > form {
-            width: 66%;
+            width: 60%;
+
             > p {
                 color: c.$C_WHITE_60;
                 font-size: 14px;

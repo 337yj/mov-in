@@ -22,6 +22,11 @@
 
     > li {
       flex: 1;
+
+      .pointsHidden {
+        display: none;
+        // visibility: hidden;
+      }
     }
   }
 

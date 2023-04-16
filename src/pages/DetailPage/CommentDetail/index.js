@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { userState } from "../../../state";
 import {
@@ -18,11 +18,17 @@ import styles from "./commentDetail.module.scss";
 
 const CommentDetail = ({ comment, ...props }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [detailComment, setDetailComment] = useState();
   const [content, setContent] = useState("");
-  const [detailMovie, setDetailMovie] = useState();
   const [user, setUser] = useRecoilState(userState);
   const formattedRuntime = formatRuntime(detailComment?.movie?.runtime || 0);
+
+  const onClickNavigate = (path) => {
+    return () => {
+      navigate(path);
+    };
+  };
 
   const onGetCommentDetail = async () => {
     try {
@@ -61,28 +67,28 @@ const CommentDetail = ({ comment, ...props }) => {
     // onGetMovieDetail();
   }, [id]);
 
-  const onGetMovieDetail = async () => {
-    try {
-      const movieId = detailComment?.movie?.id;
-      const response = await getMovie(movieId);
-      if (response.status === 200) {
-        setDetailMovie(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const onGetMovieDetail = async () => {
+  //   try {
+  //     const movieId = detailComment?.movie?.id;
+  //     const response = await getMovie(movieId);
+  //     if (response.status === 200) {
+  //       setDetailMovie(response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   //NOTE: return null은 보통 맨 마지막에 위치
   // if (!id) {
   //   return null;
   // }
 
-  useEffect(() => {
-    if (detailComment?.movie) {
-      onGetMovieDetail();
-    }
-  }, [detailComment]);
+  // useEffect(() => {
+  //   if (detailComment?.movie) {
+  //     onGetMovieDetail();
+  //   }
+  // }, [detailComment]);
 
   return (
     <main>
@@ -96,7 +102,10 @@ const CommentDetail = ({ comment, ...props }) => {
       </div>
       <section className={styles.wrapper}>
         <article className={styles.infoWrapper}>
-          <div className={styles.title}>
+          <div
+            className={styles.title}
+            onClick={onClickNavigate(`/detail/${detailComment?.movie?.id}`)}
+          >
             <h1>{detailComment?.movie?.title}</h1>
           </div>
           <div className={styles.info}>

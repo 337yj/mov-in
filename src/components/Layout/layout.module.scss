@@ -3,7 +3,8 @@
 .wrapper {
   height: 100vh;
   background-color: c.$C_INDIGO;
-  > main {
+
+  .outletWrapper {
     margin-top: -90px;
   }
 }

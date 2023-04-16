@@ -22,7 +22,7 @@ const columns = [
 
 const POST_PER_PAGE = 10;
 
-const BOComment = ({ comment }) => {
+const BOComment = ({ comment, checkItems }) => {
   const [comments, setComments] = useState([]);
   const [selectedComment, setSelectedComment] = useState(null);
   const [page, setPage] = useState(1); // 현재 페이지
@@ -33,7 +33,7 @@ const BOComment = ({ comment }) => {
   const data = comments.map((comment) => ({
     닉네임: comment.nickname ?? "-",
     코멘트: comment.content ?? "-",
-    // 평점: comment.score.toFixed(1) ?? "-",
+    평점: comment.score.toFixed(1) ?? "-",
     좋아요: comment.likeCount ?? "-",
     작성일자: dayjs(comment.createdAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));
@@ -82,7 +82,7 @@ const BOComment = ({ comment }) => {
   }, [page]);
 
   return (
-    <section className={styles.wrapper}>
+    <main className={styles.wrapper}>
       <h1>코멘트 관리 페이지</h1>
       <div>
         <SearchInput placeholder={"회원 닉네임을 검색하세요."} />
@@ -110,7 +110,7 @@ const BOComment = ({ comment }) => {
         pageRangeDisplayed={5}
         onChange={onChange}
       />
-    </section>
+    </main>
   );
 };
 

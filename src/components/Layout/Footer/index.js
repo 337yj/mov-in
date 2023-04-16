@@ -11,6 +11,7 @@ const Footer = ({ className, textStyle }) => {
   if (location.pathname.startsWith("/auth/")) {
     return null;
   }
+
   return (
     <footer className={cx(styles.footer, styles[textStyle])}>
       <div className={cx(styles.container)}>

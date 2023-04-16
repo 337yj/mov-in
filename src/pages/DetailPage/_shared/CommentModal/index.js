@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   createReview,
   getMovieMyReview,
+  getReviewsMovie,
   updateReviews,
 } from "../../../../api/Review";
 import { useRecoilValue } from "recoil";
@@ -9,7 +10,7 @@ import { userState } from "../../../../state";
 import { Modal, Stars, Tag, Button, Toast } from "../../../../components";
 import { POINTS, TENSIONS } from "../pointTag";
 import styles from "./commentModal.module.scss";
-import { useParams } from "react-router-dom";
+import { msgList } from "../toastMsg";
 
 const CommentModal = ({
   title,
@@ -19,18 +20,20 @@ const CommentModal = ({
   modal,
   setModal,
   myComment,
+  onGetCommentDetail,
+  onGetMovieComments,
 }) => {
-  const { id } = useParams();
+  const [comments, setComments] = useState([]);
   const [content, setContent] = useState(comment ? comment.content : "");
-  const [rating, setRating] = useState(comment ? comment.score : null);
+  const [rating, setRating] = useState(comment ? comment.score : 0);
   const [selectedPoints, setSelectedPoints] = useState(
     comment ? comment?.enjoyPoints : [],
   );
   const [selectedTension, setSelectedTension] = useState(
     comment ? comment?.tensions?.[0] : null,
   );
-  // const [myComment, setMyComment] = useState();
   const [toastFloat, setToastFloat] = useState(false);
+  const [toastMsg, setToastMsg] = useState("");
   const user = useRecoilValue(userState);
 
   // const onGetMyComment = async () => {
@@ -39,6 +42,24 @@ const CommentModal = ({
   //     if (response.data) setMyComment(response.data);
   //   }
   // };
+
+  // const onGetMovieComment = async () => {
+  //   try {
+  //     const response = await getReviewsMovie(movie?.id);
+  //     if (response.status === 200) {
+  //       const data = response.data;
+  //       setComments(data);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  const toast = (msg) => {
+    if (!toastFloat) {
+      setToastFloat(true);
+      setToastMsg(msgList[msg]);
+    }
+  };
 
   const onChange = (e) => {
     const { value } = e.currentTarget;
@@ -63,16 +84,13 @@ const CommentModal = ({
 
   const onClickNotUser = () => {
     if (!user) {
-      setToastFloat(true);
-      setTimeout(() => {
-        setToastFloat(false);
-      }, 1500);
-      return;
+      toast("loginRequired");
     }
   };
 
-  const onClick = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    onClickNotUser();
     const commentData = {
       content,
       score: rating,
@@ -81,27 +99,34 @@ const CommentModal = ({
     };
     if (isModified) {
       await updateReviews(myComment?.id, commentData);
+      // CommentDetail > Comment 에서 넘겨옴
+      setToastFloat(true);
+      toast("modify");
+      onGetCommentDetail();
+      // CommentList > Comment 에서 넘겨옴
+      onGetMovieComments();
     } else {
       await createReview(movie?.id, commentData);
+      setToastFloat(true);
+      toast("save");
+      // onGetMovieComments();
     }
     setModal((prev) => !prev);
   };
 
-  console.log(myComment);
-  // console.log(isModified);
   useEffect(() => {
-    // setContent(comment ? comment.content : "");
-    // setRating(comment ? comment.score : null);
-    // setSelectedPoints(comment ? comment?.enjoyPoints : []);
-    // setSelectedTension(comment ? comment?.tensions?.[0] : null);
-    // onGetMyComment();
-  }, []);
+    if (toastFloat) {
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 2000);
+    }
+  }, [toastFloat]);
 
   return (
     modal && (
       <Modal className={styles.commentModal} title={title} setModal={setModal}>
-        {toastFloat && <Toast>로그인 후 이용 가능합니다.</Toast>}
-        <section className={styles.wrapper}>
+        <Toast float={toastFloat} children={toastMsg} />
+        <form className={styles.wrapper} id="reviewForm" onSubmit={onSubmit}>
           <p>영화를 평가해주세요.</p>
           <div className={styles.ratingWrapper}>
             <Stars rating={rating} onRatingChange={onRatingChange} />
@@ -151,12 +176,14 @@ const CommentModal = ({
             value={content}
             onChange={onChange}
           />
+
           <div className={styles.btnWrapper}>
             {isModified ? (
               <Button
                 className={styles.submitBtn}
                 color="primary"
-                onClick={onClick}
+                form="reviewForm"
+                type="submit"
               >
                 수정
               </Button>
@@ -164,7 +191,8 @@ const CommentModal = ({
               <Button
                 className={styles.submitBtn}
                 color="primary"
-                onClick={onClick}
+                form="reviewForm"
+                type="submit"
               >
                 저장
               </Button>
@@ -177,7 +205,7 @@ const CommentModal = ({
               취소
             </Button>
           </div>
-        </section>
+        </form>
       </Modal>
     )
   );

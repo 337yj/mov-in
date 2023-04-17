@@ -10,7 +10,7 @@ import { IconLink } from "../../assets";
 import { Toast } from "../../components";
 import { formatRuntime } from "./_shared/formatRuntime";
 import styles from "./detail.module.scss";
-import { getReviewsMovie } from "../../api/Review";
+import { getMovieMyReview, getReviewsMovie } from "../../api/Review";
 
 const Detail = () => {
   const ref = useRef(null);
@@ -20,6 +20,7 @@ const Detail = () => {
   //NOTE: tab은 리코일로 사용하는게 더 편하다
   const [toastFloat, setToastFloat] = useState(false);
   const [comments, setComments] = useState([]);
+  const [myComment, setMyComment] = useState();
   const formattedRuntime = formatRuntime(movie?.runtime || 0);
 
   const onGetMovieDetail = async () => {
@@ -53,6 +54,13 @@ const Detail = () => {
     setComments(response.data);
   };
 
+  const onGetMyComment = async () => {
+    const response = await getMovieMyReview(id);
+    if (response.status === 200) {
+      if (response.data) setMyComment(response.data);
+    }
+  };
+
   useEffect(() => {
     if (!ref.current) return;
 
@@ -67,6 +75,7 @@ const Detail = () => {
   useEffect(() => {
     onGetMovieDetail();
     onGetComments();
+    onGetMyComment();
   }, [id]);
 
   if (!movie) {
@@ -75,11 +84,7 @@ const Detail = () => {
 
   return (
     <main ref={ref}>
-      {toastFloat && (
-        <div className={styles.toastWrapper}>
-          <Toast>링크가 복사되었습니다.</Toast>
-        </div>
-      )}
+      <Toast float={toastFloat}>링크가 복사되었습니다.</Toast>
       <div className={styles.backgroundWrapper}>
         <img
           className={styles.backgroundImg}

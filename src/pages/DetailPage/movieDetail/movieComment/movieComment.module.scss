@@ -30,6 +30,10 @@
     }
   }
 
+  .noExistComment {
+    @include m.flex();
+  }
+
   .btnWrapper {
     @include m.flex(flex-end);
 

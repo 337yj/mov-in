@@ -131,7 +131,7 @@ const Comment = ({
 
   return (
     <section className={styles.wrapper} onClick={props.onClick}>
-      <Toast float={toastFloat} children={toastMsg} />
+      <Toast float={toastFloat}>{toastMsg}</Toast>
       <div className={styles.commentHeader}>
         <div className={styles.userInfo}>
           <img

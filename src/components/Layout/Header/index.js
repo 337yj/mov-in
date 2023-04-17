@@ -25,16 +25,16 @@ const Header = () => {
   };
 
   const onClickIcon = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prevIsOpen) => !prevIsOpen);
   };
 
   const logout = () => {
     localStorage.clear();
     setUser(null);
-    console.log("로그아웃");
+    setIsOpen(false);
+    navigate("/");
   };
 
-  // 페이지이동, 다른곳 클릭하면 dropdown닫기
   useEffect(() => {
     const onClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -55,7 +55,12 @@ const Header = () => {
     };
   }, [dropdownRef]);
 
-  // 경로가 "/auth/"로 시작할 때, 헤더를 보이지 않게 처리(맨 뒤에 선언해야 적용됨)
+  useEffect(() => {
+    if (user) {
+      setIsOpen(false);
+    }
+  }, [user]);
+
   if (location.pathname.startsWith("/auth/")) {
     return null;
   }

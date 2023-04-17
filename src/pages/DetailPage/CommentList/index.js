@@ -82,17 +82,20 @@ const CommentList = ({}) => {
         <article className={styles.detailInfoWrapper}>
           <div className={styles.commentWrapper}>
             <h2>코멘트</h2>
-
-            <ul className={styles.commentList}>
-              {comments.map((comment) => (
-                <li key={comment.id} className={styles.comment}>
-                  <Comment
-                    comment={comment}
-                    onGetMovieComments={onGetMovieComments}
-                  />
-                </li>
-              ))}
-            </ul>
+            {comments.length > 0 ? (
+              <ul className={styles.commentList}>
+                {comments.map((comment) => (
+                  <li key={comment.id} className={styles.comment}>
+                    <Comment
+                      comment={comment}
+                      onGetMovieComments={onGetMovieComments}
+                    />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className={styles.noExistComment}>작성된 코멘트가 없습니다.</p>
+            )}
           </div>
         </article>
       </section>
@@ -101,16 +104,3 @@ const CommentList = ({}) => {
 };
 
 export default CommentList;
-
-// return (
-//   <article className={styles.wrapper}>
-//     <h2>코멘트</h2>
-//     <ul className={styles.commentList}>
-//       {comments.map((comment) => (
-//         <li key={comment.id} className={styles.comment}>
-//           <Comment comment={comment} onGetReviewsMovie={onGetReviewsMovie} />
-//         </li>
-//       ))}
-//     </ul>
-//   </article>
-// );

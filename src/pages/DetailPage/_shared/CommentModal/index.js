@@ -109,7 +109,7 @@ const CommentModal = ({
       await createReview(movie?.id, commentData);
       setToastFloat(true);
       toast("save");
-      // onGetMovieComments();
+      onGetMovieComments();
     }
     setModal((prev) => !prev);
   };

@@ -13,6 +13,7 @@ const MovieComment = ({ movie }) => {
   const [comments, setComments] = useState([]);
   const [myComment, setMyComment] = useState();
   const user = useRecoilValue(userState);
+  const isAuthor = myComment?.user?.id === user?.id;
 
   const onClickNavigate = (path) => {
     return () => {
@@ -23,15 +24,16 @@ const MovieComment = ({ movie }) => {
   const onGetMyComment = async () => {
     const response = await getMovieMyReview(id);
     if (response.status === 200) {
-      if (response.data) setMyComment(response.data);
+      if (response.data) {
+        setMyComment(response.data);
+      }
     }
-    onGetMovieComment();
   };
-  // console.log(myComment);
+  console.log(myComment);
 
   const onGetMovieComment = async () => {
     try {
-      const response = await getReviewsMovie(movie?.id);
+      const response = await getReviewsMovie(id);
       if (response.status === 200) {
         const data = response.data;
         setComments(data);
@@ -49,19 +51,25 @@ const MovieComment = ({ movie }) => {
   return (
     <section className={styles.wrapper}>
       <h2>코멘트</h2>
-      <div className={styles.myComment}>
-        {myComment && <Comment comment={myComment} />}
-      </div>
-      <ul className={styles.commentWrapper}>
-        {comments
-          .filter((comment) => comment?.user?.id !== user?.id)
-          .slice(0, 2)
-          .map((comment) => (
-            <li key={comment?.id}>
-              <Comment comment={comment} className={styles.pointsHidden} />
-            </li>
-          ))}
-      </ul>
+      {comments.length > 0 ? (
+        <>
+          <div className={styles.myComment}>
+            {myComment && <Comment comment={myComment} />}
+          </div>
+          <ul className={styles.commentWrapper}>
+            {comments
+              .filter((comment) => comment?.user?.id !== user?.id)
+              .slice(0, 2)
+              .map((comment) => (
+                <li key={comment?.id}>
+                  <Comment comment={comment} className={styles.pointsHidden} />
+                </li>
+              ))}
+          </ul>
+        </>
+      ) : (
+        <p className={styles.noExistComment}>작성된 코멘트가 없습니다.</p>
+      )}
       <div className={styles.btnWrapper}>
         <button
           className={styles.moreBtn}

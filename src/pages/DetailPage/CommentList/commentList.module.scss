@@ -71,6 +71,7 @@
     flex-grow: 1;
     width: 46%;
     min-width: 700px;
+    min-height: 650px;
     height: fit-content;
     padding: 36px;
     margin-top: 20px;
@@ -79,6 +80,7 @@
 
     .commentWrapper {
       width: 100%;
+      height: 100%;
 
       > h2 {
         margin-bottom: 34px;
@@ -88,6 +90,12 @@
 
       .comment {
         margin-bottom: 16px;
+      }
+
+      .noExistComment {
+        @include m.flex();
+        font-size: 26px;
+        height: 400px;
       }
     }
   }

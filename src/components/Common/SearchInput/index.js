@@ -11,6 +11,7 @@ const SearchInput = ({ className, placeholder, ...props }) => {
   const onChange = (event) => {
     setState({ ...state, keyword: event.target.value });
   };
+
   const onSubmit = async (event) => {
     event.preventDefault();
     onClick();

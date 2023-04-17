@@ -21,7 +21,7 @@ const BoMovieModal = ({ movie, modal, onCloseModal }) => {
     try {
       const response = await getMovie(id);
       if (response.status === 200) {
-        setMovies(response.data);
+        setMovies(response.data.data);
       }
     } catch (error) {
       console.error(error);
@@ -57,16 +57,15 @@ const BoMovieModal = ({ movie, modal, onCloseModal }) => {
                 <BsFillHeartFill />
                 {movie.likeCount}
               </Button>
-              {/* <Button
-                className={styles.views}
-                color="dark"
-              ></Button> */}
+              {/* <Button className={styles.views} color="dark">
+                {totalCount}
+              </Button> */}
               <Button className={styles.averageScore} color={"dark"}>
                 <h2>평균평점</h2>{" "}
                 {movie.averageScore ? (
                   <span className={styles.averageScore}>
                     {<BsStarFill className={styles.IconStar} />}
-                    {/* {movie.averageScore.toFixed(1)} */}
+                    {movie.averageScore.toFixed(1)}
                   </span>
                 ) : null}
               </Button>

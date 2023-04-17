@@ -16,36 +16,36 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
     );
 
   // // 체크된 아이템을 담을 배열
-  // const [checkItems, setCheckItems] = useState([]);
-  // const [isChecked, setIsChecked] = useState(false);
+  const [checkItems, setCheckItems] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
 
   const onCheckedAll = (e) => {
     setIsChecked(!isChecked);
   };
 
-  // // 체크박스 단일 선택
-  // const handleSingleCheck = (checked, id) => {
-  //   if (checked) {
-  //     // 단일 선택 시 체크된 아이템을 배열에 추가
-  //     setCheckItems((prev) => [...prev, id]);
-  //   } else {
-  //     // 단일 선택 해제 시 체크된 아이템을 제외하고 배열 추가
-  //     setCheckItems(checkItems.filter((el) => el !== id));
-  //   }
-  // };
+  // 체크박스 단일 선택
+  const handleSingleCheck = (checked, id) => {
+    if (checked) {
+      // 단일 선택 시 체크된 아이템을 배열에 추가
+      setCheckItems((prev) => [...prev, id]);
+    } else {
+      // 단일 선택 해제 시 체크된 아이템을 제외하고 배열 추가
+      setCheckItems(checkItems.filter((el) => el !== id));
+    }
+  };
 
-  // // 체크박스 전체 선택
-  // const handleAllCheck = (checked) => {
-  //   if (checked) {
-  //     // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
-  //     const idArray = [];
-  //     data.forEach((el) => idArray.push(el.id));
-  //     setCheckItems(idArray);
-  //   } else {
-  //     // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
-  //     setCheckItems([]);
-  //   }
-  // };
+  // 체크박스 전체 선택
+  const handleAllCheck = (checked) => {
+    if (checked) {
+      // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
+      const idArray = [];
+      data.forEach((el) => idArray.push(el.id));
+      setCheckItems(idArray);
+    } else {
+      // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
+      setCheckItems([]);
+    }
+  };
 
   const rowsPerPage = rows.slice(0, 10);
 
@@ -97,9 +97,8 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
               {...row.getRowProps()}
             >
               <td>
-                <CheckBox />
+                <CheckBox onClick={handleSingleCheck} />
               </td>
-
               {row.cells.map((cell) => {
                 return (
                   <td {...cell.getCellProps()}>

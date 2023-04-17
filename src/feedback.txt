@@ -24,5 +24,13 @@ ex)
 Comment카드에 감상포인트들이 렌더링 되지 않게 만들고 싶은데 display:none이 적용되지 않습니다.
 DetailPage > movieDetail > movieComment (styles.pointsHidden)
 
-
 5. 로그인페이지 하단에 빈공간이 생기는 문제
+
+6.bopage 영화 관리에 영화 데이터가 null로 표시됩니다.
+
+7.bopage 영화 관리 모달을 닫으면 에러가 납니다
+
+8.bopage에 유저와 코멘트 모달을 말씀해 주신대로 함수로 넣었는데 적용되지 않습니다.
+
+9. myPage > userInfo 탈퇴하기 누르면 메인페이지로 이동하는데 403 에러가 뜹니다
+

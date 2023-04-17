@@ -22,3 +22,5 @@ adminYun@aa.aa
 undefined로 넘어오는 문제
 
 5. Bopage > Bomovie 모달 X를 누르면 에러가 뜹니다
+
+6. myPage > userInfo 탈퇴하기 누르면 메인페이지로 이동하는데 403 에러가 뜹니다

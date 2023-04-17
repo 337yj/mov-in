@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 
-import { getMovies, getMoviesCount } from "../../../api/Movie";
+import { getMovies, getMovie, getMoviesCount } from "../../../api/Movie";
 
 import { SearchInput, Table, Button, Paging } from "../../../components";
 import { BoMovieModal } from "../_shared";
@@ -19,6 +20,8 @@ const columns = [
 const POST_PER_PAGE = 10;
 
 const BOMovie = ({ movie }) => {
+  const { id } = useParams;
+
   const [movies, setMovies] = useState([]);
   //NOTE: 선택된 영화를 관리하기 위한 state
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -63,6 +66,18 @@ const BOMovie = ({ movie }) => {
     }
   };
 
+  const onGetMovieDetail = async () => {
+    try {
+      const response = await getMovie(id);
+      if (response.status === 200) {
+        const data = response.data;
+        setSelectedMovie(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onGetMoviesCount = async () => {
     try {
       const response = await getMoviesCount();
@@ -76,11 +91,12 @@ const BOMovie = ({ movie }) => {
 
   useEffect(() => {
     onGetMovies();
+    onGetMovieDetail(id);
     onGetMoviesCount();
-  }, [page]);
+  }, [page, id]);
 
   return (
-    <section className={styles.wrapper}>
+    <main className={styles.wrapper}>
       <h1>영화 관리 페이지</h1>
       <div className={styles.search}>
         <SearchInput placeholder={"영화명을 검색하세요."} />
@@ -113,7 +129,7 @@ const BOMovie = ({ movie }) => {
         pageRangeDisplayed={5}
         onChange={onChange}
       />
-    </section>
+    </main>
   );
 };
 

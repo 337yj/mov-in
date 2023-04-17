@@ -7,20 +7,25 @@ adminYun@aa.aa
 12345678
 
 
-1. 리뷰 수정시 400에러
-(DetailPage > _shared > CommentModal - CommentList > Comment)
+1. 리뷰생성시 영화디테일페이지의 movieComment섹션에서 바로 반영되게 하는법..
 
-1. 영화디테일 페이지 or 코멘트리스트 페이지에서 리뷰 좋아요 누를시 409에러
-(DetailPage > Comment)
+2. 리뷰수정, 좋아요, 삭제를 영화디테일, 코멘트리스트, 코멘트디테일에서 다 사용할 수 있게 만들고
+바로 업데이트되게 하고싶은데 각각의 api를 다시 호출할때 페이지마다 다른 에러가 납니다..
 
-2. 영화디테일 > 코멘트리스트 > 코멘트디테일 페이지에서 리뷰를 삭제할시 404에러
+ex)
+코멘트리스트에서 리뷰수정시 onGetCommentDetail is not a function에러
+코멘트디테일에서 리뷰수정시 onGetMovieComments is not a function에러
 
-3. 코멘트 디테일 페이지에서 댓글을 남기고 
-뒤로가기를 2번 눌러야 코멘트리스트페이지로 이동이됨
+3.  영화디테일페이지의 movieComment섹션에서는 
+Comment카드에 감상포인트들이 렌더링 되지 않게 만들고 싶은데 display:none이 적용되지 않습니다.
+DetailPage > movieDetail > movieComment (styles.pointsHidden)
 
-4. myPage > 코멘트 및 평점, 북마크
-undefined로 넘어오는 문제
+4. 로그인페이지 하단에 빈공간이 생기는 문제
 
-5. Bopage > Bomovie 모달 X를 누르면 에러가 뜹니다
+5.bopage 영화 관리에 영화 데이터가 null로 표시됩니다.
 
-6. myPage > userInfo 탈퇴하기 누르면 메인페이지로 이동하는데 403 에러가 뜹니다
+6.bopage 영화 관리 모달을 닫으면 에러가 납니다
+
+7.bopage에 유저와 코멘트 모달을 말씀해 주신대로 함수로 넣었는데 적용되지 않습니다.
+
+8. myPage > userInfo 탈퇴하기 누르면 메인페이지로 이동하는데 403 에러가 뜹니다

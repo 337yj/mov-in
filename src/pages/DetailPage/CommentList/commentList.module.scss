@@ -29,21 +29,21 @@
   @include m.flex(center, center, column);
   position: relative;
   width: 100%;
-  //NOTE: margin-top 을 부모 요소에 넣어서 위로 올려버리시면 됩니다~
   margin-top: -120px;
   margin-bottom: 70px;
 
   .infoWrapper {
     @include m.flex(space-between);
-    //NOTE: position absolute를 넣으면 부모 요소의 height가 0이 됩니다.
-    // position: absolute;
     width: 46%;
     min-width: 700px;
     padding-bottom: 20px;
     border-bottom: 1px solid c.$C_DARKGRAY;
 
     .title {
-      @include m.flex();
+      &:hover {
+        cursor: pointer;
+      }
+
       > h1 {
         padding-right: 24px;
         font-size: 36px;
@@ -53,6 +53,7 @@
 
     .info {
       @include m.flex(center, flex-end, row);
+      flex-shrink: 0;
       height: 36px;
       font-size: 14px;
       font-weight: 400;
@@ -67,13 +68,12 @@
 
   .detailInfoWrapper {
     @include m.flex(flex-start, center, column);
+    flex-grow: 1;
     width: 46%;
     min-width: 700px;
     height: fit-content;
     padding: 36px;
-    padding-bottom: 300px;
     margin-top: 20px;
-    flex-grow: 1;
     border-radius: 4px;
     background-color: c.$C_WHITE_10;
 
@@ -81,22 +81,13 @@
       width: 100%;
 
       > h2 {
+        margin-bottom: 34px;
         font-size: 36px;
         font-weight: 700;
-        margin-bottom: 34px;
       }
 
-      .innerWrapper {
-        @include m.flex(center, flex-start, column);
-        width: 100%;
-
-        .commentList {
-          width: 100%;
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          grid-template-rows: auto;
-          grid-gap: 20px;
-        }
+      .comment {
+        margin-bottom: 16px;
       }
     }
   }

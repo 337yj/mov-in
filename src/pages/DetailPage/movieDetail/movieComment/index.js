@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { getMovieMyReview, getReviewsMovie } from "../../../../api/Review";
-import { myCommentState, userState } from "../../../../state";
+import { userState } from "../../../../state";
 import Comment from "../../CommentList/Comment";
 
 import styles from "./movieComment.module.scss";
@@ -25,7 +25,7 @@ const MovieComment = ({ movie }) => {
     if (response.status === 200) {
       if (response.data) setMyComment(response.data);
     }
-    // onGetMovieComment();
+    onGetMovieComment();
   };
   // console.log(myComment);
 
@@ -50,12 +50,7 @@ const MovieComment = ({ movie }) => {
     <section className={styles.wrapper}>
       <h2>코멘트</h2>
       <div className={styles.myComment}>
-        {myComment && (
-          <Comment
-            comment={myComment}
-            onClick={onClickNavigate(`/commentDetail/${myComment?.id}`)}
-          />
-        )}
+        {myComment && <Comment comment={myComment} />}
       </div>
       <ul className={styles.commentWrapper}>
         {comments
@@ -63,7 +58,7 @@ const MovieComment = ({ movie }) => {
           .slice(0, 2)
           .map((comment) => (
             <li key={comment?.id}>
-              <Comment comment={comment} />
+              <Comment comment={comment} className={styles.pointsHidden} />
             </li>
           ))}
       </ul>

@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getMovie } from "../../../api/Movie";
 import { getReviewsMovie } from "../../../api/Review";
 import { formatRuntime } from "../_shared/formatRuntime";
@@ -9,10 +9,17 @@ import styles from "./commentList.module.scss";
 
 const CommentList = ({}) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [comments, setComments] = useState();
   const [movie, setMovie] = useState();
   const formattedRuntime = formatRuntime(movie?.runtime || 0);
-  console.log(movie);
+  // console.log(movie);
+
+  const onClickNavigate = (path) => {
+    return () => {
+      navigate(path);
+    };
+  };
 
   const onGetMovieDetail = async () => {
     try {
@@ -25,7 +32,7 @@ const CommentList = ({}) => {
     }
   };
 
-  const onGetReviewsMovie = async () => {
+  const onGetMovieComments = async () => {
     try {
       const response = await getReviewsMovie(id);
       if (response.status === 200) {
@@ -40,7 +47,7 @@ const CommentList = ({}) => {
   };
 
   useEffect(() => {
-    onGetReviewsMovie();
+    onGetMovieComments();
     onGetMovieDetail();
   }, [id]);
 
@@ -60,7 +67,10 @@ const CommentList = ({}) => {
       </div>
       <section className={styles.wrapper}>
         <article className={styles.infoWrapper}>
-          <div className={styles.title}>
+          <div
+            className={styles.title}
+            onClick={onClickNavigate(`/detail/${movie?.id}`)}
+          >
             <h1>{movie?.title}</h1>
           </div>
           <div className={styles.info}>
@@ -72,18 +82,17 @@ const CommentList = ({}) => {
         <article className={styles.detailInfoWrapper}>
           <div className={styles.commentWrapper}>
             <h2>코멘트</h2>
-            <div className={styles.innerWrapper}>
-              <ul className={styles.commentList}>
-                {comments.map((comment) => (
-                  <li key={comment.id} className={styles.comment}>
-                    <Comment
-                      comment={comment}
-                      onGetReviewsMovie={onGetReviewsMovie}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
+
+            <ul className={styles.commentList}>
+              {comments.map((comment) => (
+                <li key={comment.id} className={styles.comment}>
+                  <Comment
+                    comment={comment}
+                    onGetMovieComments={onGetMovieComments}
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
         </article>
       </section>

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { useSortBy, useTable, useRowSelect, usePagination } from "react-table";
 import cx from "classnames";
+import React, { useState } from "react";
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
+import { useSortBy, useTable } from "react-table";
 import { CheckBox } from "../../Common";
-import { FaSortDown, FaSortUp, FaSort } from "react-icons/fa";
 import styles from "./table.module.scss";
 
 const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
@@ -89,6 +89,7 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
       <tbody {...getTableBodyProps()}>
         {rowsPerPage.map((row) => {
           prepareRow(row);
+
           return (
             <tr
               className={cx(styles.bodyTrStyle, {
@@ -107,7 +108,7 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
                 );
               })}
               {/* //TODO: 테이블을 사용하는 다른 페이지에서도 firstButton을 함수로 바꿔야한다. */}
-              {firstButton(row)}
+              {firstButton(row.original.id)}
               {secondButton}
             </tr>
           );

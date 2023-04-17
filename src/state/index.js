@@ -17,3 +17,8 @@ export const myCommentState = atom({
   key: "myCommentState",
   default: {},
 });
+
+export const commentModalState = atom({
+  key: "commentModalState",
+  default: false,
+});

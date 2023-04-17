@@ -6,33 +6,35 @@ import { getMovie } from "../../../../api/Movie";
 import { Modal, Button } from "../../../../components";
 
 import styles from "./boMovieModal.module.scss";
-import { BsFillHeartFill } from "react-icons/bs";
+import { BsFillHeartFill, BsStarFill } from "react-icons/bs";
 
-const BoMovieModal = ({ movie, modal, onCloseModal }) => {
-  const { id } = useParams();
+const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
+  //NOTE: id가 필요하지 않습니다.
+  // const { id } = useParams();
 
-  const [movies, setMovies] = useState([]);
+  const [movie, setMovie] = useState(null);
 
   const onClickModal = () => {
     onCloseModal();
+    setMovie(null);
   };
 
   const onGetMovieDetail = async () => {
     try {
-      const response = await getMovie(id);
+      const response = await getMovie(movieId);
       if (response.status === 200) {
-        setMovies(response.data.data);
+        setMovie(response.data);
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+  console.log({ movieId, movie });
   useEffect(() => {
-    onGetMovieDetail(movie);
-  }, [id]);
+    onGetMovieDetail();
+  }, [movieId]);
 
-  console.log({ modal, movie });
   if (!movie) {
     return null;
   }
@@ -64,7 +66,7 @@ const BoMovieModal = ({ movie, modal, onCloseModal }) => {
                 <h2>평균평점</h2>{" "}
                 {movie.averageScore ? (
                   <span className={styles.averageScore}>
-                    {<BsStarFill className={styles.IconStar} />}
+                    <BsStarFill className={styles.IconStar} />
                     {movie.averageScore.toFixed(1)}
                   </span>
                 ) : null}

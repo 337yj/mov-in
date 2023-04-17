@@ -12,6 +12,7 @@ const Modal = ({
   buttonSecond,
   onClick,
   setModal,
+  // NOTE: 다른 곳에서 모달을 쓸 때 close가 안된다 => setModal도 onClick에 넣어야 합니다.
 }) => {
   return (
     <div className={cx(styles.overlay)}>
@@ -23,7 +24,10 @@ const Modal = ({
           </div>
           <button
             className={cx(styles.closeBtn)}
-            onClick={() => setModal(false)}
+            onClick={() => {
+              setModal && setModal(false);
+              onClick && onClick();
+            }}
           >
             <IconClose />
           </button>

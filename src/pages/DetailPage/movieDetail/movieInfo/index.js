@@ -5,7 +5,7 @@ import {
   deleteBookmarks,
   getMyBookmarks,
 } from "../../../../api/Bookmark";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { userState } from "../../../../state";
 import CommentModal from "../../_shared/CommentModal";
 import { Button, Toast } from "../../../../components";
@@ -19,10 +19,14 @@ import {
 } from "react-icons/bs";
 import cx from "classnames";
 import styles from "./movieInfo.module.scss";
+import { commentModalState } from "../../../../state";
 
 const MovieInfo = ({ movie }) => {
   //NOTE: 모달을 recoil로 관리하는 경우 => 모달 컴포넌트를 한곳에만 선언을 하고, state를 통해서만 modal의 상태를 관리하고 싶을 때
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
+
+  //NOTE: recoil을 통해 modal을 관리
+  const setModal = useSetRecoilState(commentModalState);
   const [showAllStaffs, setShowAllStaffs] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);
@@ -156,12 +160,12 @@ const MovieInfo = ({ movie }) => {
           <BsPencil className={styles.IconReview} />
           코멘트
         </Button>
-        <CommentModal
+        {/* <CommentModal
           movie={movie}
           title={movie.title}
           modal={modal}
           setModal={setModal}
-        />
+        /> */}
       </div>
       <div className={styles.infoWrapper}>
         <div className={styles.scoreWrapper}>

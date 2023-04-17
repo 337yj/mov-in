@@ -31,6 +31,7 @@ const Comment = ({
   className,
   onGetCommentDetail,
   onGetMovieComments,
+  isPointsView = true, //NOTE: default value를 props에 넣어주는 방식
   ...props
 }) => {
   const navigate = useNavigate();
@@ -85,12 +86,11 @@ const Comment = ({
     try {
       if (isLiked) {
         await deleteReviewsLike(comment?.id);
-        onGetCommentDetail();
       } else {
         await createReviewsLike(comment?.id);
-        onGetCommentDetail();
       }
       setIsLiked(!isLiked);
+      await onGetMovieComments();
     } catch (error) {
       console.error(error);
     }
@@ -98,13 +98,13 @@ const Comment = ({
 
   const onClickDelete = async () => {
     await deleteReviews(comment?.id);
+    await onGetMovieComments();
     const currentPathname = window.location.pathname;
     if (currentPathname.startsWith("/commentDetail")) {
       navigate(-1);
     }
     setToastFloat(true);
     toast("delete");
-    onGetMovieComments();
   };
 
   const onClickModify = () => {
@@ -142,14 +142,16 @@ const Comment = ({
           <p className={styles.username}>
             {comment.user?.nickname ?? comment.user?.name}
           </p>
-          <p className={cx(styles.points, className)}>
-            {enjoyPoints?.map((point, index) => (
-              <span key={index}>{point}</span>
-            ))}
-            {tensions?.map((point, index) => (
-              <span key={index}>긴장감 {point}</span>
-            ))}
-          </p>
+          {isPointsView && (
+            <p className={cx(styles.points, className)}>
+              {enjoyPoints?.map((point, index) => (
+                <span key={index}>{point}</span>
+              ))}
+              {tensions?.map((point, index) => (
+                <span key={index}>긴장감 {point}</span>
+              ))}
+            </p>
+          )}
         </div>
 
         <p className={styles.userScore}>

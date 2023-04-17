@@ -93,7 +93,9 @@ const Login = () => {
               onChange={onChange}
               autoComplete="off"
             />
-            <p onClick={onClickNavigate("auth/register")}>회원이 아니신가요?</p>
+            <p onClick={onClickNavigate("/auth/register")}>
+              회원이 아니신가요?
+            </p>
             <Button type="submit" form="loginForm" color="primary">
               로그인
             </Button>

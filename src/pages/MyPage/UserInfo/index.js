@@ -38,8 +38,7 @@ const UserInfo = () => {
 
   const onClickPsw = () => {
     setShowPsw(!showPsw);
-  }
-
+  };
 
   const onChangeInfo = (e) => {
     const { name, value } = e.target;
@@ -57,16 +56,21 @@ const UserInfo = () => {
     }
   };
 
-  //회원탈퇴
+  //회원탈퇴 -> 유저(나) 삭제 + 로그아웃
   const onDelete = async () => {
     if (confirm("회원 탈퇴 하시겠습니까?")) {
       const response = await deleteUser(user?.id);
+      //NOTE: 회원탈퇴를 한 경우 로그인페이지로 갈건지 아니면 홈 화면으로 갈건지
+
       if (response.status === 204) {
+        localStorage.clear();
+        setMe(null);
         alert("삭제 완료 되었습니다");
         navigate("/");
-        (location || window.location || document.location).reload();
+        //NOTE: 로그아웃과 동일 로직으로 처리를 해야합니다. -> 토큰도 지우고, me 정보도 지워야합니다.
+        // (location || window.location || document.location).reload();
       } else {
-        toast("fail")
+        toast("fail");
         return;
       }
     }
@@ -200,7 +204,7 @@ const UserInfo = () => {
                 value={form?.password}
                 onChange={onChangeInfo}
                 className={styles.inputText}
-               />
+              />
             </div>
             <div>
               <Input

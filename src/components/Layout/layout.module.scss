@@ -5,6 +5,8 @@
   background-color: c.$C_INDIGO;
 
   .outletWrapper {
-    margin-top: -90px;
+    &:not(.isAuth) {
+      margin-top: -90px;
+    }
   }
 }

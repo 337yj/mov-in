@@ -104,13 +104,13 @@ const CommentModal = ({
       toast("modify");
       onGetCommentDetail();
       // CommentList > Comment 에서 넘겨옴
-      onGetMovieComments();
     } else {
       await createReview(movie?.id, commentData);
       setToastFloat(true);
       toast("save");
-      onGetMovieComments();
     }
+
+    await onGetMovieComments();
     setModal((prev) => !prev);
   };
 

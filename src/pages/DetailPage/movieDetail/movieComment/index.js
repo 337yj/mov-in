@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { getMovieMyReview, getReviewsMovie } from "../../../../api/Review";
-import { userState } from "../../../../state";
+import { commentModalState, userState } from "../../../../state";
 import Comment from "../../CommentList/Comment";
 
 import styles from "./movieComment.module.scss";
+import CommentModal from "../../_shared/CommentModal";
 
 const MovieComment = ({ movie }) => {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  //NOTE: CommentModal의 열림 상태
+  const [modal, setModal] = useRecoilState(commentModalState);
   const [comments, setComments] = useState([]);
   const [myComment, setMyComment] = useState();
   const user = useRecoilValue(userState);
@@ -26,10 +30,11 @@ const MovieComment = ({ movie }) => {
     if (response.status === 200) {
       if (response.data) {
         setMyComment(response.data);
+      } else {
+        setMyComment(null);
       }
     }
   };
-  console.log(myComment);
 
   const onGetMovieComment = async () => {
     try {
@@ -54,7 +59,12 @@ const MovieComment = ({ movie }) => {
       {comments.length > 0 ? (
         <>
           <div className={styles.myComment}>
-            {myComment && <Comment comment={myComment} />}
+            {myComment && (
+              <Comment
+                comment={myComment}
+                onGetMovieComments={onGetMyComment}
+              />
+            )}
           </div>
           <ul className={styles.commentWrapper}>
             {comments
@@ -62,7 +72,11 @@ const MovieComment = ({ movie }) => {
               .slice(0, 2)
               .map((comment) => (
                 <li key={comment?.id}>
-                  <Comment comment={comment} className={styles.pointsHidden} />
+                  <Comment
+                    comment={comment}
+                    onGetMovieComments={onGetMovieComment}
+                    isPointsView={false}
+                  />
                 </li>
               ))}
           </ul>
@@ -78,6 +92,16 @@ const MovieComment = ({ movie }) => {
           더보기
         </button>
       </div>
+      <CommentModal
+        movie={movie}
+        title={movie.title}
+        modal={modal}
+        setModal={setModal}
+        onGetMovieComments={async () => {
+          await onGetMovieComment();
+          await onGetMyComment();
+        }}
+      />
     </section>
   );
 };

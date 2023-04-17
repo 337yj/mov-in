@@ -23,7 +23,7 @@ const BOMovie = ({ movie }) => {
   const { id } = useParams;
 
   const [movies, setMovies] = useState([]);
-  //NOTE: 선택된 영화를 관리하기 위한 state
+  //NOTE: 선택된 영화를 관리하기 위한 state -> 선택된 movie의 id
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [page, setPage] = useState(1); // 현재 페이지
   const [totalCount, setTotalCount] = useState(0);
@@ -33,6 +33,7 @@ const BOMovie = ({ movie }) => {
   const data = movies.map((movie) => ({
     //NOTE: substring을 통한 문자열 자르기
     // 제목: movie.title.substring(0, 10),
+    id: movie.id,
     제목: movie.title ?? "-",
     감독: movie.staffs.find((staff) => staff.role === "감독")?.name ?? "-",
     장르: movie.genres.map((genre) => genre?.name).join(", ") ?? "-",
@@ -94,6 +95,7 @@ const BOMovie = ({ movie }) => {
     onGetMovieDetail(id);
     onGetMoviesCount();
   }, [page, id]);
+  console.log({ selectedMovie });
 
   return (
     <main className={styles.wrapper}>
@@ -118,7 +120,7 @@ const BOMovie = ({ movie }) => {
         secondButton={<Button color={"primary"}>삭제</Button>}
       />
       <BoMovieModal
-        movie={selectedMovie}
+        movieId={selectedMovie}
         modal={modal}
         onCloseModal={onCloseModal}
       />

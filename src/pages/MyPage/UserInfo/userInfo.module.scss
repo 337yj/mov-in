@@ -30,7 +30,7 @@
     }
   }
 
-/*
+  /*
  <<<<<<< KNI
   .info {
     @include m.flex();
@@ -101,18 +101,23 @@
 
       .infoWrapper {
         > div {
-
           > label {
             @include m.flex();
             font-size: 24px;
 
-            p {
+            p:first-child {
               width: 200px;
             }
           }
 
           > .inputText {
             width: 662px;
+          }
+
+          .errText {
+            @include m.flex(flex-end);
+            color: c.$C_PINK_80;
+            font-size: 14px;
           }
         }
       }
@@ -121,6 +126,7 @@
     .bottom {
       > p {
         @include m.flex(flex-end);
+        margin-left: 90%;
         color: c.$C_PINK_80;
         cursor: pointer;
       }

@@ -10,5 +10,6 @@ export const msgList = {
   save : "저장 되었습니다",
   cancel : "취소 되었습니다",
   delete : "탈퇴 되었습니다",
-  fail : "실패 했습니다"
+  fail : "실패 했습니다",
+  errText : "잘못된 양식 입니다"
 }

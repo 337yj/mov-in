@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import cx from "classnames";
 import { FaStarHalf, FaRegStarHalf } from "react-icons/fa";
 
@@ -58,4 +58,4 @@ const Stars = ({ rating, onRatingChange }) => {
     </output>
   );
 };
-export default Stars;
+export default memo(Stars);

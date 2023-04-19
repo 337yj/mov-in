@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import {
   createReview,
   getMovieMyReview,
@@ -20,73 +20,56 @@ const CommentModal = ({
   modal,
   setModal,
   myComment,
-  onGetCommentDetail,
   onGetMovieComments,
 }) => {
-  const [comments, setComments] = useState([]);
-  const [content, setContent] = useState(comment ? comment.content : "");
-  const [rating, setRating] = useState(comment ? comment.score : 0);
-  const [selectedPoints, setSelectedPoints] = useState(
-    comment ? comment?.enjoyPoints : [],
-  );
-  const [selectedTension, setSelectedTension] = useState(
-    comment ? comment?.tensions?.[0] : null,
-  );
+  const user = useRecoilValue(userState);
+  const [content, setContent] = useState("");
+  const [rating, setRating] = useState(0);
+  const [selectedPoints, setSelectedPoints] = useState([]);
+  const [selectedTension, setSelectedTension] = useState(null);
+  const [previousComment, setPreviousComment] = useState(null);
   const [toastFloat, setToastFloat] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
-  const user = useRecoilValue(userState);
-
-  // const onGetMyComment = async () => {
-  //   const response = await getMovieMyReview(id);
-  //   if (response.status === 200) {
-  //     if (response.data) setMyComment(response.data);
-  //   }
-  // };
-
-  // const onGetMovieComment = async () => {
-  //   try {
-  //     const response = await getReviewsMovie(movie?.id);
-  //     if (response.status === 200) {
-  //       const data = response.data;
-  //       setComments(data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  const toast = (msg) => {
-    if (!toastFloat) {
-      setToastFloat(true);
-      setToastMsg(msgList[msg]);
-    }
-  };
 
   const onChange = (e) => {
     const { value } = e.currentTarget;
     setContent(value);
   };
 
-  const onRatingChange = (newRating) => {
+  const onRatingChange = useCallback((newRating) => {
     setRating(newRating);
+  }, []);
+
+  const onClickPoint = useCallback(
+    (name) => {
+      if (selectedPoints.includes(name)) {
+        setSelectedPoints(selectedPoints.filter((pointId) => pointId !== name));
+      } else if (selectedPoints.length < 3) {
+        setSelectedPoints([...selectedPoints, name]);
+      }
+    },
+    [selectedPoints],
+  );
+
+  const onClickTension = useCallback(
+    (name) => {
+      setSelectedTension(name);
+    },
+    [selectedTension],
+  );
+
+  const resetCommentForm = () => {
+    setContent("");
+    setRating(0);
+    setSelectedPoints([]);
+    setSelectedTension(null);
   };
 
-  const onClickPoint = (name) => {
-    if (selectedPoints.includes(name)) {
-      setSelectedPoints(selectedPoints.filter((pointId) => pointId !== name));
-    } else if (selectedPoints.length < 3) {
-      setSelectedPoints([...selectedPoints, name]);
-    }
-  };
-
-  const onClickTension = (name) => {
-    setSelectedTension(name);
-  };
-
-  const onClickNotUser = () => {
+  const onClickNotUser = useCallback(() => {
     if (!user) {
       toast("loginRequired");
     }
-  };
+  }, [user]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -99,20 +82,48 @@ const CommentModal = ({
     };
     if (isModified) {
       await updateReviews(myComment?.id, commentData);
-      // CommentDetail > Comment 에서 넘겨옴
-      setToastFloat(true);
-      toast("modify");
-      onGetCommentDetail();
-      // CommentList > Comment 에서 넘겨옴
+      // setToastFloat(true);
+      // toast("modify");
     } else {
       await createReview(movie?.id, commentData);
-      setToastFloat(true);
-      toast("save");
+      // setToastFloat(true);
+      // toast("save");
     }
-
     await onGetMovieComments();
     setModal((prev) => !prev);
   };
+
+  const onClickClose = useCallback(() => {
+    setModal((prev) => !prev);
+  }, []);
+
+  const toast = (msg) => {
+    if (!toastFloat) {
+      setToastFloat(true);
+      setToastMsg(msgList[msg]);
+    }
+  };
+
+  const onClickSave = useCallback(() => {
+    toast("save");
+  }, []);
+
+  const onClickModify = useCallback(() => {
+    toast("modify");
+  }, []);
+
+  useEffect(() => {
+    if (isModified) {
+      setPreviousComment(comment);
+      setContent(comment?.content ?? "");
+      setRating(comment?.score ?? 0);
+      setSelectedPoints(comment?.enjoyPoints ?? []);
+      setSelectedTension(comment?.tensions?.[0] ?? null);
+    } else {
+      resetCommentForm();
+      setPreviousComment(null);
+    }
+  }, [modal]);
 
   useEffect(() => {
     if (toastFloat) {
@@ -125,7 +136,7 @@ const CommentModal = ({
   return (
     modal && (
       <Modal className={styles.commentModal} title={title} setModal={setModal}>
-        <Toast float={toastFloat} children={toastMsg} />
+        <Toast children={toastMsg} float={toastFloat} />
         <form className={styles.wrapper} id="reviewForm" onSubmit={onSubmit}>
           <p>영화를 평가해주세요.</p>
           <div className={styles.ratingWrapper}>
@@ -184,6 +195,7 @@ const CommentModal = ({
                 color="primary"
                 form="reviewForm"
                 type="submit"
+                onClick={onClickModify}
               >
                 수정
               </Button>
@@ -193,6 +205,7 @@ const CommentModal = ({
                 color="primary"
                 form="reviewForm"
                 type="submit"
+                onClick={onClickSave}
               >
                 저장
               </Button>
@@ -200,7 +213,7 @@ const CommentModal = ({
             <Button
               className={styles.cancelBtn}
               color="secondary"
-              onClick={() => setModal((prev) => !prev)}
+              onClick={onClickClose}
             >
               취소
             </Button>

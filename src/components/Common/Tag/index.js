@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import cx from "classnames";
 import styles from "./tag.module.scss";
 
@@ -14,11 +14,7 @@ const Tag = ({
 }) => {
   const [isActive, setIsActive] = useState(isSelected || false);
 
-  useEffect(() => {
-    setIsActive(isSelected);
-  }, [isSelected]);
-
-  const onActiveClick = () => {
+  const onActiveClick = useCallback(() => {
     if (isActive) {
       setIsActive(false);
       onClick(id, false);
@@ -26,7 +22,12 @@ const Tag = ({
       setIsActive(true);
       onClick(id, true);
     }
-  };
+  }, [isActive]);
+
+  useEffect(() => {
+    setIsActive(isSelected);
+  }, [isSelected]);
+
   return (
     <button
       disabled={isDisabled}
@@ -39,7 +40,7 @@ const Tag = ({
   );
 };
 
-export default Tag;
+export default memo(Tag);
 
 // const Tag = ({
 //   className,

@@ -6,12 +6,12 @@ import {
   deleteReviews,
   deleteReviewsLike,
   getMovieMyReview,
-  getReviewsMovie,
 } from "../../../../api/Review";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { spoilerState, userState } from "../../../../state";
-import { Tag, Toast } from "../../../../components";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../../state";
+import { Toast } from "../../../../components";
 import CommentModal from "../../_shared/CommentModal";
+import { msgList } from "../../_shared/toastMsg";
 import {
   BsFillHeartFill,
   BsHeart,
@@ -23,7 +23,6 @@ import { TfiCommentAlt } from "react-icons/tfi";
 import { ImageProfile1 } from "../../../../assets";
 import cx from "classnames";
 import styles from "./comment.module.scss";
-import { msgList } from "../../_shared/toastMsg";
 
 const Comment = ({
   comment,
@@ -31,7 +30,7 @@ const Comment = ({
   className,
   onGetCommentDetail,
   onGetMovieComments,
-  isPointsView = true, //NOTE: default value를 props에 넣어주는 방식
+  isPointsView = true,
   ...props
 }) => {
   const navigate = useNavigate();
@@ -107,9 +106,10 @@ const Comment = ({
     toast("delete");
   };
 
-  const onClickModify = () => {
+  const onClickModify = async () => {
     setModal(true);
     setIsModified(true);
+    await onGetMovieComments();
   };
 
   useEffect(() => {
@@ -184,12 +184,10 @@ const Comment = ({
           isModified={isModified}
           setModal={setModal}
           myComment={myComment}
-          onGetCommentDetail={onGetCommentDetail}
           onGetMovieComments={onGetMovieComments}
         />
       </div>
       <div className={styles.commentFooter}>
-        {/* {toastFloat && <Toast>로그인 후 이용 가능합니다.</Toast>} */}
         <div className={styles.footerBtnWrapper}>
           <button className={styles.likeBtn} onClick={onClickCommentLike}>
             {isLiked ? (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import cx from "classnames";
 import { NavLink } from "react-router-dom";
 import styles from "./lnb.module.scss";
@@ -29,4 +29,4 @@ const LNB = ({ title, menus, basePath, selectedPath }) => {
   );
 };
 
-export default LNB;
+export default memo(LNB);

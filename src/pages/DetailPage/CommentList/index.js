@@ -1,19 +1,18 @@
-import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMovie } from "../../../api/Movie";
 import { getReviewsMovie } from "../../../api/Review";
-import { formatRuntime } from "../_shared/formatRuntime";
 import Comment from "./Comment";
+import { formatRuntime } from "../_shared/formatRuntime";
+import dayjs from "dayjs";
 import styles from "./commentList.module.scss";
 
 const CommentList = ({}) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [comments, setComments] = useState();
   const [movie, setMovie] = useState();
+  const [comments, setComments] = useState();
   const formattedRuntime = formatRuntime(movie?.runtime || 0);
-  // console.log(movie);
 
   const onClickNavigate = (path) => {
     return () => {

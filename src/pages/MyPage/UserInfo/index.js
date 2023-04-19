@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useRecoilValue, atom, useRecoilState } from "recoil";
 import dayjs from "dayjs";
 import { useMount } from "react-use";
 import { validateForm } from "../../Auth/Register/utils";
 import { useMe } from "../../../hooks";
+//import { image } from "../_shared/imageModal/image.js" 
 import {
   updateUser,
   getUsersMe,
   deleteUser,
   updateMe,
 } from "../../../api/User";
-import { userState } from "../../../state";
+import { userState, imageModalState } from "../../../state";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
 import { Button, Input, Toast } from "../../../components";
 import { ImageModal } from "../_shared";
@@ -21,7 +22,7 @@ import styles from "./userInfo.module.scss";
 const UserInfo = () => {
   const user = useMe();
   const [me, setMe] = useRecoilState(userState);
-  const [openImgModal, setOpenImgModal] = useState(false);
+  const [modal, setModal] = useRecoilState(imageModalState);
   const [floatToast, setFloatToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
   const [err, setErr] = useState({});
@@ -37,7 +38,7 @@ const UserInfo = () => {
   const navigate = useNavigate();
 
   const onClickPsw = () => {
-    setShowPsw(!showPsw);
+    setShowPsw(showPsw("password"));
   };
 
   const onChangeInfo = (e) => {
@@ -54,6 +55,13 @@ const UserInfo = () => {
     if (response.status === 200) {
       setMe(response.data);
     }
+  };
+
+  const getProfileImage = (name) => {
+    setForm({
+      ...form,
+      ['profileImage']: name,
+    });
   };
 
   //회원탈퇴 -> 유저(나) 삭제 + 로그아웃
@@ -113,7 +121,7 @@ const UserInfo = () => {
 
   //프로필 모달
   const onClickImg = () => {
-    setOpenImgModal(!openImgModal);
+    setModal(!modal);
   };
 
   const cancel = () => {
@@ -150,9 +158,6 @@ const UserInfo = () => {
     });
   }, [me]);
 
-  console.log(form);
-  console.log(user);
-
   return (
     <main className={styles.wrapper}>
       <header className={styles.header}>
@@ -170,6 +175,17 @@ const UserInfo = () => {
               src={user?.profileImage ?? ImageProfile2}
             />
             <p onClick={onClickImg}>프로필 사진 변경하기</p>
+            {onClickImg && (
+              <ImageModal
+                title="프로필 사진 변경"
+                subtitle="프로필 사진을 변경할 수 있습니다"
+                modal={modal}
+                setModal={setModal}
+                setImage={getProfileImage}
+                onClick={(e)=>onSubmit(e)}
+                secondBtn={<Button color="primary" children="저장"/>}
+              />
+            )}
           </article>
           <article id="registerForm" className={styles.infoWrapper}>
             <div>
@@ -177,7 +193,7 @@ const UserInfo = () => {
                 name="nickname"
                 label="닉네임"
                 placeholder={"새로운 닉네임을 입력해주세요"}
-                value={form?.nickname}
+                value={form?.nickname || ""}
                 onChange={onChangeInfo}
                 className={styles.inputText}
               />
@@ -188,8 +204,7 @@ const UserInfo = () => {
                 name="email"
                 label="이메일"
                 placeholder={"새로운 이메일을 입력해주세요"}
-                value={form?.email}
-                //errorText={err.email}
+                value={form?.email || ""}
                 onChange={onChangeInfo}
                 className={styles.inputText}
               />
@@ -201,7 +216,7 @@ const UserInfo = () => {
                 label="비밀번호"
                 type="password"
                 placeholder={"새로운 비밀번호를 입력해주세요"}
-                value={form?.password}
+                value={form?.password || ""}
                 onChange={onChangeInfo}
                 className={styles.inputText}
               />
@@ -211,7 +226,7 @@ const UserInfo = () => {
                 name="birth"
                 label="생년월일"
                 //value={dayjs(user?.birth, "YYMMDD").format("YY.MM.DD")}
-                value={form?.birth}
+                value={form?.birth || ""}
                 className={styles.inputText}
                 readOnly
               />
@@ -234,7 +249,6 @@ const UserInfo = () => {
               children="저장"
               onClick={(e) => {
                 onSubmit(e);
-                //toast("save");
               }}
             />
             <Toast children={toastMsg} float={floatToast} />

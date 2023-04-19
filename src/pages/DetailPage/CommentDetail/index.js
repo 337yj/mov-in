@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userState } from "../../../state";
-import {
-  createReviewsComments,
-  deleteReviewsComments,
-  getReviewsDetail,
-} from "../../../api/Review";
-import { getMovie } from "../../../api/Movie";
+import { createReviewsComments, getReviewsDetail } from "../../../api/Review";
 import Comment from "../CommentList/Comment";
 import Reply from "./Reply";
 import { Button } from "../../../components";
 import { formatRuntime } from "../_shared/formatRuntime";
-import dayjs from "dayjs";
 import { ImageProfile2 } from "../../../assets";
+import dayjs from "dayjs";
 import styles from "./commentDetail.module.scss";
 
 const CommentDetail = ({ comment, ...props }) => {
@@ -21,7 +16,7 @@ const CommentDetail = ({ comment, ...props }) => {
   const navigate = useNavigate();
   const [detailComment, setDetailComment] = useState();
   const [content, setContent] = useState("");
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
   const formattedRuntime = formatRuntime(detailComment?.movie?.runtime || 0);
 
   const onClickNavigate = (path) => {
@@ -47,7 +42,6 @@ const CommentDetail = ({ comment, ...props }) => {
   };
 
   const onSubmit = async (e) => {
-    //NOTE: form tag의 onSubmit은 preventDefault을 해야 페이지가 리로드 되지 않습니다.
     e.preventDefault();
     const commentData = {
       content: content,
@@ -57,38 +51,9 @@ const CommentDetail = ({ comment, ...props }) => {
     setContent("");
   };
 
-  const onDelete = async () => {
-    await deleteReviewsComments(detailComment.id);
-    onGetCommentDetail();
-  };
-
   useEffect(() => {
     onGetCommentDetail();
-    // onGetMovieDetail();
   }, [id]);
-
-  // const onGetMovieDetail = async () => {
-  //   try {
-  //     const movieId = detailComment?.movie?.id;
-  //     const response = await getMovie(movieId);
-  //     if (response.status === 200) {
-  //       setDetailMovie(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  //NOTE: return null은 보통 맨 마지막에 위치
-  // if (!id) {
-  //   return null;
-  // }
-
-  // useEffect(() => {
-  //   if (detailComment?.movie) {
-  //     onGetMovieDetail();
-  //   }
-  // }, [detailComment]);
 
   return (
     <main>
@@ -129,7 +94,7 @@ const CommentDetail = ({ comment, ...props }) => {
               <section className={styles.commentSection}>
                 <Comment
                   comment={detailComment}
-                  onGetCommentDetail={onGetCommentDetail}
+                  onGetMovieComments={onGetCommentDetail}
                 />
               </section>
               <section className={styles.replyInputSection}>

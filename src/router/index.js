@@ -16,6 +16,7 @@ import {
   RegisterPage,
   MyPage,
   //Profile,
+  UserPage,
   UserInfo,
   Like,
   Bookmark,
@@ -46,7 +47,7 @@ const route = (
       <Route path="like" element={<Like />} />
       <Route path="bookmark" element={<Bookmark />} />
     </Route>
-    {/* <Route path="myPage/:id" element={<Profile />} /> */}
+    <Route path="userPage/:id" element={<UserPage />} />
     <Route path="boPage" element={<BOPage />}>
       <Route path="boUser" element={<BOUser />} />
       <Route path="boComment" element={<BOComment />} />

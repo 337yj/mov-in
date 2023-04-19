@@ -1,0 +1,32 @@
+@use "../../../../styles/constants/" as c;
+@use "../../../../styles/mixins/" as m;
+
+.imgWrapper {
+  height: 100%;
+  width: 100%;
+  font-size: 22px;
+
+  > img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.buttonWrapper {
+  @include m.flex(flex-end);
+  animation: fadeInButton 0.5s ease-in-out forwards;
+
+  > button {
+    margin-left: 5px;
+  }
+}
+
+@keyframes fadeInButton {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}

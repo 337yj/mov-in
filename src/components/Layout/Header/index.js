@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../../state";
@@ -122,4 +122,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

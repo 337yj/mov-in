@@ -9,7 +9,6 @@ import { getReviewMe } from "../../../api/Review";
 import { updateMe, getUsersMe } from "../../../api/User";
 import { Button, CheckBox, Toast } from "../../../components";
 import MyCard from "./MyCard";
-//import EditMode from "./EditMode";
 import { msgList } from "../constants";
 //import { AlertModal, ImageModal } from "../_shared";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
@@ -33,7 +32,7 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const onChange = (e) => {
-    const { name, value } = e.currentTarget;
+    const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
@@ -58,16 +57,43 @@ const Profile = () => {
     }
   };
 
-  useMount(() => {
-    onGetMe();
-  });
+  const onClickReview = () => {
+    navigate("/myPage/comment");
+  };
 
+  const onClickImage = () => {
+    navigate("/myPage/userInfo");
+  };
 
+  // const onChangeIntro = (e) => {
+  //   setIntroduce(e.target.value);
+  // };
+
+  const onClickCheckbox = () => {
+    setIsChangePublic(!isChangePublic);
+  };
+
+  //공개처리
+  const onClickPublic = async () => {
+    const userData = {
+      isPublic: !me?.isPublic,
+    };
+    const response = await updateMe(userData);
+    if (response.status === 204) {
+      onGetMe();
+      toast("save");
+    } else {
+      console.log("에러!");
+    }
+  };
+
+  // 저장
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const introData = {
       description: form?.description,
+      //isPublic: form?.isPublic,
     };
 
     try {
@@ -75,25 +101,13 @@ const Profile = () => {
       if (responsePatch.status === 204) {
         onGetMe();
         toast("save");
+        //onClickPublic();
       }
     } catch (err) {
       const errData = err.response.data;
       alert(errData.message);
       toast("fail");
-    }
-  };
-
-  //공개처리
-  const onClickCheckbox = async () => {
-    const userData = {
-      isPublic: !me?.isPublic,
-    };
-    const response = await updateMe(userData);
-    if (response.status === 204) {
-      onGetMe();
-      onClickPublic();
-    } else {
-      console.log("에러!");
+      return;
     }
   };
 
@@ -113,25 +127,6 @@ const Profile = () => {
   //   }
   // };
 
-  const onClickReview = () => {
-    navigate("/myPage/comment");
-  };
-
-  const onClickImage = () => {
-    navigate("/myPage/userInfo");
-  };
-
-  // const onChangeIntro = (e) => {
-  //   setIntroduce(e.target.value);
-  // };
-
-  const onClickPublic = () => {
-    setIsChangePublic(!isChangePublic);
-    setForm({
-      description: me?.description,
-    });
-  };
-
   const toast = (msg) => {
     if (!floatToast) {
       setFloatToast(true);
@@ -143,6 +138,7 @@ const Profile = () => {
     getMyMovieList();
     setForm({
       description: me?.description,
+      isPublic: me?.isPublic,
     });
     //updateUserInfo();
   }, [me]);
@@ -155,7 +151,7 @@ const Profile = () => {
     }
   }, [floatToast]);
 
-  console.log(me);
+  console.log(form);
 
   return (
     <main className={styles.wrapper}>
@@ -163,17 +159,17 @@ const Profile = () => {
       <header className={styles.header}>
         <div className={styles.titleWrapper}>
           <h1 className={styles.title}>프로필</h1>
-          {isChangePublic ? (
+          {user?.isPublic ? (
             <Button
               color={"primary"}
               children={"공개"}
-              onChange={onClickPublic}
+              onChange={onClickCheckbox}
             />
           ) : (
             <Button
               color={"primary"}
               children={"비공개"}
-              onChange={onClickPublic}
+              onChange={onClickCheckbox}
               className={cx(styles.isPublic)}
             />
           )}
@@ -193,23 +189,20 @@ const Profile = () => {
 
         <div className={styles.introWrapper}>
           <textarea
+            name={"description"}
             className={styles.introText}
-            value={form?.description}
+            value={form?.description || ""}
             placeholder={"소개글을 작성해주세요"}
             onChange={onChange}
           />
         </div>
-        {/* <Input
-          placeholder="소개글을 작성해 주세요"
-          value={introduce}
-          onChange={onChangeIntro}
-        /> */}
+
         <div className={styles.ratedMovie}>
           <h1>최근 평가한 영화</h1>
         </div>
         <div className={styles.cardList}>
           {myReviews.map((review) => (
-            <MyCard movie={review} />
+            <MyCard key={review.id} movie={review} />
           ))}
         </div>
         <h6 onClick={onClickReview}>더보기</h6>
@@ -221,9 +214,13 @@ const Profile = () => {
               onClickPublic();
               onClickCheckbox();
             }}
-            check={isChangePublic}
           />
-          <h5>공개 모드로 전환하기</h5>
+          {user?.isPublic ? (
+            <h5>비공개 모드로 전환하기</h5>
+          ) : (
+            <h5>공개 모드로 전환하기</h5>
+          )}
+
           <Button
             color="secondary"
             children="취소"
@@ -242,9 +239,6 @@ const Profile = () => {
           {/* <AlertModal /> */}
         </div>
       </section>
-      {/* <section>
-      {user && !isPublic ? <EditMode /> : <div></div>}
-      </section> */}
     </main>
   );
 };

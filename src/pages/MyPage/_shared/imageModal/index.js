@@ -1,25 +1,49 @@
 import React, { useState, useEffect } from "react";
+import { useMe } from "../../../../hooks";
 import { Button, Modal } from "../../../../components";
-import {
-  ImageProfile1,
-  ImageProfile2,
-  ImageProfile3,
-  ImageProfile4,
-  ImageProfile5,
-  ImageProfile6,
-  ImageProfile7,
-  ImageProfile8,
-  ImageProfile9,
-  ImageProfile10,
-  ImageProfile11,
-  ImageProfile12,
-} from "../../../../assets/images/profileImages";
+import { imgList } from "./image.js";
 import styles from "./imageModal.module.scss";
 
-const ImageModal = () => {
-  <Modal>
-        <ImageProfile1 />
-  </Modal>;
+const ImageModal = ({
+  setImage,
+  modal,
+  setModal,
+  title,
+  subtitle,
+  firstBtn,
+  secondBtn,
+  onClick
+}) => {
+  
+  const checkImage = (name) => {
+    setImage(name);
+  };
+
+  console.log(imgList);
+
+  return (
+    modal && (
+      <>
+        <Modal
+          setModal={setModal}
+          title={title}
+          subTitle={subtitle}
+          onClick={onClick}
+          buttonFirst={firstBtn}
+          buttonSecond={secondBtn}
+        >
+          <section className={styles.imgWrapper}>
+            {imgList.map(({ name, id, img }) => {
+              <span
+                onClick={() => checkImage(id)}
+                key={id}
+              >{img()}</span>                
+            })}
+          </section>
+        </Modal>
+      </>
+    )
+  );
 };
 
 export default ImageModal;

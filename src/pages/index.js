@@ -12,14 +12,16 @@ export { default as CommentPage } from "./DetailPage/CommentList";
 export { default as CommentDetailPage } from "./DetailPage/CommentDetail";
 
 export { default as MyPage } from "./MyPage";
-//export { default as Profile } from "./MyPage/Profile";
 export { default as UserInfo } from "./MyPage/UserInfo";
 export { default as CommentAndRating } from "./MyPage/CommentAndRating";
 export { default as Like } from "./MyPage/Like";
 export { default as Bookmark } from "./MyPage/Bookmark";
+
+export { default as UserPage } from "./UserPage";
 
 export { default as BOPage } from "./BOPage";
 export { default as BOUser } from "./BOPage/./BOUser";
 export { default as BOComment } from "./BOPage/BOComment";
 
 export { default as ComponentPage } from "./Component";
+

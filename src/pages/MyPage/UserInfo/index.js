@@ -56,6 +56,13 @@ const UserInfo = () => {
     }
   };
 
+  const getProfileImage = (name) => {
+    setForm({
+      ...form,
+      ['profileImage']: name,
+    });
+  };
+
   //회원탈퇴 -> 유저(나) 삭제 + 로그아웃
   const onDelete = async () => {
     if (confirm("회원 탈퇴 하시겠습니까?")) {
@@ -113,7 +120,6 @@ const UserInfo = () => {
 
   //프로필 모달
   const onClickImg = () => {
-    //setOpenImgModal(!openImgModal);
     setModal(!modal);
   };
 
@@ -151,9 +157,6 @@ const UserInfo = () => {
     });
   }, [me]);
 
-  console.log(form);
-  console.log(user);
-
   return (
     <main className={styles.wrapper}>
       <header className={styles.header}>
@@ -177,7 +180,10 @@ const UserInfo = () => {
                 subtitle="프로필 사진을 변경할 수 있습니다"
                 modal={modal}
                 setModal={setModal}
+                setImage={getProfileImage}
                 onClick={(e)=>onSubmit(e)}
+                buttonFirst={<Button color="secondary" children="취소"/>}
+                buttonSecond={<Button color="primary" children="저장"/>}
               />
             )}
           </article>
@@ -187,7 +193,7 @@ const UserInfo = () => {
                 name="nickname"
                 label="닉네임"
                 placeholder={"새로운 닉네임을 입력해주세요"}
-                value={form?.nickname}
+                value={form?.nickname || ""}
                 onChange={onChangeInfo}
                 className={styles.inputText}
               />
@@ -198,7 +204,7 @@ const UserInfo = () => {
                 name="email"
                 label="이메일"
                 placeholder={"새로운 이메일을 입력해주세요"}
-                value={form?.email}
+                value={form?.email || ""}
                 onChange={onChangeInfo}
                 className={styles.inputText}
               />
@@ -210,7 +216,7 @@ const UserInfo = () => {
                 label="비밀번호"
                 type="password"
                 placeholder={"새로운 비밀번호를 입력해주세요"}
-                value={form?.password}
+                value={form?.password || ""}
                 onChange={onChangeInfo}
                 className={styles.inputText}
               />
@@ -220,7 +226,7 @@ const UserInfo = () => {
                 name="birth"
                 label="생년월일"
                 //value={dayjs(user?.birth, "YYMMDD").format("YY.MM.DD")}
-                value={form?.birth}
+                value={form?.birth || ""}
                 className={styles.inputText}
                 readOnly
               />

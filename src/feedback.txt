@@ -5,7 +5,3 @@ yun@aa.aa
 어드민 auth/adminLogin
 adminYun@aa.aa 
 12345678
-
-
-1. myPage > Profile 공개/비공개 체크 후 저장하면 체크가 그대로 되어있는 문제가 있습니다
-

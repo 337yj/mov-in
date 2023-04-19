@@ -26,8 +26,6 @@ const ImageModal = ({
           title={title}
           subTitle={subtitle}
           onClick={onClick}
-          buttonFirst={buttonFirst}
-          buttonSecond={buttonSecond}
         >
           <section className={styles.imgWrapper}>
             {imgList.map(({ id, name, img }) => {
@@ -40,7 +38,7 @@ const ImageModal = ({
                 {img()}
               </span>;
             })}
-            <div className={styles.imgWrapper}>
+            <div className={styles.buttonWrapper}>
             {buttonFirst}
             {buttonSecond}
             </div>

@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { BsFillHeartFill, BsStarFill } from "react-icons/bs";
+import dayjs from "dayjs";
 
 import { getMovie, updateMovie } from "../../../../api/Movie";
 
 import { Modal, Button } from "../../../../components";
 
 import styles from "./boMovieModal.module.scss";
-import { BsFillHeartFill, BsStarFill } from "react-icons/bs";
 
 const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
-  //NOTE: id가 필요하지 않습니다.
-  // const { id } = useParams();
-
   const [movie, setMovie] = useState(null);
 
   const onClickModal = () => {
     onCloseModal();
     setMovie(null);
   };
-
-  const onClickModify = async () => {};
 
   const onChange = (e) => {
     const { value } = e.currentTarget;
@@ -35,7 +31,6 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
       runtime,
       genres,
       releasedAtm,
-      staffs: [role === "감독"],
     };
     await updateMovie(movieId, movieData);
     alert("수정되었습니다.");
@@ -56,6 +51,7 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
   };
 
   console.log({ movieId, movie });
+
   useEffect(() => {
     onGetMovieDetail();
   }, [movieId]);
@@ -80,14 +76,22 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
               alt="thumbnail"
             />
             <div className={styles.content}>
-              <Button className={styles.likeButton} color={"dark"}>
-                <BsFillHeartFill />
+              <p className={styles.movieTitle}>{movie.title}</p>
+              <div className={styles.contentInfo}>
+                <p>{movie.runtime}분 |</p>
+                <p>{movie.genres.map((genre) => genre?.name).join(", ")} |</p>
+                <p>
+                  {dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}
+                </p>
+              </div>
+              <div className={styles.likeButton} color={"dark"}>
+                <BsFillHeartFill className={styles.IconHeart} />
                 {movie.likeCount}
-              </Button>
-              <Button className={styles.views} color="dark">
+              </div>
+              <div className={styles.views} color="dark">
                 {movie.reviewCount}
-              </Button>
-              <Button className={styles.averageScore} color={"dark"}>
+              </div>
+              <div className={styles.averageScore} color={"dark"}>
                 <h2>평균평점</h2>{" "}
                 {movie.averageScore ? (
                   <span className={styles.averageScore}>
@@ -95,10 +99,10 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
                     {movie.averageScore.toFixed(1)}
                   </span>
                 ) : null}
-              </Button>
+              </div>{" "}
               <p className={styles.plot}>{movie.plot}</p>
             </div>
-          </section>
+          </section>{" "}
           <div className={styles.buttonWrapper}>
             <Button
               className={styles.modify}
@@ -110,7 +114,7 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
             <Button
               className={styles.cancel}
               color={"secondary"}
-              onClick={() => setModal((prev) => !prev)}
+              onClick={onClickModal}
             >
               취소
             </Button>

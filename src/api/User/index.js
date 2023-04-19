@@ -62,6 +62,11 @@ export const deleteUser = (id) => {
   return apiClient.delete(`/users/${id}`);
 };
 
+// 유저 다수 삭제하기
+export const deleteManyUser = (id) => {
+  return apiClient.delete(`/users`);
+};
+
 export const countUsers = () => {
   return apiClient.get(`users/count`);
 };

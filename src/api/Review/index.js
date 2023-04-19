@@ -57,6 +57,16 @@ export const deleteReviews = (id) => {
   return apiClient.delete(`/reviews/${id}`);
 };
 
+// 리뷰 어드민 삭제
+export const deleteAdminReviews = (id) => {
+  return apiClient.delete(`/reviews/${id}/admin`);
+};
+
+// 리뷰 다수 삭제
+export const deleteManyReviews = () => {
+  return apiClient.delete(`/reviews/many/admin`);
+};
+
 // 리뷰 댓글 생성
 export const createReviewsComments = (id, body) => {
   return apiClient.post(`/reviews/${id}/comments`, body);

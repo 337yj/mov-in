@@ -41,37 +41,37 @@ export const imgList = [
     },
     {
       id: 6,
-      name: "ImageProfile2",
+      name: "ImageProfile6",
       img: () => (<ImageProfile6 />),
     },
     {
       id: 7,
-      name: "ImageProfile2",
+      name: "ImageProfile7",
       img: () => (<ImageProfile7 />),
     },
     {
       id: 8,
-      name: "ImageProfile2",
+      name: "ImageProfile8",
       img: () => (<ImageProfile8 />),
     },
     {
       id: 9,
-      name: "ImageProfile2",
+      name: "ImageProfile9",
       img: () => (<ImageProfile9 />),
     },
     {
       id: 10,
-      name: "ImageProfile2",
+      name: "ImageProfile10",
       img: () => (<ImageProfile10 />),
     },
     {
       id: 11,
-      name: "ImageProfile2",
+      name: "ImageProfile11",
       img: () => (<ImageProfile11 />),
     },
     {
       id: 12,
-      name: "ImageProfile2",
+      name: "ImageProfile12",
       img: () => (<ImageProfile12 />),
     },
   ];

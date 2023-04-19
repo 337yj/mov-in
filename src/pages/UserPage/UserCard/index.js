@@ -7,18 +7,18 @@ import cx from "classnames";
 
 const UserCard = ({ review }) => {
   const navigate = useNavigate();
-  console.log({ review });
-
+  // console.log({ review });
 
   const onClick = () => {
     navigate(`/commentDetail/${review.id}`);
   };
 
+
   return (
     <section className={styles.wrapper} onClick={onClick}>
-      {review.movie.postImage ? (
+      {review?.movie.postImage ? (
         <img
-          src={review.movie.postImage}
+          src={review?.movie.postImage}
           alt="thumbnail"
           className={cx(styles.img)}
         />
@@ -31,12 +31,12 @@ const UserCard = ({ review }) => {
           <span className={styles.score}>
             <p>전체</p> 
             <BsStarFill className={styles.star} />
-            {review.movie.averageScore?.toFixed(1)}
+            {review?.movie.averageScore?.toFixed(1)}
           </span>
           <span className={styles.myScore}>
           <p>평가</p> 
             <BsStarFill className={styles.star} />
-            {review.score?.toFixed(1)}
+            {review?.score?.toFixed(1)}
           </span>
         </div>
       </div>

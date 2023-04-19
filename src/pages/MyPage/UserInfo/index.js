@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useRecoilValue, atom, useRecoilState } from "recoil";
 import dayjs from "dayjs";
 import { useMount } from "react-use";
 import { validateForm } from "../../Auth/Register/utils";
 import { useMe } from "../../../hooks";
+//import { image } from "../_shared/imageModal/image.js" 
 import {
   updateUser,
   getUsersMe,
@@ -37,7 +38,7 @@ const UserInfo = () => {
   const navigate = useNavigate();
 
   const onClickPsw = () => {
-    setShowPsw(!showPsw);
+    setShowPsw(showPsw("password"));
   };
 
   const onChangeInfo = (e) => {
@@ -182,8 +183,7 @@ const UserInfo = () => {
                 setModal={setModal}
                 setImage={getProfileImage}
                 onClick={(e)=>onSubmit(e)}
-                buttonFirst={<Button color="secondary" children="취소"/>}
-                buttonSecond={<Button color="primary" children="저장"/>}
+                secondBtn={<Button color="primary" children="저장"/>}
               />
             )}
           </article>

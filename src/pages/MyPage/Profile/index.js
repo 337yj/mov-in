@@ -81,7 +81,7 @@ const Profile = () => {
     const response = await updateMe(userData);
     if (response.status === 204) {
       onGetMe();
-      //onClickPublic();
+      toast("save");
     } else {
       console.log("에러!");
     }
@@ -101,7 +101,7 @@ const Profile = () => {
       if (responsePatch.status === 204) {
         onGetMe();
         toast("save");
-        onClickCheckbox();
+        //onClickPublic();
       }
     } catch (err) {
       const errData = err.response.data;
@@ -196,11 +196,7 @@ const Profile = () => {
             onChange={onChange}
           />
         </div>
-        {/* <Input
-          placeholder="소개글을 작성해 주세요"
-          value={introduce}
-          onChange={onChangeIntro}
-        /> */}
+
         <div className={styles.ratedMovie}>
           <h1>최근 평가한 영화</h1>
         </div>
@@ -219,7 +215,11 @@ const Profile = () => {
               onClickCheckbox();
             }}
           />
-          <h5>비공개 모드로 전환하기</h5>
+          {user?.isPublic ? (
+            <h5>비공개 모드로 전환하기</h5>
+          ) : (
+            <h5>공개 모드로 전환하기</h5>
+          )}
 
           <Button
             color="secondary"
@@ -239,9 +239,6 @@ const Profile = () => {
           {/* <AlertModal /> */}
         </div>
       </section>
-      {/* <section>
-      {user && !isPublic ? <EditMode /> : <div></div>}
-      </section> */}
     </main>
   );
 };

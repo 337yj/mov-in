@@ -13,22 +13,21 @@ import styles from "./userPage.module.scss";
 const UserPage = () => {
   const params = useParams();
   const [user, setUser] = useRecoilState(userState);
-  const navigate = useNavigate();
   const [userReviews, setUserReviews] = useState([]);
   //const [user, setUser] = useState({});
 
-  const onGetUserInfo = async () => {
-    const response = await getUsersDetail(params.id);
-    if (response.status === 200) {
-      setUser(response.data);
-    }
-  };
+  // const onGetUserInfo = async () => {
+  //   const response = await getUsersDetail(params.id);
+  //   if (response.status === 200) {
+  //     setUser(response.data);
+  //   }
+  // };
 
   const onGetReviews = async () => {
     const response = await getReviewUser(params.id);
     if (response.status === 200) {
-      const items = [...response.data].slice(0, 5);
-      setUserReviews(items);
+      //const items = [...response.data].slice(0, 5);
+      setUserReviews(response.data);
     }
   };
 
@@ -36,7 +35,9 @@ const UserPage = () => {
     onGetReviews();
   });
 
-  console.log(user);
+  console.log({ userReviews });
+
+  
   return (
     <main className={styles.wrapper}>
       <section className={styles.info}>
@@ -71,8 +72,8 @@ const UserPage = () => {
               <h1>{user?.nickname} 님이 평가한 영화</h1>
             </div>
             <div className={styles.cardList}>
-              {userReviews.map((review) => (
-                <UserCard key={review.id} review={review} />
+              {userReviews?.map((review) => (
+                <UserCard key={review.id} />
               ))}
             </div>
           </>

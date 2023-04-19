@@ -10,13 +10,16 @@ const ImageModal = ({
   setModal,
   title,
   subtitle,
-  buttonFirst,
-  buttonSecond,
+  firstBtn,
+  secondBtn,
   onClick
 }) => {
+  
   const checkImage = (name) => {
     setImage(name);
   };
+
+  console.log(imgList);
 
   return (
     modal && (
@@ -26,22 +29,16 @@ const ImageModal = ({
           title={title}
           subTitle={subtitle}
           onClick={onClick}
+          buttonFirst={firstBtn}
+          buttonSecond={secondBtn}
         >
           <section className={styles.imgWrapper}>
-            {imgList.map(({ id, name, img }) => {
+            {imgList.map(({ name, id, img }) => {
               <span
-                onClick={() => {
-                  checkImage(name);
-                }}
+                onClick={() => checkImage(id)}
                 key={id}
-              >
-                {img()}
-              </span>;
+              >{img()}</span>                
             })}
-            <div className={styles.buttonWrapper}>
-            {buttonFirst}
-            {buttonSecond}
-            </div>
           </section>
         </Modal>
       </>

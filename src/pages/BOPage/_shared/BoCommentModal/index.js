@@ -1,35 +1,54 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { getReviewsDetail } from "../../../../api/Review";
-
+import { getReviewsDetail, deleteReviews } from "../../../../api/Review";
+import Comment from "../../../DetailPage/CommentList/Comment";
 import { Modal, Button } from "../../../../components";
 
 import styles from "./boCommentModal.module.scss";
 
-const BoMovieModal = ({ comment, user, modal, onCloseModal }) => {
-  const { id, profileImage } = useParams();
+const BoMovieModal = ({ userId, commentId, modal, onCloseModal }) => {
+  const [id] = useParams;
 
-  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState([]);
+  const [user, setUser] = useState(null);
 
   const onClickModal = () => {
     onCloseModal();
+    setComment(null);
   };
 
-  const onGetCommentsDetail = async () => {
+  const onGetCommentDetail = async () => {
     try {
-      const response = await getReviewsDetail(id);
+      const response = await getReviewsDetail(commentId);
       if (response.status === 200) {
-        setComments(response.data);
+        setComment(response.data);
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+  const onGetUserDetail = async () => {
+    try {
+      const response = await getReviewsDetail(userId);
+      if (response.status === 200) {
+        setUser(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onClickDelete = async () => {
+    await deleteReviews(id);
+    alert("삭제되었습니다.");
+  };
+
   useEffect(() => {
-    onGetCommentsDetail();
-  }, [id]);
+    onGetCommentDetail();
+    onGetUserDetail();
+  }, [commentId]);
 
   if (!comment) {
     return null;
@@ -39,6 +58,7 @@ const BoMovieModal = ({ comment, user, modal, onCloseModal }) => {
     modal && (
       <Modal
         className={styles.boCommentModal}
+        user={user}
         review={comment}
         title={"코멘트 관리"}
         onClick={onClickModal}
@@ -51,20 +71,25 @@ const BoMovieModal = ({ comment, user, modal, onCloseModal }) => {
                 alt="profileImage"
                 className={styles.profileImage}
               />
-              <figcaption className={styles.username}>{id.nickname}</figcaption>
+              <figcaption className={styles.username}>
+                {user.nickname}
+              </figcaption>
               <Stars />
               <Tag className={styles.pointTag} />
               <Tag className={styles.tensionTag} />
             </figure>
-            <CommentBody className={styles.content} content={id.content} />
-            <CommentFooter
-              movie={movie}
+            <Comment
+              comment={comment.comment}
               className={styles.comment}
-              date={dayjs(id.createdAt).format("YYYY.MM.DD")}
+              onGetCommentDetail={onGetCommentDetail}
             />
           </section>
           <div className={styles.buttonWrapper}>
-            <Button className={styles.delete} color={"primary"}>
+            <Button
+              className={styles.delete}
+              color={"primary"}
+              onClick={onClickDelete}
+            >
               삭제
             </Button>
             <Button className={styles.cancel} color={"secondary"}>

@@ -18,6 +18,7 @@ const columns = [
 ];
 
 const POST_PER_PAGE = 10;
+// const page = 1
 
 const BOMovie = ({ movie }) => {
   const { id } = useParams;
@@ -37,7 +38,7 @@ const BOMovie = ({ movie }) => {
     제목: movie.title ?? "-",
     감독: movie.staffs.find((staff) => staff.role === "감독")?.name ?? "-",
     장르: movie.genres.map((genre) => genre?.name).join(", ") ?? "-",
-    // 평균평점: movie.averageScore.toFixed(1) ?? "-",
+    평균평점: movie.averageScore.toFixed(1) ?? "-",
     개봉일자: dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));
 
@@ -95,6 +96,7 @@ const BOMovie = ({ movie }) => {
     onGetMovieDetail(id);
     onGetMoviesCount();
   }, [page, id]);
+
   console.log({ selectedMovie });
 
   return (

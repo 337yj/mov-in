@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { getMovieMyReview, getReviewsMovie } from "../../../../api/Review";
+import {
+  getMovieMyReview,
+  getReviewsDetail,
+  getReviewsMovie,
+} from "../../../../api/Review";
 import { commentModalState, userState } from "../../../../state";
 import Comment from "../../CommentList/Comment";
 
 import styles from "./movieComment.module.scss";
 import CommentModal from "../../_shared/CommentModal";
+import { getMovie } from "../../../../api/Movie";
 
 const MovieComment = ({ movie }) => {
   const { id } = useParams();
@@ -15,9 +20,9 @@ const MovieComment = ({ movie }) => {
   //NOTE: CommentModal의 열림 상태
   const [modal, setModal] = useRecoilState(commentModalState);
   const [comments, setComments] = useState([]);
+  const [detailComment, setDetailComment] = useState();
   const [myComment, setMyComment] = useState();
   const user = useRecoilValue(userState);
-  const isAuthor = myComment?.user?.id === user?.id;
 
   const onClickNavigate = (path) => {
     return () => {
@@ -45,6 +50,17 @@ const MovieComment = ({ movie }) => {
       }
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const onGetCommentDetail = async () => {
+    try {
+      const response = await getReviewsDetail(id);
+      if (response.status === 200) {
+        setDetailComment(response.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

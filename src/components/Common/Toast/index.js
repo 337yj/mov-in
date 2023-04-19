@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { CSSTransition } from "react-transition-group";
 import cx from "classnames";
 import styles from "./toast.module.scss";
@@ -30,10 +30,12 @@ const transitionStyle = {
 };
 
 const Toast = ({ className, type, children, func, float, ...props }) => {
+  const nodeRef = React.useRef(null)
   return (
-    <CSSTransition in={float} timeout={3000} unmountOnExit>
+    <CSSTransition nodeRef={nodeRef} in={float} timeout={3000} unmountOnExit>
       {(state) => (
         <section
+          ref={nodeRef}
           style={{ ...transitionStyle[state] }}
           className={cx(styles.toast, className, styles[type])}
         >

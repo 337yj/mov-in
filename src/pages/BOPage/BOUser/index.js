@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 
 import {
   getUsers,
@@ -24,6 +25,8 @@ const columns = [
 const POST_PER_PAGE = 10;
 
 const BOUser = ({ user }) => {
+  const { id } = useParams;
+
   const [users, setUsers] = useState([]);
   const [input, setInput] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -54,6 +57,14 @@ const BOUser = ({ user }) => {
 
   const onChange = (page) => {
     setPage(page);
+  };
+
+  const onClickDelete = async () => {
+    if (response.status === 204) {
+      await deleteUser(id);
+      alert("탈퇴되었습니다.");
+      await onGetSelectedUser();
+    }
   };
 
   const onGetUsers = async () => {
@@ -105,27 +116,14 @@ const BOUser = ({ user }) => {
     }
   };
 
-  const onDeleteUser = async () => {
-    try {
-      const response = await deleteUser(id);
-      if (response.status === 204) {
-        onGetUsers();
-      }
-    } catch (error) {
-      console.error(error);
-    }
-
-    const ids = selectedUser.join(",");
-    deleteUser(ids);
-  };
-
   useEffect(() => {
     onGetUsers();
     onGetUsersCount();
-  }, [page]);
+    onGetSelectedUser(id);
+  }, [page, id]);
 
-  console.log(users);
-
+  console.log({ selectedUser });
+  console.log({ user });
   return (
     <section className={styles.wrapper}>
       <h1>유저 관리 페이지</h1>
@@ -135,7 +133,7 @@ const BOUser = ({ user }) => {
           placeholder={"회원 닉네임을 검색하세요."}
           onChange={onChangeSearch}
         />
-        <Button color={"danger"} onclick={onDeleteUser}>
+        <Button color={"danger"} onClick={onClickDelete}>
           탈퇴
         </Button>
       </div>
@@ -143,17 +141,21 @@ const BOUser = ({ user }) => {
         columns={columns}
         data={data}
         firstButton={(user) => (
-          <Button color={"warning"} onclick={onClickModal(user)}>
+          <Button color={"warning"} onClick={onClickModal(user)}>
             보기
           </Button>
         )}
         secondButton={
-          <Button color={"danger"} onclick={onDeleteUser}>
+          <Button color={"danger"} onClick={onClickDelete}>
             탈퇴
           </Button>
         }
       />
-      <BoUserModal user={user} modal={modal} setModal={setModal} />
+      <BoUserModal
+        userId={selectedUser}
+        modal={modal}
+        onCloseModal={onCloseModal}
+      />
       <Paging
         totalCount={totalCount}
         page={page}
@@ -164,5 +166,4 @@ const BOUser = ({ user }) => {
     </section>
   );
 };
-
 export default BOUser;

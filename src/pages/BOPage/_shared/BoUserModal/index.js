@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { getUsersDetail, getUsersInfo } from "../../../../api/User";
+import { deleteUser, getUsersDetail, getUsersInfo } from "../../../../api/User";
 
 import { Modal, Button } from "../../../../components";
 
 import styles from "./boUserModal.module.scss";
 
-const BoUserModal = ({ user, modal, onCloseModal }) => {
-  const { id, userId } = useParams();
-
-  const [users, setUsers] = useState([]);
+const BoUserModal = ({ userId, modal, onCloseModal }) => {
+  const [user, setUser] = useState(null);
 
   const onClickModal = () => {
     onCloseModal();
+    setUser(null);
+  };
+
+  const onClickDelete = async () => {
+    await deleteUser(id);
+    alert("탈퇴되었습니다.");
   };
 
   const onGetUsersDetail = async () => {
     try {
-      const response = await getUsersDetail(id);
+      const response = await getUsersDetail(userId);
       if (response.status === 200) {
-        setUsers(response.data);
+        setUser(response.data);
       }
     } catch (error) {
       console.error(error);
@@ -31,16 +35,16 @@ const BoUserModal = ({ user, modal, onCloseModal }) => {
     try {
       const response = await getUsersInfo(userId);
       if (response.status === 200) {
-        setUsers(response.data);
+        setUser(response.data);
       }
     } catch (error) {
       console.error(error);
     }
-
+    console.log({ user });
     useEffect(() => {
       onGetUsersDetail();
       onGetUsersInFo();
-    }, [id, userId]);
+    }, [userId]);
 
     if (!user) {
       return null;
@@ -82,7 +86,11 @@ const BoUserModal = ({ user, modal, onCloseModal }) => {
               </div>
             </section>
             <div className={styles.buttonWrapper}>
-              <Button className={styles.modify} color={"danger"}>
+              <Button
+                className={styles.modify}
+                color={"danger"}
+                onClick={onClickDelete}
+              >
                 탈퇴
               </Button>
               <Button className={styles.cancel} color={"secondary"}>

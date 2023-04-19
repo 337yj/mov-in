@@ -1,0 +1,64 @@
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
+
+.wrapper {
+  position: relative;
+  width: 180px;
+  margin-right: 14px;
+  cursor: pointer;
+
+  .img {
+    width: 180px;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 10px;
+
+    &.shadow {
+      border: 1px solid c.$C_WHITE_10;
+    }
+  }
+
+  .infoWrapper {
+    @include m.flex(flex-start, flex-start, column);
+    padding-top: 8px;
+
+    .title {
+      @include m.ellipse();
+      max-width: 140px;
+      font-size: 18px;
+      font-weight: 700;
+      padding-bottom: 2px;
+    }
+
+    .score {
+      @include m.flex();
+      margin-top: 4px;
+      font-size: 14px;
+      color: c.$C_YELLOW;
+
+      .star {
+        width: 14px;
+        height: 12px;
+        margin-right: 6px;
+      }
+    }
+
+    .myScore {
+      @include m.flex();
+      margin-top: 4px;
+      font-size: 14px;
+      color: c.$C_WHITE_80;
+
+      .star {
+        width: 14px;
+        height: 12px;
+        margin-right: 6px;
+      }
+    }
+
+    .nullScore {
+      margin-top: 4px;
+      font-size: 14px;
+    }
+  }
+}

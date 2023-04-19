@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+<h1>INTRODUCTION</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3> 영화를 사랑하는 사람을 위한 영화 평점 웹 사이트 mov'in</h3>
 
-## Available Scripts
+<br />
+<img width="340px" alt="logo" src="https://user-images.githubusercontent.com/94007890/233002328-6ee3d1ec-2a12-4021-bb07-b21205f56f91.png" />
+<br />
 
-In the project directory, you can run:
+<!-- <img height="220" alt="streaming" src="https://user-images.githubusercontent.com/85829962/146299269-865cdd03-8924-4564-96fe-d3bc3da72e09.png"> <img height="220" alt="mypage" src="https://user-images.githubusercontent.com/85829962/146310340-29861ea5-1e57-4f07-a96b-77b6c1d0e474.png">
 
-### `npm start`
+<b><a href="http://studeaming.com">👉🏼 studeaming 사이트 바로가기</a></b>  
+<b><a href="https://github.com/codestates/studeaming/wiki">👉🏼 studeaming 프로젝트 위키 바로가기</a></b> -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+<h1>MAIN FEATURES</h1>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 영화 목록을 **조회** 하고 **검색** 할 수 있습니다.
+- **영화 리뷰**를 남길 수 있으며 나만의 **감상 포인트** 와 **긴장감 지수** 까지 기록할 수 있습니다.
+- 마음에 드는 영화가 있다면 **좋아요** 로 관심을 표하고, **북마크**로 영화를 담을 수 있습니다.
+- 다른 유저의 프로필을 조회하여 **소개글**과 유저가 남긴 **리뷰**를 확인할 수 있습니다.
+- 나의 프로필을 노출하기 싫다면 **공개** 혹은 **비공개** 처리를 할 수 있습니다.
+- 관리자 페이지가 따로 있어 **영화 목록 관리** 와 **회원 및 댓글 관리**가 가능 합니다.
 
-### `npm run build`
+<br />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<h1>STACK</h1>
+<!-- <img width="700" alt="stack" src="https://user-images.githubusercontent.com/85681803/146872410-188275f2-f64c-4851-868e-da0814db3cfe.png" /> -->
+<img width="700" alt="stack" src="https://user-images.githubusercontent.com/94007890/233066880-52b9f27b-f90c-4e40-817b-9b136ff1ff2c.png" />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h2>Front-end</h2>
 
-### `npm run eject`
+`React` `Sass` `JavaScript` `axios` `day.js` `Prettier` `esLint`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<br />
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<h2>Back-end</h2>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`node.js` `yarn` `AWS` `JWT`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<br />
 
-## Learn More
+<h2>Tools</h2>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`figma` `Notion` `discord` 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br />
 
-### Code Splitting
+<h1>MEMBER</h1>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+|<a href="https://github.com/337yj">이윤정</a>|<a href="https://github.com/miyyaa24">김나임</a>|<a href="https://github.com/minjeongraw34">김민정</a>|<a href="https://github.com/baeseorim">배서림</a>|
+|------|----|----|----|
+|leader|member|member|member|
+|Front|Front|Front|Front|

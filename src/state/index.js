@@ -22,3 +22,8 @@ export const commentModalState = atom({
   key: "commentModalState",
   default: false,
 });
+
+export const imageModalState = atom({
+  key: "imageModalState",
+  default: false,
+});

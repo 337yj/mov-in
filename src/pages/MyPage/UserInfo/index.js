@@ -11,7 +11,7 @@ import {
   deleteUser,
   updateMe,
 } from "../../../api/User";
-import { userState } from "../../../state";
+import { userState, imageModalState } from "../../../state";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
 import { Button, Input, Toast } from "../../../components";
 import { ImageModal } from "../_shared";
@@ -21,7 +21,7 @@ import styles from "./userInfo.module.scss";
 const UserInfo = () => {
   const user = useMe();
   const [me, setMe] = useRecoilState(userState);
-  const [openImgModal, setOpenImgModal] = useState(false);
+  const [modal, setModal] = useRecoilState(imageModalState);
   const [floatToast, setFloatToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
   const [err, setErr] = useState({});
@@ -113,7 +113,8 @@ const UserInfo = () => {
 
   //프로필 모달
   const onClickImg = () => {
-    setOpenImgModal(!openImgModal);
+    //setOpenImgModal(!openImgModal);
+    setModal(!modal);
   };
 
   const cancel = () => {
@@ -170,6 +171,15 @@ const UserInfo = () => {
               src={user?.profileImage ?? ImageProfile2}
             />
             <p onClick={onClickImg}>프로필 사진 변경하기</p>
+            {onClickImg && (
+              <ImageModal
+                title="프로필 사진 변경"
+                subtitle="프로필 사진을 변경할 수 있습니다"
+                modal={modal}
+                setModal={setModal}
+                onClick={(e)=>onSubmit(e)}
+              />
+            )}
           </article>
           <article id="registerForm" className={styles.infoWrapper}>
             <div>
@@ -189,7 +199,6 @@ const UserInfo = () => {
                 label="이메일"
                 placeholder={"새로운 이메일을 입력해주세요"}
                 value={form?.email}
-                //errorText={err.email}
                 onChange={onChangeInfo}
                 className={styles.inputText}
               />
@@ -234,7 +243,6 @@ const UserInfo = () => {
               children="저장"
               onClick={(e) => {
                 onSubmit(e);
-                //toast("save");
               }}
             />
             <Toast children={toastMsg} float={floatToast} />

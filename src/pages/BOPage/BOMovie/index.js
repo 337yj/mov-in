@@ -48,6 +48,7 @@ const BOMovie = ({ movie }) => {
       setSelectedMovie(movie);
     };
   };
+
   const onCloseModal = () => {
     setModal(!modal);
     setSelectedMovie(null);
@@ -104,7 +105,9 @@ const BOMovie = ({ movie }) => {
       <h1>영화 관리 페이지</h1>
       <div className={styles.search}>
         <SearchInput placeholder={"영화명을 검색하세요."} />
-        <Button color={"primary"} children={"삭제"} />
+        <Button color={"primary"} onClick={onsubmit}>
+          수정
+        </Button>
       </div>
       <Table
         columns={columns}
@@ -119,7 +122,7 @@ const BOMovie = ({ movie }) => {
             </Button>
           )
         }
-        secondButton={<Button color={"primary"}>삭제</Button>}
+        secondButton={<Button color={"primary"}>수정</Button>}
       />
       <BoMovieModal
         movieId={selectedMovie}

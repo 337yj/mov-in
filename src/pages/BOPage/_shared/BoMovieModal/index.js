@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { getMovie } from "../../../../api/Movie";
+import { getMovie, updateMovie } from "../../../../api/Movie";
 
 import { Modal, Button } from "../../../../components";
 
@@ -17,6 +17,31 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
   const onClickModal = () => {
     onCloseModal();
     setMovie(null);
+  };
+
+  const onClickModify = async () => {};
+
+  const onChange = (e) => {
+    const { value } = e.currentTarget;
+    setMovie(value);
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const movieData = {
+      title,
+      plot,
+      score: rating,
+      runtime,
+      genres,
+      releasedAtm,
+      staffs: [role === "감독"],
+    };
+    await updateMovie(movieId, movieData);
+    alert("수정되었습니다.");
+    onGetMovieDetail();
+    await onGetMovieDetail();
+    setModal((prev) => !prev);
   };
 
   const onGetMovieDetail = async () => {
@@ -59,9 +84,9 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
                 <BsFillHeartFill />
                 {movie.likeCount}
               </Button>
-              {/* <Button className={styles.views} color="dark">
-                {totalCount}
-              </Button> */}
+              <Button className={styles.views} color="dark">
+                {movie.reviewCount}
+              </Button>
               <Button className={styles.averageScore} color={"dark"}>
                 <h2>평균평점</h2>{" "}
                 {movie.averageScore ? (
@@ -75,10 +100,18 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
             </div>
           </section>
           <div className={styles.buttonWrapper}>
-            <Button className={styles.modify} color={"primary"}>
+            <Button
+              className={styles.modify}
+              color={"primary"}
+              onClick={onSubmit}
+            >
               수정
             </Button>
-            <Button className={styles.cancel} color={"secondary"}>
+            <Button
+              className={styles.cancel}
+              color={"secondary"}
+              onClick={() => setModal((prev) => !prev)}
+            >
               취소
             </Button>
           </div>
@@ -87,5 +120,4 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
     )
   );
 };
-
 export default BoMovieModal;

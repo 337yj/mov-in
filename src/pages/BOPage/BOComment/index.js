@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 
 import {
-  getReviewsMovie,
   getReviewsCount,
   getReviews,
+  deleteReviews,
+  getReviewsDetail,
 } from "../../../api/Review";
 
 import { SearchInput, Table, Button, Paging } from "../../../components";
@@ -22,36 +24,46 @@ const columns = [
 
 const POST_PER_PAGE = 10;
 
-const BOComment = ({ comment, checkItems }) => {
-  const [comments, setComments] = useState([]);
-  const [selectedComment, setSelectedComment] = useState(null);
+const BOComment = ({ Review }) => {
+  const { id } = useParams;
+
+  const [Reviews, setReviews] = useState([]);
+  const [selectedReview, setSelectedReview] = useState(null);
   const [page, setPage] = useState(1); // 현재 페이지
   const [totalCount, setTotalCount] = useState(0);
 
   const [modal, setModal] = useState(false);
 
-  const data = comments.map((comment) => ({
-    닉네임: comment.nickname ?? "-",
-    코멘트: comment.content ?? "-",
-    평점: comment.score.toFixed(1) ?? "-",
-    좋아요: comment.likeCount ?? "-",
-    작성일자: dayjs(comment.createdAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
+  const data = Reviews.map((Review) => ({
+    닉네임: Review.nickname ?? "-",
+    코멘트: Review.content ?? "-",
+    평점: Review.score.toFixed(1) ?? "-",
+    좋아요: Review.likeCount ?? "-",
+    작성일자: dayjs(Review.createdAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));
 
-  const onClickModal = (comment) => {
+  const onClickModal = (Review) => {
     return () => {
       setModal(!modal);
-      selectedComment(comment);
+      selectedReview(Review);
     };
   };
 
   const onCloseModal = () => {
     setModal(false);
-    setSelectedComment(null);
+    setSelectedReview(null);
   };
 
   const onChange = (page) => {
     setPage(page);
+  };
+
+  const onClickDelete = async () => {
+    const response = await deleteReviews(id);
+    if (response.status === 204) {
+      alert("삭제되었습니다.");
+      onGetSelectReview();
+    }
   };
 
   const onGetReviews = async () => {
@@ -76,30 +88,49 @@ const BOComment = ({ comment, checkItems }) => {
     }
   };
 
+  const onGetSelectReview = async () => {
+    try {
+      const response = await getReviewsDetail(id);
+      if (response.status === 200) {
+        const data = response.data;
+        setSelectedReview(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     onGetReviews();
+    onGetSelectReview(id);
     onGetReviewsCount();
-  }, [page]);
+  }, [page, id]);
 
   return (
     <main className={styles.wrapper}>
       <h1>코멘트 관리 페이지</h1>
       <div>
         <SearchInput placeholder={"회원 닉네임을 검색하세요."} />
-        <Button color={"primary"} children={"삭제"} />
+        <Button color={"primary"} onClick={onClickDelete}>
+          삭제
+        </Button>
       </div>
       <Table
         columns={columns}
         data={data}
-        firstButton={(comment) => (
-          <Button color={"warning"} onclick={onClickModal(comment)}>
+        firstButton={(Review) => (
+          <Button color={"warning"} onClick={onClickModal(Review)}>
             보기
           </Button>
         )}
-        secondButton={<Button color={"primary"}>삭제</Button>}
+        secondButton={
+          <Button color={"primary"} onClick={onClickDelete}>
+            삭제
+          </Button>
+        }
       />
       <BoCommentModal
-        comment={selectedComment}
+        reviewId={selectedReview}
         modal={modal}
         onCloseModal={onCloseModal}
       />

@@ -18,15 +18,14 @@ const columns = [
 ];
 
 const POST_PER_PAGE = 10;
-// const page = 1
 
 const BOMovie = ({ movie }) => {
   const { id } = useParams;
 
   const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
   //NOTE: 선택된 영화를 관리하기 위한 state -> 선택된 movie의 id
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [page, setPage] = useState(1); // 현재 페이지
   const [totalCount, setTotalCount] = useState(0);
 
   const [modal, setModal] = useState(false);
@@ -38,7 +37,7 @@ const BOMovie = ({ movie }) => {
     제목: movie.title ?? "-",
     감독: movie.staffs.find((staff) => staff.role === "감독")?.name ?? "-",
     장르: movie.genres.map((genre) => genre?.name).join(", ") ?? "-",
-    평균평점: movie.averageScore.toFixed(1) ?? "-",
+    평균평점: movie.averageScore?.toFixed(1) ?? "-",
     개봉일자: dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD") ?? "-",
   }));
 
@@ -69,6 +68,17 @@ const BOMovie = ({ movie }) => {
     }
   };
 
+  const onGetMoviesCount = async () => {
+    try {
+      const response = await getMoviesCount();
+      if (response.status === 200) {
+        setTotalCount(response.data.count);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onGetMovieDetail = async () => {
     try {
       const response = await getMovie(id);
@@ -81,33 +91,23 @@ const BOMovie = ({ movie }) => {
     }
   };
 
-  const onGetMoviesCount = async () => {
-    try {
-      const response = await getMoviesCount();
-      if (response.status === 200) {
-        setTotalCount(response.data.count);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
     onGetMovies();
     onGetMovieDetail(id);
     onGetMoviesCount();
   }, [page, id]);
 
-  console.log({ selectedMovie });
+  console.log({ selectedMovie, movies });
 
   return (
     <main className={styles.wrapper}>
       <h1>영화 관리 페이지</h1>
-      <div className={styles.search}>
-        <SearchInput placeholder={"영화명을 검색하세요."} />
-        <Button color={"primary"} onClick={onsubmit}>
+
+      <div className={styles.searchWrapper}>
+        {/* <SearchInput placeholder={"영화명을 검색하세요."} /> */}
+        {/* <Button color={"primary"} onClick={onsubmit}>
           수정
-        </Button>
+        </Button> */}
       </div>
       <Table
         columns={columns}

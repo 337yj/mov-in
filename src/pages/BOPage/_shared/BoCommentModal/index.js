@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
-import { getReviewsDetail, deleteReviews } from "../../../../api/Review";
+import { getReviewsDetail, deleteAdminReviews } from "../../../../api/Review";
+import { getUsersDetail } from "../../../../api/User";
 import Comment from "../../../DetailPage/CommentList/Comment";
-import { Modal, Button } from "../../../../components";
+import { Modal, Button, Stars } from "../../../../components";
 
 import styles from "./boCommentModal.module.scss";
 
-const BoMovieModal = ({ userId, commentId, modal, onCloseModal }) => {
-  const [id] = useParams;
-
-  const [comment, setComment] = useState([]);
+const BoMovieModal = ({ userId, reviewId, modal, onCloseModal }) => {
+  const [review, setReview] = useState([]);
   const [user, setUser] = useState(null);
 
   const onClickModal = () => {
     onCloseModal();
-    setComment(null);
+    setReview(null);
   };
 
   const onGetCommentDetail = async () => {
     try {
-      const response = await getReviewsDetail(commentId);
+      const response = await getReviewsDetail(reviewId);
       if (response.status === 200) {
-        setComment(response.data);
+        setReview(response.data);
       }
     } catch (error) {
       console.error(error);
@@ -31,7 +29,7 @@ const BoMovieModal = ({ userId, commentId, modal, onCloseModal }) => {
 
   const onGetUserDetail = async () => {
     try {
-      const response = await getReviewsDetail(userId);
+      const response = await getUsersDetail(userId);
       if (response.status === 200) {
         setUser(response.data);
       }
@@ -41,16 +39,16 @@ const BoMovieModal = ({ userId, commentId, modal, onCloseModal }) => {
   };
 
   const onClickDelete = async () => {
-    await deleteReviews(id);
+    await deleteAdminReviews(reviewId);
     alert("삭제되었습니다.");
   };
 
   useEffect(() => {
     onGetCommentDetail();
     onGetUserDetail();
-  }, [commentId]);
+  }, [reviewId]);
 
-  if (!comment) {
+  if (!review) {
     return null;
   }
 
@@ -59,7 +57,7 @@ const BoMovieModal = ({ userId, commentId, modal, onCloseModal }) => {
       <Modal
         className={styles.boCommentModal}
         user={user}
-        review={comment}
+        review={review}
         title={"코멘트 관리"}
         onClick={onClickModal}
       >
@@ -67,19 +65,17 @@ const BoMovieModal = ({ userId, commentId, modal, onCloseModal }) => {
           <section className={styles.content}>
             <figure className={styles.profile}>
               <img
-                src={user.profileImage}
+                src={user?.profileImage}
                 alt="profileImage"
                 className={styles.profileImage}
               />
               <figcaption className={styles.username}>
-                {user.nickname}
+                {user?.nickname}
               </figcaption>
               <Stars />
-              <Tag className={styles.pointTag} />
-              <Tag className={styles.tensionTag} />
             </figure>
             <Comment
-              comment={comment.comment}
+              comment={review.comment}
               className={styles.comment}
               onGetCommentDetail={onGetCommentDetail}
             />
@@ -92,7 +88,11 @@ const BoMovieModal = ({ userId, commentId, modal, onCloseModal }) => {
             >
               삭제
             </Button>
-            <Button className={styles.cancel} color={"secondary"}>
+            <Button
+              className={styles.cancel}
+              color={"secondary"}
+              onClick={onClickModal}
+            >
               취소
             </Button>
           </div>

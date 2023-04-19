@@ -17,7 +17,7 @@
     }
   }
 
-  > div {
+  .searchWrapper {
     @include m.flex(flex-end, null, row);
     column-gap: 10px;
   }

@@ -4,8 +4,9 @@ import { useParams } from "react-router";
 import {
   getReviewsCount,
   getReviews,
-  deleteReviews,
+  deleteAdminReviews,
   getReviewsDetail,
+  deleteManyReviews,
 } from "../../../api/Review";
 
 import { SearchInput, Table, Button, Paging } from "../../../components";
@@ -28,9 +29,12 @@ const BOComment = ({ Review }) => {
   const { id } = useParams;
 
   const [Reviews, setReviews] = useState([]);
+  const [page, setPage] = useState(1);
   const [selectedReview, setSelectedReview] = useState(null);
-  const [page, setPage] = useState(1); // 현재 페이지
   const [totalCount, setTotalCount] = useState(0);
+
+  // const [toastFloat, setToastFloat] = useState(false);
+  // const [toastMsg, setToastMsg] = useState("");
 
   const [modal, setModal] = useState(false);
 
@@ -45,7 +49,7 @@ const BOComment = ({ Review }) => {
   const onClickModal = (Review) => {
     return () => {
       setModal(!modal);
-      selectedReview(Review);
+      setSelectedReview(Review);
     };
   };
 
@@ -58,11 +62,21 @@ const BOComment = ({ Review }) => {
     setPage(page);
   };
 
-  const onClickDelete = async () => {
-    const response = await deleteReviews(id);
+  const onClickManyDelete = async () => {
+    const response = await deleteManyReviews();
     if (response.status === 204) {
-      alert("삭제되었습니다.");
+      onGetReviews();
       onGetSelectReview();
+      alert("삭제되었습니다.");
+    }
+  };
+
+  const onClickDelete = async () => {
+    const response = await deleteAdminReviews(id);
+    if (response.status === 204) {
+      onGetReviews();
+      onGetSelectReview();
+      alert("삭제되었습니다.");
     }
   };
 
@@ -70,7 +84,7 @@ const BOComment = ({ Review }) => {
     try {
       const response = await getReviews(page, POST_PER_PAGE);
       if (response.status === 200) {
-        setComments(response.data.data);
+        setReviews(response.data.data);
       }
     } catch (error) {
       console.error(error);
@@ -109,12 +123,16 @@ const BOComment = ({ Review }) => {
   return (
     <main className={styles.wrapper}>
       <h1>코멘트 관리 페이지</h1>
-      <div>
-        <SearchInput placeholder={"회원 닉네임을 검색하세요."} />
-        <Button color={"primary"} onClick={onClickDelete}>
+      <div className={styles.searchWrapper}>
+        {/* <SearchInput
+          value={user?.name}
+          placeholder={"회원 닉네임을 검색하세요."}
+        /> */}
+        <Button color={"primary"} onClick={onClickManyDelete}>
           삭제
         </Button>
       </div>
+
       <Table
         columns={columns}
         data={data}

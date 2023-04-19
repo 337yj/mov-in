@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import dayjs from "dayjs";
 
 import {
   getUsers,
@@ -12,7 +13,6 @@ import { SearchInput, Table, Button, Paging } from "../../../components/Common";
 import { BoUserModal } from "../_shared";
 
 import styles from "./boUser.module.scss";
-import dayjs from "dayjs";
 
 const columns = [
   { Header: "이름", accessor: "이름" },
@@ -28,9 +28,8 @@ const BOUser = ({ user }) => {
   const { id } = useParams;
 
   const [users, setUsers] = useState([]);
-  const [input, setInput] = useState([]);
+  const [page, setPage] = useState(1);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [page, setPage] = useState(1); // 현재 페이지
   const [totalCount, setTotalCount] = useState(0);
 
   const [modal, setModal] = useState(false);
@@ -46,12 +45,12 @@ const BOUser = ({ user }) => {
   const onClickModal = (user) => {
     return () => {
       setModal(!modal);
-      selectedUser(user);
+      setSelectedUser(user);
     };
   };
 
   const onCloseModal = () => {
-    setModal(false);
+    setModal(!modal);
     setSelectedUser(null);
   };
 
@@ -63,7 +62,7 @@ const BOUser = ({ user }) => {
     if (response.status === 204) {
       await deleteUser(id);
       alert("탈퇴되었습니다.");
-      await onGetSelectedUser();
+      await onGetUserDetail();
     }
   };
 
@@ -90,26 +89,12 @@ const BOUser = ({ user }) => {
     }
   };
 
-  const onGetSelectedUser = async () => {
+  const onGetUserDetail = async () => {
     try {
       const response = await getUsersDetail(id);
       if (response.status === 200) {
-        setSelectedUser(response.data.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const onChangeSearch = async () => {
-    try {
-      const response = await getUsers(e.target.value);
-      if (response.status === 200) {
-        setInput(response.data.data);
-        setPage(1);
-      }
-      if (e.target.value === null) {
-        setUsers(response.data.data);
+        const data = response.data;
+        setSelectedUser(data);
       }
     } catch (error) {
       console.error(error);
@@ -119,24 +104,27 @@ const BOUser = ({ user }) => {
   useEffect(() => {
     onGetUsers();
     onGetUsersCount();
-    onGetSelectedUser(id);
+    onGetUserDetail(id);
   }, [page, id]);
 
-  console.log({ selectedUser });
-  console.log({ user });
+  console.log({ selectedUser, users });
+
   return (
     <section className={styles.wrapper}>
       <h1>유저 관리 페이지</h1>
-      <div>
-        <SearchInput
+      <div className={styles.searchWrapper}>
+        {/* <SearchInput
           value={user?.name}
           placeholder={"회원 닉네임을 검색하세요."}
-          onChange={onChangeSearch}
-        />
-        <Button color={"danger"} onClick={onClickDelete}>
-          탈퇴
-        </Button>
+        /> */}
       </div>
+      <Button
+        className={styles.deleteButton}
+        color={"danger"}
+        onClick={onClickDelete}
+      >
+        탈퇴
+      </Button>
       <Table
         columns={columns}
         data={data}

@@ -14,8 +14,11 @@
     }
   }
 
-  > div {
-    @include m.flex(flex-end, null, row);
-    column-gap: 10px;
+  // .searchWrapper {
+  // @include m.flex(flex-start, null, row);
+  // column-gap: 10px;
+  // }
+  .deleteButton {
+    @include m.flex(flex-start);
   }
 }

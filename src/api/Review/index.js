@@ -42,6 +42,11 @@ export const getReviewMe = () => {
   return apiClient.get(`/reviews/me`);
 };
 
+// 유저 영화 리뷰 목록
+export const getReviewUser = (userId) => {
+  return apiClient.get(`/reviews/users/${userId}`);
+};
+
 // 영화 리뷰 생성
 export const createReview = (movieId, body) => {
   return apiClient.post(`/reviews/${movieId}`, body);

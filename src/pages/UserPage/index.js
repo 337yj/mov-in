@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMount } from "react-use";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -27,20 +27,14 @@ const UserPage = () => {
   const onGetReviews = async () => {
     const response = await getReviewUser(params.id);
     if (response.status === 200) {
-      setUserReviews(response.data);
+      const items = [...response.data].slice(0, 5);
+      setUserReviews(items);
     }
   };
 
-  const onNavigateReviews = (id) => {
-    return () => {
-      navigate(`/commentDetail/${id}`);
-    };
-  };
-
-  // useMount(() => {
-  //   onGetUserInfo();
-  //   onGetReviews();
-  // });
+  useMount(() => {
+    onGetReviews();
+  });
 
   console.log(user);
   return (
@@ -65,22 +59,22 @@ const UserPage = () => {
           </article>
         ) : (
           <>
-          <div className={styles.introWrapper}>
-          <textarea
-            name={"description"}
-            className={styles.introText}
-            value={user?.description || ""}
-            readOnly
-          />
-        </div>
-          <div className={styles.cardList}>
-            <div className={styles.ratedMovie}>
-              <h1>최근 평가한 영화</h1>
+            <div className={styles.introWrapper}>
+              <textarea
+                name={"description"}
+                className={styles.introText}
+                value={user?.description || ""}
+                readOnly
+              />
             </div>
-            {userReviews.map((review) => (
-              <UserCard key={review.id} review={review} />
-            ))}
-          </div>
+            <div className={styles.ratedMovie}>
+              <h1>{user?.nickname} 님이 평가한 영화</h1>
+            </div>
+            <div className={styles.cardList}>
+              {userReviews.map((review) => (
+                <UserCard key={review.id} review={review} />
+              ))}
+            </div>
           </>
         )}
       </section>

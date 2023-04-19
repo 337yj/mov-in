@@ -10,6 +10,7 @@
   .info {
     .header {
       width: 100%;
+      padding-top: 70px;
       padding-bottom: 50px;
 
       .title {
@@ -94,5 +95,13 @@
         }
       }
     }
+
+    .cardList {
+      @include m.flex(left);
+      height: 80%;
+      width: 50vw;
+      padding-bottom: 20px;
+    }
+
   }
 }

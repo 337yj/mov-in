@@ -11,14 +11,14 @@ const UserCard = ({ review }) => {
 
 
   const onClick = () => {
-    navigate(`/commentDetail/${review.user.id}`);
+    navigate(`/commentDetail/${review.id}`);
   };
 
   return (
     <section className={styles.wrapper} onClick={onClick}>
-      {review.postImage ? (
+      {review.movie.postImage ? (
         <img
-          src={review.postImage}
+          src={review.movie.postImage}
           alt="thumbnail"
           className={cx(styles.img)}
         />
@@ -26,7 +26,7 @@ const UserCard = ({ review }) => {
         <img src={noPoster} className={cx(styles.img, styles.shadow)} />
       )}
       <div className={styles.infoWrapper}>
-        <h2 className={styles.title}>{movie?.movie.title}</h2>
+        <h2 className={styles.title}>{review?.movie.title}</h2>
         <div>
           <span className={styles.score}>
             <p>전체</p> 

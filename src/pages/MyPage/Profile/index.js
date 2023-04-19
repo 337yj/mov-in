@@ -226,7 +226,7 @@ const Profile = () => {
             children="취소"
             onClick={() => toast("cancel")}
           />
-          <Toast type="dangerToast" children={toastMsg} float={floatToast} />
+          <Toast children={toastMsg} float={floatToast} />
           <Button
             color="primary"
             children="저장"

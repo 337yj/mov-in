@@ -13,6 +13,7 @@ adminYun@aa.aa
 뜨다가 안뜨다가 하고 떠도 사라질때 갑자기 사라집니다..
 DetailPage > _shared > CommentModal (저장, 수정시 Toast)
 DetailPage > CommentList > Comment (삭제할시 Toast)
+-> Toast, Alert, Modal => 보통 밖에다가 빼놓고 사용하는 경우가 많습니다.
 
 2. CommentModal에 useCallback, memo를 사용해봤는데 적절하게 사용한걸까요?
 그런데 Modal의 닫힘아이콘, Tag컴포넌트는 계속 리렌더링이 일어납니다

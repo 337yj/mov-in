@@ -3,6 +3,7 @@
 
 .boMovieModal {
   position: fixed;
+  width: 640px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -25,9 +26,11 @@
         row-gap: 8px;
         flex-wrap: wrap;
 
-        &.movieTitle {
-          font-size: 16px !important;
-          font-weight: 800px !important ;
+        .movieTitle {
+          //NOTE: font-size는 좀 더 컸으면 좋을 것 같다.
+          font-size: 16px;
+
+          font-weight: 700;
         }
 
         .contentInfo {
@@ -67,6 +70,9 @@
 
   .buttonWrapper {
     @include m.flex(flex-end, center, row);
+    //NOTE: 버튼 바닥에 고정
+    position: fixed;
+    bottom: 20px;
     column-gap: 10px;
   }
 }

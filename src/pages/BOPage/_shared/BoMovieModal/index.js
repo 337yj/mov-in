@@ -60,6 +60,8 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
     return null;
   }
 
+  //NOTE: 모달 내의 텍스트는 전체적으로 크기가 좀 커져야할 것 같습니다.
+
   return (
     modal && (
       <Modal

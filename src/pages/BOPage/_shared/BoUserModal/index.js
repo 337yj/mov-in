@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import { deleteUser, getUsersDetail, getUsersInfo } from "../../../../api/User";
 
-import { Modal, Button } from "../../../../components";
+import { Modal, Button, Input } from "../../../../components";
 
 import styles from "./boUserModal.module.scss";
+import dayjs from "dayjs";
 
 const BoUserModal = ({ userId, modal, onCloseModal }) => {
   const [user, setUser] = useState(null);
@@ -49,7 +50,7 @@ const BoUserModal = ({ userId, modal, onCloseModal }) => {
   if (!user) {
     return null;
   }
-  console.log({ userId, user });
+
   return (
     modal && (
       <Modal
@@ -72,17 +73,17 @@ const BoUserModal = ({ userId, modal, onCloseModal }) => {
 
             <div className={styles.content}>
               <h4>닉네임</h4>
-              <Input>{user?.nickname}</Input>
+              <Input value={user?.nickname}></Input>
               <h4>이메일</h4>
-              <Input>{user?.email}</Input>
+              <Input value={user?.email}></Input>
               <h4>생년월일</h4>
-              <Input>
-                {dayjs(user?.birth, "YYYYMMDD").format("YYYY.MM.DD")}
-              </Input>
+              <Input
+                value={dayjs(user?.birth, "YYYYMMDD").format("YYYY.MM.DD")}
+              ></Input>
               <h4>가입일자</h4>
-              <Input>
-                {dayjs(user?.createdAt, "YYYYMMDD").format("YYYY.MM.DD")}
-              </Input>
+              <Input
+                value={dayjs(user?.createdAt, "YYYYMMDD").format("YYYY.MM.DD")}
+              ></Input>
             </div>
           </section>
           <div className={styles.buttonWrapper}>

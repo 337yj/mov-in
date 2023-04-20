@@ -1,15 +1,15 @@
+import cx from "classnames";
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMount } from "react-use";
 import { useRecoilState } from "recoil";
-import cx from "classnames";
+import { getReviewMe } from "../../../api/Review";
+import { getUsersMe, updateMe } from "../../../api/User";
+import { Button, CheckBox, Toast } from "../../../components";
 import { useMe } from "../../../hooks";
 import { userState } from "../../../state";
-import { getReviewMe } from "../../../api/Review";
-import { updateMe, getUsersMe } from "../../../api/User";
-import { Button, CheckBox, Toast } from "../../../components";
-import MyCard from "./MyCard";
 import { msgList } from "../constants";
+import MyCard from "./MyCard";
 //import { AlertModal, ImageModal } from "../_shared";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
 import styles from "./profile.module.scss";
@@ -74,18 +74,18 @@ const Profile = () => {
   };
 
   //공개처리
-  const onClickPublic = async () => {
-    const userData = {
-      isPublic: !me?.isPublic,
-    };
-    const response = await updateMe(userData);
-    if (response.status === 204) {
-      onGetMe();
-      toast("save");
-    } else {
-      console.log("에러!");
-    }
-  };
+  // const onClickPublic = async () => {
+  //   const userData = {
+  //     isPublic: !me?.isPublic,
+  //   };
+  //   const response = await updateMe(userData);
+  //   if (response.status === 204) {
+  //     onGetMe();
+  //     toast("save");
+  //   } else {
+  //     console.log("에러!");
+  //   }
+  // };
 
   // 저장
   const onSubmit = async (e) => {
@@ -93,7 +93,7 @@ const Profile = () => {
 
     const introData = {
       description: form?.description,
-      //isPublic: form?.isPublic,
+      isPublic: isChangePublic,
     };
 
     try {
@@ -140,6 +140,7 @@ const Profile = () => {
       description: me?.description,
       isPublic: me?.isPublic,
     });
+    setIsChangePublic(me?.isPublic);
     //updateUserInfo();
   }, [me]);
 
@@ -150,8 +151,6 @@ const Profile = () => {
       }, 2000);
     }
   }, [floatToast]);
-
-  console.log(form);
 
   return (
     <main className={styles.wrapper}>
@@ -209,18 +208,18 @@ const Profile = () => {
 
         <div className={styles.checkInfo}>
           <CheckBox
+            checked={isChangePublic}
             className={styles.checkbox}
             onClick={() => {
-              onClickPublic();
               onClickCheckbox();
+              // onClickPublic();
             }}
           />
-          {user?.isPublic ? (
+          {isChangePublic ? (
             <h5>비공개 모드로 전환하기</h5>
           ) : (
             <h5>공개 모드로 전환하기</h5>
           )}
-
           <Button
             color="secondary"
             children="취소"

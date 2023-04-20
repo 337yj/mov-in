@@ -17,30 +17,27 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
 
   // // 체크된 아이템을 담을 배열
   const [checkItems, setCheckItems] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
-
-  const onCheckedAll = (e) => {
-    setIsChecked(!isChecked);
-  };
 
   // 체크박스 단일 선택
-  const handleSingleCheck = (checked, id) => {
-    if (checked) {
-      // 단일 선택 시 체크된 아이템을 배열에 추가
-      setCheckItems((prev) => [...prev, id]);
-    } else {
-      // 단일 선택 해제 시 체크된 아이템을 제외하고 배열 추가
-      setCheckItems(checkItems.filter((el) => el !== id));
-    }
+  const handleSingleCheck = (id) => {
+    return () => {
+      //NOTE: checkItems에 id가 있는지 확인
+      if (!checkItems.includes(id)) {
+        // 단일 선택 시 체크된 아이템을 배열에 추가
+        setCheckItems((prev) => [...prev, id]);
+      } else {
+        // 단일 선택 해제 시 체크된 아이템을 제외하고 배열 추가
+        setCheckItems(checkItems.filter((el) => el !== id));
+      }
+    };
   };
 
   // 체크박스 전체 선택
-  const handleAllCheck = (checked) => {
-    if (checked) {
+  //NOTE: 전체 선택 => checkItems에 모든 id를 담거나 / 모든 id를 빼거나
+  const handleAllCheck = () => {
+    if (checkItems.length !== data.length) {
       // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
-      const idArray = [];
-      data.forEach((el) => idArray.push(el.id));
-      setCheckItems(idArray);
+      setCheckItems(data.map((item) => item.id));
     } else {
       // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
       setCheckItems([]);
@@ -59,7 +56,7 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
           >
             <td>
               <CheckBox
-                onChange={(e) => handleAllCheck(e.target.checked)}
+                onChange={handleAllCheck}
                 checked={checkItems.length === data.length ? true : false}
               />
             </td>
@@ -98,7 +95,10 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
               {...row.getRowProps()}
             >
               <td>
-                <CheckBox onClick={handleSingleCheck} />
+                <CheckBox
+                  checked={checkItems.includes(row.original.id)}
+                  onClick={handleSingleCheck(row.original.id)}
+                />
               </td>
               {row.cells.map((cell) => {
                 return (

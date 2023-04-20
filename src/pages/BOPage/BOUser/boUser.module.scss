@@ -18,6 +18,11 @@
   // @include m.flex(flex-start, null, row);
   // column-gap: 10px;
   // }
+  .deleteWrapper {
+    @include m.flex(flex-end, center, row);
+    width: 100%;
+    padding: 0px 16px;
+  }
   .deleteButton {
     @include m.flex(flex-start);
   }

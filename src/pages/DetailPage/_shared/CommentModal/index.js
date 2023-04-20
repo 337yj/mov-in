@@ -1,17 +1,13 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
-import {
-  createReview,
-  getMovieMyReview,
-  getReviewsMovie,
-  updateReviews,
-} from "../../../../api/Review";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
+import { createReview, updateReviews } from "../../../../api/Review";
+import { Button, Modal, Stars, Tag, Toast } from "../../../../components";
 import { userState } from "../../../../state";
-import { Modal, Stars, Tag, Button, Toast } from "../../../../components";
 import { POINTS, TENSIONS } from "../pointTag";
-import styles from "./commentModal.module.scss";
 import { msgList } from "../toastMsg";
+import styles from "./commentModal.module.scss";
 
+//NOTE: memo가 의미 없다.
 const CommentModal = ({
   title,
   movie,
@@ -28,6 +24,7 @@ const CommentModal = ({
   const [selectedPoints, setSelectedPoints] = useState([]);
   const [selectedTension, setSelectedTension] = useState(null);
   const [previousComment, setPreviousComment] = useState(null);
+  //NOTE: 밑의 2개의 state를 recoil로 관리 => CommentModal에서 Toast를 JSX로 넣지 않고, DetailPage에서 관리
   const [toastFloat, setToastFloat] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
 
@@ -65,11 +62,12 @@ const CommentModal = ({
     setSelectedTension(null);
   };
 
-  const onClickNotUser = useCallback(() => {
+  //NOTE: useCallback 불필요
+  const onClickNotUser = () => {
     if (!user) {
       toast("loginRequired");
     }
-  }, [user]);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -90,7 +88,6 @@ const CommentModal = ({
       // toast("save");
     }
     await onGetMovieComments();
-    setModal((prev) => !prev);
   };
 
   const onClickClose = useCallback(() => {
@@ -129,6 +126,8 @@ const CommentModal = ({
     if (toastFloat) {
       setTimeout(() => {
         setToastFloat(false);
+        //NOTE: 모달을 끄는 로직을 토스트가 꺼진 후에 실행
+        setModal((prev) => !prev);
       }, 2000);
     }
   }, [toastFloat]);

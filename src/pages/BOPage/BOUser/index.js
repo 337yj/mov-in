@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
 import dayjs from "dayjs";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
 import {
+  deleteUser,
   getUsers,
   getUsersCount,
-  deleteUser,
   getUsersDetail,
 } from "../../../api/User";
 
-import { SearchInput, Table, Button, Paging } from "../../../components/Common";
+import { Button, Paging, Table } from "../../../components/Common";
 import { BoUserModal } from "../_shared";
 
 import styles from "./boUser.module.scss";
@@ -35,6 +35,7 @@ const BOUser = ({ user }) => {
   const [modal, setModal] = useState(false);
 
   const data = users.map((user) => ({
+    id: user.id,
     이름: user.name ?? "-",
     닉네임: user.nickname ?? "-",
     코멘트: user.reviewCount ?? "-",
@@ -118,13 +119,15 @@ const BOUser = ({ user }) => {
           placeholder={"회원 닉네임을 검색하세요."}
         /> */}
       </div>
-      <Button
-        className={styles.deleteButton}
-        color={"danger"}
-        onClick={onClickDelete}
-      >
-        탈퇴
-      </Button>
+      <div className={styles.deleteWrapper}>
+        <Button
+          className={styles.deleteButton}
+          color={"danger"}
+          onClick={onClickDelete}
+        >
+          탈퇴
+        </Button>
+      </div>
       <Table
         columns={columns}
         data={data}

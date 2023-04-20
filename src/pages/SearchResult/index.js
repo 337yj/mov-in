@@ -20,8 +20,7 @@ const SearchResult = () => {
   const result = [...searchAll];
 
   const onGetMovies = async () => {
-    const response = await getMovies(1, 200);
-
+    const response = await getMovies(1, 200, searchText);
     if (response.status === 200) {
       const items = [...response.data.data];
       setMovies(items);
@@ -32,7 +31,7 @@ const SearchResult = () => {
   useEffect(() => {
     setIsFind(false);
     onGetMovies();
-  }, []);
+  }, [searchText]);
 
   return (
     <main className={styles.searchWrapper}>

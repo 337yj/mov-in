@@ -21,21 +21,21 @@ const RelatedMovie = ({ movie }) => {
     }
   };
 
-  const onWheel = (e) => {
-    const container = containerRef.current;
-    container.scrollLeft += e.deltaY;
-  };
+  // const onWheel = (e) => {
+  //   const container = containerRef.current;
+  //   container.scrollLeft += e.deltaY;
+  // };
 
-  useEffect(() => {
-    const element = document.querySelector(".listWrapper");
-    if (element) {
-      element.addEventListener("wheel", onWheel, { passive: false });
+  // useEffect(() => {
+  //   const element = document.querySelector(".listWrapper");
+  //   if (element) {
+  //     element.addEventListener("wheel", onWheel, { passive: false });
 
-      return () => {
-        element.removeEventListener("wheel", onWheel);
-      };
-    }
-  }, []);
+  //     return () => {
+  //       element.removeEventListener("wheel", onWheel);
+  //     };
+  //   }
+  // }, []);
 
   useEffect(() => {
     onGetRelatedMovie();
@@ -46,7 +46,7 @@ const RelatedMovie = ({ movie }) => {
   }
 
   return (
-    <section className={styles.wrapper} onWheel={onWheel}>
+    <section className={styles.wrapper}>
       <h2>연관된 영화</h2>
 
       <ul className={styles.listWrapper} ref={containerRef}>

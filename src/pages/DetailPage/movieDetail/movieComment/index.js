@@ -8,12 +8,19 @@ import {
 } from "../../../../api/Review";
 import { commentModalState, userState } from "../../../../state";
 import Comment from "../../CommentList/Comment";
-
+import { msgList } from "../../_shared/toastMsg";
 import styles from "./movieComment.module.scss";
 import CommentModal from "../../_shared/CommentModal";
 import { getMovie } from "../../../../api/Movie";
+import { Toast } from "../../../../components";
 
-const MovieComment = ({ movie }) => {
+const MovieComment = ({
+  movie,
+  setToastMsg,
+  setToastFloat,
+  toastFloat,
+  toast,
+}) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -23,6 +30,13 @@ const MovieComment = ({ movie }) => {
   const [detailComment, setDetailComment] = useState();
   const [myComment, setMyComment] = useState();
   const user = useRecoilValue(userState);
+
+  // const toast = (msg) => {
+  //   if (!toastFloat) {
+  //     setToastFloat(true);
+  //     setToastMsg(msgList[msg]);
+  //   }
+  // };
 
   const onClickNavigate = (path) => {
     return () => {
@@ -78,7 +92,9 @@ const MovieComment = ({ movie }) => {
             {myComment && (
               <Comment
                 comment={myComment}
+                toast={toast}
                 onGetMovieComments={onGetMyComment}
+                isEllipsis={true}
               />
             )}
           </div>
@@ -92,6 +108,7 @@ const MovieComment = ({ movie }) => {
                     comment={comment}
                     onGetMovieComments={onGetMovieComment}
                     isPointsView={false}
+                    isEllipsis={true}
                   />
                 </li>
               ))}
@@ -113,6 +130,7 @@ const MovieComment = ({ movie }) => {
         title={movie.title}
         modal={modal}
         setModal={setModal}
+        toast={toast}
         onGetMovieComments={async () => {
           await onGetMovieComment();
           await onGetMyComment();

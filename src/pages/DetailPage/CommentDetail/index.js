@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { userState } from "../../../state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { toastFloatState, toastMsgState, userState } from "../../../state";
 import { createReviewsComments, getReviewsDetail } from "../../../api/Review";
+import { msgList } from "../_shared/toastMsg";
 import Comment from "../CommentList/Comment";
 import Reply from "./Reply";
-import { Button } from "../../../components";
+import { Button, Toast } from "../../../components";
 import { formatRuntime } from "../_shared/formatRuntime";
 import { ImageProfile2 } from "../../../assets";
 import dayjs from "dayjs";
@@ -16,6 +17,8 @@ const CommentDetail = ({ comment, ...props }) => {
   const navigate = useNavigate();
   const [detailComment, setDetailComment] = useState();
   const [content, setContent] = useState("");
+  const [toastFloat, setToastFloat] = useRecoilState(toastFloatState);
+  const [toastMsg, setToastMsg] = useRecoilState(toastMsgState);
   const user = useRecoilValue(userState);
   const formattedRuntime = formatRuntime(detailComment?.movie?.runtime || 0);
 
@@ -49,14 +52,31 @@ const CommentDetail = ({ comment, ...props }) => {
     await createReviewsComments(detailComment.id, commentData);
     onGetCommentDetail();
     setContent("");
+    toast("save");
   };
 
   useEffect(() => {
     onGetCommentDetail();
   }, [id]);
 
+  const toast = (msg) => {
+    if (!toastFloat) {
+      setToastFloat(true);
+      setToastMsg(msgList[msg]);
+    }
+  };
+
+  useEffect(() => {
+    if (toastFloat) {
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 2000);
+    }
+  }, [toastFloat]);
+
   return (
     <main>
+      <Toast children={toastMsg} float={toastFloat} />
       <div className={styles.backgroundWrapper}>
         <img
           className={styles.backgroundImg}
@@ -94,6 +114,7 @@ const CommentDetail = ({ comment, ...props }) => {
               <section className={styles.commentSection}>
                 <Comment
                   comment={detailComment}
+                  toast={toast}
                   onGetMovieComments={onGetCommentDetail}
                 />
               </section>
@@ -137,6 +158,7 @@ const CommentDetail = ({ comment, ...props }) => {
                       <li key={reply.id} className={styles.reply}>
                         <Reply
                           reply={reply}
+                          toast={toast}
                           onGetCommentDetail={onGetCommentDetail}
                         />
                       </li>

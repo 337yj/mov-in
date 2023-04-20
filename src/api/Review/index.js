@@ -27,6 +27,13 @@ export const getReviewsMovie = (movieId) => {
   return apiClient.get(`/reviews/movie/${movieId}`);
 };
 
+// 영화 리뷰 목록 조회 - 페이징
+export const getReviewsMoviePaging = (movieId, page = 1, limit = 20) => {
+  return apiClient.get(
+    `/reviews/movie/${movieId}/paging?page=${page}&limit=${limit}`,
+  );
+};
+
 // 영화 리뷰 상세 조회
 export const getReviewsDetail = (id) => {
   return apiClient.get(`/reviews/${id}/detail`);

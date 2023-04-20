@@ -13,7 +13,6 @@ const UserCard = ({ review }) => {
     navigate(`/commentDetail/${review.id}`);
   };
 
-
   return (
     <section className={styles.wrapper} onClick={onClick}>
       {review?.movie.postImage ? (
@@ -29,12 +28,12 @@ const UserCard = ({ review }) => {
         <h2 className={styles.title}>{review?.movie.title}</h2>
         <div>
           <span className={styles.score}>
-            <p>전체</p> 
+            <p>전체</p>
             <BsStarFill className={styles.star} />
             {review?.movie.averageScore?.toFixed(1)}
           </span>
           <span className={styles.myScore}>
-          <p>평가</p> 
+            <p>평가</p>
             <BsStarFill className={styles.star} />
             {review?.score?.toFixed(1)}
           </span>

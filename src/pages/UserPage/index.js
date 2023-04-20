@@ -1,27 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useMount } from "react-use";
-import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import React, { useState } from "react";
 import { TiLockClosed } from "react-icons/ti";
-import { userState } from "../../state";
+import { useParams } from "react-router-dom";
+import { useMount } from "react-use";
 import { getReviewUser } from "../../api/Review";
 import { getUsersDetail } from "../../api/User";
-import UserCard from "./UserCard";
 import { ImageProfile2 } from "../../assets/images/profileImages";
+import UserCard from "./UserCard";
 import styles from "./userPage.module.scss";
 
 const UserPage = () => {
   const params = useParams();
-  const [user, setUser] = useRecoilState(userState);
-  const [userReviews, setUserReviews] = useState([]);
-  //const [user, setUser] = useState({});
 
-  // const onGetUserInfo = async () => {
-  //   const response = await getUsersDetail(params.id);
-  //   if (response.status === 200) {
-  //     setUser(response.data);
-  //   }
-  // };
+  const [userReviews, setUserReviews] = useState([]);
+  const [user, setUser] = useState({});
+
+  const onGetUserInfo = async () => {
+    const response = await getUsersDetail(params.id);
+    if (response.status === 200) {
+      setUser(response.data);
+    }
+  };
 
   const onGetReviews = async () => {
     const response = await getReviewUser(params.id);
@@ -33,11 +31,9 @@ const UserPage = () => {
 
   useMount(() => {
     onGetReviews();
+    onGetUserInfo();
   });
 
-  console.log({ userReviews });
-
-  
   return (
     <main className={styles.wrapper}>
       <section className={styles.info}>
@@ -73,7 +69,7 @@ const UserPage = () => {
             </div>
             <div className={styles.cardList}>
               {userReviews?.map((review) => (
-                <UserCard key={review.id} />
+                <UserCard key={review.id} review={review} />
               ))}
             </div>
           </>

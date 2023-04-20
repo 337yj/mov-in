@@ -24,8 +24,8 @@ const UserPage = () => {
   const onGetReviews = async () => {
     const response = await getReviewUser(params.id);
     if (response.status === 200) {
-      //const items = [...response.data].slice(0, 5);
-      setUserReviews(response.data);
+      const items = [...response.data].slice(0, 5);
+      setUserReviews(items);
     }
   };
 
@@ -60,7 +60,7 @@ const UserPage = () => {
               <textarea
                 name={"description"}
                 className={styles.introText}
-                value={user?.description || ""}
+                value={user?.description || "소개글이 작성 되지 않았습니다"}
                 readOnly
               />
             </div>

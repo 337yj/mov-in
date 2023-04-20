@@ -208,7 +208,7 @@ const Profile = () => {
 
         <div className={styles.checkInfo}>
           <CheckBox
-            checked={isChangePublic}
+            //checked={isChangePublic}
             className={styles.checkbox}
             onClick={() => {
               onClickCheckbox();

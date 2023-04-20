@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import cx from "classnames";
 import { useMe } from "../../../../hooks";
 import { Button, Modal } from "../../../../components";
 import { imgList } from "./image.js";
@@ -10,16 +11,13 @@ const ImageModal = ({
   setModal,
   title,
   subtitle,
-  firstBtn,
-  secondBtn,
-  onClick
+  onClick,
 }) => {
   
-  const checkImage = (name) => {
-    setImage(name);
+  const checkImage = (id) => {
+    setImage(id);
+    onClick();
   };
-
-  console.log(imgList);
 
   return (
     modal && (
@@ -29,17 +27,18 @@ const ImageModal = ({
           title={title}
           subTitle={subtitle}
           onClick={onClick}
-          buttonFirst={firstBtn}
-          buttonSecond={secondBtn}
         >
-          <section className={styles.imgWrapper}>
-            {imgList.map(({ name, id, img }) => {
-              <span
-                onClick={() => checkImage(id)}
-                key={id}
-              >{img()}</span>                
-            })}
-          </section>
+          <article className={styles.content}>
+            <div className={styles.imgWrapper}>
+              {imgList.map(({ id, name, img, imgId }) => {
+                return (
+                  <span onClick={() => checkImage(id)} key={imgId}>
+                    {img()}
+                  </span>
+                );
+              })}
+            </div>
+          </article>
         </Modal>
       </>
     )

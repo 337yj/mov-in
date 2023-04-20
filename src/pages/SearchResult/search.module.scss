@@ -2,14 +2,14 @@
 @use "../../styles/mixins/" as m;
 
 .searchWrapper {
-    @include m.flex(left);
+    @include m.flex(flex-start);
     width: 100%;
     min-height: 100vh;
-    padding-top: 160px;
-    //overflow: auto;
+    padding: 12rem 0rem;
+    margin-left: 3rem;
 
     .searchTitle {
-        padding-left: 8rem;
+        padding-left: 12.5rem;
         font-weight: 700;
         font-size: 30px;
 
@@ -32,7 +32,7 @@
 }
 
 .helpWrapper {
-    padding: 2rem 8rem 14rem 8rem;
+    padding-left: 13rem;
 
     >h4 {
         font-weight: 700;
@@ -44,7 +44,7 @@
         font-size: 16px;
 
         >li {
-            padding-bottom: 5px;
+            padding-bottom: 6px;
             &::before {
                 content : '⋆ ';
             }

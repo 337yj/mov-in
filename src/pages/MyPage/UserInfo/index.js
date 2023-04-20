@@ -1,11 +1,10 @@
-import React, { useState, useEffect, forwardRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useRecoilValue, atom, useRecoilState } from "recoil";
-import dayjs from "dayjs";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+//import dayjs from "dayjs";
 import { useMount } from "react-use";
 import { validateForm } from "../../Auth/Register/utils";
 import { useMe } from "../../../hooks";
-//import { image } from "../_shared/imageModal/image.js" 
 import {
   updateUser,
   getUsersMe,
@@ -26,7 +25,7 @@ const UserInfo = () => {
   const [floatToast, setFloatToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
   const [err, setErr] = useState({});
-  const [showPsw, setShowPsw] = useState("text");
+  //const [showPsw, setShowPsw] = useState("text");
   const [form, setForm] = useState({
     nickname: "",
     email: "",
@@ -37,9 +36,9 @@ const UserInfo = () => {
 
   const navigate = useNavigate();
 
-  const onClickPsw = () => {
-    setShowPsw(showPsw("password"));
-  };
+  // const onClickPsw = () => {
+  //   setShowPsw(showPsw("password"));
+  // };
 
   const onChangeInfo = (e) => {
     const { name, value } = e.target;
@@ -57,10 +56,10 @@ const UserInfo = () => {
     }
   };
 
-  const getProfileImage = (name) => {
+  const getProfileImage = (id) => {
     setForm({
       ...form,
-      ['profileImage']: name,
+      ["profileImage"]: id,
     });
   };
 
@@ -111,6 +110,7 @@ const UserInfo = () => {
       if (responsePatch.status === 204) {
         onGetMe();
         toast("save");
+        //setModal(false);
       }
     } catch (err) {
       const errData = err.response.data;
@@ -158,6 +158,8 @@ const UserInfo = () => {
     });
   }, [me]);
 
+  console.log(user);
+
   return (
     <main className={styles.wrapper}>
       <header className={styles.header}>
@@ -172,18 +174,19 @@ const UserInfo = () => {
             <img
               onClick={onClickImg}
               className={styles.profileImg}
-              src={user?.profileImage ?? ImageProfile2}
+              src={form?.profileImage ?? ImageProfile2}
             />
             <p onClick={onClickImg}>프로필 사진 변경하기</p>
-            {onClickImg && (
+            {modal && (
               <ImageModal
                 title="프로필 사진 변경"
                 subtitle="프로필 사진을 변경할 수 있습니다"
                 modal={modal}
+                // X버튼 클릭시 모달 사라짐
                 setModal={setModal}
+                // 사진 선택 후 모달 사라짐
+                onClick={setModal}
                 setImage={getProfileImage}
-                onClick={(e)=>onSubmit(e)}
-                secondBtn={<Button color="primary" children="저장"/>}
               />
             )}
           </article>

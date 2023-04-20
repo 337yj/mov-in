@@ -4,43 +4,31 @@ import Card from "../Card";
 import SubCard from "../Carousel/Card";
 
 import StyledSlider from "./carouselStyle";
-import styles from "./carousel.module.scss";
 
 const Carousel = ({ slidesToShow, slidesToScroll, movies }) => {
   const settings = {
     arrow: false,
     dots: false,
-    // infinite: true,
-    speed: 700,
+    speed: 800,
     slidesToShow: parseInt(slidesToShow),
     slidesToScroll: parseInt(slidesToScroll),
     autoplay: true,
-    //slidesToShow: 4,
     prevArrow: <IconCaretLeft />,
     nextArrow: <IconCaretRight />,
   };
-
-  //NOTE: 새로운 카드 생성 - 방법 1 => 추천~
-  //NOTE: className을 여러개 만들어서 적용  - 방법 2
 
   return (
     <>
       {slidesToShow !== "5" ? (
         <StyledSlider {...settings}>
           {movies.map((movie) => (
-            <Card
-              className={styles.img}
-              movie={movie}
-              hoverCardClassName={styles.hover}
-              // wrapperClassName={~~~}
-              type="carousel"
-            />
+            <Card movie={movie} type="carousel" />
           ))}
         </StyledSlider>
       ) : (
         <StyledSlider {...settings}>
           {movies.map((movie) => (
-            <SubCard className={styles.img} movie={movie} />
+            <SubCard movie={movie} />
           ))}
         </StyledSlider>
       )}

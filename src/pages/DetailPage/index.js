@@ -1,26 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
 import { getMovie } from "../../api/Movie";
-import { commentIdState } from "../../state";
 import { MovieComment, MovieInfo, RelatedMovie } from "./movieDetail";
-
-import dayjs from "dayjs";
-import { IconLink } from "../../assets";
+import { useRecoilState } from "recoil";
+import { toastFloatState, toastMsgState } from "../../state";
 import { Toast } from "../../components";
+import dayjs from "dayjs";
 import { formatRuntime } from "./_shared/formatRuntime";
+import { msgList } from "./_shared/toastMsg";
+import { IconLink } from "../../assets";
 import styles from "./detail.module.scss";
-import { getMovieMyReview, getReviewsMovie } from "../../api/Review";
 
 const Detail = () => {
   const ref = useRef(null);
   const { id } = useParams();
   const { pathname } = useLocation();
   const [movie, setMovie] = useState();
-  //NOTE: tab은 리코일로 사용하는게 더 편하다
-  const [toastFloat, setToastFloat] = useState(false);
-  // const [comments, setComments] = useState([]);
-  // const [myComment, setMyComment] = useState();
+  const [toastFloat, setToastFloat] = useRecoilState(toastFloatState);
+  const [toastMsg, setToastMsg] = useRecoilState(toastMsgState);
   const formattedRuntime = formatRuntime(movie?.runtime || 0);
 
   const onGetMovieDetail = async () => {
@@ -34,32 +31,30 @@ const Detail = () => {
     }
   };
 
+  const toast = (msg) => {
+    if (!toastFloat) {
+      setToastFloat(true);
+      setToastMsg(msgList[msg]);
+    }
+  };
+
+  useEffect(() => {
+    if (toastFloat) {
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 2000);
+    }
+  }, [toastFloat]);
+
   const onCopyClipBoard = async () => {
     const url = window.location.href;
     try {
       await navigator.clipboard.writeText(url);
-      setToastFloat(true);
-      setTimeout(() => {
-        setToastFloat(false);
-      }, 1500);
+      toast("link");
     } catch (error) {
       console.log(error);
     }
   };
-  //NOTE: 같이 API를 많이 사용하거나, 생성 수정 삭제 등의 데이터의 변경이 일어나는 경우에는
-  //NOTE: tab을 통해서 구분하는 것보다 페이지를 만드는게 정신건강에 좋다.
-  //NOTE: 방법2) react-query 사용
-  // const onGetComments = async () => {
-  //   const response = await getReviewsMovie(id);
-  //   setComments(response.data);
-  // };
-
-  // const onGetMyComment = async () => {
-  //   const response = await getMovieMyReview(id);
-  //   if (response.status === 200) {
-  //     if (response.data) setMyComment(response.data);
-  //   }
-  // };
 
   useEffect(() => {
     if (!ref.current) return;
@@ -74,8 +69,6 @@ const Detail = () => {
 
   useEffect(() => {
     onGetMovieDetail();
-    // onGetComments();
-    // onGetMyComment();
   }, [id]);
 
   if (!movie) {
@@ -84,7 +77,8 @@ const Detail = () => {
 
   return (
     <main ref={ref}>
-      <Toast float={toastFloat}>링크가 복사되었습니다.</Toast>
+      {/* <Toast float={toastFloat}>링크가 복사되었습니다.</Toast> */}
+      <Toast children={toastMsg} float={toastFloat} />
       <div className={styles.backgroundWrapper}>
         <img
           className={styles.backgroundImg}
@@ -107,19 +101,15 @@ const Detail = () => {
         </article>
         <article className={styles.detailInfoWrapper}>
           <MovieInfo movie={movie} />
-          <MovieComment movie={movie} />
+          <MovieComment
+            movie={movie}
+            setToastMsg={setToastMsg}
+            setToastFloat={setToastFloat}
+            toastFloat={toastFloat}
+            toast={toast}
+          />
           <RelatedMovie movie={movie} />
         </article>
-        {/* <CommentModal
-        movie={movie}
-        title={movie.title}
-        modal={modal}
-        setModal={setModal}
-        onGetMovieComments={async () => {
-          await onGetMovieComment();
-          await onGetMyComment();
-        }}
-      /> */}
       </section>
     </main>
   );

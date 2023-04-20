@@ -14,7 +14,7 @@ const Tag = ({
 }) => {
   const [isActive, setIsActive] = useState(isSelected || false);
 
-  const onActiveClick = useCallback(() => {
+  const onActiveClick = () => {
     if (isActive) {
       setIsActive(false);
       onClick(id, false);
@@ -22,7 +22,7 @@ const Tag = ({
       setIsActive(true);
       onClick(id, true);
     }
-  }, [isActive]);
+  };
 
   useEffect(() => {
     setIsActive(isSelected);

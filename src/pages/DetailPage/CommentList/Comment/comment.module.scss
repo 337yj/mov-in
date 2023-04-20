@@ -5,7 +5,6 @@
   @include m.flex(center, flex-start, column);
   width: 100%;
   min-width: 40%;
-  // row-gap: 10px;
   height: 100%;
   padding: 20px;
   border-radius: 10px;
@@ -21,7 +20,6 @@
 
       .profileImage {
         width: 40px;
-        // margin-right: 16px;
       }
 
       .username {
@@ -70,14 +68,17 @@
     border-bottom: 1px solid c.$C_DARKGRAY_80;
     overflow: hidden;
 
-    .content {
+    .contentWrapper {
       width: 100%;
       min-height: 140px;
       color: c.$C_WHITE;
       font-size: 16px;
       font-weight: 400;
 
-      > p {
+      .content {
+        &.ellipsis {
+          @include m.multiEllipsis(16px, 20px, 6);
+        }
         cursor: pointer;
       }
     }
@@ -88,9 +89,6 @@
 
       .modifyBtn,
       .deleteBtn {
-        // border: 0;
-        // background-color: transparent;
-
         .iconModify,
         .iconDelete {
           width: 23px;

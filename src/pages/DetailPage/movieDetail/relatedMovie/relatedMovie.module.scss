@@ -14,15 +14,23 @@
 
   .listWrapper {
     @include m.flex(flex-start);
-    // height: 100%;
     flex-wrap: nowrap;
     gap: 16px;
+    padding-bottom: 16px;
     overflow-x: scroll;
-    // height: 500px;
     overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+      display: block;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      width: 8%;
+      background-color: c.$C_DARKGRAY;
+      border-radius: 5px;
+    }
+
     .card {
-      // width: 260px;
-      // width: 100%;
       .cardImg {
         width: 260px;
         border-radius: 6px;

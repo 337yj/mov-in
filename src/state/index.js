@@ -8,16 +8,6 @@ export const userState = atom({
   default: null,
 });
 
-export const commentIdState = atom({
-  key: "commentIdState",
-  default: null,
-});
-
-export const myCommentState = atom({
-  key: "myCommentState",
-  default: {},
-});
-
 export const commentModalState = atom({
   key: "commentModalState",
   default: false,
@@ -26,4 +16,14 @@ export const commentModalState = atom({
 export const imageModalState = atom({
   key: "imageModalState",
   default: false,
+});
+
+export const toastFloatState = atom({
+  key: "toastFloatState",
+  default: false,
+});
+
+export const toastMsgState = atom({
+  key: "toastMsgState",
+  default: "",
 });

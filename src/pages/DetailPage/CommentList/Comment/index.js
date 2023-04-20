@@ -9,9 +9,7 @@ import {
 } from "../../../../api/Review";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../../state";
-import { Toast } from "../../../../components";
 import CommentModal from "../../_shared/CommentModal";
-import { msgList } from "../../_shared/toastMsg";
 import {
   BsFillHeartFill,
   BsHeart,
@@ -31,6 +29,8 @@ const Comment = ({
   onGetCommentDetail,
   onGetMovieComments,
   isPointsView = true,
+  isEllipsis = false,
+  toast,
   ...props
 }) => {
   const navigate = useNavigate();
@@ -38,8 +38,6 @@ const Comment = ({
   const [isLiked, setIsLiked] = useState(false);
   const [isModified, setIsModified] = useState(false);
   const [modal, setModal] = useState(false);
-  const [toastFloat, setToastFloat] = useState(false);
-  const [toastMsg, setToastMsg] = useState("");
   const enjoyPoints = comment?.enjoyPoints ? comment?.enjoyPoints : [];
   const tensions = comment?.tensions ? comment?.tensions : [];
   const user = useRecoilValue(userState);
@@ -51,13 +49,6 @@ const Comment = ({
     };
   };
 
-  const toast = (msg) => {
-    if (!toastFloat) {
-      setToastFloat(true);
-      setToastMsg(msgList[msg]);
-    }
-  };
-
   const onGetMyComment = async () => {
     const response = await getMovieMyReview(comment?.movie?.id);
     if (response.status === 200) {
@@ -67,7 +58,6 @@ const Comment = ({
 
   const onClickNotUser = () => {
     if (!user) {
-      setToastFloat(true);
       toast("loginRequired");
     }
   };
@@ -102,7 +92,6 @@ const Comment = ({
     if (currentPathname.startsWith("/commentDetail")) {
       navigate(-1);
     }
-    setToastFloat(true);
     toast("delete");
   };
 
@@ -117,21 +106,12 @@ const Comment = ({
     onGetMyComment();
   }, [comment?.id]);
 
-  useEffect(() => {
-    if (toastFloat) {
-      setTimeout(() => {
-        setToastFloat(false);
-      }, 2000);
-    }
-  }, [toastFloat]);
-
   if (!comment) {
     return null;
   }
 
   return (
     <section className={styles.wrapper} onClick={props.onClick}>
-      <Toast float={toastFloat}>{toastMsg}</Toast>
       <div className={styles.commentHeader}>
         <div className={styles.userInfo}>
           <img
@@ -143,7 +123,7 @@ const Comment = ({
             {comment.user?.nickname ?? comment.user?.name}
           </p>
           {isPointsView && (
-            <p className={cx(styles.points, className)}>
+            <p className={styles.points}>
               {enjoyPoints?.map((point, index) => (
                 <span key={index}>{point}</span>
               ))}
@@ -161,8 +141,11 @@ const Comment = ({
         </p>
       </div>
       <div className={styles.commentBody}>
-        <div className={styles.content}>
-          <p onClick={onClickNavigate(`/commentDetail/${comment.id}`)}>
+        <div className={styles.contentWrapper}>
+          <p
+            className={cx(styles.content, { [styles.ellipsis]: isEllipsis })}
+            onClick={onClickNavigate(`/commentDetail/${comment.id}`)}
+          >
             {comment?.content}
           </p>
         </div>
@@ -183,6 +166,7 @@ const Comment = ({
           modal={modal}
           isModified={isModified}
           setModal={setModal}
+          toast={toast}
           myComment={myComment}
           onGetMovieComments={onGetMovieComments}
         />

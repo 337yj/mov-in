@@ -15,6 +15,7 @@ const CommentModal = ({
   isModified,
   modal,
   setModal,
+  toast,
   myComment,
   onGetMovieComments,
 }) => {
@@ -24,13 +25,11 @@ const CommentModal = ({
   const [selectedPoints, setSelectedPoints] = useState([]);
   const [selectedTension, setSelectedTension] = useState(null);
   const [previousComment, setPreviousComment] = useState(null);
-  //NOTE: 밑의 2개의 state를 recoil로 관리 => CommentModal에서 Toast를 JSX로 넣지 않고, DetailPage에서 관리
-  const [toastFloat, setToastFloat] = useState(false);
-  const [toastMsg, setToastMsg] = useState("");
 
   const onChange = (e) => {
     const { value } = e.currentTarget;
     setContent(value);
+    // setContent(convertNewlineToBr(value));
   };
 
   const onRatingChange = useCallback((newRating) => {
@@ -80,26 +79,16 @@ const CommentModal = ({
     };
     if (isModified) {
       await updateReviews(myComment?.id, commentData);
-      // setToastFloat(true);
-      // toast("modify");
     } else {
       await createReview(movie?.id, commentData);
-      // setToastFloat(true);
-      // toast("save");
     }
+    setModal((prev) => !prev);
     await onGetMovieComments();
   };
 
   const onClickClose = useCallback(() => {
     setModal((prev) => !prev);
   }, []);
-
-  const toast = (msg) => {
-    if (!toastFloat) {
-      setToastFloat(true);
-      setToastMsg(msgList[msg]);
-    }
-  };
 
   const onClickSave = useCallback(() => {
     toast("save");
@@ -122,20 +111,10 @@ const CommentModal = ({
     }
   }, [modal]);
 
-  useEffect(() => {
-    if (toastFloat) {
-      setTimeout(() => {
-        setToastFloat(false);
-        //NOTE: 모달을 끄는 로직을 토스트가 꺼진 후에 실행
-        setModal((prev) => !prev);
-      }, 2000);
-    }
-  }, [toastFloat]);
-
   return (
     modal && (
       <Modal className={styles.commentModal} title={title} setModal={setModal}>
-        <Toast children={toastMsg} float={toastFloat} />
+        {/* <Toast children={toastMsg} float={toastFloat} /> */}
         <form className={styles.wrapper} id="reviewForm" onSubmit={onSubmit}>
           <p>영화를 평가해주세요.</p>
           <div className={styles.ratingWrapper}>

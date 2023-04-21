@@ -222,7 +222,7 @@ const Profile = () => {
               // onClickPublic();
             }}
           />
-          {isChangePublic ? (
+          {user?.isPublic ? (
             <h5>비공개 모드로 전환하기</h5>
           ) : (
             <h5>공개 모드로 전환하기</h5>

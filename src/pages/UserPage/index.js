@@ -5,6 +5,7 @@ import { useMount } from "react-use";
 import { getReviewUser } from "../../api/Review";
 import { getUsersDetail } from "../../api/User";
 import { ImageProfile2 } from "../../assets/images/profileImages";
+import * as ProfileImages from "../../assets/images/profileImages";
 import UserCard from "./UserCard";
 import styles from "./userPage.module.scss";
 
@@ -43,7 +44,11 @@ const UserPage = () => {
         <div className={styles.myInfo}>
           <img
             className={styles.profileImg}
-            src={user?.profileImage ?? ImageProfile2}
+            src={user?.profileImage
+              ? Object.entries(ProfileImages).filter(([key, value]) => {
+                  return key === user?.profileImage;
+                })[0][1]
+              : ImageProfile2}
           />
           <h4>{user?.nickname} 님</h4>
         </div>

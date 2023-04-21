@@ -14,29 +14,15 @@ import CommentModal from "../../_shared/CommentModal";
 import { getMovie } from "../../../../api/Movie";
 import { Toast } from "../../../../components";
 
-const MovieComment = ({
-  movie,
-  setToastMsg,
-  setToastFloat,
-  toastFloat,
-  toast,
-}) => {
+const MovieComment = ({ movie, toast }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  //NOTE: CommentModal의 열림 상태
   const [modal, setModal] = useRecoilState(commentModalState);
   const [comments, setComments] = useState([]);
   const [detailComment, setDetailComment] = useState();
   const [myComment, setMyComment] = useState();
   const user = useRecoilValue(userState);
-
-  // const toast = (msg) => {
-  //   if (!toastFloat) {
-  //     setToastFloat(true);
-  //     setToastMsg(msgList[msg]);
-  //   }
-  // };
 
   const onClickNavigate = (path) => {
     return () => {

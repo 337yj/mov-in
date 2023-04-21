@@ -38,8 +38,13 @@ const UserInfo = () => {
 
   const navigate = useNavigate();
 
-  // const onClickPsw = () => {
-  //   setShowPsw(showPsw("password"));
+  // const noPassword = (form) => {
+  //   const error = true;
+  //   if (form.password.length === 0) {
+  //     return error;
+  //   } else if (0 < form.password.length < 8) {
+  //     return !error;
+  //   }
   // };
 
   const onChangeInfo = (e) => {
@@ -77,7 +82,6 @@ const UserInfo = () => {
         alert("삭제 완료 되었습니다");
         navigate("/");
         //NOTE: 로그아웃과 동일 로직으로 처리를 해야합니다. -> 토큰도 지우고, me 정보도 지워야합니다.
-        // (location || window.location || document.location).reload();
       } else {
         toast("fail");
         return;
@@ -93,10 +97,19 @@ const UserInfo = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (err.email || err.password) {
-      toast("errText");
+    if (err.email && err.password || err.nickname) {
+      toast("require");
       return;
-    }
+    } else if (err.email) {
+      toast("emailError");
+      return;
+    } else if (err.password) {
+      toast("passwordError");
+      return;
+    // } else if (err.nickname) {
+    //   toast("nicknameError");
+    //   return;
+   }
 
     const myInfoData = {
       nickname: form?.nickname,
@@ -198,6 +211,7 @@ const UserInfo = () => {
           <article id="registerForm" className={styles.infoWrapper}>
             <div>
               <form>
+              {err && <p className={styles.errText}>{err.nickname}</p>}
                 <Input
                   name="nickname"
                   label="닉네임"

@@ -13,10 +13,12 @@ import {
   ImageProfile12,
 } from "../../../../assets/images/profileImages/import.js";
 
+//NOTE: path를 추가 => 사용하는 곳에서 "../../../"
 export const imgList = [
   {
     imgId: 1,
     id: "ImageProfile1",
+
     name: ImageProfile1,
     img: () => <ImageProfile1 />,
   },

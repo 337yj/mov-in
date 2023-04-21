@@ -13,7 +13,6 @@ const ImageModal = ({
   subtitle,
   onClick,
 }) => {
-  
   const checkImage = (id) => {
     setImage(id);
     onClick();

@@ -49,6 +49,15 @@ export const getReviewMe = () => {
   return apiClient.get(`/reviews/me`);
 };
 
+export const getReviewMePage = (page, limit) => {
+  return apiClient.get(`/reviews/me/paging`, {
+    params: {
+      page,
+      limit,
+    },
+  });
+};
+
 // 유저 영화 리뷰 목록
 export const getReviewUser = (userId) => {
   return apiClient.get(`/reviews/users/${userId}`);

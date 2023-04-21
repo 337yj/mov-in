@@ -36,18 +36,28 @@ const CommentList = ({}) => {
   console.log(items);
 
   const onGetMovieCommentsPaging = useCallback(async () => {
+    //NOTE: page가 -1일 때 요청하지 않도록 설정
+    if (page === -1) return;
+
     setLoading(true);
     const response = await getReviewsMoviePaging(id, page, 5);
     if (response.status === 200) {
       const dataItems = [...response.data.data];
+      if (page === 1) {
+        setItems(dataItems);
+        setLoading(false);
+        return;
+      }
       setItems((prevItems) => {
         // 중복
-        const newItems = dataItems.filter(
-          (item) => !prevItems.find((prevItem) => prevItem.id === item.id),
-        );
-        return [...prevItems, ...newItems].sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-        );
+        // const newItems = dataItems.filter(
+        //   (item) => !prevItems.find((prevItem) => prevItem.id === item.id),
+        // );
+        // return [...prevItems, ...newItems].sort(
+        //   (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        // );
+
+        return [...prevItems, ...dataItems];
       });
       if (dataItems.length < 5) {
         setPage(-1); // 더 이상 데이터를 로딩하지 않도록 페이지 번호를 -1로 설정
@@ -78,19 +88,16 @@ const CommentList = ({}) => {
     }
   };
 
-  const onGetMovieComments = async () => {
-    try {
-      const response = await getReviewsMovie(id);
-      if (response.status === 200) {
-        const sortedComments = response.data.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setComments(sortedComments);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const onGetMovieComments = async () => {
+  //   try {
+  //     const response = await getReviewsMoviePaging(id, 1, 5);
+  //     if (response.status === 200) {
+  //       setItems(response.data.data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const toast = (msg) => {
     if (!toastFloat) {
@@ -151,7 +158,7 @@ const CommentList = ({}) => {
                     <Comment
                       comment={comment}
                       toast={toast}
-                      onGetMovieComments={onGetMovieComments}
+                      onGetMovieComments={() => setPage(1)}
                     />
                   </li>
                 ))}

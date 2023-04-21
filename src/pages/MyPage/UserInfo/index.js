@@ -13,10 +13,12 @@ import {
 } from "../../../api/User";
 import { userState, imageModalState } from "../../../state";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
+import * as ProfileImages from "../../../assets/images/profileImages";
 import { Button, Input, Toast } from "../../../components";
 import { ImageModal } from "../_shared";
 import { msgList } from "../constants";
 import styles from "./userInfo.module.scss";
+import { imgList } from "../_shared/imageModal/image";
 
 const UserInfo = () => {
   const user = useMe();
@@ -158,8 +160,6 @@ const UserInfo = () => {
     });
   }, [me]);
 
-  console.log(user);
-
   return (
     <main className={styles.wrapper}>
       <header className={styles.header}>
@@ -174,7 +174,13 @@ const UserInfo = () => {
             <img
               onClick={onClickImg}
               className={styles.profileImg}
-              src={form?.profileImage ?? ImageProfile2}
+              src={
+                form?.profileImage
+                  ? Object.entries(ProfileImages).filter(([key, value]) => {
+                      return key === form?.profileImage;
+                    })[0][1]
+                  : ImageProfile2
+              }
             />
             <p onClick={onClickImg}>프로필 사진 변경하기</p>
             {modal && (

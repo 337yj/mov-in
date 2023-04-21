@@ -12,6 +12,7 @@ import { msgList } from "../constants";
 import MyCard from "./MyCard";
 //import { AlertModal, ImageModal } from "../_shared";
 import { ImageProfile2 } from "../../../assets/images/profileImages";
+import * as ProfileImages from "../../../assets/images/profileImages";
 import styles from "./profile.module.scss";
 
 const Profile = () => {
@@ -180,7 +181,13 @@ const Profile = () => {
         <div className={styles.myInfo}>
           <img
             className={styles.profileImg}
-            src={user?.profileImage ?? ImageProfile2}
+            src={
+              user?.profileImage
+                ? Object.entries(ProfileImages).filter(([key, value]) => {
+                    return key === user?.profileImage;
+                  })[0][1]
+                : ImageProfile2
+            }
             onClick={onClickImage}
           />
           <h4>{user?.nickname} 님</h4>

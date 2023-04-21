@@ -7,6 +7,7 @@ import { SearchInput } from "../../Common";
 import { ImageProfile2 } from "../../../assets";
 import { ImageLogo } from "../../../assets";
 import { BsChevronDown } from "react-icons/bs";
+import * as ProfileImages from "../../../assets/images/profileImages";
 import cx from "classnames";
 import styles from "./header.module.scss";
 
@@ -83,7 +84,13 @@ const Header = () => {
             <div className={styles.dropdownInfo} onClick={onClickIcon}>
               <div className={styles.userInfo}>
                 <img
-                  src={user.profileImage ?? ImageProfile2}
+                  src={
+                    user?.profileImage
+                      ? Object.entries(ProfileImages).filter(([key, value]) => {
+                          return key === user?.profileImage;
+                        })[0][1]
+                      : ImageProfile2
+                  }
                   alt="profileImage"
                   className={styles.profileImage}
                 />

@@ -91,7 +91,6 @@ const UserInfo = () => {
 
   //저장
   const onSubmit = async (e) => {
-    // if (e && e.preventDefault) { e.preventDefault(); }
     e.preventDefault();
 
     if (err.email || err.password) {

@@ -65,7 +65,7 @@
   .introText {
     @include m.flex(center);
     flex-shrink: 0;
-    width: 980px;
+    width: 960px;
     margin-bottom: 50px;
     padding: 10px;
     font-size: 16px;
@@ -92,7 +92,7 @@
 h6 {
   @include m.flex(right);
   flex-shrink: 0;
-  width: 980px;
+  width: 960px;
   cursor: pointer;
 }
 
@@ -100,18 +100,19 @@ h6 {
   @include m.flex(left);
   flex-shrink: 0;
   height: 80%;
-  width: 980px;
+  width: 995px;
   padding-bottom: 20px;
 }
 
 .checkInfo {
   @include m.flex(left);
-  width: 1300px;
+  width: 970px;
   flex-shrink: 0;
   padding-top: 45px;
 
   > h5 {
-    padding: 0px 595px 0px 8px;
+    width: 735px;
+    padding-left: 8px;
   }
 
   > button {

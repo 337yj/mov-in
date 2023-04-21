@@ -32,7 +32,7 @@ const Login = () => {
       const data = response.data;
       setUser(data);
     }
-    console.log(response.data);
+    //console.log(response.data);
   };
 
   const onChange = (e) => {
@@ -54,7 +54,7 @@ const Login = () => {
         const data = response.data;
         saveTokens(data);
       }
-      console.log("로그인성공");
+      //console.log("로그인성공");
       navigate("/");
       onGetMe();
     } catch (error) {

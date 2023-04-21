@@ -210,7 +210,7 @@ const UserInfo = () => {
             </div>
             <div>
               <form>
-              {err && <p className={styles.errText}>{err.email}</p>}
+                {err && <p className={styles.errText}>{err.email}</p>}
                 <Input
                   name="email"
                   label="이메일"
@@ -223,13 +223,13 @@ const UserInfo = () => {
             </div>
             <div>
               <form>
-              {err && <p className={styles.errText}>{err.password}</p>}
+                {err && <p className={styles.errText}>{err.password}</p>}
                 <Input
                   name="password"
                   label="비밀번호"
                   type="password"
                   autoComplete="off"
-                  placeholder={"새로운 비밀번호를 입력해주세요"}
+                  placeholder={"현재 혹은 새로운 비밀번호를 입력해주세요"}
                   value={form?.password || ""}
                   onChange={onChangeInfo}
                   className={styles.inputText}

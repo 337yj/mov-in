@@ -10,7 +10,6 @@
 
     .titleWrapper {
       @include m.flex(row);
-
       .title {
         font : {
           size: 36px;
@@ -65,7 +64,8 @@
 
   .introText {
     @include m.flex(center);
-    width: 50vw;
+    flex-shrink: 0;
+    width: 980px;
     margin-bottom: 50px;
     padding: 10px;
     font-size: 16px;
@@ -76,10 +76,11 @@
 
 .ratedMovie {
   @include m.flex(left);
+  flex-shrink: 0;
   padding-bottom: 20px;
   
   > h1 {
-    padding-right: 50rem;
+    //padding-right: 50rem;
     font : {
       size: 24px;
       weight: 700;
@@ -90,19 +91,23 @@
 
 h6 {
   @include m.flex(right);
-  width: 50vw;
+  flex-shrink: 0;
+  width: 980px;
   cursor: pointer;
 }
 
 .cardList {
   @include m.flex(left);
+  flex-shrink: 0;
   height: 80%;
-  width: 50vw;
+  width: 980px;
   padding-bottom: 20px;
 }
 
 .checkInfo {
   @include m.flex(left);
+  width: 1300px;
+  flex-shrink: 0;
   padding-top: 45px;
 
   > h5 {

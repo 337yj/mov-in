@@ -44,11 +44,13 @@ const UserPage = () => {
         <div className={styles.myInfo}>
           <img
             className={styles.profileImg}
-            src={user?.profileImage
-              ? Object.entries(ProfileImages).filter(([key, value]) => {
-                  return key === user?.profileImage;
-                })[0][1]
-              : ImageProfile2}
+            src={
+              !user?.profileImage || user?.profileImage.includes("Icon")
+                ? ImageProfile2
+                : Object.entries(ProfileImages).filter(([key, value]) => {
+                    return key === user?.profileImage;
+                  })[0][1]
+            }
           />
           <h4>{user?.nickname} 님</h4>
         </div>

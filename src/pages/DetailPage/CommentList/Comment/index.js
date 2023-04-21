@@ -18,7 +18,8 @@ import {
   BsTrash,
 } from "react-icons/bs";
 import { TfiCommentAlt } from "react-icons/tfi";
-import { ImageProfile1 } from "../../../../assets";
+import { ImageProfile2 } from "../../../../assets";
+import * as ProfileImages from "../../../../assets/images/profileImages";
 import cx from "classnames";
 import styles from "./comment.module.scss";
 
@@ -115,9 +116,17 @@ const Comment = ({
       <div className={styles.commentHeader}>
         <div className={styles.userInfo}>
           <img
-            src={ImageProfile1}
+            src={
+              !comment.user?.profileImage ||
+              comment.user?.profileImage.includes("Icon")
+                ? ImageProfile2
+                : Object.entries(ProfileImages).filter(([key, value]) => {
+                    return key === comment.user?.profileImage;
+                  })[0][1]
+            }
             alt="userProfileImage"
             className={styles.profileImage}
+            onClick={onClickNavigate(`/userPage/${comment.user?.id}`)}
           />
           <p className={styles.username}>
             {comment.user?.nickname ?? comment.user?.name}

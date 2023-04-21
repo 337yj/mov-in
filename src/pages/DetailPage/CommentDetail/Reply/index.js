@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   deleteReviewsComments,
   updateReviewsComments,
@@ -6,7 +7,8 @@ import {
 import { userState } from "../../../../state";
 import { useRecoilValue } from "recoil";
 import dayjs from "dayjs";
-import { ImageProfile4 } from "../../../../assets";
+import * as ProfileImages from "../../../../assets/images/profileImages";
+import { ImageProfile2 } from "../../../../assets";
 import { BsCheck2, BsPencilSquare, BsTrash, BsX } from "react-icons/bs";
 import styles from "./reply.module.scss";
 
@@ -15,10 +17,17 @@ const Reply = ({ reply, toast, onGetCommentDetail, className, ...props }) => {
   const [initialContent, setInitialContent] = useState(reply.content);
   const [isModify, setIsModify] = useState(false);
   const user = useRecoilValue(userState);
+  const navigate = useNavigate();
   const isAuthor = reply?.user?.id === user?.id;
 
   const onChange = (e) => {
     setReplyContent(e.currentTarget.value);
+  };
+
+  const onClickNavigate = (path) => {
+    return () => {
+      navigate(path);
+    };
   };
 
   const onSubmit = async () => {
@@ -53,9 +62,12 @@ const Reply = ({ reply, toast, onGetCommentDetail, className, ...props }) => {
     <section className={styles.wrapper}>
       <div className={styles.profileWrapper}>
         <img
-          src={ImageProfile4}
+          src={!reply.user?.profileImage || (reply.user?.profileImage.includes("Icon")) ? ImageProfile2 : Object.entries(ProfileImages).filter(([key, value]) => {
+              return key === reply.user?.profileImage;
+            })[0][1]}
           alt="userProfileImage"
           className={styles.profileImage}
+          onClick={onClickNavigate(`/userPage/${reply.user?.id}`)}
         />
         <p className={styles.username}>
           {reply.user?.nickname ?? reply.user?.name}

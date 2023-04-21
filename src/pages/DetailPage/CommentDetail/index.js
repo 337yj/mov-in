@@ -9,6 +9,7 @@ import Reply from "./Reply";
 import { Button, Toast } from "../../../components";
 import { formatRuntime } from "../_shared/formatRuntime";
 import { ImageProfile2 } from "../../../assets";
+import * as ProfileImages from "../../../assets/images/profileImages";
 import dayjs from "dayjs";
 import styles from "./commentDetail.module.scss";
 
@@ -125,9 +126,18 @@ const CommentDetail = ({ comment, ...props }) => {
                       <div className={styles.profile}>
                         <img
                           // src={comment.user.profileImage ?? profileImage}
-                          src={ImageProfile2}
+                          src={
+                            user?.profileImage
+                              ? Object.entries(ProfileImages).filter(
+                                  ([key, value]) => {
+                                    return key === user?.profileImage;
+                                  },
+                                )[0][1]
+                              : ImageProfile2
+                          }
                           alt="userProfileImage"
                           className={styles.profileImage}
+                          onClick={onClickNavigate(`/myPage`)}
                         />
 
                         <p className={styles.username}>

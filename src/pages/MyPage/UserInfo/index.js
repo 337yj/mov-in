@@ -197,47 +197,56 @@ const UserInfo = () => {
           </article>
           <article id="registerForm" className={styles.infoWrapper}>
             <div>
-              <Input
-                name="nickname"
-                label="닉네임"
-                placeholder={"새로운 닉네임을 입력해주세요"}
-                value={form?.nickname || ""}
-                onChange={onChangeInfo}
-                className={styles.inputText}
-              />
+              <form>
+                <Input
+                  name="nickname"
+                  label="닉네임"
+                  placeholder={"새로운 닉네임을 입력해주세요"}
+                  value={form?.nickname || ""}
+                  onChange={onChangeInfo}
+                  className={styles.inputText}
+                />
+              </form>
             </div>
             <div>
+              <form>
               {err && <p className={styles.errText}>{err.email}</p>}
-              <Input
-                name="email"
-                label="이메일"
-                placeholder={"새로운 이메일을 입력해주세요"}
-                value={form?.email || ""}
-                onChange={onChangeInfo}
-                className={styles.inputText}
-              />
+                <Input
+                  name="email"
+                  label="이메일"
+                  placeholder={"새로운 이메일을 입력해주세요"}
+                  value={form?.email || ""}
+                  onChange={onChangeInfo}
+                  className={styles.inputText}
+                />
+              </form>
             </div>
             <div>
+              <form>
               {err && <p className={styles.errText}>{err.password}</p>}
-              <Input
-                name="password"
-                label="비밀번호"
-                type="password"
-                placeholder={"새로운 비밀번호를 입력해주세요"}
-                value={form?.password || ""}
-                onChange={onChangeInfo}
-                className={styles.inputText}
-              />
+                <Input
+                  name="password"
+                  label="비밀번호"
+                  type="password"
+                  autoComplete="off"
+                  placeholder={"새로운 비밀번호를 입력해주세요"}
+                  value={form?.password || ""}
+                  onChange={onChangeInfo}
+                  className={styles.inputText}
+                />
+              </form>
             </div>
             <div>
-              <Input
-                name="birth"
-                label="생년월일"
-                //value={dayjs(user?.birth, "YYMMDD").format("YY.MM.DD")}
-                value={form?.birth || ""}
-                className={styles.inputText}
-                readOnly
-              />
+              <form>
+                <Input
+                  name="birth"
+                  label="생년월일"
+                  //value={dayjs(user?.birth, "YYMMDD").format("YY.MM.DD")}
+                  value={form?.birth || ""}
+                  className={styles.inputText}
+                  readOnly
+                />
+              </form>
             </div>
           </article>
         </article>

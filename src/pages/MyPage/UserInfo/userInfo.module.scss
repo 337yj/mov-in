@@ -58,23 +58,25 @@
 
       .infoWrapper {
         > div {
-          > label {
-            @include m.flex();
-            font-size: 24px;
+          > form {
+            > label {
+              @include m.flex();
+              font-size: 24px;
 
-            p:first-child {
-              width: 200px;
+              p:first-child {
+                width: 200px;
+              }
             }
-          }
 
-          > .inputText {
-            width: 662px;
-          }
+            > .inputText {
+              width: 662px;
+            }
 
-          .errText {
-            @include m.flex(flex-end);
-            color: c.$C_PINK_80;
-            font-size: 14px;
+            .errText {
+              @include m.flex(flex-end);
+              color: c.$C_PINK_80;
+              font-size: 14px;
+            }
           }
         }
       }

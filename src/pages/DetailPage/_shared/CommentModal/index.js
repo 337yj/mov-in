@@ -29,7 +29,6 @@ const CommentModal = ({
   const onChange = (e) => {
     const { value } = e.currentTarget;
     setContent(value);
-    // setContent(convertNewlineToBr(value));
   };
 
   const onRatingChange = useCallback((newRating) => {
@@ -70,7 +69,6 @@ const CommentModal = ({
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    onClickNotUser();
     const commentData = {
       content,
       score: rating,
@@ -91,6 +89,9 @@ const CommentModal = ({
   }, []);
 
   const onClickSave = useCallback(() => {
+    if (!user) {
+      return toast("loginRequired");
+    }
     toast("save");
   }, []);
 
@@ -114,7 +115,6 @@ const CommentModal = ({
   return (
     modal && (
       <Modal className={styles.commentModal} title={title} setModal={setModal}>
-        {/* <Toast children={toastMsg} float={toastFloat} /> */}
         <form className={styles.wrapper} id="reviewForm" onSubmit={onSubmit}>
           <p>영화를 평가해주세요.</p>
           <div className={styles.ratingWrapper}>

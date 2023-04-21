@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getMovie } from "../../../api/Movie";
 import { getReviewsMovie, getReviewsMoviePaging } from "../../../api/Review";
 import { toastFloatState, toastMsgState } from "../../../state";
@@ -15,7 +15,15 @@ import styles from "./commentList.module.scss";
 const CommentList = ({}) => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  //NOTE: 페이지가 바뀔 때마다 scroll을 최상단으로 올려준다. => react-router-dom scroll to top
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [location.pathname]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [location]);
   const [ref, inView] = useInView();
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
@@ -158,7 +166,10 @@ const CommentList = ({}) => {
                     <Comment
                       comment={comment}
                       toast={toast}
-                      onGetMovieComments={() => setPage(1)}
+                      onGetMovieComments={async () => {
+                        setPage(1);
+                        await onGetMovieCommentsPaging();
+                      }}
                     />
                   </li>
                 ))}

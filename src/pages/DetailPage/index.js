@@ -59,7 +59,6 @@ const Detail = () => {
   useEffect(() => {
     if (!ref.current) return;
 
-    //NOTE: ref를 사용해서 스크롤 위치를 변경
     ref.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -77,7 +76,6 @@ const Detail = () => {
 
   return (
     <main ref={ref}>
-      {/* <Toast float={toastFloat}>링크가 복사되었습니다.</Toast> */}
       <Toast children={toastMsg} float={toastFloat} />
       <div className={styles.backgroundWrapper}>
         <img
@@ -100,12 +98,12 @@ const Detail = () => {
           </div>
         </article>
         <article className={styles.detailInfoWrapper}>
-          <MovieInfo movie={movie} />
+          <MovieInfo movie={movie} toast={toast} />
           <MovieComment
             movie={movie}
-            setToastMsg={setToastMsg}
-            setToastFloat={setToastFloat}
-            toastFloat={toastFloat}
+            // setToastMsg={setToastMsg}
+            // setToastFloat={setToastFloat}
+            // toastFloat={toastFloat}
             toast={toast}
           />
           <RelatedMovie movie={movie} />

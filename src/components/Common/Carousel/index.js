@@ -9,10 +9,12 @@ const Carousel = ({ slidesToShow, slidesToScroll, movies }) => {
   const settings = {
     arrow: false,
     dots: false,
-    speed: 800,
+    speed: 3000,
+    infinite: true,
     slidesToShow: parseInt(slidesToShow),
     slidesToScroll: parseInt(slidesToScroll),
     autoplay: true,
+    autoplaySpeed: 4000,
     prevArrow: <IconCaretLeft />,
     nextArrow: <IconCaretRight />,
   };
@@ -22,13 +24,13 @@ const Carousel = ({ slidesToShow, slidesToScroll, movies }) => {
       {slidesToShow !== "5" ? (
         <StyledSlider {...settings}>
           {movies.map((movie) => (
-            <Card movie={movie} type="carousel" />
+            <Card movie={movie} type="carousel" key={movie.id} />
           ))}
         </StyledSlider>
       ) : (
         <StyledSlider {...settings}>
           {movies.map((movie) => (
-            <SubCard movie={movie} />
+            <SubCard movie={movie} key={movie.id} />
           ))}
         </StyledSlider>
       )}

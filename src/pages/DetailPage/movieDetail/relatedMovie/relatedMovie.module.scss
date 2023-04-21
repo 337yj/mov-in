@@ -3,7 +3,7 @@
 
 .wrapper {
   width: 100%;
-  padding-top: 12px;
+  margin: 12px;
   height: 540px;
   > h2 {
     padding: 24px 0;
@@ -26,8 +26,9 @@
 
     &::-webkit-scrollbar-thumb {
       width: 8%;
+      height: 10px;
       background-color: c.$C_DARKGRAY;
-      border-radius: 5px;
+      border-radius: 50px;
     }
 
     .card {

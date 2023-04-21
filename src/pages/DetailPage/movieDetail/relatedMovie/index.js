@@ -4,8 +4,7 @@ import { getRelatedMovies } from "../../../../api/Movie";
 import { Card } from "../../../../components";
 import styles from "./relatedMovie.module.scss";
 
-// 연관된 영화 불러오기
-const RelatedMovie = ({ movie }) => {
+const RelatedMovie = () => {
   const containerRef = useRef(null);
   const { id } = useParams();
   const [relatedMovie, setRelatedMovie] = useState();
@@ -20,22 +19,6 @@ const RelatedMovie = ({ movie }) => {
       console.log(error);
     }
   };
-
-  // const onWheel = (e) => {
-  //   const container = containerRef.current;
-  //   container.scrollLeft += e.deltaY;
-  // };
-
-  // useEffect(() => {
-  //   const element = document.querySelector(".listWrapper");
-  //   if (element) {
-  //     element.addEventListener("wheel", onWheel, { passive: false });
-
-  //     return () => {
-  //       element.removeEventListener("wheel", onWheel);
-  //     };
-  //   }
-  // }, []);
 
   useEffect(() => {
     onGetRelatedMovie();

@@ -5,10 +5,10 @@ import {
   deleteBookmarks,
   getMyBookmarks,
 } from "../../../../api/Bookmark";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { userState } from "../../../../state";
-import CommentModal from "../../_shared/CommentModal";
-import { Button, Toast } from "../../../../components";
+import { commentModalState } from "../../../../state";
+import { Button } from "../../../../components";
 import {
   BsBookmark,
   BsBookmarkFill,
@@ -19,21 +19,17 @@ import {
 } from "react-icons/bs";
 import cx from "classnames";
 import styles from "./movieInfo.module.scss";
-import { commentModalState } from "../../../../state";
 
-const MovieInfo = ({ movie }) => {
-  //NOTE: 모달을 recoil로 관리하는 경우 => 모달 컴포넌트를 한곳에만 선언을 하고, state를 통해서만 modal의 상태를 관리하고 싶을 때
-  // const [modal, setModal] = useState(false);
-
-  //NOTE: recoil을 통해 modal을 관리
+const MovieInfo = ({ movie, toast }) => {
   const setModal = useSetRecoilState(commentModalState);
   const [showAllStaffs, setShowAllStaffs] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmark, setIsBookmark] = useState(false);
-  const [toastFloat, setToastFloat] = useState(false);
   const user = useRecoilValue(userState);
 
-  const toggleModal = () => setModal((prev) => !prev);
+  const toggleModal = () => {
+    setModal((prev) => !prev);
+  };
 
   const getStaffs = (staffs) => {
     const roleOrder = { 감독: 1, 각본: 2 };
@@ -76,16 +72,11 @@ const MovieInfo = ({ movie }) => {
     } else {
       setIsBookmark(false);
     }
-    // console.log(response.data);
   };
 
   const onClickNotUser = () => {
     if (!user) {
-      setToastFloat(true);
-      setTimeout(() => {
-        setToastFloat(false);
-      }, 1500);
-      return;
+      toast("loginRequired");
     }
   };
 
@@ -129,7 +120,6 @@ const MovieInfo = ({ movie }) => {
 
   return (
     <section className={styles.wrapper}>
-      <Toast float={toastFloat}>로그인 후 이용 가능합니다.</Toast>
       <div className={styles.postWrapper}>
         <img
           className={styles.postImage}
@@ -160,12 +150,6 @@ const MovieInfo = ({ movie }) => {
           <BsPencil className={styles.IconReview} />
           코멘트
         </Button>
-        {/* <CommentModal
-          movie={movie}
-          title={movie.title}
-          modal={modal}
-          setModal={setModal}
-        /> */}
       </div>
       <div className={styles.infoWrapper}>
         <div className={styles.scoreWrapper}>

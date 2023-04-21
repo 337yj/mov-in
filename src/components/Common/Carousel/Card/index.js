@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Tag from "../../Tag";
-import noPoster from "../../../../assets/images/poster/noPoster.png"
+import noPoster from "../../../../assets/images/poster/noPoster.png";
 import dayjs from "dayjs";
 import cx from "classnames";
 import styles from "./subCard.module.scss";
 
-const SubCard = ({ movie, className }) => {
+const SubCard = ({ movie, className, key }) => {
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -14,7 +14,7 @@ const SubCard = ({ movie, className }) => {
   };
 
   return (
-    <section className={styles.wrapper} onClick={onClick}>
+    <section className={styles.wrapper} key={key} onClick={onClick}>
       {movie.postImage ? (
         <img
           src={movie.postImage}
@@ -22,26 +22,24 @@ const SubCard = ({ movie, className }) => {
           className={cx(styles.img, className)}
         />
       ) : (
-        <img src={noPoster} className={cx(styles.img, styles.shadow)}/>
+        <img src={noPoster} className={cx(styles.img, styles.shadow)} />
       )}
-        <article className={styles.info}>
-          <div className={styles.padding}>
-            <div className={styles.title}>
-              <h3>{movie.title}</h3>
-              <div className={styles.date}>
-                <p>
-                  {dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}
-                </p>
-              </div>
+      <article className={styles.info}>
+        <div className={styles.padding}>
+          <div className={styles.title}>
+            <h3>{movie.title}</h3>
+            <div className={styles.date}>
+              <p>{dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}</p>
             </div>
-            <div className={styles.tags}>
-              <Tag 
-                text={movie.genres.map((genre) => genre.name).join(", ")}
-              ></Tag>
-            </div>
-            <p className={styles.plot}>{movie.plot}</p>
           </div>
-        </article>
+          <div className={styles.tags}>
+            <Tag
+              text={movie.genres.map((genre) => genre.name).join(", ")}
+            ></Tag>
+          </div>
+          <p className={styles.plot}>{movie.plot}</p>
+        </div>
+      </article>
     </section>
   );
 };

@@ -9,6 +9,7 @@ import styles from "./card.module.scss";
 
 const Card = ({
   movie,
+  key,
   type = "default",
   className,
   hoverCardClassName,
@@ -23,6 +24,7 @@ const Card = ({
   return (
     <section
       className={cx(styles.wrapper, styles[type], wrapperClassName)}
+      key={key}
       onClick={onClick}
     >
       {movie.postImage ? (

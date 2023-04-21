@@ -76,7 +76,7 @@ const Header = () => {
       <div className={styles.inputWrapper}>
         <SearchInput
           className={styles.searchInput}
-          placeholder={"영화, 감독, 유저를 검색해보세요."}
+          placeholder={"영화, 감독, 배우를 검색해보세요."}
         />
         {user ? (
           <div className={styles.dropdownWrapper} ref={dropdownRef}>

@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../../api/Auth";
-import { saveTokens } from "../../../utils";
 import { getUsersMe } from "../../../api/User";
-import { useSetRecoilState } from "recoil";
-import { userState } from "../../../state";
-import { Input, Button } from "../../../components";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { toastFloatState, userState } from "../../../state";
+import { saveTokens } from "../../../utils";
+import { validateForm } from "../_shared/loginUtils";
+import { Input, Button, Toast } from "../../../components";
 import Poster from "../_shared/poster";
 import { ImageLogo } from "../../../assets";
 import styles from "./login.module.scss";
 
-// yun@aa.aa
-// 12345678
 const Login = () => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userState);
+  const [toastFloat, setToastFloat] = useRecoilState(toastFloatState);
 
   const [form, setForm] = useState({
     email: "",
@@ -32,7 +32,6 @@ const Login = () => {
       const data = response.data;
       setUser(data);
     }
-    //console.log(response.data);
   };
 
   const onChange = (e) => {
@@ -42,6 +41,9 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const errors = validateForm(form);
+    setErr(errors);
 
     const userData = {
       email: form.email,
@@ -53,13 +55,11 @@ const Login = () => {
       if (response.status === 200) {
         const data = response.data;
         saveTokens(data);
+        navigate("/");
+        onGetMe();
       }
-      //console.log("로그인성공");
-      navigate("/");
-      onGetMe();
     } catch (error) {
-      // 404: 존재하지 않는 유저
-      console.log(error);
+      setToastFloat(true);
     }
   };
 
@@ -69,12 +69,24 @@ const Login = () => {
     };
   };
 
+  useEffect(() => {
+    if (toastFloat) {
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 2000);
+    }
+  }, [toastFloat]);
+
   return (
     <main>
+      <Toast
+        children={"입력하신 정보가 정확하지 않습니다."}
+        float={toastFloat}
+      />
       <section className={styles.wrapper}>
         <Poster />
         <article>
-          <img src={ImageLogo} alt="logo" />
+          <img src={ImageLogo} alt="logo" onClick={() => navigate("/")} />
           <form id="loginForm" onSubmit={onSubmit}>
             <Input
               name="email"

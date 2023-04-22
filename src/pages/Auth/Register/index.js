@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../../api/Auth";
 import { saveTokens } from "../../../utils";
-import { validateForm } from "./utils";
+import { validateForm } from "../_shared/registerUtils";
 import { Input, Button } from "../../../components";
-import { ImageLogo } from "../../../assets";
 import Poster from "../_shared/poster";
+import { ImageLogo } from "../../../assets";
 import styles from "./register.module.scss";
 
 const Register = () => {
@@ -55,7 +55,6 @@ const Register = () => {
         const data = response.data;
         saveTokens(data);
       }
-      //console.log("가입됐당");
       navigate("/auth/login");
     } catch (error) {
       console.log(error);
@@ -63,7 +62,6 @@ const Register = () => {
   };
 
   useEffect(() => {
-    // form 값이 변경될 때마다 err값 확인되도록
     setErr(validateForm(form));
   }, [form]);
 
@@ -72,7 +70,7 @@ const Register = () => {
       <section className={styles.wrapper}>
         <Poster />
         <article>
-          <img src={ImageLogo} alt="logo" />
+          <img src={ImageLogo} alt="logo" onClick={() => navigate("/")} />
           <form id="registerForm" onSubmit={onSubmit}>
             <Input
               name="email"

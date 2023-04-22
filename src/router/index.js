@@ -7,7 +7,6 @@ import Layout from "../components/Layout";
 
 import {
   HomePage,
-  ComponentPage,
   SearchResultPage,
   DetailPage,
   CommentPage,
@@ -52,7 +51,6 @@ const route = (
       <Route path="boUser" element={<BOUser />} />
       <Route path="boComment" element={<BOComment />} />
     </Route>
-    <Route path="components" element={<ComponentPage />} />
   </Route>
 );
 

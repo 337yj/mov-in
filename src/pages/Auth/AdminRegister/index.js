@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { adminRegister } from "../../../api/Auth";
 import { saveTokens } from "../../../utils";
-import { validateForm } from "./utils";
+import { validateForm } from "../_shared/registerUtils";
 import { Button, Input } from "../../../components";
 import Poster from "../_shared/poster";
 import { ImageLogo } from "../../../assets";
@@ -55,7 +55,6 @@ const AdminRegister = () => {
         const data = response.data;
         saveTokens(data);
       }
-      //console.log("어드민 가입됐당");
       navigate("/auth/adminLogin");
     } catch (error) {
       console.log(error);
@@ -63,7 +62,6 @@ const AdminRegister = () => {
   };
 
   useEffect(() => {
-    // form 값이 변경될 때마다 err값 확인되도록
     setErr(validateForm(form));
   }, [form]);
 
@@ -72,7 +70,7 @@ const AdminRegister = () => {
       <section className={styles.wrapper}>
         <Poster />
         <article>
-          <img src={ImageLogo} alt="logo" />
+          <img src={ImageLogo} alt="logo" onClick={() => navigate("/")} />
           <form id="registerForm" onSubmit={onSubmit}>
             <Input
               name="email"

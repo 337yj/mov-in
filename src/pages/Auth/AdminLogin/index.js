@@ -1,31 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { adminLogin } from "../../../api/Auth";
-import { saveTokens } from "../../../utils";
 import { getUsersMe } from "../../../api/User";
-import { userState } from "../../../state";
-import { useSetRecoilState } from "recoil";
-import { Button, Input } from "../../../components";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { toastFloatState, userState } from "../../../state";
+import { saveTokens } from "../../../utils";
+import { validateForm } from "../_shared/loginUtils";
+import { Button, Input, Toast } from "../../../components";
 import Poster from "../_shared/poster";
 import { ImageLogo } from "../../../assets";
 import styles from "./adminLogin.module.scss";
 
-// adminYun@aa.aa
-// 12345678
-// adad@aa.aa
-// 123123123
 const AdminLogin = () => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userState);
-
-  const onGetMe = async () => {
-    const response = await getUsersMe();
-    if (response.status === 200) {
-      const data = response.data;
-      setUser(data);
-    }
-    console.log(response.data);
-  };
+  const [toastFloat, setToastFloat] = useRecoilState(toastFloatState);
 
   const [form, setForm] = useState({
     email: "",
@@ -37,19 +26,24 @@ const AdminLogin = () => {
     password: "",
   });
 
+  const onGetMe = async () => {
+    const response = await getUsersMe();
+    if (response.status === 200) {
+      const data = response.data;
+      setUser(data);
+    }
+  };
+
   const onChange = (e) => {
     const { name, value } = e.currentTarget;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const onClickNavigate = (path) => {
-    return () => {
-      navigate(path);
-    };
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const errors = validateForm(form);
+    setErr(errors);
 
     const userData = {
       email: form.email,
@@ -62,21 +56,37 @@ const AdminLogin = () => {
         const data = response.data;
         saveTokens(data);
       }
-      //console.log("어드민 로그인성공");
       navigate("/boPage");
       onGetMe();
     } catch (error) {
-      // 404: 존재하지 않는 유저
-      console.log(error);
+      setToastFloat(true);
     }
   };
 
+  const onClickNavigate = (path) => {
+    return () => {
+      navigate(path);
+    };
+  };
+
+  useEffect(() => {
+    if (toastFloat) {
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 2000);
+    }
+  }, [toastFloat]);
+
   return (
     <main>
+      <Toast
+        children={"입력하신 정보가 정확하지 않습니다."}
+        float={toastFloat}
+      />
       <section className={styles.wrapper}>
         <Poster />
         <article>
-          <img src={ImageLogo} alt="logo" />
+          <img src={ImageLogo} alt="logo" onClick={onClickNavigate("/")} />
           <form id="loginForm" onSubmit={onSubmit}>
             <Input
               name="email"

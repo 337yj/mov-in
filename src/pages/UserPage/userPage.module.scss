@@ -5,7 +5,7 @@
   @include m.flex();
   width: 100%;
   height: 100vh;
-  padding: 200px;
+  padding: 250px;
 
   .info {
     .header {
@@ -75,7 +75,8 @@
       .introText {
         @include m.flex(center);
         width: 960px;
-        margin-bottom: 80px;
+        height: 100px;
+        margin-bottom: 50px;
         padding: 25px;
         font-size: 20px;
         background-color: c.$C_WHITE_10;

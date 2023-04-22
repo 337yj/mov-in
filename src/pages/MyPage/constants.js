@@ -11,5 +11,8 @@ export const msgList = {
   cancel : "취소 되었습니다",
   delete : "탈퇴 되었습니다",
   fail : "실패 했습니다",
-  errText : "잘못된 양식 입니다"
+  emailError : "이메일을 확인 해주세요",
+  passwordError : "비밀번호를 확인 해주세요",
+  nicknameError : "닉네임을 확인 해주세요",
+  require : "필수항목은 모두 기입 해주세요"
 }

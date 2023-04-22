@@ -50,7 +50,7 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
     }
   };
 
-  console.log({ movieId, movie });
+  //console.log({ movieId, movie });
 
   useEffect(() => {
     onGetMovieDetail();

@@ -97,7 +97,7 @@ const BOMovie = ({ movie }) => {
     onGetMoviesCount();
   }, [page, id]);
 
-  console.log({ selectedMovie, movies });
+  //console.log({ selectedMovie, movies });
 
   return (
     <main className={styles.wrapper}>

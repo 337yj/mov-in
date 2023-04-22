@@ -31,7 +31,7 @@ const SearchResult = () => {
       setIsFind(!isFind);
     }
   };
-  console.log(movies);
+  //console.log(movies);
   useEffect(() => {
     setIsFind(false);
     onGetMovies();

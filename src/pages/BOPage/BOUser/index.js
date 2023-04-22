@@ -108,7 +108,7 @@ const BOUser = ({ user }) => {
     onGetUserDetail(id);
   }, [page, id]);
 
-  console.log({ selectedUser, users });
+  //console.log({ selectedUser, users });
 
   return (
     <section className={styles.wrapper}>

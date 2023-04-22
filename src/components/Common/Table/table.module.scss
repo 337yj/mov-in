@@ -30,6 +30,9 @@ table {
     &:first-child {
       min-width: 50px;
     }
+    &:nth-child(n+7):nth-child(-n+8) {
+      min-width: 50px;
+    }
   }
 
   .headTrStyle {

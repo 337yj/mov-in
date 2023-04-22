@@ -108,8 +108,10 @@ const Table = ({ columns, data, isSelected, firstButton, secondButton }) => {
                 );
               })}
               {/* //TODO: 테이블을 사용하는 다른 페이지에서도 firstButton을 함수로 바꿔야한다. */}
-              {firstButton(row.original.id)}
-              {secondButton}
+              <td>
+                {firstButton(row.original.id)}
+              </td>
+              <td>{secondButton}</td>
             </tr>
           );
         })}

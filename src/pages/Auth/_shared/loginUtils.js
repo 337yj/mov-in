@@ -17,14 +17,6 @@ export const validateForm = (form) => {
   } else if (form.password !== form.passwordConfirm) {
     errors.passwordConfirm = "비밀번호가 일치하지 않습니다.";
   }
-  if (!form.name) {
-    errors.name = "이름을 입력해주세요.";
-  }
-  if (!form.birth) {
-    errors.birth = "생년월일 6자를 입력해주세요.";
-  }
-  if (!form.nickname) {
-    errors.nickname = "닉네임을 입력해주세요.";
-  }
+
   return errors;
 };

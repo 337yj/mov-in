@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 //import dayjs from "dayjs";
 import { useMount } from "react-use";
-import { validateForm } from "../../Auth/Register/utils";
+import { validateForm } from "../../Auth/_shared/registerUtils";
+
 import { useMe } from "../../../hooks";
 import {
   updateUser,

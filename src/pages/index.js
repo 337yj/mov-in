@@ -22,6 +22,3 @@ export { default as UserPage } from "./UserPage";
 export { default as BOPage } from "./BOPage";
 export { default as BOUser } from "./BOPage/./BOUser";
 export { default as BOComment } from "./BOPage/BOComment";
-
-export { default as ComponentPage } from "./Component";
-

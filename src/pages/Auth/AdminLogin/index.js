@@ -95,7 +95,7 @@ const AdminLogin = () => {
               onChange={onChange}
               autoComplete="off"
             />
-            <p onClick={onClickNavigate("auth/adminRegister")}>
+            <p onClick={onClickNavigate("/auth/adminRegister")}>
               관리자 등록을 하시겠습니까?
             </p>
             <Button type="submit" form="loginForm" color="primary">

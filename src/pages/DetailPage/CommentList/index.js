@@ -41,7 +41,7 @@ const CommentList = ({}) => {
     };
   };
 
-  console.log(items);
+  //console.log(items);
 
   const onGetMovieCommentsPaging = useCallback(async () => {
     //NOTE: page가 -1일 때 요청하지 않도록 설정

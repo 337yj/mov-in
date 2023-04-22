@@ -41,7 +41,7 @@ const BoUserModal = ({ userId, modal, onCloseModal }) => {
   //     console.error(error);
   //   }
 
-  console.log({ userId, user });
+  //console.log({ userId, user });
 
   useEffect(() => {
     onGetUsersDetail();

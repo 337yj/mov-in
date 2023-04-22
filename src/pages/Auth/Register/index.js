@@ -55,7 +55,7 @@ const Register = () => {
         const data = response.data;
         saveTokens(data);
       }
-      console.log("가입됐당");
+      //console.log("가입됐당");
       navigate("/auth/login");
     } catch (error) {
       console.log(error);

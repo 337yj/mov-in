@@ -16,6 +16,7 @@
     background-color: c.$C_INDIGO;
     font-weight: 400;
     font-size: 14px;
+    animation: fadeIn 0.5s ease-in-out forwards;
 
     .postWrapper {
       @include m.flex(null, null, row);
@@ -74,5 +75,15 @@
     position: fixed;
     bottom: 20px;
     column-gap: 10px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
   }
 }

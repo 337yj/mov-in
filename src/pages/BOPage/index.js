@@ -8,7 +8,7 @@ import styles from "./boPage.module.scss";
 
 const BOPage = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
+  //console.log(pathname);
 
   // useEffect(() => {
   //   if (!auth) {

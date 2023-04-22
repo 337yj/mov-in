@@ -55,7 +55,7 @@ const AdminRegister = () => {
         const data = response.data;
         saveTokens(data);
       }
-      console.log("어드민 가입됐당");
+      //console.log("어드민 가입됐당");
       navigate("/auth/adminLogin");
     } catch (error) {
       console.log(error);

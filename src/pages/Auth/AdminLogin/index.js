@@ -62,7 +62,7 @@ const AdminLogin = () => {
         const data = response.data;
         saveTokens(data);
       }
-      console.log("어드민 로그인성공");
+      //console.log("어드민 로그인성공");
       navigate("/boPage");
       onGetMe();
     } catch (error) {

@@ -16,3 +16,12 @@ ScrollToTop컴포넌트를 어디에 위치시켜야 적용이되는지 잘 모�
 
 
 1) 어드민 코멘트 관리 페이지 -> 삭제 버튼 위치
+
+
+Dev Tools - Eslint, Prettier
+
+Backend
+- Nest.js
+- Swagger
+- MySQL
+- TypeScript

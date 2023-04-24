@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef, memo } from "react";
+import React, { memo } from "react";
 import { CSSTransition } from "react-transition-group";
 import cx from "classnames";
 import styles from "./toast.module.scss";
 import { IconGreenCheck } from "../../../assets/icon";
-import { IconClose } from "../../../assets/icon";
 
 const transitionStyle = {
   entering: {
@@ -30,7 +29,7 @@ const transitionStyle = {
 };
 
 const Toast = ({ className, type, children, func, float, ...props }) => {
-  const nodeRef = React.useRef(null)
+  const nodeRef = React.useRef(null);
   return (
     <CSSTransition nodeRef={nodeRef} in={float} timeout={3000} unmountOnExit>
       {(state) => (
@@ -43,9 +42,6 @@ const Toast = ({ className, type, children, func, float, ...props }) => {
             <IconGreenCheck />
           </figure>
           {children}
-          {/* <button onClick={func}>
-              <IconClose />
-            </button> */}
         </section>
       )}
     </CSSTransition>

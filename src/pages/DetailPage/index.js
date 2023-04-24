@@ -99,13 +99,7 @@ const Detail = () => {
         </article>
         <article className={styles.detailInfoWrapper}>
           <MovieInfo movie={movie} toast={toast} />
-          <MovieComment
-            movie={movie}
-            // setToastMsg={setToastMsg}
-            // setToastFloat={setToastFloat}
-            // toastFloat={toastFloat}
-            toast={toast}
-          />
+          <MovieComment movie={movie} toast={toast} />
           <RelatedMovie movie={movie} />
         </article>
       </section>

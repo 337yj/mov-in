@@ -12,7 +12,6 @@
   border-radius: 50px;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  //animation: toDown 1s ease-in-out forwards;
   background-color: c.$C_PURPLE;
   font-size: 16px;
   color: c.$C_WHITE;
@@ -28,15 +27,6 @@
   &.darkToast {
     background-color: c.$C_DARKINDIGO;
   }
-
-  // > button {
-  //   margin-left: 80px;
-  //   height: 32px;
-  //   width: 32px;
-  //   background-color: c.$C_TRANSPARENT;
-  //   border: none;
-  //   cursor: pointer;
-  // }
 }
 
 .circle {
@@ -48,13 +38,3 @@
   background-color: c.$C_WHITE;
   border-radius: 100%;
 }
-
-// @keyframes toDown {
-//   0% {
-//     transform: translate(-50%, -200%);
-//   }
-
-//   100% {
-//     transform: translate(-50%, 20%);
-//   }
-// }

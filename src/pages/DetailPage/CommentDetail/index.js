@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { toastFloatState, toastMsgState, userState } from "../../../state";
@@ -29,7 +29,7 @@ const CommentDetail = ({ comment, ...props }) => {
     };
   };
 
-  const onGetCommentDetail = async () => {
+  const onGetCommentDetail = useCallback(async () => {
     try {
       const response = await getReviewsDetail(id);
       if (response.status === 200) {
@@ -38,7 +38,7 @@ const CommentDetail = ({ comment, ...props }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
 
   const onChange = (e) => {
     const { value } = e.currentTarget;

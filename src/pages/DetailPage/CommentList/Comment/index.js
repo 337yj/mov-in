@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import {
@@ -71,7 +71,7 @@ const Comment = ({
     }
   };
 
-  const onClickCommentLike = async () => {
+  const onClickCommentLike = useCallback(async () => {
     onClickNotUser();
     try {
       if (isLiked) {
@@ -84,7 +84,7 @@ const Comment = ({
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [isLiked]);
 
   const onClickDelete = async () => {
     await deleteReviews(comment?.id);
@@ -207,4 +207,4 @@ const Comment = ({
   );
 };
 
-export default Comment;
+export default memo(Comment);

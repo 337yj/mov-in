@@ -43,7 +43,6 @@ const route = (
       <Route path="adminLogin" element={<AdminLoginPage />} />
       <Route path="adminRegister" element={<AdminRegisterPage />} />
     </Route>
-
     <Route path="/" element={<PrivateRoute />}>
       <Route path="myPage" element={<MyPage />}>
         <Route path="userInfo" element={<UserInfo />} />
@@ -52,9 +51,7 @@ const route = (
         <Route path="bookmark" element={<Bookmark />} />
       </Route>
     </Route>
-
     <Route path="userPage/:id" element={<UserPage />} />
-
     <Route path="/" element={<AdminPrivateRoute />}>
       <Route path="boPage" element={<BOPage />}>
         <Route path="boUser" element={<BOUser />} />

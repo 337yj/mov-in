@@ -8,15 +8,17 @@
 <img width="340px" alt="logo" src="https://user-images.githubusercontent.com/94007890/233002328-6ee3d1ec-2a12-4021-bb07-b21205f56f91.png" />
 <br />
 
-<img width="800" alt="thumbnail" src="https://user-images.githubusercontent.com/94007890/233815377-1bf25d42-65e5-4aa3-a4a9-a5a5b59033ab.png"/>
-<b><a href="http://codestates.s3-website.ap-northeast-2.amazonaws.com/">🌐 사이트 바로가기</a></b> <br />
-<b><a href="https://github.com/337yj/mov-in/wiki">🌐 프로젝트 위키 바로가기</a></b>
+<img width="800" alt="thumbnail" src="https://user-images.githubusercontent.com/94007890/233815377-1bf25d42-65e5-4aa3-a4a9-a5a5b59033ab.png"/><br /><br />
 
-<br /><br />
+<b><a href="http://codestates.s3-website.ap-northeast-2.amazonaws.com/">🌐 사이트 바로가기</a></b> <br /><br />
+<b><a href="https://github.com/337yj/mov-in/wiki">👉 프로젝트를 더 자세히 보고 싶다면!</a></b>
+
+<br />
 
 <!-- <img height="220" alt="streaming" src="https://user-images.githubusercontent.com/85829962/146299269-865cdd03-8924-4564-96fe-d3bc3da72e09.png"> <img height="220" alt="mypage" src="https://user-images.githubusercontent.com/85829962/146310340-29861ea5-1e57-4f07-a96b-77b6c1d0e474.png">
 
 <b><a href="http://studeaming.com">👉🏼 studeaming 사이트 바로가기</a></b>  
+
 <b><a href="https://github.com/337yj/mov-in/wiki">👉🏼 프로젝트 위키 바로가기</a></b> -->
 
 
@@ -34,9 +36,22 @@
 - 나의 프로필을 노출하기 싫다면 **공개** 혹은 **비공개** 처리를 할 수 있습니다.
 
 - 관리자 페이지가 따로 있어 **영화 목록 관리** 와 **회원 및 댓글 관리**가 가능 합니다.
-
+<br />
 <br />
 
+<h2>요구사항 정의서</h2>
+<img width="700" alt="requirements specification" src="https://user-images.githubusercontent.com/94007890/233959273-e9fec0f2-72f8-4032-856b-6da65dfac924.jpg" />
+<b><a href="https://github.com/337yj/mov-in/files/11310452/-.1.pdf">📃 요구사항 정의서 다운 받기</a></b> 
+<br />
+<br />
+<br />
+
+<h2>화면 정의서</h2>
+<img width="700" alt="requirements specification" src="https://user-images.githubusercontent.com/94007890/233996089-073e386e-3e18-4b1c-a5d0-b264729b2032.png" />
+<b><a href="https://www.figma.com/file/XJlRiBZTbNPZTXk5UHgBJQ/%ED%99%94%EB%A9%B4%EC%A0%95%EC%9D%98%EC%84%9C?node-id=1-2&t=u6xbdaA6wzIaII2l-0">🌐 Figma 바로가기</a></b>  
+<br />
+<br />
+<br />
 
 <h1>STACK</h1>
 <!-- <img width="700" alt="stack" src="https://user-images.githubusercontent.com/85681803/146872410-188275f2-f64c-4851-868e-da0814db3cfe.png" /> -->
@@ -44,29 +59,35 @@
 
 ### **Front-end**
 
-`React` `React Router` `React Hooks` `recoil` `javaScript`
+`React` `JavaScript` `react-router-dom` `Recoil`
 
 `Sass` `axios` `day.js`
 
 <br />
 
-### Back-end ㅣ Deploy
+### Back-end
 
-`Node.js` `yarn` `Swagger` `JWT` `S3`
+`Next.js` `mySql` `TypeScript` `Swagger` `JWT`
+
+<br />
+
+### Deploy
+
+`S3`  `Github Action`
 
 <br />
 
-### Common
+### Common ㅣ Dev Tools
 
-`git` `GitHub` `Figma` `Notion` `ESLint` `Prettier`
+`git` `GitHub` `Figma` `Notion` ㅣ `ESLint` `Prettier`
 
-<br />
+<br /><br />
 
 <h1>MEMBER</h1>
 
-|<a href="https://github.com/337yj">이윤정</a>|<a href="https://github.com/miyyaa24">김나임</a>|<a href="https://github.com/minjeongraw34">김민정</a>|<a href=" ">배서림</a>|
-|------|----|----|----|
-|leader|member|member|member|
-|Front|Front|Front|Front|
+|<a href="https://github.com/337yj">이윤정</a>|<a href="https://github.com/miyyaa24">김나임</a>|~~<a href="https://github.com/minjeongraw34">김민정</a>~~|
+|------|----|----|
+|leader|member|member|
+|Front|Front|Front|
 
 <br />

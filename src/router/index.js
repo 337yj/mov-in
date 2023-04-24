@@ -31,13 +31,12 @@ import AdminPrivateRoute from "./adminPrivateRoute";
 
 const route = (
   <Route path="/" element={<Layout />}>
-    {/* <ScrollToTop /> */}
     <Route index element={<HomePage />} />
     <Route path="searchResult" element={<SearchResultPage />} />
     <Route path="detail/:id" element={<DetailPage />} />
     <Route path="commentList/:id" element={<CommentPage />} />
     <Route path="commentDetail/:id" element={<CommentDetailPage />} />
-    
+
     <Route path="auth">
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
@@ -55,7 +54,7 @@ const route = (
     </Route>
 
     <Route path="userPage/:id" element={<UserPage />} />
-    
+
     <Route path="/" element={<AdminPrivateRoute />}>
       <Route path="boPage" element={<BOPage />}>
         <Route path="boUser" element={<BOUser />} />

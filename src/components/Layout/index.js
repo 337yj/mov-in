@@ -16,16 +16,17 @@ const Layout = () => {
   // }, [location.pathname]);
 
   return (
-    <section className={styles.wrapper}>
-      <Header />
-      <section
-        className={cx(styles.outletWrapper, { [styles.isAuth]: isAuthPage })}
-      >
-        {/* <ScrollToTop /> */}
-        <Outlet />
+    <ScrollToTop>
+      <section className={styles.wrapper}>
+        <Header />
+        <section
+          className={cx(styles.outletWrapper, { [styles.isAuth]: isAuthPage })}
+        >
+          <Outlet />
+        </section>
+        <Footer />
       </section>
-      <Footer />
-    </section>
+    </ScrollToTop>
   );
 };
 

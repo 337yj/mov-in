@@ -15,8 +15,6 @@ import styles from "./commentList.module.scss";
 const CommentList = ({}) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-
   //NOTE: 페이지가 바뀔 때마다 scroll을 최상단으로 올려준다. => react-router-dom scroll to top
   // useEffect(() => {
   //   window.scrollTo(0, 0);
@@ -30,7 +28,6 @@ const CommentList = ({}) => {
   const [loading, setLoading] = useState(false);
 
   const [movie, setMovie] = useState();
-  const [comments, setComments] = useState();
   const [toastFloat, setToastFloat] = useRecoilState(toastFloatState);
   const [toastMsg, setToastMsg] = useRecoilState(toastMsgState);
   const formattedRuntime = formatRuntime(movie?.runtime || 0);
@@ -41,10 +38,7 @@ const CommentList = ({}) => {
     };
   };
 
-  //console.log(items);
-
   const onGetMovieCommentsPaging = useCallback(async () => {
-    //NOTE: page가 -1일 때 요청하지 않도록 설정
     if (page === -1) return;
 
     setLoading(true);
@@ -57,18 +51,10 @@ const CommentList = ({}) => {
         return;
       }
       setItems((prevItems) => {
-        // 중복
-        // const newItems = dataItems.filter(
-        //   (item) => !prevItems.find((prevItem) => prevItem.id === item.id),
-        // );
-        // return [...prevItems, ...newItems].sort(
-        //   (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-        // );
-
         return [...prevItems, ...dataItems];
       });
       if (dataItems.length < 5) {
-        setPage(-1); // 더 이상 데이터를 로딩하지 않도록 페이지 번호를 -1로 설정
+        setPage(-1);
       }
     }
     setLoading(false);
@@ -76,7 +62,6 @@ const CommentList = ({}) => {
 
   useEffect(() => {
     if (inView && !loading && page !== -1) {
-      // 더 이상 데이터를 로딩하지 않도록 페이지 번호를 -1로 설정한 경우, 새로운 페이지를 요청하지 않도록
       setPage((prevPage) => prevPage + 1);
     }
   }, [inView, loading, page]);
@@ -96,17 +81,6 @@ const CommentList = ({}) => {
     }
   };
 
-  // const onGetMovieComments = async () => {
-  //   try {
-  //     const response = await getReviewsMoviePaging(id, 1, 5);
-  //     if (response.status === 200) {
-  //       setItems(response.data.data);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const toast = (msg) => {
     if (!toastFloat) {
       setToastFloat(true);
@@ -123,13 +97,8 @@ const CommentList = ({}) => {
   }, [toastFloat]);
 
   useEffect(() => {
-    // onGetMovieComments();
     onGetMovieDetail();
   }, [id]);
-
-  // if (!comments) {
-  //   return null;
-  // }
 
   return (
     <main>

@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import ScrollToTop from "./ScrollToTop";
 
 const Layout = () => {
   const location = useLocation();
@@ -20,6 +21,7 @@ const Layout = () => {
       <section
         className={cx(styles.outletWrapper, { [styles.isAuth]: isAuthPage })}
       >
+        {/* <ScrollToTop /> */}
         <Outlet />
       </section>
       <Footer />

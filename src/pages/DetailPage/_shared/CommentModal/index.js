@@ -1,13 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { createReview, updateReviews } from "../../../../api/Review";
-import { Button, Modal, Stars, Tag, Toast } from "../../../../components";
+import { Button, Modal, Stars, Tag } from "../../../../components";
 import { userState } from "../../../../state";
 import { POINTS, TENSIONS } from "../pointTag";
-import { msgList } from "../toastMsg";
 import styles from "./commentModal.module.scss";
 
-//NOTE: memo가 의미 없다.
 const CommentModal = ({
   title,
   movie,
@@ -31,27 +29,21 @@ const CommentModal = ({
     setContent(value);
   };
 
-  const onRatingChange = useCallback((newRating) => {
+  const onRatingChange = (newRating) => {
     setRating(newRating);
-  }, []);
+  };
 
-  const onClickPoint = useCallback(
-    (name) => {
-      if (selectedPoints.includes(name)) {
-        setSelectedPoints(selectedPoints.filter((pointId) => pointId !== name));
-      } else if (selectedPoints.length < 3) {
-        setSelectedPoints([...selectedPoints, name]);
-      }
-    },
-    [selectedPoints],
-  );
+  const onClickPoint = (name) => {
+    if (selectedPoints.includes(name)) {
+      setSelectedPoints(selectedPoints.filter((pointId) => pointId !== name));
+    } else if (selectedPoints.length < 3) {
+      setSelectedPoints([...selectedPoints, name]);
+    }
+  };
 
-  const onClickTension = useCallback(
-    (name) => {
-      setSelectedTension(name);
-    },
-    [selectedTension],
-  );
+  const onClickTension = (name) => {
+    setSelectedTension(name);
+  };
 
   const resetCommentForm = () => {
     setContent("");
@@ -60,21 +52,16 @@ const CommentModal = ({
     setSelectedTension(null);
   };
 
-  //NOTE: useCallback 불필요
-  const onClickNotUser = () => {
-    if (!user) {
-      toast("loginRequired");
-    }
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const commentData = {
       content,
       score: rating,
       enjoyPoints: selectedPoints.length > 0 ? selectedPoints : null,
       tensions: selectedTension !== null ? [selectedTension] : null,
     };
+
     if (isModified) {
       await updateReviews(myComment?.id, commentData);
     } else {
@@ -84,20 +71,20 @@ const CommentModal = ({
     await onGetMovieComments();
   };
 
-  const onClickClose = useCallback(() => {
+  const onClickClose = () => {
     setModal((prev) => !prev);
-  }, []);
+  };
 
-  const onClickSave = useCallback(() => {
+  const onClickSave = () => {
     if (!user) {
       return toast("loginRequired");
     }
     toast("save");
-  }, []);
+  };
 
-  const onClickModify = useCallback(() => {
+  const onClickModify = () => {
     toast("modify");
-  }, []);
+  };
 
   useEffect(() => {
     if (isModified) {

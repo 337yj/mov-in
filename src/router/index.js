@@ -31,6 +31,7 @@ import AdminPrivateRoute from "./adminPrivateRoute";
 
 const route = (
   <Route path="/" element={<Layout />}>
+    {/* <ScrollToTop /> */}
     <Route index element={<HomePage />} />
     <Route path="searchResult" element={<SearchResultPage />} />
     <Route path="detail/:id" element={<DetailPage />} />

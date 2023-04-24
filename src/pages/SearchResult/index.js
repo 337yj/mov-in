@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { getMovies } from "../../api/Movie";
 import { Card } from "../../components";
@@ -10,32 +10,39 @@ import styles from "./search.module.scss";
 const SearchResult = () => {
   const { state } = useLocation();
   const [movies, setMovies] = useState([]);
+  const [result, setResult] = useState([]);
   const [isFind, setIsFind] = useState(false);
   const searchText = state.keyword;
 
-  const searchAll = movies.filter(
-    (item) =>
-      item.title.replace(/ /g, "").includes(searchText.replace(/ /g, "")) ||
-      item.staffs.some((staff) =>
-        staff.name.replace(/ /g, "").includes(searchText.replace(/ /g, "")),
-      ),
-  );
+  const searchAll = useCallback(() => {
+    const filtered = movies.filter(
+      (item) =>
+        item.title.replace(/ /g, "").includes(searchText.replace(/ /g, "")) ||
+        item.staffs.some((staff) =>
+          staff.name.replace(/ /g, "").includes(searchText.replace(/ /g, "")),
+        ),
+    );
+    setResult(filtered);
+  }, [movies, searchText]);
 
-  const result = [...searchAll];
-
-  const onGetMovies = async () => {
-    const response = await getMovies(1, 200, searchText);
-    if (response.status === 200) {
-      const items = [...response.data.data];
-      setMovies(items);
-      setIsFind(!isFind);
+  const onGetMovies = useCallback(async () => {
+    if (searchText !== "") {
+      const response = await getMovies(1, 200, searchText);
+      if (response.status === 200) {
+        const items = [...response.data.data];
+        setMovies(items);
+        setIsFind(items.length > 0);
+      }
     }
-  };
-  //console.log(movies);
-  useEffect(() => {
-    setIsFind(false);
-    onGetMovies();
   }, [searchText]);
+
+  useEffect(() => {
+    onGetMovies();
+  }, [onGetMovies]);
+
+  useEffect(() => {
+    searchAll();
+  }, [searchAll]);
 
   return (
     <main className={styles.searchWrapper}>

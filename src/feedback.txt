@@ -10,24 +10,6 @@ adminYun@aa.aa
 12345678
 
 
-1. 리뷰디테일 페이지 - 무한스크롤 최신순 정렬 문제
-리뷰를 최신순으로 정렬하고 싶은데 한번 로딩이 걸린 뒤에 최신순으로 정렬이 됩니다
-리뷰를 불러올때 500에러가 납니다
-
-2. myPage > userInfo
-   프로필 사진 변경 시 엑박이 뜨고 새로고침하면 사라지는 문제가 있습니다..
-
-
-3.
-CommentList에서 무한스크롤 적용전에는 
-Comment컴포넌트로 보내는 onGeMovieComments props에 onGetMovieComments를 넘겨줬을때 CommentList페이지에서 수정, 삭제시 바로 반영이 되었는데
-
-무한스크롤 적용후
-onGetMovieComments나 onGetMovieCommentsPaging을 
-넘겨줘도 바로 반영이 안되던데 왜그런걸까요,,
-
-
-1) 어드민 페이지 모달 -> 유저 & 코멘트 관리
-2) 어드민 페이지 - 코멘트 관리 삭제 버튼 위치 조정
-3) 어드민 페이지 헤더 - 검색 기능 삭제
-4) 유저 프로필 이미지 
+1. ScrollToTop컴포넌트 위치 문제
+페이지 이동시 상단으로 위치하게 만들어야하는데
+ScrollToTop컴포넌트를 어디에 위치시켜야 적용이되는지 잘 모르겠습니다..

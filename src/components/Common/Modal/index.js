@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { memo } from "react";
 import cx from "classnames";
 import styles from "./modal.module.scss";
 import { IconClose } from "../../../assets";
@@ -14,10 +14,10 @@ const Modal = ({
   setModal,
   // NOTE: 다른 곳에서 모달을 쓸 때 close가 안된다 => setModal도 onClick에 넣어야 합니다.
 }) => {
-  const onClickClose = useCallback(() => {
+  const onClickClose = () => {
     setModal && setModal(false);
     onClick && onClick();
-  }, [setModal, onClick]);
+  };
 
   return (
     <div className={cx(styles.overlay)}>

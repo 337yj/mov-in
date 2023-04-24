@@ -4,4 +4,5 @@ export const msgList = {
   delete: "삭제 되었습니다.",
   loginRequired: "로그인 후 이용 가능합니다.",
   link: "링크가 복사되었습니다.",
+  required: "별점과 코멘트를 입력해주세요.",
 };

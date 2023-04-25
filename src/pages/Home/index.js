@@ -18,7 +18,7 @@ const HORROR_ID = "a3864a82-d9c1-4bf5-a891-0acc2e479090";
 const ROMANCE_ID = "73fa7e1d-0e3e-4506-9432-21c29faa8dd7";
 const ACTION_ID = "fc84777a-d713-4539-a5b9-8c24f0c85b99";
 const FANTASY_ID = "360b5842-fc83-4ea9-a7fa-0d62017b975b";
-const MAIN_ID = "0cb81bbb-0c66-4152-8ca5-680ffb717779";
+const MAIN_ID = "5ca6ee50-5db9-4446-8f39-3db4890894cb";
 
 const Home = () => {
   const { id } = useParams();
@@ -140,7 +140,7 @@ const Home = () => {
               {dayjs(mainInfo?.releasedAt, "YYYYMMDD").format("YYYY.MM")}
               <span>
                 <BsStarFill className={styles.star} />
-                {mainInfo?.averageScore.toFixed(1)}
+                {mainInfo?.averageScore?.toFixed(1)}
               </span>
             </p>
             <p className={styles.plot}>{mainInfo?.plot}</p>

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../../api/Auth";
+import { toastFloatState } from "../../../state";
+import { useRecoilState } from "recoil";
 import { saveTokens } from "../../../utils";
 import { validateForm } from "../_shared/registerUtils";
-import { Input, Button } from "../../../components";
+import { Input, Button, Toast } from "../../../components";
 import Poster from "../_shared/poster";
 import { ImageLogo } from "../../../assets";
 import styles from "./register.module.scss";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [toastFloat, setToastFloat] = useRecoilState(toastFloatState);
 
   const [form, setForm] = useState({
     email: "",
@@ -38,7 +41,7 @@ const Register = () => {
       err.birth ||
       err.nickname
     ) {
-      return;
+      return setToastFloat(true);
     }
 
     const userData = {
@@ -49,15 +52,11 @@ const Register = () => {
       nickname: form.nickname,
     };
 
-    try {
-      const response = await register(userData);
-      if (response.status === 200) {
-        const data = response.data;
-        saveTokens(data);
-      }
+    const response = await register(userData);
+    if (response.status === 200) {
+      const data = response.data;
+      saveTokens(data);
       navigate("/auth/login");
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -65,8 +64,20 @@ const Register = () => {
     setErr(validateForm(form));
   }, [form]);
 
+  useEffect(() => {
+    if (toastFloat) {
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 2000);
+    }
+  }, [toastFloat]);
+
   return (
     <main>
+      <Toast
+        children={"입력하신 정보가 정확하지 않습니다."}
+        float={toastFloat}
+      />
       <section className={styles.wrapper}>
         <Poster />
         <article>
@@ -109,7 +120,7 @@ const Register = () => {
             <Input
               errorText={err.birth}
               onChange={onChange}
-              placeholder="생년월일(YYMMDD)"
+              placeholder="생년월일(YYYYMMDD)"
               name="birth"
               value={form.birth}
               autoComplete="off"

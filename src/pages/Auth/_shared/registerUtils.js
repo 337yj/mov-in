@@ -21,7 +21,9 @@ export const validateForm = (form) => {
     errors.name = "이름을 입력해주세요.";
   }
   if (!form.birth) {
-    errors.birth = "생년월일 6자를 입력해주세요.";
+    errors.birth = "생년월일 8자를 입력해주세요.";
+  } else if (form.birth.length < 8) {
+    errors.birth = "생년월일은 8자를 입력해야 합니다.";
   }
   if (!form.nickname) {
     errors.nickname = "닉네임을 입력해주세요.";

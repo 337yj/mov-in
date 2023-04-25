@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { adminRegister } from "../../../api/Auth";
+import { toastFloatState } from "../../../state";
+import { useRecoilState } from "recoil";
 import { saveTokens } from "../../../utils";
 import { validateForm } from "../_shared/registerUtils";
-import { Button, Input } from "../../../components";
+import { Button, Input, Toast } from "../../../components";
 import Poster from "../_shared/poster";
 import { ImageLogo } from "../../../assets";
 import styles from "./adminRegister.module.scss";
 
 const AdminRegister = () => {
   const navigate = useNavigate();
+  const [toastFloat, setToastFloat] = useRecoilState(toastFloatState);
 
   const [form, setForm] = useState({
     email: "",
@@ -38,7 +41,7 @@ const AdminRegister = () => {
       err.birth ||
       err.nickname
     ) {
-      return;
+      return setToastFloat(true);
     }
 
     const userData = {
@@ -49,15 +52,11 @@ const AdminRegister = () => {
       nickname: form.nickname,
     };
 
-    try {
-      const response = await adminRegister(userData);
-      if (response.status === 200) {
-        const data = response.data;
-        saveTokens(data);
-      }
+    const response = await adminRegister(userData);
+    if (response.status === 200) {
+      const data = response.data;
+      saveTokens(data);
       navigate("/auth/adminLogin");
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -65,8 +64,20 @@ const AdminRegister = () => {
     setErr(validateForm(form));
   }, [form]);
 
+  useEffect(() => {
+    if (toastFloat) {
+      setTimeout(() => {
+        setToastFloat(false);
+      }, 2000);
+    }
+  }, [toastFloat]);
+
   return (
     <main>
+      <Toast
+        children={"입력하신 정보가 정확하지 않습니다."}
+        float={toastFloat}
+      />
       <section className={styles.wrapper}>
         <Poster />
         <article>
@@ -109,7 +120,7 @@ const AdminRegister = () => {
             <Input
               errorText={err.birth}
               onChange={onChange}
-              placeholder="생년월일(YYMMDD)"
+              placeholder="생년월일(YYYYMMDD)"
               name="birth"
               value={form.birth}
               autoComplete="off"

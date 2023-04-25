@@ -2,6 +2,8 @@ import dayjs from "dayjs";
 import { Button, Modal } from "../../../../components";
 import styles from "./boReportModal.module.scss";
 import { ImageProfile2 } from "../../../../assets";
+import * as ProfileImages from "../../../../assets/images/profileImages";
+
 import {
   deleteReport,
   getReportDetail,
@@ -72,6 +74,8 @@ const BoReportModal = ({ modal, report, setModal, onClose }) => {
         <article className={styles.comment}>
           <div className={styles.userInfo}>
             <div>
+              {/* <img src={
+                  user?.profileImage} /> */}
               <img
                 src={
                   !user?.profileImage || user?.profileImage.includes("Icon")

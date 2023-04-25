@@ -4,10 +4,11 @@ import dayjs from "dayjs";
 
 import { getMovies, getMovie, getMoviesCount } from "../../../api/Movie";
 
-import { SearchInput, Table, Button, Paging } from "../../../components";
+import { SearchInput, Table, Button, Paging, Input } from "../../../components";
 import { BoMovieModal } from "../_shared";
-
+import cx from "classnames";
 import styles from "./boMovie.module.scss";
+import { IconSearch } from "../../../assets";
 
 const columns = [
   { Header: "제목", accessor: "제목" },
@@ -19,20 +20,21 @@ const columns = [
 
 const POST_PER_PAGE = 10;
 
-const BOMovie = ({ movie }) => {
+const BOMovie = () => {
   const { id } = useParams;
 
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  //NOTE: 선택된 영화를 관리하기 위한 state -> 선택된 movie의 id
+
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [totalCount, setTotalCount] = useState(0);
+
+  const [form, setForm] = useState();
+  const [Count, setCount] = useState();
 
   const [modal, setModal] = useState(false);
 
   const data = movies.map((movie) => ({
-    //NOTE: substring을 통한 문자열 자르기
-    // 제목: movie.title.substring(0, 10),
     id: movie.id,
     제목: movie.title ?? "-",
     감독: movie.staffs.find((staff) => staff.role === "감독")?.name ?? "-",
@@ -53,8 +55,15 @@ const BOMovie = ({ movie }) => {
     setSelectedMovie(null);
   };
 
-  const onChange = (page) => {
+  const onPageChange = (page) => {
     setPage(page);
+  };
+
+  const onSetData = (data, total) => {
+    const totalPage = Math.ceil(total / POST_PER_PAGE);
+    // setMovieData(data);
+    setCount(total);
+    setPage(totalPage);
   };
 
   const onGetMovies = async () => {
@@ -62,6 +71,7 @@ const BOMovie = ({ movie }) => {
       const response = await getMovies(page, POST_PER_PAGE);
       if (response.status === 200) {
         setMovies(response.data.data);
+        onSetData(response.data.data, response.data.paging.total);
       }
     } catch (error) {
       console.error(error);
@@ -91,6 +101,36 @@ const BOMovie = ({ movie }) => {
     }
   };
 
+  // 영화 검색 기능
+  const onSearch = async (e) => {
+    e.preventDefault();
+    setPage(1);
+    const response2 = await getMovies(1, POST_PER_PAGE, form);
+    onSetData(response2.data.data, response2.data.paging.total);
+  };
+  const onSearchPageChange = async () => {
+    const response2 = await getMovies(page, POST_PER_PAGE, form);
+    onSetData(response2.data.data, response2.data.paging.total);
+  };
+
+  const onChange = (e) => {
+    const { value } = e.currentTarget;
+
+    //NOTE: 검색어가 있다가 사라지면 다시 데이터를 불러오는 로직
+    if (value.length === 0) {
+      onGetMovies();
+    }
+    setForm(value);
+  };
+
+  useEffect(() => {
+    if (!form) {
+      onGetMovies();
+    } else {
+      onSearchPageChange();
+    }
+  }, [page, modal]);
+
   useEffect(() => {
     onGetMovies();
     onGetMovieDetail(id);
@@ -104,24 +144,35 @@ const BOMovie = ({ movie }) => {
       <h1>영화 관리 페이지</h1>
 
       <div className={styles.searchWrapper}>
-        {/* <SearchInput placeholder={"영화명을 검색하세요."} /> */}
-        {/* <Button color={"primary"} onClick={onsubmit}>
-          수정
-        </Button> */}
+        {/* <form
+          id="searchForm"
+          className={cx(styles.searchInput, styles["iconLocation"])}
+        >
+          <input
+            onChange={onChange}
+            name="title"
+            value={form}
+            placeholder="영화 제목을 입력해주세요."
+            className={styles.inputWrapper}
+          />
+          <button
+            type="submit"
+            form="searchForm"
+            onClick={onSearch}
+            className={styles.searchBtn}
+          >
+            <IconSearch className={styles.iconSearch} />
+          </button>
+        </form> */}
       </div>
       <Table
         columns={columns}
         data={data}
-        firstButton={
-          // NOTE: 어떤 영화를 선택했는지 알 수가 없다.
-          // NOTE: 선택한 영화를 담을 state가 없다.
-          // NOTE: 아래와 같이 함수를 사용
-          (movie) => (
-            <Button color={"warning"} onClick={onClickModal(movie)}>
-              보기
-            </Button>
-          )
-        }
+        firstButton={(movie) => (
+          <Button color={"warning"} onClick={onClickModal(movie)}>
+            보기
+          </Button>
+        )}
         secondButton={<Button color={"primary"}>수정</Button>}
       />
       <BoMovieModal
@@ -134,7 +185,7 @@ const BOMovie = ({ movie }) => {
         page={page}
         postPerPage={POST_PER_PAGE}
         pageRangeDisplayed={5}
-        onChange={onChange}
+        onChange={onPageChange}
       />
     </main>
   );

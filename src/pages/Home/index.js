@@ -18,7 +18,8 @@ const HORROR_ID = "a3864a82-d9c1-4bf5-a891-0acc2e479090";
 const ROMANCE_ID = "73fa7e1d-0e3e-4506-9432-21c29faa8dd7";
 const ACTION_ID = "fc84777a-d713-4539-a5b9-8c24f0c85b99";
 const FANTASY_ID = "360b5842-fc83-4ea9-a7fa-0d62017b975b";
-const MAIN_ID = "a672a7aa-aabb-4344-84c1-da1054661c54";
+const MAIN_ID = "5ca6ee50-5db9-4446-8f39-3db4890894cb";
+
 const Home = () => {
   const { id } = useParams();
   const navigate = useNavigate();

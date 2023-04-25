@@ -9,7 +9,13 @@ import {
   getUsersDetail,
 } from "../../../api/User";
 
-import { Button, Paging, SearchInput, Table } from "../../../components/Common";
+import {
+  Button,
+  NoResult,
+  Paging,
+  SearchInput,
+  Table,
+} from "../../../components/Common";
 import { BoUserModal } from "../_shared";
 
 import styles from "./boUser.module.scss";
@@ -30,6 +36,7 @@ const BOUser = ({ user }) => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [selectedUser, setSelectedUser] = useState([]);
+  const [clickedUser, setClickedUser] = useState(null);
   const [totalCount, setTotalCount] = useState(0);
   const [form, setForm] = useState();
 
@@ -47,13 +54,13 @@ const BOUser = ({ user }) => {
   const onClickModal = (user) => {
     return () => {
       setModal(!modal);
-      setSelectedUser(user);
+      setClickedUser(user);
     };
   };
 
   const onCloseModal = () => {
     setModal(!modal);
-    setSelectedUser(null);
+    setClickedUser(null);
   };
 
   const onChange = (page) => {
@@ -134,8 +141,6 @@ const BOUser = ({ user }) => {
     onGetUserDetail(id);
   }, [page, id]);
 
-  //console.log({ selectedUser, users });
-
   return (
     <section className={styles.wrapper}>
       <h1>유저 관리 페이지</h1>
@@ -156,24 +161,28 @@ const BOUser = ({ user }) => {
           탈퇴
         </Button>
       </div>
-      <Table
-        columns={columns}
-        data={data}
-        setCheckedItems={setSelectedUser}
-        checkedItems={selectedUser}
-        firstButton={(user) => (
-          <Button color={"warning"} onClick={onClickModal(user)}>
-            보기
-          </Button>
-        )}
-        secondButton={(id) => (
-          <Button color={"danger"} onClick={onClickDelete(id)}>
-            탈퇴
-          </Button>
-        )}
-      />
+      {data.length === 0 && form?.length > 0 ? (
+        <NoResult text={form} />
+      ) : (
+        <Table
+          columns={columns}
+          data={data}
+          setCheckedItems={setSelectedUser}
+          checkedItems={selectedUser}
+          firstButton={(user) => (
+            <Button color={"warning"} onClick={onClickModal(user)}>
+              보기
+            </Button>
+          )}
+          secondButton={(id) => (
+            <Button color={"danger"} onClick={onClickDelete(id)}>
+              탈퇴
+            </Button>
+          )}
+        />
+      )}
       <BoUserModal
-        userId={selectedUser}
+        userId={clickedUser}
         modal={modal}
         onCloseModal={onCloseModal}
       />

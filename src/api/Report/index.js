@@ -9,3 +9,11 @@ export const getReports = (page = 1, limit = 20, username = null) => {
   }
   return apiClient.get(url);
 };
+
+export const getReportStatus = () => {
+  return apiClient.get("/reports/status");
+};
+
+export const createReport = () => {
+  return apiClient.get("/reports/status");
+};

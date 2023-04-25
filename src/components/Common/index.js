@@ -10,3 +10,4 @@ export { default as Stars } from "./Stars";
 export { default as Card } from "./Card";
 export { default as Carousel } from "./Carousel";
 export { default as Paging } from "./Pagination";
+export { default as NoResult } from "./NoResult";

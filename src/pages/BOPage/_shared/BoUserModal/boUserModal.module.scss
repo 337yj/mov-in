@@ -1,2 +1,43 @@
 @use "../../../../styles/constants" as c;
 @use "../../../../styles/mixins/" as m;
+
+.boUserModal {
+  position: relative;
+  width: 540px;
+  height: 800px;
+}
+
+.wrapper {
+  height: 100%;
+  display: block;
+  position: relative;
+  .profileWrapper {
+    @include m.flex(space-between);
+    > figure {
+      @include m.flex(center, center, column);
+      row-gap: 12px;
+    }
+    .count {
+      @include m.flex(space-between, center);
+      width: 120px;
+      padding: 4px 32px;
+      background-color: c.$C_DARKGRAY_80;
+      border-radius: 10px;
+      > svg {
+        width: 20px;
+      }
+    }
+
+    .profileImage {
+      width: 160px;
+    }
+  }
+
+  .buttonWrapper {
+    @include m.flex(flex-end);
+    position: absolute;
+    column-gap: 12px;
+    bottom: 20px;
+    right: 0px;
+  }
+}

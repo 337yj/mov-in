@@ -27,10 +27,10 @@ const BOMovie = () => {
   const [page, setPage] = useState(1);
 
   const [selectedMovie, setSelectedMovie] = useState([]);
+  const [clickedMovie, setClickedMovie] = useState(null);
   const [totalCount, setTotalCount] = useState(0);
 
   const [form, setForm] = useState();
-  const [Count, setCount] = useState();
 
   const [modal, setModal] = useState(false);
 
@@ -46,13 +46,13 @@ const BOMovie = () => {
   const onClickModal = (movie) => {
     return () => {
       setModal(!modal);
-      setSelectedMovie(movie);
+      setClickedMovie(movie);
     };
   };
 
   const onCloseModal = () => {
     setModal(!modal);
-    setSelectedMovie(null);
+    setClickedMovie(null);
   };
 
   const onPageChange = (page) => {
@@ -61,7 +61,6 @@ const BOMovie = () => {
 
   const onSetData = (data, total) => {
     setMovies(data);
-    setCount(total);
     setTotalCount(total);
   };
 
@@ -166,7 +165,7 @@ const BOMovie = () => {
         secondButton={() => <Button color={"primary"}>수정</Button>}
       />
       <BoMovieModal
-        movieId={selectedMovie}
+        movieId={clickedMovie}
         modal={modal}
         onCloseModal={onCloseModal}
       />

@@ -35,12 +35,6 @@ const Footer = ({ className, textStyle }) => {
           >
             김민정
           </a>
-          <a
-            className={cx(styles.nameLink)}
-            href="https://github.com/baeseorim"
-          >
-            배서림
-          </a>
           <a className={cx(styles.nameLink)} href="https://github.com/337yj">
             이윤정
           </a>

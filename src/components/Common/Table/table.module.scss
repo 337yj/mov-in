@@ -22,7 +22,6 @@ table {
     overflow: hidden;
   }
 
-  td,
   th {
     @include m.flex();
     min-width: 140px;
@@ -30,7 +29,17 @@ table {
     &:first-child {
       min-width: 50px;
     }
-    &:nth-child(n+7):nth-child(-n+8) {
+  }
+
+  td {
+    @include m.flex();
+    min-width: 140px;
+
+    &:first-child {
+      min-width: 50px;
+    }
+
+    &:nth-last-child(n+0):nth-last-child(-n+2) {
       min-width: 50px;
     }
   }

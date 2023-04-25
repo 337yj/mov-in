@@ -42,7 +42,7 @@ const BOComment = ({ Review }) => {
 
   const data = Reviews.map((Review) => ({
     id: Review.id,
-    닉네임: Review.nickname ?? "-",
+    닉네임: Review?.user.nickname ?? "-",
     코멘트: Review.content ?? "-",
     평점: Review.score.toFixed(1) ?? "-",
     좋아요: Review.likeCount ?? "-",

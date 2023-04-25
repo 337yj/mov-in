@@ -93,28 +93,30 @@ const BoUserModal = ({ userId, modal, onCloseModal }) => {
               <Input readOnly value={user?.email}></Input>
               <h4>생년월일</h4>
               <Input
-                readOnly value={dayjs(user?.birth, "YYYYMMDD").format("YYYY.MM.DD")}
+                readOnly
+                value={dayjs(user?.birth, "YYYYMMDD").format("YYYY.MM.DD")}
               ></Input>
               <h4>가입일자</h4>
               <Input
-                readOnly value={dayjs(user?.createdAt, "YYYYMMDD").format("YYYY.MM.DD")}
+                readOnly
+                value={dayjs(user?.createdAt, "YYYYMMDD").format("YYYY.MM.DD")}
               ></Input>
             </div>
           </section>
           <div className={styles.buttonWrapper}>
-            <Button
-              className={styles.modify}
-              color={"danger"}
-              onClick={onClickDelete}
-            >
-              탈퇴
-            </Button>
             <Button
               className={styles.cancel}
               color={"secondary"}
               onClick={onClickModal}
             >
               취소
+            </Button>
+            <Button
+              className={styles.modify}
+              color={"danger"}
+              onClick={onClickDelete}
+            >
+              탈퇴
             </Button>
           </div>
         </form>

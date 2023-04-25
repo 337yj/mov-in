@@ -4,36 +4,32 @@ import { IconSearch } from "../../../assets";
 import cx from "classnames";
 import styles from "./searchInput.module.scss";
 
-const SearchInput = ({
-  className,
-  placeholder,
-  onSubmit: onSubmitProps,
-  isAdmin = false,
-  ...props
-}) => {
+const SearchInput = ({ className, placeholder, ...props }) => {
+  const [state, setState] = useState({ keyword: "", results: [] });
   const navigate = useNavigate();
 
+  const onChange = (event) => {
+    setState({ ...state, keyword: event.target.value });
+  };
   const onSubmit = async (event) => {
     event.preventDefault();
-
-    onSubmitProps && onSubmitProps();
     onClick();
   };
 
   const onClick = () => {
-    if (!isAdmin) {
-      navigate("/searchResult", {
-        state,
-      });
-    }
+    navigate("/searchResult", {
+      state
+    });
   };
 
   return (
     <form className={cx(styles.searchForm, className)} onSubmit={onSubmit}>
       <input
         type="text"
+        value={state?.keyword}
         placeholder={placeholder}
         className={styles.searchInput}
+        onChange={onChange}
         {...props}
       />
       <button type="submit" className={styles.searchBtn}>

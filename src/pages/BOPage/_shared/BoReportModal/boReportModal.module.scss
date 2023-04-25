@@ -9,8 +9,8 @@
 
 .comment {
   background-color: c.$C_WHITE_10;
-  padding: 30px;
-  margin-top: 72px;
+  padding: 40px;
+  margin-top: 65px;
   border-radius: 8px;
   font-size: 18px;
   animation: fadeIn 0.5s ease-in-out forwards;
@@ -36,6 +36,7 @@
 
   .score {
     font-size: 16px;
+    color: c.$C_YELLOW;
   }
 
   .content {

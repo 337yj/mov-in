@@ -55,6 +55,8 @@ const BoReportModal = ({ modal, report, setModal, onClose }) => {
     if (reportData) onGetUser(reportData.userId);
   }, [reportData]);
 
+  console.log(reportData);
+
   return (
     modal && (
       <Modal
@@ -66,6 +68,7 @@ const BoReportModal = ({ modal, report, setModal, onClose }) => {
           신고 일자 : {dayjs(reportData?.createdAt).format("YYYY.MM.DD")}
         </p>
         <p className={styles.reportContent}>신고 사유 : {reportData?.reason}</p>
+        <p className={styles.reportContent}>신고자 : {user?.nickname}</p>
         <article className={styles.comment}>
           <div className={styles.userInfo}>
             <div>
@@ -80,9 +83,9 @@ const BoReportModal = ({ modal, report, setModal, onClose }) => {
                 alt="userProfileImage"
                 className={styles.profileImage}
               />
-              <p className={styles.username}>{user?.nickname ?? user?.name}</p>
+              <p className={styles.username}>{reportData?.review.user.nickname ?? "닉네임을 찾을 수 없습니다"}</p>
             </div>
-            <p className={styles.score}>평점 {reportData?.score}</p>
+            <p className={styles.score}>평점 {reportData?.review?.score?.toFixed(1)}</p>
           </div>
           <p className={styles.content}>{reportData?.review?.content}</p>
         </article>

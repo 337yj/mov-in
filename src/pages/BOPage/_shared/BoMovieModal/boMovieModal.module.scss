@@ -3,34 +3,41 @@
 
 .boMovieModal {
   position: fixed;
-  width: 640px;
+  width: 600px;
+  height: 680px;
   top: 50%;
   left: 50%;
+  padding-top: 70px;
   transform: translate(-50%, -50%);
 
   .wrapper {
     @include m.flex(flex-start, center, column);
     row-gap: 10px;
     width: 540px;
-    height: 510px;
-    background-color: c.$C_INDIGO;
+    padding-top:20px;
+    //background-color: c.$C_INDIGO;
     font-weight: 400;
     font-size: 14px;
     animation: fadeIn 0.5s ease-in-out forwards;
 
     .postWrapper {
       @include m.flex(null, null, row);
-      column-gap: 10px;
+      column-gap: 20px;
+      padding: 30px 30px 0px 0px;
+
+      >img {
+        height: 300px !important;
+        width: 280px;
+      }
 
       .content {
         @include m.flex(null, null, column);
-        row-gap: 8px;
+        row-gap: 10px;
         flex-wrap: wrap;
 
         .movieTitle {
           //NOTE: font-size는 좀 더 컸으면 좋을 것 같다.
-          font-size: 16px;
-
+          font-size: 30px;
           font-weight: 700;
         }
 
@@ -43,10 +50,12 @@
       }
       .likeButton {
         @include m.flex(null, center, row);
+        margin-top: 6px;
         column-gap: 5px;
+        
         & .IconHeart {
-          width: 15px;
-          height: 15px;
+          width: 12px;
+          height: 12px;
           font-weight: 400;
           font-size: 14px;
         }
@@ -54,7 +63,13 @@
 
       .averageScore {
         @include m.flex(null, center, row);
+        color: c.$C_YELLOW;
         column-gap: 5px;
+
+        >h2 {
+          color: c.$C_WHITE;
+        }
+
         .IconStar {
           width: 15px;
           height: 15px;
@@ -64,7 +79,11 @@
       }
 
       .plot {
+        height: 150px;
+        overflow: scroll;
+        padding-top: 10px;
         flex-wrap: wrap;
+        line-height: 25px;
       }
     }
   }
@@ -73,7 +92,7 @@
     @include m.flex(flex-end, center, row);
     //NOTE: 버튼 바닥에 고정
     position: fixed;
-    bottom: 20px;
+    bottom: 50px;
     column-gap: 10px;
   }
 }

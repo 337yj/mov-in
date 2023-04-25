@@ -8,14 +8,21 @@ import { Modal, Button, Stars } from "../../../../components";
 import styles from "./boCommentModal.module.scss";
 
 import { ImageProfile2 } from "../../../../assets/images/profileImages";
+import { useNavigate } from "react-router-dom";
 
 const BoMovieModal = ({ userId, reviewId, modal, onCloseModal }) => {
   const [review, setReview] = useState(null);
+
+  const navigate = useNavigate();
 
   const onClickModal = () => {
     onCloseModal();
     setReview(null);
   };
+
+  const onClickToDetail = () => {
+    navigate(`/detail/${review?.movie.id}`)
+  }
 
   const onGetCommentDetail = async () => {
     try {
@@ -48,10 +55,12 @@ const BoMovieModal = ({ userId, reviewId, modal, onCloseModal }) => {
         user={review.user}
         review={review}
         title={"코멘트 관리"}
+        subTitle={"코멘트를 관리할 수 있습니다"}
         onClick={onClickModal}
       >
         <form className={styles.wrapper}>
           <section className={styles.content}>
+            <h1 onClick={onClickToDetail}>{review?.movie.title}</h1>
             <Comment
               comment={review}
               className={styles.comment}

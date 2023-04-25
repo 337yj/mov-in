@@ -202,7 +202,7 @@ const BOReport = () => {
           data={data}
           setCheckedItems={setSelectedReport}
           checkedItems={selectedReport}
-          firstButton={(user) => (
+          secondButton={(user) => (
             <Button color={"warning"} onClick={onClickModal(user)}>
               보기
             </Button>

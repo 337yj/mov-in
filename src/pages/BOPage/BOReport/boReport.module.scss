@@ -3,6 +3,8 @@
 
 .wrapper {
   min-width: 1020px;
+  margin-top: 100px;
+
   > h1 {
     width: 100%;
     text-align: left;
@@ -39,15 +41,16 @@
       @include m.flex(flex-start);
       position: relative;
       column-gap: 12px;
-      margin-top: 32px;
+      margin: 32px 0px;
       flex-grow: 1;
-      background-color: c.$C_DARKGRAY;
-      padding: 12px;
+      background-color: c.$C_WHITE_10;
+      padding: 20px;
       border-radius: 6px;
 
       .content {
         @include m.flex(flex-start, flex-start, column);
         row-gap: 8px;
+        margin-left: 10px;
 
         > h2 {
           font-size: 28px;

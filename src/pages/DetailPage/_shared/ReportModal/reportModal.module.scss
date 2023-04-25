@@ -2,17 +2,21 @@
 @use "../../../../styles/mixins/" as m;
 .reportModal {
   width: 620px;
-  height: 600px;
+  height: 700px;
+  animation: fadeIn 0.5s ease-in-out forwards;
 
   .reasonWrapper {
-    margin: 12px 0px 24px;
+    margin: 30px 0px 30px 0px;
+    
     .reasons {
       @include m.flex(space-between);
       margin: 12px 0px;
 
       .tab {
         color: c.$C_WHITE;
+        font-size: 16px;
         background-color: c.$C_DARKGRAY;
+
         &.selected {
           color: c.$C_WHITE;
           background-color: c.$C_PURPLE;
@@ -22,25 +26,28 @@
   }
 
   h1 {
-    margin: 12px 0px;
-    font-size: 28px;
+    margin: 20px 0px;
+    padding-top: 5px;
+    font-size: 24px;
     font-weight: 700;
   }
 
   .comment {
-    background-color: c.$C_DARKGRAY;
-    padding: 12px;
+    background-color: c.$C_WHITE_10;
+    padding: 30px;
+    font-size: 18px;
     border-radius: 8px;
 
     .userInfo {
       @include m.flex(space-between);
-      border-bottom: 1px solid c.$C_WHITE;
+      border-bottom: 1px solid c.$C_WHITE_40;
       padding-bottom: 12px;
       > div {
         @include m.flex(flex-start);
 
         > p {
-          margin-left: 20px;
+          margin-left: 12px;
+          font-size: 18px;
         }
       }
 
@@ -51,12 +58,13 @@
 
     .score {
       font-size: 16px;
+      color: c.$C_YELLOW;
     }
 
     .content {
-      margin-top: 24px;
-      border-bottom: 1px solid c.$C_WHITE;
-      padding-bottom: 12px;
+      margin: 24px 0px;
+      border-bottom: 1px solid c.$C_WHITE_40;
+      padding-bottom: 20px;
     }
 
     .footer {
@@ -68,9 +76,20 @@
 
   .buttonWrapper {
     @include m.flex(flex-end);
+    animation: fadeIn 0.5s ease-in-out forwards;
     position: absolute;
-    bottom: 20px;
+    bottom: 40px;
     column-gap: 12px;
-    right: 20px;
+    right: 45px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
   }
 }

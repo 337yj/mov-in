@@ -56,7 +56,7 @@ const BoUserModal = ({ userId, modal, onCloseModal }) => {
   if (!user) {
     return null;
   }
-  console.log(user);
+  //console.log(user);
   return (
     modal && (
       <Modal
@@ -88,16 +88,16 @@ const BoUserModal = ({ userId, modal, onCloseModal }) => {
 
             <div className={styles.content}>
               <h4>닉네임</h4>
-              <Input value={user?.nickname}></Input>
+              <Input readOnly value={user?.nickname}></Input>
               <h4>이메일</h4>
-              <Input value={user?.email}></Input>
+              <Input readOnly value={user?.email}></Input>
               <h4>생년월일</h4>
               <Input
-                value={dayjs(user?.birth, "YYYYMMDD").format("YYYY.MM.DD")}
+                readOnly value={dayjs(user?.birth, "YYYYMMDD").format("YYYY.MM.DD")}
               ></Input>
               <h4>가입일자</h4>
               <Input
-                value={dayjs(user?.createdAt, "YYYYMMDD").format("YYYY.MM.DD")}
+                readOnly value={dayjs(user?.createdAt, "YYYYMMDD").format("YYYY.MM.DD")}
               ></Input>
             </div>
           </section>

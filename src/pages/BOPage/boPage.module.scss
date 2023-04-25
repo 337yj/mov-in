@@ -3,7 +3,7 @@
 
 .wrapper {
   @include m.flex(flex-start, null, row);
-  height: calc(100vh - 140px);
-  padding: 180px 50px;
+  //height: calc(100vh - 140px);
+  padding: 180px 180px;
   column-gap: 80px;
 }

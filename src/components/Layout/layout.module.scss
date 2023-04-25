@@ -1,8 +1,9 @@
 @use "../../styles/constants" as c;
 
 .wrapper {
-  height: 100vh;
+  // max-height: 100vh;
   background-color: c.$C_INDIGO;
+  // overflow: scroll;
 
   .outletWrapper {
     &:not(.isAuth) {

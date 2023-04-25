@@ -25,3 +25,9 @@ Backend
 - Swagger
 - MySQL
 - TypeScript
+
+Frontend
+- Javascript
+- React
+- Recoil
+- SASS

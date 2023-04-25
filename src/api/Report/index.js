@@ -14,6 +14,6 @@ export const getReportStatus = () => {
   return apiClient.get("/reports/status");
 };
 
-export const createReport = () => {
-  return apiClient.get("/reports/status");
+export const createReport = (reviewId, body) => {
+  return apiClient.post(`/reports/${reviewId}`, body);
 };

@@ -1,5 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  ScrollRestoration,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { getMovie } from "../../../api/Movie";
 import { getReviewsMovie, getReviewsMoviePaging } from "../../../api/Review";
 import { toastFloatState, toastMsgState } from "../../../state";
@@ -101,7 +106,7 @@ const CommentList = ({}) => {
   }, [id]);
 
   return (
-    <main>
+    <main className={styles.wrapper}>
       <Toast children={toastMsg} float={toastFloat} />
       <div className={styles.backgroundWrapper}>
         <img

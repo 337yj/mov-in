@@ -30,8 +30,10 @@ const BOComment = ({ Review }) => {
 
   const [Reviews, setReviews] = useState([]);
   const [page, setPage] = useState(1);
-  const [selectedReview, setSelectedReview] = useState(null);
+  const [selectedReview, setSelectedReview] = useState([]);
+  const [clickedReview, setClickedReview] = useState(null);
   const [totalCount, setTotalCount] = useState(0);
+  const [form, setForm] = useState();
 
   // const [toastFloat, setToastFloat] = useState(false);
   // const [toastMsg, setToastMsg] = useState("");
@@ -39,6 +41,7 @@ const BOComment = ({ Review }) => {
   const [modal, setModal] = useState(false);
 
   const data = Reviews.map((Review) => ({
+    id: Review.id,
     닉네임: Review.nickname ?? "-",
     코멘트: Review.content ?? "-",
     평점: Review.score.toFixed(1) ?? "-",
@@ -49,13 +52,13 @@ const BOComment = ({ Review }) => {
   const onClickModal = (Review) => {
     return () => {
       setModal(!modal);
-      setSelectedReview(Review);
+      setClickedReview(Review);
     };
   };
 
   const onCloseModal = () => {
     setModal(false);
-    setSelectedReview(null);
+    setClickedReview(null);
   };
 
   const onChange = (page) => {
@@ -63,7 +66,7 @@ const BOComment = ({ Review }) => {
   };
 
   const onClickManyDelete = async () => {
-    const response = await deleteManyReviews();
+    const response = await deleteManyReviews(selectedReview.join(","));
     if (response.status === 204) {
       onGetReviews();
       onGetSelectReview();
@@ -71,13 +74,15 @@ const BOComment = ({ Review }) => {
     }
   };
 
-  const onClickDelete = async () => {
-    const response = await deleteAdminReviews(id);
-    if (response.status === 204) {
-      onGetReviews();
-      onGetSelectReview();
-      alert("삭제되었습니다.");
-    }
+  const onClickDelete = (id) => {
+    return async () => {
+      const response = await deleteAdminReviews(id);
+      if (response.status === 204) {
+        onGetReviews();
+        onGetSelectReview();
+        alert("삭제되었습니다.");
+      }
+    };
   };
 
   const onGetReviews = async () => {
@@ -85,6 +90,18 @@ const BOComment = ({ Review }) => {
       const response = await getReviews(page, POST_PER_PAGE);
       if (response.status === 200) {
         setReviews(response.data.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onSearchReviews = async () => {
+    try {
+      const response = await getReviews(page, POST_PER_PAGE, form);
+      if (response.status === 200) {
+        setReviews(response.data.data);
+        setTotalCount(response.data.paging.total);
       }
     } catch (error) {
       console.error(error);
@@ -114,9 +131,19 @@ const BOComment = ({ Review }) => {
     }
   };
 
+  const onChangeInput = (e) => {
+    const { value } = e.currentTarget;
+
+    //NOTE: 검색어가 있다가 사라지면 다시 데이터를 불러오는 로직
+    if (value.length === 0) {
+      onGetReviews();
+    }
+    setForm(value);
+  };
+
   useEffect(() => {
     onGetReviews();
-    onGetSelectReview(id);
+
     onGetReviewsCount();
   }, [page, id]);
 
@@ -124,11 +151,18 @@ const BOComment = ({ Review }) => {
     <main className={styles.wrapper}>
       <h1>코멘트 관리 페이지</h1>
       <div className={styles.searchWrapper}>
-        {/* <SearchInput
-          value={user?.name}
+        <SearchInput
+          className={styles.searchInput}
+          value={form}
+          onChange={onChangeInput}
           placeholder={"회원 닉네임을 검색하세요."}
-        /> */}
-        <Button color={"primary"} onClick={onClickManyDelete}>
+          onSubmit={onSearchReviews}
+        />
+        <Button
+          className={styles.delete}
+          color={"primary"}
+          onClick={onClickManyDelete}
+        >
           삭제
         </Button>
       </div>
@@ -136,19 +170,21 @@ const BOComment = ({ Review }) => {
       <Table
         columns={columns}
         data={data}
+        checkedItems={selectedReview}
+        setCheckedItems={setSelectedReview}
         firstButton={(Review) => (
           <Button color={"warning"} onClick={onClickModal(Review)}>
             보기
           </Button>
         )}
-        secondButton={
-          <Button color={"primary"} onClick={onClickDelete}>
+        secondButton={(id) => (
+          <Button color={"primary"} onClick={onClickDelete(id)}>
             삭제
           </Button>
-        }
+        )}
       />
       <BoCommentModal
-        reviewId={selectedReview}
+        reviewId={clickedReview}
         modal={modal}
         onCloseModal={onCloseModal}
       />

@@ -1,0 +1,35 @@
+@use "../../../styles/constants/" as c;
+@use "../../../styles/mixins/" as m;
+.wrapper {
+  min-width: 1020px;
+  min-height: 600px;
+  padding: 120px;
+  // background-color: c.$C_DARKINDIGO;
+  border-radius: 12px;
+
+  .main {
+    font-size: 36px;
+    > span {
+      color: c.$C_YELLOW;
+    }
+  }
+
+  > p {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 52px;
+  }
+
+  > ul {
+    margin-top: 32px;
+    list-style: circle;
+    > li {
+      list-style-type: disc;
+      list-style-position: inside;
+    }
+
+    > li + li {
+      margin-top: 12px;
+    }
+  }
+}

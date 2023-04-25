@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 
 import { getReviewsDetail, deleteAdminReviews } from "../../../../api/Review";
-import { getUsersDetail } from "../../../../api/User";
+
 import Comment from "../../../DetailPage/CommentList/Comment";
 import { Modal, Button, Stars } from "../../../../components";
 
 import styles from "./boCommentModal.module.scss";
 
+import { ImageProfile2 } from "../../../../assets/images/profileImages";
+
 const BoMovieModal = ({ userId, reviewId, modal, onCloseModal }) => {
-  const [review, setReview] = useState([]);
-  const [user, setUser] = useState(null);
+  const [review, setReview] = useState(null);
 
   const onClickModal = () => {
     onCloseModal();
@@ -27,17 +28,6 @@ const BoMovieModal = ({ userId, reviewId, modal, onCloseModal }) => {
     }
   };
 
-  const onGetUserDetail = async () => {
-    try {
-      const response = await getUsersDetail(userId);
-      if (response.status === 200) {
-        setUser(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const onClickDelete = async () => {
     await deleteAdminReviews(reviewId);
     alert("삭제되었습니다.");
@@ -45,7 +35,6 @@ const BoMovieModal = ({ userId, reviewId, modal, onCloseModal }) => {
 
   useEffect(() => {
     onGetCommentDetail();
-    onGetUserDetail();
   }, [reviewId]);
 
   if (!review) {
@@ -56,26 +45,15 @@ const BoMovieModal = ({ userId, reviewId, modal, onCloseModal }) => {
     modal && (
       <Modal
         className={styles.boCommentModal}
-        user={user}
+        user={review.user}
         review={review}
         title={"코멘트 관리"}
         onClick={onClickModal}
       >
         <form className={styles.wrapper}>
           <section className={styles.content}>
-            <figure className={styles.profile}>
-              <img
-                src={user?.profileImage}
-                alt="profileImage"
-                className={styles.profileImage}
-              />
-              <figcaption className={styles.username}>
-                {user?.nickname}
-              </figcaption>
-              <Stars />
-            </figure>
             <Comment
-              comment={review.comment}
+              comment={review}
               className={styles.comment}
               onGetCommentDetail={onGetCommentDetail}
             />

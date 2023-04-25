@@ -34,7 +34,7 @@
     @include m.flex(left);
     width: 100%;
     min-height: 750px;
-    object-fit: contain;
+
     background: linear-gradient(
         c.$C_TRANSPARENT,
         c.$C_INDIGO_30,
@@ -45,7 +45,7 @@
 
     background: {
       size: cover;
-      position: 10% 10%;
+      position: 20% 10%;
       repeat: no-repeat;
     }
   }

@@ -18,7 +18,17 @@
   }
 
   .searchWrapper {
-    @include m.flex(flex-end, null, row);
+    @include m.flex(flex-end, center, row);
+    width: 100%;
     column-gap: 10px;
+
+    .searchInput {
+      width: 260px;
+    }
+
+    .delete {
+      height: 50px;
+      font-size: 16px;
+    }
   }
 }

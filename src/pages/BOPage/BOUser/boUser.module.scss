@@ -14,16 +14,18 @@
     }
   }
 
-  // .searchWrapper {
-  // @include m.flex(flex-start, null, row);
-  // column-gap: 10px;
-  // }
   .deleteWrapper {
     @include m.flex(flex-end, center, row);
     width: 100%;
     padding: 0px 16px;
+    column-gap: 12px;
+
+    .searchInput {
+      width: 260px;
+    }
   }
   .deleteButton {
     @include m.flex(flex-start);
+    height: 50px;
   }
 }

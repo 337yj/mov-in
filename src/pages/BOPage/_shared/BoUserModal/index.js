@@ -6,9 +6,13 @@ import { Modal, Button, Input } from "../../../../components";
 
 import styles from "./boUserModal.module.scss";
 import dayjs from "dayjs";
+import { ImageProfile2 } from "../../../../assets";
+import { BsHeart, BsLinkedin } from "react-icons/bs";
+import { TfiCommentAlt } from "react-icons/tfi";
 
 const BoUserModal = ({ userId, modal, onCloseModal }) => {
   const [user, setUser] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
   const onClickModal = () => {
     onCloseModal();
@@ -31,26 +35,28 @@ const BoUserModal = ({ userId, modal, onCloseModal }) => {
     }
   };
 
-  // const onGetUsersInFo = async () => {
-  //   try {
-  //     const response = await getUsersInfo(userId);
-  //     if (response.status === 200) {
-  //       setUser(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
+  const onGetUsersInFo = async () => {
+    try {
+      const response = await getUsersInfo(userId);
+      if (response.status === 200) {
+        setUserInfo(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   //console.log({ userId, user });
 
   useEffect(() => {
     onGetUsersDetail();
+    onGetUsersInFo();
   }, [userId]);
 
   if (!user) {
     return null;
   }
-
+  console.log(user);
   return (
     modal && (
       <Modal
@@ -64,11 +70,20 @@ const BoUserModal = ({ userId, modal, onCloseModal }) => {
             <figure>
               <img
                 className={styles.profileImage}
-                src={user?.profileImage}
+                src={
+                  (user?.profileImage && user?.profileImage?.includes("Up")) ||
+                  ImageProfile2
+                }
                 alt="thumbnail"
               />
-              <Button color={"dark"}>{user?.likeCount}</Button>
-              <Button color={"dark"}>{user?.reviewCount}</Button>
+              <div className={styles.count}>
+                <BsHeart />
+                {userInfo?.likeCount.toLocaleString()}
+              </div>
+              <div className={styles.count}>
+                <TfiCommentAlt />
+                {userInfo?.reviewCount.toLocaleString()}
+              </div>
             </figure>
 
             <div className={styles.content}>

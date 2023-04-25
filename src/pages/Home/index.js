@@ -129,7 +129,7 @@ const Home = () => {
   useEffect(() => {
     onGetMainDetail();
   }, [id]);
-
+  console.log({ mainInfo });
   return (
     <main className={styles.wrapper}>
       <section>
@@ -140,17 +140,20 @@ const Home = () => {
               {dayjs(mainInfo?.releasedAt, "YYYYMMDD").format("YYYY.MM")}
               <span>
                 <BsStarFill className={styles.star} />
-                {mainInfo?.averageScore?.toFixed(1)}
+                {mainInfo?.averageScore?.toFixed(1) || 0}
               </span>
             </p>
             <p className={styles.plot}>{mainInfo?.plot}</p>
-            <Button color={"warning"} children={"더보기"} className={styles.btnStyle} onClick={onClickDetail}/>
+            <Button
+              color={"warning"}
+              children={"더보기"}
+              className={styles.btnStyle}
+              onClick={onClickDetail}
+            />
           </div>
         </div>
         <div className={styles.listWrapper}>
-          <h1 className={styles.mainTitle}>
-            인기 10위 영화
-          </h1>
+          <h1 className={styles.mainTitle}>인기 10위 영화</h1>
           <Carousel slidesToShow="4" slidesToScroll="4" movies={topTen} />
           <h1 className={styles.mainTitle}>연애세포를 깨우는 로맨스 영화</h1>
           <Carousel slidesToShow="5" slidesToScroll="5" movies={romanceList} />

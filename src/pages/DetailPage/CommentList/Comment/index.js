@@ -16,12 +16,15 @@ import {
   BsPencilSquare,
   BsStarFill,
   BsTrash,
+  BsBell,
 } from "react-icons/bs";
 import { TfiCommentAlt } from "react-icons/tfi";
-import { ImageProfile2 } from "../../../../assets";
+import { IconReport, ImageProfile2 } from "../../../../assets";
 import * as ProfileImages from "../../../../assets/images/profileImages";
 import cx from "classnames";
 import styles from "./comment.module.scss";
+import { FaRegHandPointRight } from "react-icons/fa";
+import ReportModal from "../../_shared/ReportModal";
 
 const Comment = ({
   comment,
@@ -39,6 +42,7 @@ const Comment = ({
   const [isLiked, setIsLiked] = useState(false);
   const [isModified, setIsModified] = useState(false);
   const [modal, setModal] = useState(false);
+  const [reportModal, setReportModal] = useState(false);
   const enjoyPoints = comment?.enjoyPoints ? comment?.enjoyPoints : [];
   const tensions = comment?.tensions ? comment?.tensions : [];
   const user = useRecoilValue(userState);
@@ -48,6 +52,13 @@ const Comment = ({
     return () => {
       navigate(path);
     };
+  };
+  const onOpenReportModal = () => {
+    setReportModal(true);
+  };
+
+  const onCloseReportModal = () => {
+    setReportModal(false);
   };
 
   const onGetMyComment = async () => {
@@ -158,16 +169,22 @@ const Comment = ({
             {comment?.content}
           </p>
         </div>
-        {isAuthor && (
-          <div className={styles.bodyBtnWrapper}>
-            <button className={styles.modifyBtn} onClick={onClickModify}>
-              <BsPencilSquare className={styles.iconModify} />
-            </button>
-            <button className={styles.deleteBtn} onClick={onClickDelete}>
-              <BsTrash className={styles.iconDelete} />
-            </button>
-          </div>
-        )}
+
+        <div className={styles.bodyBtnWrapper}>
+          <button className={styles.reportBtn} onClick={onOpenReportModal}>
+            <BsBell className={styles.iconReport} />
+          </button>
+          {isAuthor && (
+            <>
+              <button className={styles.modifyBtn} onClick={onClickModify}>
+                <BsPencilSquare className={styles.iconModify} />
+              </button>
+              <button className={styles.deleteBtn} onClick={onClickDelete}>
+                <BsTrash className={styles.iconDelete} />
+              </button>
+            </>
+          )}
+        </div>
 
         <CommentModal
           title={comment.movie?.title}
@@ -178,6 +195,11 @@ const Comment = ({
           toast={toast}
           myComment={myComment}
           onGetMovieComments={onGetMovieComments}
+        />
+        <ReportModal
+          review={comment}
+          modal={reportModal}
+          setModal={setReportModal}
         />
       </div>
       <div className={styles.commentFooter}>

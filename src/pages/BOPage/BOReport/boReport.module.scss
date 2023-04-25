@@ -1,0 +1,85 @@
+@use "../../../styles/constants" as c;
+@use "../../../styles/mixins" as m;
+
+.wrapper {
+  min-width: 1020px;
+  > h1 {
+    width: 100%;
+    text-align: left;
+    font: {
+      size: 36px;
+      weight: 700;
+    }
+  }
+
+  .searchWrapper {
+    @include m.flex(space-between);
+    width: 100%;
+    margin: 24px 0px;
+
+    .searchInput {
+      width: 320px;
+    }
+
+    > div {
+      @include m.flex(flex-start);
+      column-gap: 8px;
+
+      .deleteButton {
+        height: 42px;
+      }
+    }
+  }
+  .reportStatus {
+    @include m.flex(space-between);
+    width: 100%;
+    column-gap: 16px;
+
+    .statusWrapper {
+      @include m.flex(flex-start);
+      position: relative;
+      column-gap: 12px;
+      margin-top: 32px;
+      flex-grow: 1;
+      background-color: c.$C_DARKGRAY;
+      padding: 12px;
+      border-radius: 6px;
+
+      .content {
+        @include m.flex(flex-start, flex-start, column);
+        row-gap: 8px;
+
+        > h2 {
+          font-size: 28px;
+          font-weight: 700;
+        }
+      }
+      .pending {
+        @include m.flex;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: c.$C_PINK;
+        font-size: 50px;
+        font-weight: 800;
+      }
+
+      .clear {
+        @include m.flex;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: c.$C_PURPLE;
+        font-size: 50px;
+      }
+      > p {
+        position: absolute;
+        top: 50%;
+        right: 48px;
+        transform: translate(50%, -50%);
+        font-size: 28px;
+        font-weight: 700;
+      }
+    }
+  }
+}

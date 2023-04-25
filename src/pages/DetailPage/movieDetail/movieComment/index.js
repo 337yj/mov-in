@@ -4,8 +4,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { getMovieMyReview, getReviewsMovie } from "../../../../api/Review";
 import { commentModalState, userState } from "../../../../state";
 import Comment from "../../CommentList/Comment";
-import styles from "./movieComment.module.scss";
 import CommentModal from "../../_shared/CommentModal";
+import styles from "./movieComment.module.scss";
 
 const MovieComment = ({ movie, toast }) => {
   const { id } = useParams();

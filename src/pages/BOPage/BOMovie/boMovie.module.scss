@@ -15,7 +15,12 @@
   }
 
   .searchWrapper {
-    @include m.flex(flex-end, null, row);
+    @include m.flex(flex-end, center);
+    width: 100%;
     column-gap: 10px;
+
+    .searchInput {
+      width: 260px;
+    }
   }
 }

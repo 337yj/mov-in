@@ -1,0 +1,54 @@
+@use "../../../../styles/constants" as c;
+@use "../../../../styles/mixins/" as m;
+
+.reportContent {
+  color: c.$C_WHITE_40;
+}
+
+.comment {
+  background-color: c.$C_DARKGRAY;
+  padding: 12px;
+  border-radius: 8px;
+
+  margin-top: 72px;
+  .userInfo {
+    @include m.flex(space-between);
+    border-bottom: 1px solid c.$C_WHITE;
+    padding-bottom: 12px;
+    > div {
+      @include m.flex(flex-start);
+
+      > p {
+        margin-left: 20px;
+      }
+    }
+
+    .profileImage {
+      width: 40px;
+    }
+  }
+
+  .score {
+    font-size: 16px;
+  }
+
+  .content {
+    margin-top: 24px;
+    border-bottom: 1px solid c.$C_WHITE;
+    padding-bottom: 12px;
+  }
+
+  .footer {
+    @include m.flex(space-between);
+    font-size: 16px;
+    margin-top: 24px;
+  }
+}
+
+.buttonWrapper {
+  @include m.flex(flex-end);
+  position: absolute;
+  bottom: 20px;
+  column-gap: 12px;
+  right: 20px;
+}

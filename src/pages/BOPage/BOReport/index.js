@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { getReportStatus, getReports } from "../../../api/Report";
+import {
+  deleteReport,
+  getReportStatus,
+  getReports,
+  updateReport,
+} from "../../../api/Report";
 
 import styles from "./boReport.module.scss";
 
@@ -11,6 +16,8 @@ import {
   SearchInput,
   Table,
 } from "../../../components";
+import { BoReportModal } from "../_shared";
+import dayjs from "dayjs";
 
 const columns = [
   { Header: "신고일자", accessor: "신고일자" },
@@ -38,10 +45,12 @@ const BOReport = () => {
     id: report.id,
     신고일자: dayjs(report.createdAt, "YYYYMMDD").format("YYYY.MM.DD"),
     닉네임: report.user.nickname ?? "-",
-    신고사유: user.reason ?? "-",
+    신고사유: report.reason ?? "-",
     "코멘트 내용": report.review.content ?? "-",
     처리내역: getReportType(report.type),
-    처리일자: dayjs(report.processedAt, "YYYYMMDD").format("YYYY.MM.DD"),
+    처리일자: report.processedAt
+      ? dayjs(report.processedAt, "YYYYMMDD").format("YYYY.MM.DD")
+      : "-",
   }));
 
   const onChange = (page) => {
@@ -51,13 +60,13 @@ const BOReport = () => {
   const onClickModal = (user) => {
     return () => {
       setModal(!modal);
-      setClickedUser(user);
+      setClickedReport(user);
     };
   };
 
   const onCloseModal = () => {
     setModal(!modal);
-    setClickedUser(null);
+    setClickedReport(null);
   };
 
   const onGetReportStatus = async () => {
@@ -78,6 +87,31 @@ const BOReport = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const onIgnoreReport = async () => {
+    selectedReport.forEach(async (id) => {
+      await updateReport(id, {
+        type: "IGNORE",
+      });
+    });
+    onGetReports();
+  };
+
+  const onUserDeleteReport = async () => {
+    selectedReport.forEach(async (id) => {
+      await updateReport(id, {
+        type: "USER_DELETE",
+      });
+    });
+    onGetReports();
+  };
+
+  const onDeleteReport = async () => {
+    selectedReport.forEach(async (id) => {
+      await deleteReport(id);
+    });
+    onGetReports();
   };
 
   const onSearchReports = async () => {
@@ -103,6 +137,7 @@ const BOReport = () => {
   };
 
   useEffect(() => {
+    onGetReports();
     onGetReportStatus();
   }, []);
 
@@ -136,13 +171,25 @@ const BOReport = () => {
           onSubmit={onSearchReports}
         />
         <div>
-          <Button className={styles.deleteButton} color={"secondary"}>
+          <Button
+            className={styles.deleteButton}
+            color={"secondary"}
+            onClick={onIgnoreReport}
+          >
             무시
           </Button>
-          <Button className={styles.deleteButton} color={"warning"}>
+          <Button
+            className={styles.deleteButton}
+            color={"warning"}
+            onClick={onDeleteReport}
+          >
             삭제
           </Button>
-          <Button className={styles.deleteButton} color={"danger"}>
+          <Button
+            className={styles.deleteButton}
+            color={"danger"}
+            onClick={onUserDeleteReport}
+          >
             탈퇴
           </Button>
         </div>
@@ -160,11 +207,6 @@ const BOReport = () => {
               보기
             </Button>
           )}
-          secondButton={(id) => (
-            <Button color={"danger"} onClick={onClickDelete(id)}>
-              탈퇴
-            </Button>
-          )}
         />
       )}
       <Paging
@@ -173,6 +215,12 @@ const BOReport = () => {
         postPerPage={POST_PER_PAGE}
         pageRangeDisplayed={5}
         onChange={onChange}
+      />
+      <BoReportModal
+        modal={modal}
+        report={clickedReport}
+        setModal={setModal}
+        onClose={onGetReports}
       />
     </section>
   );

@@ -7,17 +7,24 @@ import { Modal, Button, Input } from "../../../../components";
 import styles from "./boUserModal.module.scss";
 import dayjs from "dayjs";
 import { ImageProfile2 } from "../../../../assets";
+import * as ProfileImages from "../../../../assets/images/profileImages";
 import { BsHeart, BsLinkedin } from "react-icons/bs";
 import { TfiCommentAlt } from "react-icons/tfi";
+import { useNavigate } from "react-router-dom";
 
 const BoUserModal = ({ userId, modal, onCloseModal }) => {
   const [user, setUser] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
 
   const onClickModal = () => {
     onCloseModal();
     setUser(null);
   };
+
+  const onClickToUserPage = () => {
+    navigate(`/userPage/${user?.id}`);
+  }
 
   const onClickDelete = async () => {
     await deleteUser(id);
@@ -71,9 +78,13 @@ const BoUserModal = ({ userId, modal, onCloseModal }) => {
               <img
                 className={styles.profileImage}
                 src={
-                  (user?.profileImage && user?.profileImage?.includes("Up")) ||
-                  ImageProfile2
+                  !user?.profileImage || user?.profileImage.includes("Icon")
+                  ? ImageProfile2
+                  : Object.entries(ProfileImages).filter(([key, value]) => {
+                      return key === user?.profileImage;
+                    })[0][1]
                 }
+                onClick={onClickToUserPage}
                 alt="thumbnail"
               />
               <div className={styles.count}>

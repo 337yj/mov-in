@@ -9,8 +9,8 @@ import {
   deleteManyReviews,
 } from "../../../api/Review";
 
-import { SearchInput, Table, Button, Paging } from "../../../components";
-import { BoCommentModal } from "../_shared";
+import { Table, Button, Paging } from "../../../components";
+import { BoCommentModal, SearchInput } from "../_shared";
 
 import styles from "./boComment.module.scss";
 import dayjs from "dayjs";

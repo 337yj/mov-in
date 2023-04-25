@@ -4,8 +4,8 @@ import dayjs from "dayjs";
 
 import { getMovies, getMovie, getMoviesCount } from "../../../api/Movie";
 
-import { SearchInput, Table, Button, Paging, Input } from "../../../components";
-import { BoMovieModal } from "../_shared";
+import { Table, Button, Paging, Input } from "../../../components";
+import { BoMovieModal, SearchInput } from "../_shared";
 import cx from "classnames";
 import styles from "./boMovie.module.scss";
 import { IconSearch } from "../../../assets";

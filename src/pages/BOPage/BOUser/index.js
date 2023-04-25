@@ -9,7 +9,7 @@ import {
   getUsersDetail,
 } from "../../../api/User";
 
-import { Button, Paging, Table } from "../../../components/Common";
+import { Button, Paging, SearchInput, Table } from "../../../components/Common";
 import { BoUserModal } from "../_shared";
 
 import styles from "./boUser.module.scss";
@@ -29,8 +29,9 @@ const BOUser = ({ user }) => {
 
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
+  const [form, setForm] = useState();
 
   const [modal, setModal] = useState(false);
 
@@ -59,12 +60,14 @@ const BOUser = ({ user }) => {
     setPage(page);
   };
 
-  const onClickDelete = async () => {
-    if (response.status === 204) {
-      await deleteUser(id);
-      alert("탈퇴되었습니다.");
-      await onGetUserDetail();
-    }
+  const onClickDelete = (id) => {
+    return async () => {
+      if (response.status === 204) {
+        await deleteUser(id);
+        alert("탈퇴되었습니다.");
+        await onGetUserDetail();
+      }
+    };
   };
 
   const onGetUsers = async () => {
@@ -73,6 +76,19 @@ const BOUser = ({ user }) => {
       if (response.status === 200) {
         //NOTE: 페이지가 바뀌면 기존 데이터를 지우고 새로운 데이터를 추가
         setUsers(response.data.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onSearchUsers = async () => {
+    try {
+      const response = await getUsers(page, POST_PER_PAGE, form);
+      if (response.status === 200) {
+        //NOTE: 페이지가 바뀌면 기존 데이터를 지우고 새로운 데이터를 추가
+        setUsers(response.data.data);
+        setTotalCount(response.data.paging.total);
       }
     } catch (error) {
       console.error(error);
@@ -102,6 +118,16 @@ const BOUser = ({ user }) => {
     }
   };
 
+  const onChangeInput = (e) => {
+    const { value } = e.currentTarget;
+
+    //NOTE: 검색어가 있다가 사라지면 다시 데이터를 불러오는 로직
+    if (value.length === 0) {
+      onGetUsers();
+    }
+    setForm(value);
+  };
+
   useEffect(() => {
     onGetUsers();
     onGetUsersCount();
@@ -113,13 +139,15 @@ const BOUser = ({ user }) => {
   return (
     <section className={styles.wrapper}>
       <h1>유저 관리 페이지</h1>
-      <div className={styles.searchWrapper}>
-        {/* <SearchInput
-          value={user?.name}
-          placeholder={"회원 닉네임을 검색하세요."}
-        /> */}
-      </div>
+
       <div className={styles.deleteWrapper}>
+        <SearchInput
+          className={styles.searchInput}
+          value={form}
+          placeholder={"회원 닉네임을 검색하세요."}
+          onChange={onChangeInput}
+          onSubmit={onSearchUsers}
+        />
         <Button
           className={styles.deleteButton}
           color={"danger"}
@@ -131,16 +159,18 @@ const BOUser = ({ user }) => {
       <Table
         columns={columns}
         data={data}
+        setCheckedItems={setSelectedUser}
+        checkedItems={selectedUser}
         firstButton={(user) => (
           <Button color={"warning"} onClick={onClickModal(user)}>
             보기
           </Button>
         )}
-        secondButton={
-          <Button color={"danger"} onClick={onClickDelete}>
+        secondButton={(id) => (
+          <Button color={"danger"} onClick={onClickDelete(id)}>
             탈퇴
           </Button>
-        }
+        )}
       />
       <BoUserModal
         userId={selectedUser}

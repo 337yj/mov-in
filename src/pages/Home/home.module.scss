@@ -34,18 +34,18 @@
     @include m.flex(left);
     width: 100%;
     min-height: 750px;
-    object-fit: contain;
+
     background: linear-gradient(
         c.$C_TRANSPARENT,
         c.$C_INDIGO_30,
         c.$C_INDIGO_30,
         c.$C_INDIGO
       ),
-      url("https://t1.daumcdn.net/movie/41172a2470f7122450d5d0932550daae5dc6f7b2");
+      url("https://www.kukinews.com/data/kuk/image/2023/02/28/kuk202302280369.680x.0.jpg");
 
     background: {
       size: cover;
-      position: 10% 10%;
+      position: 20% 10%;
       repeat: no-repeat;
     }
   }

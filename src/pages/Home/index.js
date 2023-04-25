@@ -18,8 +18,7 @@ const HORROR_ID = "a3864a82-d9c1-4bf5-a891-0acc2e479090";
 const ROMANCE_ID = "73fa7e1d-0e3e-4506-9432-21c29faa8dd7";
 const ACTION_ID = "fc84777a-d713-4539-a5b9-8c24f0c85b99";
 const FANTASY_ID = "360b5842-fc83-4ea9-a7fa-0d62017b975b";
-const MAIN_ID = "0cb81bbb-0c66-4152-8ca5-680ffb717779";
-
+const MAIN_ID = "a672a7aa-aabb-4344-84c1-da1054661c54";
 const Home = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -129,7 +128,7 @@ const Home = () => {
   useEffect(() => {
     onGetMainDetail();
   }, [id]);
-
+  console.log({ mainInfo });
   return (
     <main className={styles.wrapper}>
       <section>
@@ -140,17 +139,20 @@ const Home = () => {
               {dayjs(mainInfo?.releasedAt, "YYYYMMDD").format("YYYY.MM")}
               <span>
                 <BsStarFill className={styles.star} />
-                {mainInfo?.averageScore.toFixed(1)}
+                {mainInfo?.averageScore?.toFixed(1) || 0}
               </span>
             </p>
             <p className={styles.plot}>{mainInfo?.plot}</p>
-            <Button color={"warning"} children={"더보기"} className={styles.btnStyle} onClick={onClickDetail}/>
+            <Button
+              color={"warning"}
+              children={"더보기"}
+              className={styles.btnStyle}
+              onClick={onClickDetail}
+            />
           </div>
         </div>
         <div className={styles.listWrapper}>
-          <h1 className={styles.mainTitle}>
-            인기 10위 영화
-          </h1>
+          <h1 className={styles.mainTitle}>인기 10위 영화</h1>
           <Carousel slidesToShow="4" slidesToScroll="4" movies={topTen} />
           <h1 className={styles.mainTitle}>연애세포를 깨우는 로맨스 영화</h1>
           <Carousel slidesToShow="5" slidesToScroll="5" movies={romanceList} />

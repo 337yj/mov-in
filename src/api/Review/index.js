@@ -84,8 +84,12 @@ export const deleteAdminReviews = (id) => {
 };
 
 // 리뷰 다수 삭제
-export const deleteManyReviews = () => {
-  return apiClient.delete(`/reviews/many/admin`);
+export const deleteManyReviews = (reviewIds) => {
+  return apiClient.delete(`/reviews/admin/many`, {
+    params: {
+      reviewIds,
+    },
+  });
 };
 
 // 리뷰 댓글 생성

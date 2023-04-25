@@ -26,7 +26,7 @@ const BOMovie = () => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
 
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
 
   const [form, setForm] = useState();
@@ -60,10 +60,9 @@ const BOMovie = () => {
   };
 
   const onSetData = (data, total) => {
-    const totalPage = Math.ceil(total / POST_PER_PAGE);
-    // setMovieData(data);
+    setMovies(data);
     setCount(total);
-    setPage(totalPage);
+    setTotalCount(total);
   };
 
   const onGetMovies = async () => {
@@ -102,12 +101,14 @@ const BOMovie = () => {
   };
 
   // 영화 검색 기능
-  const onSearch = async (e) => {
-    e.preventDefault();
+  const onSearch = async () => {
     setPage(1);
-    const response2 = await getMovies(1, POST_PER_PAGE, form);
+    const response2 = await getMovies(1, POST_PER_PAGE, {
+      title: form,
+    });
     onSetData(response2.data.data, response2.data.paging.total);
   };
+
   const onSearchPageChange = async () => {
     const response2 = await getMovies(page, POST_PER_PAGE, form);
     onSetData(response2.data.data, response2.data.paging.total);
@@ -137,43 +138,32 @@ const BOMovie = () => {
     onGetMoviesCount();
   }, [page, id]);
 
-  //console.log({ selectedMovie, movies });
-
   return (
     <main className={styles.wrapper}>
       <h1>영화 관리 페이지</h1>
 
       <div className={styles.searchWrapper}>
-        {/* <form
-          id="searchForm"
-          className={cx(styles.searchInput, styles["iconLocation"])}
-        >
-          <input
-            onChange={onChange}
-            name="title"
-            value={form}
-            placeholder="영화 제목을 입력해주세요."
-            className={styles.inputWrapper}
-          />
-          <button
-            type="submit"
-            form="searchForm"
-            onClick={onSearch}
-            className={styles.searchBtn}
-          >
-            <IconSearch className={styles.iconSearch} />
-          </button>
-        </form> */}
+        <SearchInput
+          onChange={onChange}
+          name="title"
+          value={form}
+          placeholder="영화 제목을 입력해주세요."
+          className={styles.searchInput}
+          isAdmin
+          onSubmit={onSearch}
+        />
       </div>
       <Table
         columns={columns}
         data={data}
+        setCheckedItems={setSelectedMovie}
+        checkedItems={selectedMovie}
         firstButton={(movie) => (
           <Button color={"warning"} onClick={onClickModal(movie)}>
             보기
           </Button>
         )}
-        secondButton={<Button color={"primary"}>수정</Button>}
+        secondButton={() => <Button color={"primary"}>수정</Button>}
       />
       <BoMovieModal
         movieId={selectedMovie}

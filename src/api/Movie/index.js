@@ -1,8 +1,10 @@
 import apiClient from "../apiClient";
 
 // 전체 영화 목록 불러오기, limit 20개 까지(임의)
-export const getMovies = (page = 1, limit = 20) => {
-  return apiClient.get(`movies?page=${page}&limit=${limit}`);
+export const getMovies = (page = 1, limit = 20, params) => {
+  return apiClient.get(`movies?page=${page}&limit=${limit}`, {
+    params,
+  });
 };
 
 // 영화 디테일 불러오기

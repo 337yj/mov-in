@@ -27,7 +27,9 @@ const SearchResult = () => {
 
   const onGetMovies = useCallback(async () => {
     if (searchText !== "") {
-      const response = await getMovies(1, 200, searchText);
+      const response = await getMovies(1, 200, {
+        title: searchText,
+      });
       if (response.status === 200) {
         const items = [...response.data.data];
         setMovies(items);

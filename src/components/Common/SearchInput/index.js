@@ -18,7 +18,7 @@ const SearchInput = ({ className, placeholder, ...props }) => {
 
   const onClick = () => {
     navigate("/searchResult", {
-      state
+      state,
     });
   };
 

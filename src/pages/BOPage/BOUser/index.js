@@ -143,7 +143,7 @@ const BOUser = ({ user }) => {
         <SearchInput
           className={styles.searchInput}
           value={form}
-          placeholder={"회원 닉네임을 검색하세요."}
+          placeholder={"회원 이름을 검색하세요."}
           onChange={onChangeInput}
           onSubmit={onSearchUsers}
         />

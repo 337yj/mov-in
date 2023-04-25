@@ -9,14 +9,8 @@ import {
 import styles from "./boReport.module.scss";
 
 import { getReportType } from "./constants";
-import {
-  Button,
-  NoResult,
-  Paging,
-  SearchInput,
-  Table,
-} from "../../../components";
-import { BoReportModal } from "../_shared";
+import { Button, NoResult, Paging, Table } from "../../../components";
+import { BoReportModal, SearchInput } from "../_shared";
 import dayjs from "dayjs";
 
 const columns = [

@@ -9,14 +9,8 @@ import {
   getUsersDetail,
 } from "../../../api/User";
 
-import {
-  Button,
-  NoResult,
-  Paging,
-  SearchInput,
-  Table,
-} from "../../../components/Common";
-import { BoUserModal } from "../_shared";
+import { Button, NoResult, Paging, Table } from "../../../components/Common";
+import { BoUserModal, SearchInput } from "../_shared";
 
 import styles from "./boUser.module.scss";
 

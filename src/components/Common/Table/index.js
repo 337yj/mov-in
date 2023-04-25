@@ -113,8 +113,8 @@ const Table = ({
                 );
               })}
               {/* //TODO: 테이블을 사용하는 다른 페이지에서도 firstButton을 함수로 바꿔야한다. */}
-              <td>{firstButton && firstButton(row.original.id)}</td>
-              <td>{secondButton && secondButton(row.original.id)}</td>
+              <td className={styles.buttonTd}>{firstButton && firstButton(row.original.id)}</td>
+              <td className={styles.buttonTd}>{secondButton && secondButton(row.original.id)}</td>
             </tr>
           );
         })}

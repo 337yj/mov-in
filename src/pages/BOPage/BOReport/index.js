@@ -15,7 +15,7 @@ import dayjs from "dayjs";
 
 const columns = [
   { Header: "신고일자", accessor: "신고일자" },
-  { Header: "닉네임", accessor: "닉네임" },
+  { Header: "신고자", accessor: "신고자" },
   { Header: "신고사유", accessor: "신고사유" },
   { Header: "코멘트 내용", accessor: "코멘트 내용" },
   { Header: "처리내역", accessor: "처리내역" },
@@ -38,7 +38,7 @@ const BOReport = () => {
   const data = reports.map((report) => ({
     id: report.id,
     신고일자: dayjs(report.createdAt, "YYYYMMDD").format("YYYY.MM.DD"),
-    닉네임: report.user.nickname ?? "-",
+    신고자: report.user.nickname ?? "-",
     신고사유: report.reason ?? "-",
     "코멘트 내용": report.review.content ?? "-",
     처리내역: getReportType(report.type),

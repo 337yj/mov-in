@@ -68,6 +68,7 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
         className={styles.boMovieModal}
         movie={movie}
         title={"영화 관리"}
+        subTitle={"현재 등록된 영화를 조회할 수 있습니다"}
         onClick={onClickModal}
       >
         <form className={styles.wrapper}>
@@ -78,47 +79,47 @@ const BoMovieModal = ({ movieId, modal, onCloseModal }) => {
               alt="thumbnail"
             />
             <div className={styles.content}>
-              <p className={styles.movieTitle}>{movie.title}</p>
+              <span className={styles.movieTitle}>{movie.title}</span>
+              <span>
+                  {dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}
+                </span>
               <div className={styles.contentInfo}>
                 <p>{movie.runtime}분 |</p>
-                <p>{movie.genres.map((genre) => genre?.name).join(", ")} |</p>
-                <p>
-                  {dayjs(movie.releasedAt, "YYYYMMDD").format("YYYY.MM.DD")}
-                </p>
+                <p>{movie.genres.map((genre) => genre?.name).join(", ")}</p>
               </div>
               <div className={styles.likeButton} color={"dark"}>
                 <BsFillHeartFill className={styles.IconHeart} />
-                {movie.likeCount}
+                {movie.likeCount} 명이 좋아합니다
               </div>
               <div className={styles.views} color="dark">
                 {movie.reviewCount}
               </div>
               <div className={styles.averageScore} color={"dark"}>
-                <h2>평균평점</h2>{" "}
+                {/* <h2>평균평점</h2>{" "} */}
                 {movie.averageScore ? (
                   <span className={styles.averageScore}>
                     <BsStarFill className={styles.IconStar} />
-                    {movie.averageScore.toFixed(1)}
+                    {movie?.averageScore.toFixed(1)}
                   </span>
-                ) : null}
+                ) : <span>등록된 평점이 없습니다</span>}
               </div>{" "}
               <p className={styles.plot}>{movie.plot}</p>
             </div>
           </section>{" "}
           <div className={styles.buttonWrapper}>
-            <Button
+            {/* <Button
               className={styles.modify}
               color={"primary"}
               onClick={onSubmit}
             >
               수정
-            </Button>
+            </Button> */}
             <Button
               className={styles.cancel}
-              color={"secondary"}
+              color={"primary"}
               onClick={onClickModal}
             >
-              취소
+              닫기
             </Button>
           </div>
         </form>

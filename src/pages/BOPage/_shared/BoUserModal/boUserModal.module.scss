@@ -3,8 +3,9 @@
 
 .boUserModal {
   position: relative;
-  width: 540px;
-  height: 800px;
+  width: 600px;
+  height: 740px;
+  padding: 70px;
 }
 
 .wrapper {
@@ -18,21 +19,30 @@
     
     > figure {
       @include m.flex(center, center, column);
-      row-gap: 12px;
+      row-gap: 18px;
     }
     .count {
       @include m.flex(space-between, center);
-      width: 120px;
+      width: 100px;
       padding: 4px 32px;
-      background-color: c.$C_DARKGRAY_80;
+      font-size: 16px;
+      background-color: c.$C_WHITE_10;
       border-radius: 10px;
+
       > svg {
-        width: 20px;
+        width: 18px;
       }
     }
 
     .profileImage {
-      width: 160px;
+      width: 140px;
+    }
+  }
+
+  .content {
+    >h4 {
+      font-size : 20px;
+      padding-bottom: 4px;
     }
   }
 
@@ -40,7 +50,7 @@
     @include m.flex(flex-end);
     position: absolute;
     column-gap: 12px;
-    bottom: 20px;
+    bottom: 0px;
     right: 0px;
   }
 }

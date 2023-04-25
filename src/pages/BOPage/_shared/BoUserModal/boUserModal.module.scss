@@ -11,8 +11,11 @@
   height: 100%;
   display: block;
   position: relative;
+  animation: fadeIn 0.5s ease-in-out forwards;
+  
   .profileWrapper {
     @include m.flex(space-between);
+    
     > figure {
       @include m.flex(center, center, column);
       row-gap: 12px;
@@ -39,5 +42,15 @@
     column-gap: 12px;
     bottom: 20px;
     right: 0px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
   }
 }

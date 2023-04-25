@@ -110,7 +110,7 @@ const ReportModal = ({ review, modal, setModal }) => {
                 {review.user?.nickname ?? review.user?.name}
               </p>
             </div>
-            <p className={styles.score}>평점 {review.score}</p>
+            <p className={styles.score}>평점 {review.score?.toFixed(1)}</p>
           </div>
           <p className={styles.content}>{review.content}</p>
           <div className={styles.footer}>

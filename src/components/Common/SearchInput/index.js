@@ -20,6 +20,7 @@ const SearchInput = ({ className, placeholder, ...props }) => {
     navigate("/searchResult", {
       state,
     });
+    setState({keyword : ""});
   };
 
   return (

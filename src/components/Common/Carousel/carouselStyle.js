@@ -11,16 +11,17 @@ const StyledSlider = styled(Slider)`
     //left: 0px;
     z-index: 10;
     scale: 200%;
-    margin-right: 20px;
+    //margin-right: 100px;
   }
 
   .slick-next {
-    //right: 0;
+    position : absolute;
+    left : 1340px;
     scale: 200%;
   }
 
   .slick-list {
-    width: 100%; // 구체적으로 안 넣으니까 제대로 안 뜸
+    width: 1340px; // 구체적으로 안 넣으니까 제대로 안 뜸
     // margin: 10px 14px;
   }
 `;

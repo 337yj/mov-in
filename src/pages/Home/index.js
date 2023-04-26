@@ -129,7 +129,7 @@ const Home = () => {
   useEffect(() => {
     onGetMainDetail();
   }, [id]);
-  console.log({ mainInfo });
+  //console.log({ mainInfo });
   return (
     <main className={styles.wrapper}>
       <section>
@@ -153,14 +153,26 @@ const Home = () => {
           </div>
         </div>
         <div className={styles.listWrapper}>
-          <h1 className={styles.mainTitle}>인기 10위 영화</h1>
-          <Carousel slidesToShow="4" slidesToScroll="4" movies={topTen} />
-          <h1 className={styles.mainTitle}>연애세포를 깨우는 로맨스 영화</h1>
-          <Carousel slidesToShow="5" slidesToScroll="5" movies={romanceList} />
-          <h1 className={styles.mainTitle}>긴장감 넘치는 액션 영화</h1>
-          <Carousel slidesToShow="5" slidesToScroll="5" movies={genreList} />
-          <h1 className={styles.mainTitle}>오싹한 공포 영화</h1>
-          <Carousel slidesToShow="5" slidesToScroll="5" movies={horrorList} />
+          <div>
+            <h1 className={styles.mainTitle}>인기 10위 영화</h1>
+            <Carousel slidesToShow="4" slidesToScroll="4" movies={topTen} />
+          </div>
+          <div>
+            <h1 className={styles.mainTitle}>연애세포를 깨우는 로맨스 영화</h1>
+            <Carousel
+              slidesToShow="5"
+              slidesToScroll="5"
+              movies={romanceList}
+            />
+          </div>
+          <div>
+            <h1 className={styles.mainTitle}>긴장감 넘치는 액션 영화</h1>
+            <Carousel slidesToShow="5" slidesToScroll="5" movies={genreList} />
+          </div>
+          <div>
+            <h1 className={styles.mainTitle}>오싹한 공포 영화</h1>
+            <Carousel slidesToShow="5" slidesToScroll="5" movies={horrorList} />
+          </div>
           {/* <h1 className={styles.mainTitle}>판타지</h1>
           <Carousel slidesToShow="5" slidesToScroll="5" movies={fantasyList} /> */}
         </div>

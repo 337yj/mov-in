@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 //import dayjs from "dayjs";
@@ -28,6 +28,7 @@ const UserInfo = () => {
   const [floatToast, setFloatToast] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
   const [err, setErr] = useState({});
+  const [isClicked, setIsClicked] = useState(false);
   //const [showPsw, setShowPsw] = useState("text");
   const [form, setForm] = useState({
     nickname: "",
@@ -63,6 +64,10 @@ const UserInfo = () => {
       setMe(response.data);
     }
   };
+
+  const onClickInput = () => {
+    setIsClicked(!isClicked);
+  }
 
   const getProfileImage = (id) => {
     setForm({
@@ -238,7 +243,7 @@ const UserInfo = () => {
             </div>
             <div>
               <form>
-                {err && <p className={styles.errText}>{err.password}</p>}
+                {isClicked && err && <p className={styles.errText}>{err.password}</p>}
                 <Input
                   name="password"
                   label="비밀번호"
@@ -247,6 +252,7 @@ const UserInfo = () => {
                   placeholder={"현재 혹은 새로운 비밀번호를 입력해주세요"}
                   value={form?.password || ""}
                   onChange={onChangeInfo}
+                  onClick={onClickInput}
                   className={styles.inputText}
                 />
               </form>

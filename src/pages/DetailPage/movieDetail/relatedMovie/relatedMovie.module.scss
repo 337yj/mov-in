@@ -5,8 +5,10 @@
   width: 100%;
   margin: 12px;
   height: 540px;
+  margin-bottom: 70px;
+
   > h2 {
-    padding: 24px 0;
+    padding: 24px 0 40px 0;
     border-top: 1px solid c.$C_DARKGRAY;
     font-size: 24px;
     font-weight: 700;
@@ -16,25 +18,35 @@
     @include m.flex(flex-start);
     flex-wrap: nowrap;
     gap: 16px;
-    padding-bottom: 16px;
+    padding-bottom: 30px;
     overflow-x: scroll;
     overflow-y: hidden;
 
     &::-webkit-scrollbar {
+      // width: 8%;
       display: block;
     }
 
     &::-webkit-scrollbar-thumb {
-      width: 8%;
-      height: 10px;
-      background-color: c.$C_DARKGRAY;
+      height: 6px;
+      // width: 5px;
+      background-color: c.$C_PURPLE;
       border-radius: 50px;
+      box-shadow: inset 3px 3px 10px #1c092c;
+    }
+
+    &::-webkit-scrollbar-track {
+      // height: 6px;
+      border-radius: 50px;
+      background-color: c.$C_WHITE_10;
     }
 
     .card {
       .cardImg {
-        width: 260px;
+        width: 258px;
+        height: 390px;
         border-radius: 6px;
+        object-fit: cover;
       }
     }
   }

@@ -25,12 +25,17 @@ const Login = () => {
     email: "",
     password: "",
   });
-
   const onGetMe = async () => {
-    const response = await getUsersMe();
-    if (response.status === 200) {
-      const data = response.data;
-      setUser(data);
+    try {
+      const response = await getUsersMe();
+      if (response.status === 200) {
+        const data = response.data;
+        setUser(data);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        return;
+      }
     }
   };
 

@@ -33,7 +33,7 @@ const RelatedMovie = () => {
       <h2>연관된 영화</h2>
 
       <ul className={styles.listWrapper} ref={containerRef}>
-        {relatedMovie.map((movie) => (
+        {relatedMovie.slice(0, 10).map((movie) => (
           <li key={movie.id} className={styles.card}>
             <Card className={styles.cardImg} movie={movie} />
           </li>

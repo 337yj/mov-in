@@ -2,8 +2,6 @@
 @use "../../../styles/mixins" as m;
 
 .wrapper {
-  // width: 200px;
-
   .img {
     width: 260px;
     height: 370px;
@@ -11,7 +9,7 @@
     border-radius: 10px;
 
     &.shadow {
-      border : 1px solid c.$C_WHITE_10;
+      border: 1px solid c.$C_WHITE_10;
     }
   }
 

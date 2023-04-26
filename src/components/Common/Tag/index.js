@@ -2,7 +2,6 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import cx from "classnames";
 import styles from "./tag.module.scss";
 
-//NOTE: type보다는 isSelected를 사용해서 선택이 됐음을 강조.
 const Tag = ({
   className,
   id,
@@ -41,40 +40,3 @@ const Tag = ({
 };
 
 export default memo(Tag);
-
-// const Tag = ({
-//   className,
-//   text,
-//   id,
-//   isSelected,
-//   onSelect,
-//   isDisabled,
-//   selectedPoints = [],
-//   ...props
-// }) => {
-//   const [isActive, setIsActive] = useState(isSelected || false);
-
-//   const onClick = () => {
-//     if (!isDisabled) {
-//       setIsActive(!isActive);
-//       onSelect(id);
-//     }
-//   };
-
-//   useEffect(() => {
-//     setIsActive(isSelected);
-//   }, [isSelected]);
-
-//   return (
-//     <button
-//       disabled={isDisabled}
-//       onClick={onClick}
-//       type="button"
-//       className={cx(styles.tag, className, { [styles.isActive]: isActive })}
-//     >
-//       {text}
-//     </button>
-//   );
-// };
-
-// export default Tag;

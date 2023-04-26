@@ -38,6 +38,8 @@ const UserInfo = () => {
     profileImage: "",
   });
 
+  const passwordInput = useRef()
+
   const navigate = useNavigate();
 
   // const noPassword = (form) => {

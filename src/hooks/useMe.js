@@ -6,11 +6,22 @@ import { userState } from "../state";
 const useMe = () => {
   const [user, setUser] = useRecoilState(userState);
 
-  const onGetMe = async () => {
-    const me = await getUsersMe();
+  // const onGetMe = async () => {
+  //   const me = await getUsersMe();
 
-    if (me.data) {
-      setUser(me.data);
+  //   if (me.data) {
+  //     setUser(me.data);
+  //   }
+  // };
+
+  const onGetMe = async () => {
+    try {
+      const me = await getUsersMe();
+      if (me.data) {
+        setUser(me.data);
+      }
+    } catch (error) {
+      return;
     }
   };
 

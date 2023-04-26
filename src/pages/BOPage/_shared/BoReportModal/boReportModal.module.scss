@@ -10,7 +10,7 @@
 .comment {
   background-color: c.$C_WHITE_10;
   padding: 40px;
-  margin-top: 65px;
+  margin-top: 40px;
   border-radius: 8px;
   font-size: 18px;
   animation: fadeIn 0.5s ease-in-out forwards;
@@ -40,7 +40,7 @@
   }
 
   .content {
-    margin-top: 24px;
+    margin-top: 20px;
     border-bottom: 1px solid c.$C_WHITE_40;
     padding-bottom: 12px;
   }
@@ -54,9 +54,9 @@
 
 .buttonWrapper {
   @include m.flex(flex-end);
-  margin-right: 24px;
+  margin-right: 30px;
   position: absolute;
-  bottom: 40px;
+  bottom: 50px;
   column-gap: 12px;
   right: 20px;
   animation: fadeIn 0.5s ease-in-out forwards;

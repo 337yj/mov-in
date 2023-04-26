@@ -2,21 +2,27 @@
 @use "../../styles/mixins/" as m;
 
 .wrapper {
-  //@include m.flex();
-  width: 100vw;
+  //@include m.flex(center, center, column);
+  width: 100%;
   min-height: 100vh;
   padding-bottom: 100px;
   // overflow: auto;
 
   .listWrapper {
-    width: 100vw;
-    padding: 0px 300px; // <--- 약간 어거지로 맞춤..ㅜ
+    @include m.flex(center, center, column);
+    width: 100%;
+    margin-top: 30px;
 
-    .mainTitle {
-      width: inherit;
-      padding: 80px 0 20px 12px;
-      font-weight: 700;
-      font-size: 30px;
+    > div {
+      @include m.flex(center, left, column);
+      padding: 30px 0px;
+      
+      .mainTitle {
+        padding-bottom: 20px;
+        width: inherit;
+        font-weight: 700;
+        font-size: 30px;
+      }
     }
 
     .mainMore {
@@ -33,7 +39,7 @@
   .bgWrapper {
     @include m.flex(left);
     width: 100%;
-    min-height: 750px;
+    min-height: 670px;
 
     background: linear-gradient(
         c.$C_TRANSPARENT,

@@ -48,7 +48,7 @@ const SearchResult = () => {
 
   return (
     <main className={styles.searchWrapper}>
-      {searchText !== "" && result.length !== 0 && (
+      {searchText !== "" && result.length !== 0 ? (
         <section>
           <h2 className={styles.searchTitle}>
             '<span className={styles.strongWord}>{searchText}</span>' 에 대한
@@ -64,8 +64,7 @@ const SearchResult = () => {
             })}
           </div>
         </section>
-      )}
-      {(searchText === "" || result.length === 0) && isFind && (
+      ) : (
         <section>
           <h2 className={styles.searchTitle}>
             '<span className={styles.strongWord}>{searchText}</span>' 에 대한

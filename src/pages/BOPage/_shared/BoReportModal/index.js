@@ -57,7 +57,7 @@ const BoReportModal = ({ modal, report, setModal, onClose }) => {
     if (reportData) onGetUser(reportData.userId);
   }, [reportData]);
 
-  console.log(reportData);
+  //console.log(reportData);
 
   return (
     modal && (

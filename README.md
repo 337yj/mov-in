@@ -13,15 +13,7 @@
 <b><a href="http://codestates.s3-website.ap-northeast-2.amazonaws.com/">🌐 사이트 바로가기</a></b> <br /><br />
 <b><a href="https://github.com/337yj/mov-in/wiki">👉 프로젝트를 더 자세히 보고 싶다면!</a></b>
 
-<br />
-
-<!-- <img height="220" alt="streaming" src="https://user-images.githubusercontent.com/85829962/146299269-865cdd03-8924-4564-96fe-d3bc3da72e09.png"> <img height="220" alt="mypage" src="https://user-images.githubusercontent.com/85829962/146310340-29861ea5-1e57-4f07-a96b-77b6c1d0e474.png">
-
-<b><a href="http://studeaming.com">👉🏼 studeaming 사이트 바로가기</a></b>  
-
-<b><a href="https://github.com/337yj/mov-in/wiki">👉🏼 프로젝트 위키 바로가기</a></b> -->
-
-
+<br /><br />
 
 <h1>MAIN FEATURES</h1>
 
@@ -38,23 +30,26 @@
 - 관리자 페이지가 따로 있어 **영화 목록 관리** 와 **회원 및 댓글 관리**가 가능 합니다.
 <br />
 <br />
-
-<h2>요구사항 정의서</h2>
-<img width="700" alt="requirements specification" src="https://user-images.githubusercontent.com/94007890/233959273-e9fec0f2-72f8-4032-856b-6da65dfac924.jpg" />
-<b><a href="https://github.com/337yj/mov-in/files/11310452/-.1.pdf">📃 요구사항 정의서 다운 받기</a></b> 
-<br />
-<br />
 <br />
 
 <h2>화면 정의서</h2>
-<img width="700" alt="requirements specification" src="https://user-images.githubusercontent.com/94007890/233996089-073e386e-3e18-4b1c-a5d0-b264729b2032.png" />
-<b><a href="https://www.figma.com/file/XJlRiBZTbNPZTXk5UHgBJQ/%ED%99%94%EB%A9%B4%EC%A0%95%EC%9D%98%EC%84%9C?node-id=1-2&t=u6xbdaA6wzIaII2l-0">🌐 Figma 바로가기</a></b>  
+<img width="700" alt="requirements specification" src="https://user-images.githubusercontent.com/94007890/234971096-cb958fb7-0d37-4c71-b237-b7c148e85673.png" />
+<b><a href="https://www.figma.com/file/XJlRiBZTbNPZTXk5UHgBJQ/%ED%99%94%EB%A9%B4%EC%A0%95%EC%9D%98%EC%84%9C?node-id=1-2&t=u6xbdaA6wzIaII2l-0">🌐 Figma 바로가기</a></b> 
+
+<br />
+<br />
+<br />
+
+<h2>요구사항 정의서</h2>
+<b><a href="https://github.com/337yj/mov-in/files/11310452/-.1.pdf">📃 요구사항 정의서 다운 받기</a></b> 
+
 <br />
 <br />
 <br />
 
 <h1>STACK</h1>
-<!-- <img width="700" alt="stack" src="https://user-images.githubusercontent.com/85681803/146872410-188275f2-f64c-4851-868e-da0814db3cfe.png" /> -->
+
+<img width="700" alt="stack" src="https://user-images.githubusercontent.com/94007890/234970490-5b6b81ba-7702-4578-8f8a-8782fa6de363.png" />
 
 
 ### **Front-end**

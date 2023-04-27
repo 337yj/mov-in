@@ -15,12 +15,16 @@ const useMe = () => {
   // };
 
   const onGetMe = async () => {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    if (!token) return;
+
     try {
       const me = await getUsersMe();
       if (me.data) {
         setUser(me.data);
       }
     } catch (error) {
+      // console.log(error);
       return;
     }
   };

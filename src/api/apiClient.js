@@ -33,6 +33,7 @@ apiClient.interceptors.response.use(
         refreshToken,
         accessToken,
       });
+
       if (response.data) {
         const { accessToken, refreshToken } = response.data;
         //NOTE: 토큰 저장
@@ -46,7 +47,7 @@ apiClient.interceptors.response.use(
       }
     }
 
-    return Promise.reject(error);
+    return error;
   },
 );
 

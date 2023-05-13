@@ -46,13 +46,54 @@ const Detail = () => {
     }
   }, [toastFloat]);
 
-  const onCopyClipBoard = async () => {
+  // const onCopyClipBoard = async () => {
+  //   const url = window.location.href;
+  //   try {
+  //     await navigator.clipboard.writeText(url);
+  //     toast("link");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // 텍스트 복사 기능 구현
+  // function onCopyClipBoard() {
+  //   // clipboard API 사용
+  //   const url = window.location.href;
+  //   // if (navigator.clipboard !== undefined) {
+  //   //   navigator.clipboard.writeText(url).then(() => {
+  //   //     alert("텍스트가 복사되었습니다.");
+  //   //   });
+  //   // } else {
+  //   // execCommand 사용
+  //   const textArea = document.createElement("textarea");
+  //   textArea.value = url;
+  //   document.body.appendChild(textArea);
+  //   textArea.select();
+  //   textArea.setSelectionRange(0, 99999);
+  //   try {
+  //     document.execCommand("copy");
+  //   } catch (err) {
+  //     console.error("복사 실패", err);
+  //   }
+  //   textArea.setSelectionRange(0, 0);
+  //   document.body.removeChild(textArea);
+  //   toast("link");
+  //   // }
+  // }
+  const onCopyClipBoard = () => {
     const url = window.location.href;
-    try {
-      await navigator.clipboard.writeText(url);
+    if (navigator.clipboard !== undefined) {
+      navigator.clipboard.writeText(url).then(() => {
+        toast("link");
+      });
+    } else {
+      const textArea = document.createElement("textarea");
+      document.body.appendChild(textArea);
+      textArea.value = url;
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
       toast("link");
-    } catch (error) {
-      console.log(error);
     }
   };
 

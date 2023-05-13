@@ -20,13 +20,6 @@ import styles from "./commentList.module.scss";
 const CommentList = ({}) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  //NOTE: 페이지가 바뀔 때마다 scroll을 최상단으로 올려준다. => react-router-dom scroll to top
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [location.pathname]);
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [location]);
   const [ref, inView] = useInView();
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);

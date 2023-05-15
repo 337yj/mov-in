@@ -32,7 +32,7 @@
 
 <br />
 
-<h2>Docs</h2>
+<h1>Docs</h1>
 <!-- <img width="300" alt="requirements specification" src="https://user-images.githubusercontent.com/94007890/234971096-cb958fb7-0d37-4c71-b237-b7c148e85673.png" /> -->
 
 - <b><a href="https://docs.google.com/spreadsheets/d/1RU99jICOMEqOjAc1fA44g-OIEeaNWWQm4ANsKxSb60I/edit#gid=0">요구사항 정의서</a></b>
@@ -65,7 +65,7 @@
 <br />
 <br />
 
-<h2>시연</h2>
+<h1>시연</h1>
 <table>
   <tr>
     <th>

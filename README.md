@@ -43,7 +43,7 @@
 <br />
 
 <h1>STACK</h1>
-<img width="500" alt="stack" src="https://user-images.githubusercontent.com/94007890/234970490-5b6b81ba-7702-4578-8f8a-8782fa6de363.png" />
+<!-- <img width="500" alt="stack" src="https://user-images.githubusercontent.com/94007890/234970490-5b6b81ba-7702-4578-8f8a-8782fa6de363.png" /> -->
 
 ### **Front-end**
 
@@ -52,7 +52,7 @@
 
 ### Back-end
 
-`Next.js` `mySql` `TypeScript` `Swagger` `JWT`
+`Nest.js` `mySql` `TypeScript` `Swagger` `JWT`
 
 ### Deploy
 
